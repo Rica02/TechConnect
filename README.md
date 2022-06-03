@@ -1,2 +1,2 @@
 # TechConnect
-Advanced Studio 2 assignment
+Web application project by Matthew Nguyen, Bo-Han Chen and Rica Mae Averion.
