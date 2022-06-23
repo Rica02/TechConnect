@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Header from "./Header";
 
 function AboutUs() {
 
@@ -7,14 +8,12 @@ function AboutUs() {
     let navigate = useNavigate();
 
     return (
-        <div>
-            <div>
-                About us
-            </div>
+        <>
+            <Header headerTitle={"About us"} />
             <div>
                 <button onClick={ () => navigate("/becomeatutor") }>WANT TO JOIN OUR TEAM?</button>
             </div>
-        </div>
+        </>
     );
 }
 
