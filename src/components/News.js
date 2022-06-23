@@ -1,7 +1,12 @@
 import React from "react";
+import Header from "./Header";
 
 function News() {
-    return <div>News</div>;
+    return (
+        <>
+            <Header headerTitle={"News"} />
+        </>
+    );
 }
 
 export default News;
