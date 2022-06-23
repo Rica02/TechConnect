@@ -4,17 +4,8 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 
-// const Title = styled.h1`
-//   font-size: 1.5em;
-//   text-align: center;
-//   color: palevioletred;
-// `;
-
 function App() {
   return (
-    // <div className="App">
-    //   <Title>Title test</Title>
-    // </div>
     <Router>
       <Navbar />    {/* all pages will include navbar */}
       <Routes>
