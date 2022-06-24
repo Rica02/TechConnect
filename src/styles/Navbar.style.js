@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export const NavbarContainer = styled.nav`
     width: 100%;
     height: ${(props) => (props.extendNavbar ? "100vh" : "80px")};     // if extended menu is open, fill the screen, otherwise 80px
-    background-color: #d9c9ba;
+    background-color: ${ ({ theme }) => theme.colorMain.backgroundDark };
     display: flex;
     flex-direction: column;
 
@@ -37,11 +37,11 @@ export const NavbarInnerContainer = styled.div`
 
 export const NavbarLinkContainer = styled.div`
     display: flex;
-    color: #580201;
+    color: ${ ({ theme }) => theme.colorMain.highlightMain };
 `;
 
 export const NavbarLink = styled(Link)`
-    color: #580201;
+    color: ${ ({ theme }) => theme.colorMain.highlightMain };
     font-size: large;
     font-family: Helvetica, Arial, sans-serif;
     font-weight: bold;
@@ -55,7 +55,7 @@ export const NavbarLink = styled(Link)`
 `;
 
 export const NavbarLinkExtended = styled(Link)`
-    color: #580201;
+    color: ${ ({ theme }) => theme.colorMain.highlightMain };
     font-size: large;
     font-family: Helvetica, Arial, sans-serif;
     font-weight: bold;
