@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-
+import { theme } from "../../styles/ThemeColors";
 export const Container = styled.div`
     min-height: 692px;
     bottom: 0;
@@ -9,11 +9,7 @@ export const Container = styled.div`
     top: 0;
     z-index: 0;
     overflow: hidden;
-    background: linear-gradient(
-        108deg,
-        rgba(1,147,200,255) 0%,
-        rgba(255,201,122,1) 100%
-    );
+    background-color:${ ({ theme }) => theme.colorMain.backgroundSignIn };
 `;
 
 export const FormWrap = styled.div`

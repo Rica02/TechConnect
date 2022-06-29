@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import{Link} from 'react-router-dom';
-
+import { theme } from "../../styles/ThemeColors";
 export const FooterContatiner = styled.footer`
-    background: #ff7f50;
+    background:${ ({ theme }) => theme.colorMain.backgroundfooter};
 `;
 
 export const FooterWrap = styled.div`
