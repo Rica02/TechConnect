@@ -13,6 +13,7 @@ import ErrorPage from "./components/ErrorPage";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./styles/ThemeColors.js";
 import Signin from "./components/Signin";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/signin" element={<Signin/>} />
           <Route path="*" element={<ErrorPage />} />        {/* Render error page if path does not match */}
         </Routes>
+        <Footer/>
       </Router>
     </ThemeProvider>
 
