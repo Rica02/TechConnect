@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { theme } from "../../styles/ThemeColors";
+import { theme } from "../ThemeColors";
 export const Container = styled.div`
     min-height: 692px;
     bottom: 0;

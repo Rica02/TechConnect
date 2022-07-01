@@ -14,8 +14,8 @@ import {
     NavbarLinkExtended,
     NavbarSignContainer,
     NavbarSignContainerExtended
-} from "../styles/Navbar.style";
-import LogoImg from "../assets/logo.png";
+} from "./NavbarStyle";
+import LogoImg from "../../assets/logo.png";
 
 export function Navbar() {
 

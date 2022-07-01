@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import{Link} from 'react-router-dom';
-import { theme } from "../../styles/ThemeColors";
+import { theme } from "../ThemeColors";
 export const FooterContatiner = styled.footer`
     border-top: 5px solid ${ ({ theme }) => theme.colorMain.highlightRed};
     background:${ ({ theme }) => theme.colorMain.backgroundDark};
