@@ -11,8 +11,8 @@ export const Container2=styled.div`
     display: grid;
     justify-content: center; 
     align-items: center; 
-    border-top: 5px solid red;
-    border-bottom: 5px solid red;
+    border-top: 5px solid ${ ({ theme }) => theme.colorMain.highlightRed};
+    border-bottom: 5px solid ${ ({ theme }) => theme.colorMain.highlightRed};
     
 `;
 export const JoinButton=styled.button`

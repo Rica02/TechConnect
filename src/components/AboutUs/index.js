@@ -13,7 +13,7 @@ function AboutUs() {
             <Header headerTitle={"About us"} />
             <Container>
                 <TextH2>About our team</TextH2>
-                <ContentText >article</ContentText>
+                <ContentText ></ContentText>
                 <ImgWrap>
                     <Img src={TeamImg}/>
                     <ImgText>A photo of our team</ImgText>
