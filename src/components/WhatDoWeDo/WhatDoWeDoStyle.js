@@ -10,7 +10,9 @@ export const ContainerWrap=styled.div`
     display: flex;
     justify-content: center; 
     align-items: center; 
-    
+    @media screen and (max-width: 820px){
+        flex-direction: column;
+    }
 `;
 
 export const TitleH1=styled.h2`
@@ -20,11 +22,13 @@ export const TitleH1=styled.h2`
 `;
 export const ItemWrap=styled.div`
     display: flex;
-    grid-auto-columns: minmax(auto, 1fr);
+    
     align-items: center;
     flex-direction: row;
     gap: 50px;
-   
+    @media screen and (max-width: 820px){
+        flex-direction: column;
+    }
 `;
 export const Img = styled.img`
     width: 100%;

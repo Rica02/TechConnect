@@ -10,7 +10,7 @@ function WhatDoWeDo({ HomeContent, GroupContent, ComputerContent, EmojContent })
         <>
             <Container>
                 <ContainerWrap>
-                    <TitleH1>What do We DO</TitleH1>
+                    <TitleH1>What do We Do</TitleH1>
                 </ContainerWrap>
                 <ContainerWrap>
                     
