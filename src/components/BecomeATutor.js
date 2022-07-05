@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
+import headerBanner from "../assets/images/become-a-tutor-banner.jpg";
 
 function BecomeATutor() {
 
@@ -9,7 +10,7 @@ function BecomeATutor() {
 
     return (
         <>
-            <Header headerTitle={"Become a tutor"} />
+            <Header headerTitle={"Become a tutor"} headerBanner={headerBanner} />
             <div>
                 <button onClick={ () => navigate("/contactus") }>JOIN UR TEAM</button>
             </div>

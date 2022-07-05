@@ -4,11 +4,18 @@ export const StyledHeader = styled.header`
     display: flex;
     width: 100%;
     height: 200px;
-    background-color: lightgray;
-    justify-content: center;
+    background-image: url(${ ({ headerBanner }) => headerBanner });
+    background-color: brown;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    background-color: brown;
     align-items: center;
-    font-size: 3em;
-    font-weight: bold;
     color: white;
     text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
+    font-size: 3em;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
 `
