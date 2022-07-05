@@ -4,16 +4,19 @@ import { HomeHeader, StyledButton, StyledSlideshowContainer } from "../styles/Pa
 import { Slide } from "react-slideshow-image";
 import 'react-slideshow-image/dist/styles.css';
 import { OurTutors, WhatWeDo } from "./CommonSections";
+import headerBanner from "../assets/images/home-banner.jpg";
+import testimonialImg1 from "../assets/images/home-testimonial-1.jpg";
+import testimonialImg2 from "../assets/images/home-testimonial-2.jpg";
 
 function Home() {
     // Array of image + caption to be used in Testimonial section
     const testimonalsSlides = [
         {
-            url: '/images/home-testimonial-1.jpg',
+            url: testimonialImg1,
             caption: '"Great experience! My tutor was so kind and patient, it didn\'t take long for me to learn."'
           },
           {
-            url: '/images/home-testimonial-2.jpg',
+            url: testimonialImg2,
             caption: '"I thought I could never keep up with all this technology, but thanks to my tutor John, I can now easily video call with my grandchildren abroad."'
           }
     ];
@@ -24,7 +27,7 @@ function Home() {
     return (
         <>
             {/* Header */}
-            <HomeHeader>
+            <HomeHeader headerBanner={headerBanner}>
                 <div class="headerWrapper">
                     <div class="headerUpperContainer" >
                         <h1>Let's connect</h1>
