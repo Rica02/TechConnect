@@ -3,6 +3,12 @@ import { StyledContainer } from "../styles/PageComponents.style";
 import { RiComputerFill, RiTeamFill } from "react-icons/ri";
 import { FaHome, FaSmile } from "react-icons/fa";
 import 'react-slideshow-image/dist/styles.css';
+import tutorImg1 from "../assets/images/tutor-1.jpg";
+import tutorImg2 from "../assets/images/tutor-2.jpg";
+import tutorImg3 from "../assets/images/tutor-3.jpg";
+import tutorImg4 from "../assets/images/tutor-4.jpg";
+import tutorImg5 from "../assets/images/tutor-5.jpg";
+import tutorImg6 from "../assets/images/tutor-6.jpg";
 
 /* This file contains page sections that are common to multiple pages of the website. They take a
     "color" prop that defines the background color of the section (either white or light beige). */
@@ -52,37 +58,37 @@ export function OurTutors(props) {
     // Array that contains tutor info to display
     const ourTutors = [
         {
-            url: '/images/tutor-1.jpg',
+            url: tutorImg1,
             name: 'First name',
             location: 'Melbourne, VIC',
             qualification: 'Qualifications'
         },
         {
-            url: '/images/tutor-2.jpg',
+            url: tutorImg2,
             name: 'First name',
             location: 'Sydney, NSW',
             qualification: 'Qualifications'
         },
         {
-            url: '/images/tutor-3.jpg',
+            url: tutorImg3,
             name: 'First name',
             location: 'Sydney, NSW',
             qualification: 'Qualifications'
         },
         {
-            url: '/images/tutor-4.jpg',
+            url: tutorImg4,
             name: 'First name',
             location: 'Perth, WA',
             qualification: 'Qualifications'
         },
         {
-            url: '/images/tutor-5.jpg',
+            url: tutorImg5,
             name: 'First name',
             location: 'Brisbane, QLD',
             qualification: 'Qualifications'
         },
         {
-            url: '/images/tutor-6.jpg',
+            url: tutorImg6,
             name: 'First name',
             location: 'Melbourne, VIC',
             qualification: 'Qualifications'

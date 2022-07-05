@@ -9,6 +9,7 @@ import OurServices from "./components/OurServices";
 import News from "./components/News";
 import BecomeATutor from "./components/BecomeATutor";
 import ContactUs from "./components/ContactUs";
+import BookAnAppointment from "./components/BookAnAppointment";
 import ErrorPage from "./components/ErrorPage";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./styles/ThemeColors.js";
@@ -26,6 +27,7 @@ function App() {
           <Route path="/news" element={<News />} />
           <Route path="/becomeatutor" element={<BecomeATutor />} />
           <Route path="/contactus" element={<ContactUs />} />
+          <Route path="/bookanappointment" element={<BookAnAppointment />} />
           <Route path="*" element={<ErrorPage />} />        {/* Render error page if path does not match */}
         </Routes>
       </Router>
