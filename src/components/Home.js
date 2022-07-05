@@ -1,53 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { HomeHeader, StyledButton, StyledContainer, StyledSlideshowContainer } from "../styles/PageComponents.style";
-import { RiComputerFill, RiTeamFill } from "react-icons/ri";
-import { FaHome, FaSmile } from "react-icons/fa";
+import { HomeHeader, StyledButton, StyledSlideshowContainer } from "../styles/PageComponents.style";
 import { Slide } from "react-slideshow-image";
 import 'react-slideshow-image/dist/styles.css';
+import { OurTutors, WhatWeDo } from "./CommonSections";
 
 function Home() {
-
-    const ourTutors = [
-        {
-            //url: [image url],
-            name: 'First name',
-            location: 'Melbourne, VIC',
-            qualification: 'Qualifications'
-        },
-        {
-            //url: [image url],
-            name: 'First name',
-            location: 'Sydney, NSW',
-            qualification: 'Qualifications'
-        },
-        {
-            //url: [image url],
-            name: 'First name',
-            location: 'Sydney, NSW',
-            qualification: 'Qualifications'
-        },
-        {
-            //url: [image url],
-            name: 'First name',
-            location: 'Perth, WA',
-            qualification: 'Qualifications'
-        },
-        {
-            //url: [image url],
-            name: 'First name',
-            location: 'Brisbane, QLD',
-            qualification: 'Qualifications'
-        },
-        {
-            //url: [image url],
-            name: 'First name',
-            location: 'Melbourne, VIC',
-            qualification: 'Qualifications'
-        }
-    ]
-
-
     // Array of image + caption to be used in Testimonial section
     const testimonalsSlides = [
         {
@@ -84,59 +42,13 @@ function Home() {
 
             {/* Main body */}
             <div>
-                {/* What do we do? */}
-                <StyledContainer color={ ({ theme }) => theme.colorMain.backgroundLight }>
-                    <h2>What do we do?</h2>
-                    <div class="grid-container-what-we-do">
-                        <div class="grid-item">
-                            <div class="icon-container">
-                                <RiComputerFill class="icon" />
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam gravida,
-                                neque vitae ultricies mollis, nulla arcu commodo lectus.</p>
-                        </div>
-                        <div class="grid-item">
-                            <div class="icon-container">
-                                <RiTeamFill class="icon" />
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam gravida,
-                                neque vitae ultricies mollis, nulla arcu commodo lectus.</p>
-                        </div>
-                        <div class="grid-item">
-                            <div class="icon-container">
-                                <FaHome class="icon" />
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam gravida,
-                                neque vitae ultricies mollis, nulla arcu commodo lectus.</p>
-                        </div>
-                        <div class="grid-item">
-                            <div class="icon-container">
-                                <FaSmile class="icon" />
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam gravida,
-                                neque vitae ultricies mollis, nulla arcu commodo lectus.</p>
-                        </div>
-                    </div>
-                </StyledContainer>
-                 {/* End of What do we do? */}
+                {/* What do we do section */}
+                <WhatWeDo color={ ({ theme }) => theme.colorMain.backgroundLight }/>
 
-                {/* Meet our tutors */}
-                <StyledContainer color={ ({ theme }) => theme.colorMain.backgroundDark }>
-                    <h2>Meet our tutors</h2>
-                    <div class="grid-container-tutors">
-                          {ourTutors.map((tutor, index)=> (
-                            <div class="grid-item" key={index}>
-                                <p>{tutor.name}<br/>
-                                    {tutor.location}<br/>
-                                    {tutor.qualification}<br/>
-                                </p>
-                            </div>
-                         ))}
-                    </div>
-                </StyledContainer>
-                {/* End of Meet our tutors */}
+                {/* Meet our tutors section */}
+                <OurTutors color={ ({ theme }) => theme.colorMain.backgroundDark } />
 
-                {/* Testimonials */}
+                {/* Testimonials section */}
                 <StyledSlideshowContainer color={ ({ theme }) => theme.colorMain.backgroundLight }>
                     <h2>Testimonials</h2>
                     <Slide>
@@ -148,7 +60,6 @@ function Home() {
                         ))}
                     </Slide>
                 </StyledSlideshowContainer>
-                 {/* What do we do? */}
             </div>
             {/* End of Main body */}
         </>
