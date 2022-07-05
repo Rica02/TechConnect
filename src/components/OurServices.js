@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
+import headerBanner from "../assets/images/our-services-banner.jpg";
 
 function OurServices() {
 
@@ -9,9 +10,9 @@ function OurServices() {
 
     return (
         <>
-            <Header headerTitle={"Our services"} />
+            <Header headerTitle={"Our services"} headerBanner={headerBanner} />
             <div>
-                <button onClick={ () => navigate("/contactus") }>CLICK HERE</button>
+                <button onClick={ () => navigate("/bookanappointment") }>CLICK HERE</button>
             </div>
         </>
     );

@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
+import headerBanner from "../assets/images/about-us-banner.jpg";
 
 function AboutUs() {
 
@@ -9,7 +10,7 @@ function AboutUs() {
 
     return (
         <>
-            <Header headerTitle={"About us"} />
+            <Header headerTitle={"About us"} headerBanner={headerBanner} />
             <div>
                 <button onClick={ () => navigate("/becomeatutor") }>WANT TO JOIN OUR TEAM?</button>
             </div>
