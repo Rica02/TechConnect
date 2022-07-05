@@ -4,8 +4,10 @@ import { StyledHeader } from "../styles/Header.style";
 
 function Header(props) {
     return (
-      <StyledHeader>
-        {props.headerTitle}
+      <StyledHeader headerBanner={props.headerBanner}  >
+        <div className="header-title">
+          {props.headerTitle}
+        </div>
       </StyledHeader>
     );
 }
