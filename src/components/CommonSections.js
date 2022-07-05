@@ -50,7 +50,6 @@ export function WhatWeDo(props) {
 export function OurTutors(props) {
 
     // Array that contains tutor info to display
-    // TODO: add photos for tutors
     const ourTutors = [
         {
             url: '/images/tutor-1.jpg',

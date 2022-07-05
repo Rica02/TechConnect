@@ -12,17 +12,14 @@ export const HomeHeader = styled.header`
     background-color: brown;
     align-items: center;
     color: white;
-    border-bottom: solid ${ ({ theme }) => theme.colorMain.highlightMain } 2.5px;
 
     p {
         font-size: large;
     }
-
     a {
         color: white;
         font-weight: bold;
     }
-
     .headerWrapper {
         width: 700px;
         height: auto;
@@ -33,7 +30,6 @@ export const HomeHeader = styled.header`
             width: 100%;
         }
     }
-
     .headerLowerContainer {
         display: flex;
         flex-direction: column;
@@ -62,11 +58,9 @@ export const StyledContainer = styled.div`
     h2 {
         color: ${ ({ theme }) => theme.colorMain.highlightMain };
     }
-
     p {
         font-size: large;
     }
-
     .icon-container {
         color: white;
         background-color: ${ ({ theme }) => theme.colorMain.highlightRed };
@@ -74,31 +68,26 @@ export const StyledContainer = styled.div`
         border-radius: 50%;
         margin-right: 30px;
     }
-
     .icon {
         width: 50px;
         height: auto;
     }
-
     .grid-container-what-we-do{
         display: grid;
         grid-template-columns: auto auto;
         padding: 10px;
     }
-
     .grid-item {
         display: flex;
         align-items: center;
         padding: 20px;
         font-size: 30px;
-
         img {
             height: 80px;
             margin: 20px;
             border: solid black 1px
         }
     }
-
     .grid-container-tutors{
         display: grid;
         grid-template-columns: auto auto auto;
@@ -111,27 +100,22 @@ export const StyledSlideshowContainer = styled.div`
     padding: 35px 100px;
     color: ${ ({ theme }) => theme.colorMain.text };
 
-
     h2 {
         color: ${ ({ theme }) => theme.colorMain.highlightMain };
         text-align: center;
     }
-
     span {
         font-size: large;
         padding: 50px;
     }
-
     .each-slide {
         display: flex;
         padding: 100px;
         align-items: center;
         text-align: center;
     }
-
     img {
         height: 200px;
         width: auto;
-
     }
 `
