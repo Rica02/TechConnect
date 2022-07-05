@@ -53,37 +53,37 @@ export function OurTutors(props) {
     // TODO: add photos for tutors
     const ourTutors = [
         {
-            //url: [image url],
+            url: '/images/tutor-1.jpg',
             name: 'First name',
             location: 'Melbourne, VIC',
             qualification: 'Qualifications'
         },
         {
-            //url: [image url],
+            url: '/images/tutor-2.jpg',
             name: 'First name',
             location: 'Sydney, NSW',
             qualification: 'Qualifications'
         },
         {
-            //url: [image url],
+            url: '/images/tutor-3.jpg',
             name: 'First name',
             location: 'Sydney, NSW',
             qualification: 'Qualifications'
         },
         {
-            //url: [image url],
+            url: '/images/tutor-4.jpg',
             name: 'First name',
             location: 'Perth, WA',
             qualification: 'Qualifications'
         },
         {
-            //url: [image url],
+            url: '/images/tutor-5.jpg',
             name: 'First name',
             location: 'Brisbane, QLD',
             qualification: 'Qualifications'
         },
         {
-            //url: [image url],
+            url: '/images/tutor-6.jpg',
             name: 'First name',
             location: 'Melbourne, VIC',
             qualification: 'Qualifications'
@@ -98,6 +98,7 @@ export function OurTutors(props) {
             <div class="grid-container-tutors">
                 {ourTutors.map((tutor, index)=> (
                     <div class="grid-item" key={index}>
+                        <img src={tutor.url} />
                         <p>{tutor.name}<br/>
                             {tutor.location}<br/>
                             {tutor.qualification}<br/>
