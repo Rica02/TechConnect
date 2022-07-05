@@ -36,7 +36,7 @@ function Home() {
                             the rest of the Web world.</p>
                     </div>
                     <div class="headerLowerContainer">
-                        <StyledButton onClick={ () => navigate("/contactus") }>CLICK HERE TO FIND A TUTOR</StyledButton>
+                        <StyledButton onClick={ () => navigate("/bookanappointment") }>CLICK HERE TO FIND A TUTOR</StyledButton>
                         <p>Or call us at <a href="tel:#">000-000-0000</a></p>
                     </div>
                 </div>
