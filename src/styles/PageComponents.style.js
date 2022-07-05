@@ -12,6 +12,7 @@ export const HomeHeader = styled.header`
     background-color: brown;
     align-items: center;
     color: white;
+    border-bottom: solid ${ ({ theme }) => theme.colorMain.highlightMain } 2.5px;
 
     p {
         font-size: large;
@@ -56,6 +57,7 @@ export const StyledContainer = styled.div`
     align-items: center;
     padding: 35px 100px;
     color: ${ ({ theme }) => theme.colorMain.text };
+    border-bottom: solid ${ ({ theme }) => theme.colorMain.highlightMain } 2.5px;
 
     h2 {
         color: ${ ({ theme }) => theme.colorMain.highlightMain };
