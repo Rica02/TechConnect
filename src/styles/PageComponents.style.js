@@ -4,6 +4,11 @@ export const HomeHeader = styled.header`
     display: flex;
     width: 100%;
     min-height: 80vh;
+    background-image: url("/images/home-banner.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
     background-color: brown;
     align-items: center;
     color: white;
