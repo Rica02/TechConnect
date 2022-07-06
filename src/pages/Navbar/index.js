@@ -1,5 +1,5 @@
-// This is the navbar, present in all pages
 import React, { useState } from "react";
+import { RiAccountBoxFill } from 'react-icons/ri'
 import {
     NavbarContainer,
     LeftContainer,
@@ -10,12 +10,13 @@ import {
     NavbarLink,
     Logo,
     OpenLinksButton,
-    NavbarLinkExtended
-} from "../styles/Navbar.style";
-import LogoImg from "../assets/logo.png";
+    NavbarLinkExtended,
+    NavbarSignContainer,
+    NavbarSignContainerExtended
+} from "./NavbarStyle";
+import LogoImg from "../../assets/logo.png";
 
 export function Navbar() {
-
     // used to manage the "extend button"
     const [ extendNavbar, setExtendNavbar ] = useState(false);
 
@@ -33,6 +34,10 @@ export function Navbar() {
                         <NavbarLink to="/news">NEWS</NavbarLink>
                         <NavbarLink to="/becomeatutor">BECOME A TUTOR</NavbarLink>
                         <NavbarLink to="/contactus">CONTACT US</NavbarLink>
+                        <NavbarSignContainer >
+                            <RiAccountBoxFill/>
+                            <NavbarLink to="/signin">SIGN IN</NavbarLink>
+                        </NavbarSignContainer>
                         <OpenLinksButton
                             onClick={() => {
                                 setExtendNavbar((value) => !value);     // set the value opposite of current value
@@ -55,11 +60,14 @@ export function Navbar() {
                     <NavbarLinkExtended to="/news">NEWS</NavbarLinkExtended>
                     <NavbarLinkExtended to="/becomeatutor">BECOME A TUTOR</NavbarLinkExtended>
                     <NavbarLinkExtended to="/contactus">CONTACT US</NavbarLinkExtended>
+                    <NavbarSignContainerExtended >
+                            <RiAccountBoxFill/>
+                            <NavbarLinkExtended to="/signin">Sing in</NavbarLinkExtended>
+                        </NavbarSignContainerExtended>
                 </NavbarExtendedContainer>
             )}
         </NavbarContainer>
     )
   }
-
 
   export default Navbar;
