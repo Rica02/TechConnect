@@ -4,12 +4,12 @@ import 'react-slideshow-image/dist/styles.css';
 import { StyledContainer } from "../styles/PageComponents.style";
 import { RiComputerFill, RiTeamFill } from "react-icons/ri";
 import { FaHome, FaSmile } from "react-icons/fa";
-import tutorImg1 from "../assets/images/tutor-1.jpg";
-import tutorImg2 from "../assets/images/tutor-2.jpg";
-import tutorImg3 from "../assets/images/tutor-3.jpg";
-import tutorImg4 from "../assets/images/tutor-4.jpg";
-import tutorImg5 from "../assets/images/tutor-5.jpg";
-import tutorImg6 from "../assets/images/tutor-6.jpg";
+import tutorImg1 from "../../assets/images/tutor-1.jpg";
+import tutorImg2 from "../../assets/images/tutor-2.jpg";
+import tutorImg3 from "../../assets/images/tutor-3.jpg";
+import tutorImg4 from "../../assets/images/tutor-4.jpg";
+import tutorImg5 from "../../assets/images/tutor-5.jpg";
+import tutorImg6 from "../../assets/images/tutor-6.jpg";
 
 /* This file contains page sections that are common to multiple pages of the website. They take a
     "color" prop that defines the background color of the section (either white or light beige). */

@@ -11,7 +11,7 @@ import BecomeATutor from "./components/BecomeATutor";
 import ContactUs from "./components/ContactUs";
 import BookAnAppointment from "./components/BookAnAppointment";
 import ErrorPage from "./components/ErrorPage";
-import { theme } from "./styles/ThemeColors.js";
+import { theme } from "./components/styles/ThemeColors.js";
 
 function App() {
   return (
