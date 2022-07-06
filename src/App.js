@@ -1,8 +1,8 @@
-import logo from "./logo.svg";
-import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
 import Navbar from "./components/Navbar";
-
+import Signin from "./components/Signin";
+import Footer from "./components/Footer";
 import Home from "./components/Home";
 import AboutUs from "./components/AboutUs";
 import OurServices from "./components/OurServices";
@@ -11,12 +11,7 @@ import BecomeATutor from "./components/BecomeATutor";
 import ContactUs from "./components/ContactUs";
 import BookAnAppointment from "./components/BookAnAppointment";
 import ErrorPage from "./components/ErrorPage";
-import { ThemeProvider } from "styled-components";
 import { theme } from "./styles/ThemeColors.js";
-
-// ADDED
-import Signin from "./components/Signin";
-import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -35,7 +30,7 @@ function App() {
           <Route path="/signin" element={<Signin />} />
           <Route path="*" element={<ErrorPage />} />        {/* Render error page if path does not match */}
         </Routes>
-        <Footer/>
+        <Footer/>   {/* all pages will include footer */}
       </Router>
     </ThemeProvider>
   );
