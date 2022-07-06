@@ -3,42 +3,43 @@ import 'react-slideshow-image/dist/styles.css';
 import { StyledContainer } from "../../../PagesStyle";
 import { RiComputerFill, RiTeamFill } from "react-icons/ri";
 import { FaHome, FaSmile } from "react-icons/fa";
+import { GridContainer, IconContainer } from "./WhatWeDoStyle";
 
 // "What do we do?" section. Present in Home and Our Services pages
 export default function WhatWeDo(props) {
     return (
-        <StyledContainer color={ props.color }>
+        <StyledContainer color={props.color}>
             <h2>What do we do?</h2>
-            <div class="grid-container-what-we-do">
+            <GridContainer>
                 <div class="grid-item">
-                    <div class="icon-container">
+                    <IconContainer>
                         <RiComputerFill class="icon" />
-                    </div>
+                    </IconContainer>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam gravida,
                         neque vitae ultricies mollis, nulla arcu commodo lectus.</p>
                 </div>
                 <div class="grid-item">
-                    <div class="icon-container">
+                    <IconContainer>
                         <RiTeamFill class="icon" />
-                    </div>
+                    </IconContainer>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam gravida,
                         neque vitae ultricies mollis, nulla arcu commodo lectus.</p>
                 </div>
                 <div class="grid-item">
-                    <div class="icon-container">
+                    <IconContainer>
                         <FaHome class="icon" />
-                    </div>
+                    </IconContainer>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam gravida,
                         neque vitae ultricies mollis, nulla arcu commodo lectus.</p>
                 </div>
                 <div class="grid-item">
-                    <div class="icon-container">
+                    <IconContainer>
                         <FaSmile class="icon" />
-                    </div>
+                    </IconContainer>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam gravida,
                         neque vitae ultricies mollis, nulla arcu commodo lectus.</p>
                 </div>
-            </div>
+            </GridContainer>
         </StyledContainer>
     )
 }
