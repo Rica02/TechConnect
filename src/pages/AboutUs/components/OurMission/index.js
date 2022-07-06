@@ -1,13 +1,13 @@
 import React from 'react'
 import { Container, ContainerWrap, TextH1, ContentText } from './OurMissionStyle';
 
-const OurMission = ({Articel}) => {
+const OurMission = ({Article}) => {
   return (
     <>
       <Container>
           <ContainerWrap>
               <TextH1>Our mission</TextH1>
-              <ContentText >{Articel}</ContentText>
+              <ContentText >{Article}</ContentText>
           </ContainerWrap>
       </Container>
     </>
