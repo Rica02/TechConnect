@@ -96,3 +96,25 @@ export const NavbarExtendedContainer = styled.div`
         display: none;
     }
 `;
+export const NavbarSignContainer = styled.div`
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    @media (max-width: 800px) {
+        display: none;
+    }
+`;
+
+export const NavbarSignContainerExtended = styled.div`
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @media (min-width: 800px) {
+        display: none;
+    }
+`;
+

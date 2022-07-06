@@ -1,8 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import 'react-slideshow-image/dist/styles.css';
 import { StyledContainer } from "../styles/PageComponents.style";
 import { RiComputerFill, RiTeamFill } from "react-icons/ri";
 import { FaHome, FaSmile } from "react-icons/fa";
-import 'react-slideshow-image/dist/styles.css';
 import tutorImg1 from "../assets/images/tutor-1.jpg";
 import tutorImg2 from "../assets/images/tutor-2.jpg";
 import tutorImg3 from "../assets/images/tutor-3.jpg";
@@ -95,6 +96,9 @@ export function OurTutors(props) {
         }
     ]
 
+     // Function that navigates to a different route
+     let navigate = useNavigate();
+
     return(
         <StyledContainer color={ props.color }>
             <h2>Meet our tutors</h2>
@@ -111,6 +115,7 @@ export function OurTutors(props) {
                     </div>
                 ))}
             </div>
+            <button onClick={ () => navigate("/becomeatutor") }>WANT TO JOIN OUR TEAM?</button>
         </StyledContainer>
     )
 }

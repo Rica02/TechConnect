@@ -1,6 +1,6 @@
 // This will contain the website's header
 import React from "react";
-import { StyledHeader } from "../styles/Header.style";
+import { StyledHeader } from "./Header.style.js";
 
 function Header(props) {
     return (
