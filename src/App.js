@@ -1,18 +1,17 @@
-import logo from "./logo.svg";
-import "./App.css";
-//import styled from "styled-components";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Home from "./components/Home";
-import AboutUs from "./components/AboutUs";
-import OurServices from "./components/OurServices";
-import News from "./components/News";
-import BecomeATutor from "./components/BecomeATutor";
-import ContactUs from "./components/ContactUs";
-import BookAnAppointment from "./components/BookAnAppointment";
-import ErrorPage from "./components/ErrorPage";
 import { ThemeProvider } from "styled-components";
-import { theme } from "./styles/ThemeColors.js";
+import Navbar from "./pages/Navbar";
+import Signin from "./pages/Signin";
+import Footer from "./pages/Footer";
+import Home from "./pages/Home";
+import AboutUs from "./pages/AboutUs";
+import OurServices from "./pages/OurServices";
+import News from "./pages/News";
+import BecomeATutor from "./pages/BecomeATutor";
+import ContactUs from "./pages/ContactUs";
+import BookAnAppointment from "./pages/BookAnAppointment";
+import ErrorPage from "./pages/ErrorPage";
+import { theme } from "./pages/ThemeColors";
 
 function App() {
   return (
@@ -28,8 +27,10 @@ function App() {
           <Route path="/becomeatutor" element={<BecomeATutor />} />
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/bookanappointment" element={<BookAnAppointment />} />
+          <Route path="/signin" element={<Signin />} />
           <Route path="*" element={<ErrorPage />} />        {/* Render error page if path does not match */}
         </Routes>
+        <Footer/>   {/* all pages will include footer */}
       </Router>
     </ThemeProvider>
   );
