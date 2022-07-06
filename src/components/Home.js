@@ -1,9 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { HomeHeader, StyledButton, StyledSlideshowContainer } from "../styles/PageComponents.style";
+import { HomeHeader, StyledButton, StyledSlideshowContainer } from "./styles/PageComponents.style";
 import { Slide } from "react-slideshow-image";
 import 'react-slideshow-image/dist/styles.css';
-import { OurTutors, WhatWeDo } from "./CommonSections";
+import { OurTutors, WhatWeDo } from "./PageContent/PageSections";
 import headerBanner from "../assets/images/home-banner.jpg";
 import testimonialImg1 from "../assets/images/home-testimonial-1.jpg";
 import testimonialImg2 from "../assets/images/home-testimonial-2.jpg";

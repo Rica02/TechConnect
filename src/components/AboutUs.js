@@ -6,8 +6,8 @@ import headerBanner from "../assets/images/about-us-banner.jpg";
 // ADDED
 import AboutOurTeam from "../components/AboutOurTeam";
 import OurMission from "../components/OurMission";
-import { AboutOurTeamArticel, OurMissionArticel } from '../components/ArticelData'
-import { OurTutors } from "./CommonSections";
+import { AboutOurTeamArticel, OurMissionArticel } from './PageContent/ArticleData'
+import { OurTutors } from "./PageContent/PageSections";
 
 function AboutUs() {
     return (
