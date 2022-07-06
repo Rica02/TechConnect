@@ -1,8 +1,8 @@
 import logo from "./logo.svg";
 import "./App.css";
-//import styled from "styled-components";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
+
 import Home from "./components/Home";
 import AboutUs from "./components/AboutUs";
 import OurServices from "./components/OurServices";
@@ -13,6 +13,10 @@ import BookAnAppointment from "./components/BookAnAppointment";
 import ErrorPage from "./components/ErrorPage";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./styles/ThemeColors.js";
+
+// ADDED
+import Signin from "./components/Signin";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -28,8 +32,10 @@ function App() {
           <Route path="/becomeatutor" element={<BecomeATutor />} />
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/bookanappointment" element={<BookAnAppointment />} />
+          <Route path="/signin" element={<Signin />} />
           <Route path="*" element={<ErrorPage />} />        {/* Render error page if path does not match */}
         </Routes>
+        <Footer/>
       </Router>
     </ThemeProvider>
   );

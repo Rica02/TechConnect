@@ -9,6 +9,7 @@ export const theme = {
       highlightYellow: '#F2AE2F',
       backgroundLight: '#FFFFFF',
       backgroundDark: '#F0EBE6',
-      backgroundSignIn: '#D9C9BA'
+      backgroundSignIn: '#D9C9BA',
+      backgroundfooter:'#D93D04'
     }
 }
