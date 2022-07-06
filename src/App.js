@@ -1,17 +1,17 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import Navbar from "./components/Navbar";
-import Signin from "./components/Signin";
-import Footer from "./components/Footer";
-import Home from "./components/Home";
-import AboutUs from "./components/AboutUs";
-import OurServices from "./components/OurServices";
-import News from "./components/News";
-import BecomeATutor from "./components/BecomeATutor";
-import ContactUs from "./components/ContactUs";
-import BookAnAppointment from "./components/BookAnAppointment";
-import ErrorPage from "./components/ErrorPage";
-import { theme } from "./components/styles/ThemeColors.js";
+import Navbar from "./pages/Navbar";
+import Signin from "./pages/Signin";
+import Footer from "./pages/Footer";
+import Home from "./pages/Home";
+import AboutUs from "./pages/AboutUs";
+import OurServices from "./pages/OurServices";
+import News from "./pages/News";
+import BecomeATutor from "./pages/BecomeATutor";
+import ContactUs from "./pages/ContactUs";
+import BookAnAppointment from "./pages/BookAnAppointment";
+import ErrorPage from "./pages/ErrorPage";
+import { theme } from "./pages/ThemeColors";
 
 function App() {
   return (
