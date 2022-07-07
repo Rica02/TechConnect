@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "./Header";
-import headerBanner from "../assets/images/news-banner.jpg";
+import Header from "../Header";
+import headerBanner from "../../assets/images/news-banner.jpg";
 
 function News() {
     return (
