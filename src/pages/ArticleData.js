@@ -88,3 +88,16 @@ export const TestimonialsArticle = {
         }
     ]
 }
+<<<<<<< HEAD
+=======
+
+export const BecomeATutorArticle = {
+    FirstArticle:'Would you like to earn on the side with flexible hours? Would you like to help people ' +
+    'in your area or online learn how to connect with the digital world? Join us now, no experience ' +
+    'required. To enquire about joining us and becoming a tutor, click the link below to fill in the ' +
+    'form and select "I want to join as a tutor or enquire about it" in the subject list. One of our ' +
+    'representatives will get back to you as soon as possible.',
+
+    SecondArticle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fringilla mattis metus in tincidunt. Phasellus vel tempor quam. Nam sed condimentum odio, ut aliquet neque. Fusce lectus justo, condimentum et auctor eu. suscipit vitae ipsum. Vestibulum imperdiet ornare ipsum condimentum maximus. Maecenas sodales varius scelerisque. Sed nec eros sagittis, lobortis velit nec, lobortis risus.'
+}
+>>>>>>> 5e8966ee7fd6b4cea50cb86bac547b4926972a24
