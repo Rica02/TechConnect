@@ -15,6 +15,7 @@ export const TextH2=styled.h2`
     text-align: center;
     max-width: 440px;
     margin-bottom: 35px;
+    color: ${ ({ theme }) => theme.colorMain.highlightMain};
 `;
 export const ContentText=styled.p`
     display: flex;

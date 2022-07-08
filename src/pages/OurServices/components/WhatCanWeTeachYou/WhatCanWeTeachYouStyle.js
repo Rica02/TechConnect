@@ -1,13 +1,13 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+
 export const Container=styled.div`
     display: grid;
     justify-content: center;
 `;
 
-export const TextH1=styled.h1`
+export const TextH2=styled.h2`
     text-align: center;
-    color: ${ ({ theme }) => theme.colorMain.highlightRed};
+    color: ${ ({ theme }) => theme.colorMain.highlightMain};
 `;
 
 export const CardContainer=styled.div`
@@ -17,13 +17,13 @@ export const CardContainer=styled.div`
     @media screen and (max-width: 800px){
         flex-direction: column;
     }
-    
+
 `;
 export const CardWrap=styled.div`
     margin: 10px;
     height: 220px;
     width: 250px;
-   
+
 `;
 
 export const CardImg=styled.img`
