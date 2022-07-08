@@ -12,13 +12,30 @@ import {
     OpenLinksButton,
     NavbarLinkExtended,
     NavbarSignContainer,
-    NavbarSignContainerExtended
+    NavbarSignContainerExtended,
+    Signwrap,
+    SignButtonWrap,
 } from "./NavbarStyle";
 import LogoImg from "../../assets/logo.png";
+import SigninCard from "./SigninCard"
 
+
+  //Sign Button
+  const SignButton = ()=>(
+    <>
+        <SignButtonWrap>
+        <RiAccountBoxFill fontSize="3em" />
+        <NavbarLink to="/">SIGN IN</NavbarLink>
+        </SignButtonWrap>
+    </>
+    );
+    
 export function Navbar() {
     // used to manage the "extend button"
     const [ extendNavbar, setExtendNavbar ] = useState(false);
+    const [toggleSignin,setToggleSignin] = useState(false);
+
+  
 
     return (
         <NavbarContainer extendNavbar={extendNavbar}>
@@ -34,10 +51,7 @@ export function Navbar() {
                         <NavbarLink to="/news">NEWS</NavbarLink>
                         <NavbarLink to="/becomeatutor">BECOME A TUTOR</NavbarLink>
                         <NavbarLink to="/contactus">CONTACT US</NavbarLink>
-                        <NavbarSignContainer >
-                            <RiAccountBoxFill/>
-                            <NavbarLink to="/signin">SIGN IN</NavbarLink>
-                        </NavbarSignContainer>
+                        
                         <OpenLinksButton
                             onClick={() => {
                                 setExtendNavbar((value) => !value);     // set the value opposite of current value
@@ -50,6 +64,13 @@ export function Navbar() {
                         </OpenLinksButton>
                     </NavbarLinkContainer>
                 </RightContainer>
+                <NavbarSignContainer >
+                    <Signwrap onClick={() => {setToggleSignin((value) => !value); // set the value opposite of current value
+                    }}>
+                        <SignButton/>
+                    </Signwrap>
+                    {toggleSignin && ( <SigninCard/>)}   
+                </NavbarSignContainer>
             </NavbarInnerContainer>
             { extendNavbar && (
                 // display extended menu when state is true
@@ -61,7 +82,7 @@ export function Navbar() {
                     <NavbarLinkExtended to="/becomeatutor">BECOME A TUTOR</NavbarLinkExtended>
                     <NavbarLinkExtended to="/contactus">CONTACT US</NavbarLinkExtended>
                     <NavbarSignContainerExtended >
-                            <RiAccountBoxFill/>
+                            <RiAccountBoxFill />
                             <NavbarLinkExtended to="/signin">Sing in</NavbarLinkExtended>
                         </NavbarSignContainerExtended>
                 </NavbarExtendedContainer>

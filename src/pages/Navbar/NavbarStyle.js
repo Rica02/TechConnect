@@ -96,11 +96,12 @@ export const NavbarExtendedContainer = styled.div`
     }
 `;
 export const NavbarSignContainer = styled.div`
-
-    display: flex;
-    flex-direction: row;
+    background-color: ${ ({ theme }) => theme.colorMain.backgroundSignIn };;
+    color: ${ ({ theme }) => theme.colorMain.highlightMain };
+    border-left: 2.5px solid ${ ({ theme }) => theme.colorMain.highlightMain};
+    display:grid;
     align-items: center;
-
+    z-index: 1;
     @media (max-width: 800px) {
         display: none;
     }
@@ -115,4 +116,11 @@ export const NavbarSignContainerExtended = styled.div`
     @media (min-width: 800px) {
         display: none;
     }
+`;
+export const Signwrap=styled.div`
+    display: grid;
+    min-width: 150px;
+`;
+export const SignButtonWrap = styled.div`
+    display: flex;
 `;
