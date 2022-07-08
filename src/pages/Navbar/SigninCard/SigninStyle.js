@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { Button } from "bootstrap";
 
 export const Container = styled.div`
     height: 90%;
@@ -63,4 +64,8 @@ export const Text=styled.span`
     margin-top: 24px;
     color: black;
     font-size: 14px;
+`;
+
+export const ButtonLink=styled(Link)`
+    
 `;
