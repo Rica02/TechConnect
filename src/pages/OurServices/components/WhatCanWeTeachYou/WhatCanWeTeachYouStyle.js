@@ -6,6 +6,7 @@ export const Container=styled.div`
 `;
 
 export const TextH2=styled.h2`
+    margin: 35px 0;
     text-align: center;
     color: ${ ({ theme }) => theme.colorMain.highlightMain};
 `;

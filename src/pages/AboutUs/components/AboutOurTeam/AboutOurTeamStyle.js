@@ -9,19 +9,21 @@ export const ContainerWrap=styled.div`
     display: grid;
     justify-content: center;
     align-items: center;
+    margin: 0 50px;
+    justify-items: center;
 `;
 
 export const TextH2=styled.h2`
     text-align: center;
     max-width: 440px;
-    margin-bottom: 35px;
+    margin: 35px 0;
     color: ${ ({ theme }) => theme.colorMain.highlightMain};
 `;
 export const ContentText=styled.p`
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 440px;
+    max-width: 1000px;
     margin-bottom: 35px;
 `;
 export const ImgWrap =styled.div`
@@ -37,6 +39,6 @@ export const Img = styled.img`
     padding-right: 0;
 `;
 export const ImgText=styled.p`
-    max-width: 440px;
     margin-bottom: 35px;
+    text-align: center;
 `;
