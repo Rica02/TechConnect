@@ -14,9 +14,10 @@ import {
     StepWrap,
     TextH2,
     TextWrap,
-    TextRow
+    TextRow,
+    ClickHear
 } from "./Start3StepStyle";
-import { ClickHear } from "./ButtonStyle";
+
 
 function Start3Step({ Step1_1, Step1_2, Step1_3, Step2, Step3 }) {
     let navigate = useNavigate();

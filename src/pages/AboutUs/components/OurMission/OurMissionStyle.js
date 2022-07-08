@@ -15,12 +15,14 @@ export const ContainerWrap=styled.div`
 `;
 
 export const TextH2=styled.h2`
+    font-size: 55px;
     text-align: center;
     margin: 35px 0;
     color: ${ ({ theme }) => theme.colorMain.highlightMain};
 `;
 
 export const ContentText=styled.p`
+    font-size: 25px;
     display: flex;
     justify-content: center;
     align-items: center;

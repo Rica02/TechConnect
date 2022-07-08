@@ -14,12 +14,14 @@ export const ContainerWrap=styled.div`
 `;
 
 export const TextH2=styled.h2`
+    font-size: 55px;
     text-align: center;
     max-width: 440px;
     margin: 35px 0;
     color: ${ ({ theme }) => theme.colorMain.highlightMain};
 `;
 export const ContentText=styled.p`
+    font-size: 25px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,6 +41,7 @@ export const Img = styled.img`
     padding-right: 0;
 `;
 export const ImgText=styled.p`
+    font-size: 25px;
     margin-bottom: 35px;
     text-align: center;
 `;

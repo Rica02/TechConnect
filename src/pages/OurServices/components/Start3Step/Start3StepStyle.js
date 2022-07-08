@@ -20,12 +20,14 @@ export const ContainerStep=styled.div`
     }
 `;
 export const TextH2=styled.h2`
+    font-size: 55px;
     margin: 35px 0;
     text-align: center;
     color: ${ ({ theme }) => theme.colorMain.highlightMain};
 `;
 
 export const ContentText=styled.p`
+    font-size: 25px;
     margin-left: 20px;
 
 `;
@@ -80,5 +82,15 @@ export const Number=styled.h4`
 
 `;
 export const PhoneNumber=styled(Link)`
-    cursor: 'pointer'
+    font-size: 25px;
+    cursor: 'pointer';
+`;
+export const ClickHear=styled.button`
+    background:${ ({ theme }) => theme.colorMain.highlightRed};
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 25px;
+    cursor: 'pointer';
 `;

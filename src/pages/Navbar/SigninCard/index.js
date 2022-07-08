@@ -7,10 +7,11 @@ import {
     FormInput,
     Text,
     Form ,
-    FormLabel
+    FormLabel,
+    ButtonLink
 } from './SigninStyle';
 
-function Signin() {
+function SigninCard() {
     // Function that navigates to a different route
     let navigate = useNavigate();
 
@@ -24,12 +25,12 @@ function Signin() {
                         <FormLabel htmlFor='for'>Password</FormLabel>
                         <FormInput type='password' required/>
                         <FormButton type='submitSingIn'>SIGN IN</FormButton>
-                        <Text>Forgot password</Text>
-                        <FormButton type='submitSignUp'>SIGN UP</FormButton>
+                        <ButtonLink to="/">Forgot password</ButtonLink>
+                        <FormButton onClick={ () => navigate("/bookanappointment")}>SIGN UP</FormButton>
                     </Form>
                 </Container>
         </>
     );
 }
 
-export default Signin;
+export default SigninCard;
