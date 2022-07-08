@@ -19,9 +19,10 @@ export const ContainerStep=styled.div`
         flex-direction: column;
     }
 `;
-export const TextH1=styled.h1`
+export const TextH2=styled.h2`
+    margin: 35px 0;
     text-align: center;
-    color: ${ ({ theme }) => theme.colorMain.highlightRed};
+    color: ${ ({ theme }) => theme.colorMain.highlightMain};
 `;
 
 export const ContentText=styled.p`

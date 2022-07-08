@@ -38,7 +38,7 @@ export const FooterLinkItems=styled.div`
     text-align: left;
     width: 160px;
     box-sizing: border-box;
-    color: #b22222;
+    color: ${ ({ theme }) => theme.colorMain.backgroundMain};
     @media screen and (max-width: 420px){
         margin: 0;
         padding: 10px;
@@ -53,12 +53,12 @@ export const FooterLinkTitle = styled.h1`
 
 
 export const FooterLink = styled(Link)`
-    color: #b22222;
+    color: ${ ({ theme }) => theme.colorMain.highlightMain};
     text-decoration: none;
     margin-bottom: 0.5rem;
     font-size: 14px;
     &:hover{
-        color: black;
+        color: ${ ({ theme }) => theme.colorMain.text};
         transition: 0.3s ease-in-out;
     }
 `;
@@ -80,7 +80,7 @@ export const SocialMediaWrap=styled.div`
 `;
 
 export const SocialLogo = styled(Link)`
-    color: black;
+    color: ${ ({ theme }) => theme.colorMain.highlightMain};
     justify-self: start;
     cursor: pointer;
     text-decoration: none;
@@ -89,10 +89,13 @@ export const SocialLogo = styled(Link)`
     align-items: center;
     margin-bottom: 16px;
     font-weight: bold;
+    span {
+        color: ${ ({ theme }) => theme.colorMain.highlightRed};
+    }
 `;
 
 export const WebsiteRights=styled.small`
-    color: black;
+    color: ${ ({ theme }) => theme.colorMain.text};
     margin-bottom: 16px;
 `;
 
@@ -104,6 +107,6 @@ export const SocialIcons= styled.div`
 `;
 
 export const SocialIconLink = styled.a`
-    color: black;
+    color: ${ ({ theme }) => theme.colorMain.text};
     font-size: 24px;
 `;

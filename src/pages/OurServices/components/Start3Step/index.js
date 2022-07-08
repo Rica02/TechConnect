@@ -12,7 +12,7 @@ import {
     StepNumberWrap3,
     StepTitle,
     StepWrap,
-    TextH1,
+    TextH2,
     TextWrap,
     TextRow
 } from "./Start3StepStyle";
@@ -24,7 +24,7 @@ function Start3Step({ Step1_1, Step1_2, Step1_3, Step2, Step3 }) {
         <>
             <Container>
                 <ContainerWrap>
-                    <TextH1>Start learning in just 3 steps!</TextH1>
+                    <TextH2>Start learning in just 3 steps!</TextH2>
                     <ContainerStep>
                         <StepWrap>
                             <StepTitle>Step</StepTitle>

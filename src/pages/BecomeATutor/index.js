@@ -19,7 +19,7 @@ function BecomeATutor() {
             <StyledContainer color={({ theme }) => theme.colorMain.backgroundLight} >
                 <UpperContainer>
                     <p>{FirstArticle}</p>
-                    <StyledButton onClick={ () => navigate("/contactus") }>JOIN UR TEAM</StyledButton>
+                    <StyledButton onClick={ () => navigate("/bookanappointment") }>JOIN OUR TEAM</StyledButton>
                 </UpperContainer>
                 <LowerContainer>
                     <div>

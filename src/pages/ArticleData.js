@@ -8,7 +8,7 @@ import testimonialImg1 from "../assets/images/home-testimonial-1.jpg";
 import testimonialImg2 from "../assets/images/home-testimonial-2.jpg";
 
 export const AboutOurTeamArticle = {
-    SubTitle:'A quoute that qncapsulates our mission statement',
+    SubTitle:'"A quote that encapsulates our mission statement"',
     Article:'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.'
 }
 

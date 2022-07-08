@@ -59,7 +59,7 @@ const Footer = () => {
             </FooterLinksContatiner>
             <SocialMedia>
                 <SocialMediaWrap>
-                    <SocialLogo to='/'>TechConnect</SocialLogo>
+                    <SocialLogo to='/'>Tech<span>Connect</span></SocialLogo>
                     <WebsiteRights>TechConnect ® {new Date().getFullYear()} All rithts reserved.</WebsiteRights>
                     <SocialIcons>
                         <SocialIconLink href="//www.Facebook.com/" target="_blank" aria-label = "Facebook"><FaFacebook/></SocialIconLink>
