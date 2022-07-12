@@ -1,14 +1,24 @@
-import Router from "./routes/routes"
+const express = require("express");
+const connection = require("../server/config/database.js")
+const app = express();
 
-var express = require('express')
-var app = express()
+app.get("/", function(req,res){
 
-
-app.listen("3000", function() {
-    console.log("App listening at 3000");
+    var mySQLquery = "SELECT * FROM testdb.user"
+    connection.query(mySQLquery,function(err,result){
+        if(err){
+            console.log(err)
+            throw err;
+        }res.send(result)
+    })
 })
+app.listen(3007, function(){
+    console.log("App listened function");
 
-app.use(Router)
-
-
+    connection.connect(function(err) {
+        if(err){
+            throw err;
+        }console.log("DB connection is successful!")
+    })
+})  
 
