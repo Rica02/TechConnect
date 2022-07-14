@@ -19,40 +19,34 @@ import axios from 'axios';
 function App() {
 
   const [data, setData] = useState([])
-  var url = "http://localhost:3001/";
+  const [state, setState] = useState(false)
+  var homeUrl = "http://localhost:3007/";
+  var tutorUrl = "http://localhost:3007/tutors";
   var arrayData = []
   useEffect(() => {
     async function fetchData() {
-      //alert("Button clicked")
-      
-  
-      // var data = res.data;
-      // data.map(item => {
-      //   setUsername([...userName, item.username])
-      // })
-      // console.log(userName);
-      axios.get(`${url}`).
+      axios.get(`${tutorUrl}`).
         then(response => {
-          
+
           //console.log(response.data);
           for (var key in response.data) {
             arrayData.push(response.data[key])
           }
           setData(arrayData)
-          
+          setState(true)
         })
     }
     fetchData()
-  },[url]);
-  console.log(data);
+  }, [homeUrl, tutorUrl,state]);
+  //console.log(data);
   return (
-    
+
     // ThemeProvider wraps around the whole app as it provides colours
     <ThemeProvider theme={theme} >
       <Router>
         <Navbar />    {/* all pages will include navbar */}
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home tutorData = {data} />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/ourservices" element={<OurServices />} />
           <Route path="/news" element={<News />} />
@@ -62,7 +56,7 @@ function App() {
           <Route path="/signin" element={<Signin />} />
           <Route path="*" element={<ErrorPage />} />        {/* Render error page if path does not match */}
         </Routes>
-        <Footer/>   {/* all pages will include footer */}
+        <Footer />   {/* all pages will include footer */}
       </Router>
     </ThemeProvider>
   );
