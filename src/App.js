@@ -12,9 +12,41 @@ import ContactUs from "./pages/ContactUs";
 import BookAnAppointment from "./pages/BookAnAppointment";
 import ErrorPage from "./pages/ErrorPage";
 import { theme } from "./pages/ThemeColors";
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+
 
 function App() {
+
+  const [data, setData] = useState([])
+  var url = "http://localhost:3001/";
+  var arrayData = []
+  useEffect(() => {
+    async function fetchData() {
+      //alert("Button clicked")
+      
+  
+      // var data = res.data;
+      // data.map(item => {
+      //   setUsername([...userName, item.username])
+      // })
+      // console.log(userName);
+      axios.get(`${url}`).
+        then(response => {
+          
+          //console.log(response.data);
+          for (var key in response.data) {
+            arrayData.push(response.data[key])
+          }
+          setData(arrayData)
+          
+        })
+    }
+    fetchData()
+  },[url]);
+  console.log(data);
   return (
+    
     // ThemeProvider wraps around the whole app as it provides colours
     <ThemeProvider theme={theme} >
       <Router>
