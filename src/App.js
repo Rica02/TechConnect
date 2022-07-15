@@ -13,6 +13,7 @@ import BookAnAppointment from "./pages/BookAnAppointment";
 import ErrorPage from "./pages/ErrorPage";
 import { theme } from "./pages/ThemeColors";
 import Signup from "./pages/Signin/Signup";
+import ForgotPassword from "./pages/Signin/ForgotPassword";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/bookanappointment" element={<BookAnAppointment />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route path="*" element={<ErrorPage />} />        {/* Render error page if path does not match */}
         </Routes>
         <Footer/>   {/* all pages will include footer */}

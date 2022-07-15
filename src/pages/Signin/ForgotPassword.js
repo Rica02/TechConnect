@@ -13,7 +13,7 @@ import {
     FormLabel
 } from './SigninStyle';
 
-function Signup() {
+function ForgotPassword() {
     // Function that navigates to a different route
     let navigate = useNavigate();
 
@@ -24,16 +24,16 @@ function Signup() {
                 <Icon to="/"></Icon>
                 <FormContent>
                     <Form action="#">
-                        <FormH1>Sign in to your account</FormH1>
+                        <FormH1>Enter your details</FormH1>
                         <FormLabel htmlFor='for'>Email</FormLabel>
                         <FormInput type='email' required/>
-                        <FormLabel htmlFor='for'>Password</FormLabel>
-                        <FormInput type='password' required/>
-                        <FormLabel htmlFor='for'>Password</FormLabel>
-                        <FormInput type='password' required/>
-                        <FormButton onClick={ () => navigate("/signin") }>SIGN IN</FormButton>
+                        <FormLabel htmlFor='for'>Phone</FormLabel>
+                        <FormInput type='phone' required/>
+                        <FormButton type='submitSignUp'>SEND EMAIL</FormButton>
                         <Text></Text>
-                        <FormButton type='submitSignup'>SIGN UP</FormButton>
+                        <FormButton onClick={ () => navigate("/signin") }>Back SIGN IN</FormButton>
+                       
+                        
                     </Form>
 
                 </FormContent>
@@ -47,4 +47,4 @@ function Signup() {
     );
 }
 
-export default Signup;
+export default ForgotPassword;

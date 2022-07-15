@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import {
     FormButton,
     FormH1,
     FormInput,
-    Text,
     FormLabel,
 } from './SigninStyle';
 function SignupForm() {
-    const [toggleSignup,setToggleSignup] = useState(false);
+ 
   return (
     <>
       <FormH1>Creat your account</FormH1>
