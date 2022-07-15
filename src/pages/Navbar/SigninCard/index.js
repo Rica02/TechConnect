@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import PasswordForm from "./PasswordForm";
+import SigninForm from "./SigninForm";
 import {
     Container,
     FormButton,
@@ -8,25 +10,37 @@ import {
     Text,
     Form ,
     FormLabel,
-    ButtonLink
 } from './SigninStyle';
+import SignupForm from "./SignupForm";
 
 function SigninCard() {
     // Function that navigates to a different route
     let navigate = useNavigate();
+    const [toggleSignup,setToggleSignup] = useState(true);
+    const [togglePassword,setTogglePassword] = useState(true);
+
+    
+
 
     return (
         <>
                 <Container>
                     <Form action="#">
-                        <FormH1>Enter your details to sign in</FormH1>
-                        <FormLabel htmlFor='for'>Email</FormLabel>
-                        <FormInput type='email' required/>
-                        <FormLabel htmlFor='for'>Password</FormLabel>
-                        <FormInput type='password' required/>
-                        <FormButton type='submitSingIn'>SIGN IN</FormButton>
-                        <ButtonLink to="/">Forgot password</ButtonLink>
-                        <FormButton onClick={ () => navigate("/bookanappointment")}>SIGN UP</FormButton>
+                    {toggleSignup ? 
+                        <>
+                        {togglePassword ? <>
+                            <SigninForm/>
+                            <FormButton onClick={() => {setTogglePassword((value) => !value);}}>Forgot password</FormButton>
+                            <FormButton onClick={() => {setToggleSignup((value) => !value);}}>GO SIGN UP </FormButton>
+                            </> : <>
+                            <PasswordForm/>
+                            <FormButton onClick={() => {setTogglePassword((value) => !value);}}>GO SIGN UP </FormButton>
+                            </>}   
+                        
+                        </> : <> 
+                        <SignupForm/>
+                        <FormButton onClick={() => {setToggleSignup((value) => !value);}}>GO SIGN IN</FormButton></>
+                    }
                     </Form>
                 </Container>
         </>
