@@ -32,11 +32,6 @@ function Signin() {
                         <FormButton onClick={ () => navigate("/forgotPassword") }>Forgot password</FormButton>
                         <FormButton onClick={ () => navigate("/signup") }>GO SIGN UP</FormButton>
                     </Form>
-
-                </FormContent>
-                <FormContent>
-
-
                 </FormContent>
             </FormWrap>
             </Container>

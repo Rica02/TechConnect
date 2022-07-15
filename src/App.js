@@ -14,6 +14,7 @@ import ErrorPage from "./pages/ErrorPage";
 import { theme } from "./pages/ThemeColors";
 import Signup from "./pages/Signin/Signup";
 import ForgotPassword from "./pages/Signin/ForgotPassword";
+import AddNews from "./pages/AddNews";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
+          <Route path="/addnews" element={<AddNews />} />
           <Route path="*" element={<ErrorPage />} />        {/* Render error page if path does not match */}
         </Routes>
         <Footer/>   {/* all pages will include footer */}

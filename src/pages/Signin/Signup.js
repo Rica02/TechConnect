@@ -8,6 +8,7 @@ import {
     FormInput,
     FormWrap,
     Icon,
+
     Form ,
     FormLabel
 } from './SigninStyle';
@@ -18,7 +19,7 @@ function Signup() {
 
     return (
         <>
-            <Container>
+        <Container>
             <FormWrap>
                 <Icon to="/"></Icon>
                 <FormContent>
@@ -35,12 +36,8 @@ function Signup() {
                     </Form>
 
                 </FormContent>
-                <FormContent>
-
-
-                </FormContent>
             </FormWrap>
-            </Container>
+        </Container>
         </>
     );
 }

@@ -30,10 +30,7 @@ function ForgotPassword() {
                         <FormInput type='phone' required/>
                         <FormButton type='submitSignUp'>SEND EMAIL</FormButton>
                         <FormButton onClick={ () => navigate("/signin") }>Back SIGN IN</FormButton>
-
                     </Form>
-                </FormContent>
-                <FormContent>
                 </FormContent>
             </FormWrap>
             </Container>

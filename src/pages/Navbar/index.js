@@ -51,7 +51,6 @@ export function Navbar() {
                         <NavbarLink to="/news">NEWS</NavbarLink>
                         <NavbarLink to="/becomeatutor">BECOME A TUTOR</NavbarLink>
                         <NavbarLink to="/contactus">CONTACT US</NavbarLink>
-                        
                         <OpenLinksButton
                             onClick={() => {
                                 setExtendNavbar((value) => !value);     // set the value opposite of current value
