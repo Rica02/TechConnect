@@ -8,7 +8,6 @@ import {
     FormInput,
     FormWrap,
     Icon,
-    Text,
     Form ,
     FormLabel
 } from './SigninStyle';
@@ -31,9 +30,8 @@ function Signup() {
                         <FormInput type='password' required/>
                         <FormLabel htmlFor='for'>Password</FormLabel>
                         <FormInput type='password' required/>
-                        <FormButton onClick={ () => navigate("/signin") }>SIGN IN</FormButton>
-                        <Text></Text>
                         <FormButton type='submitSignup'>SIGN UP</FormButton>
+                        <FormButton onClick={ () => navigate("/signin") }>GO SIGN IN</FormButton>
                     </Form>
 
                 </FormContent>
