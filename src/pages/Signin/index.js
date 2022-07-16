@@ -9,7 +9,7 @@ import {
     FormWrap,
     Icon,
     Text,
-    Form ,
+    Form,
     FormLabel
 } from './SigninStyle';
 
@@ -20,26 +20,26 @@ function Signin() {
     return (
         <>
             <Container>
-            <FormWrap>
-                <Icon to="/"></Icon>
-                <FormContent>
-                    <Form action="#">
-                        <FormH1>Sign in to your account</FormH1>
-                        <FormLabel htmlFor='for'>Email</FormLabel>
-                        <FormInput type='email' required/>
-                        <FormLabel htmlFor='for'>Password</FormLabel>
-                        <FormInput type='password' required/>
-                        <FormButton type='submitSingIn'>SIGN IN</FormButton>
-                        <Text>Forgot password</Text>
-                        <FormButton type='submitSignUp'>SIGN UP</FormButton>
-                    </Form>
+                <FormWrap>
+                    <Icon to="/"></Icon>
+                    <FormContent>
+                        <Form action="#">
+                            <FormH1>Sign in to your account</FormH1>
+                            <FormLabel htmlFor='for'>Email</FormLabel>
+                            <FormInput type='email' required />
+                            <FormLabel htmlFor='for'>Password</FormLabel>
+                            <FormInput type='password' required />
+                            <FormButton type='submitSingIn'>SIGN IN</FormButton>
+                            <Text>Forgot password</Text>
+                            <FormButton type='submitSignUp'>SIGN UP</FormButton>
+                        </Form>
 
-                </FormContent>
-                <FormContent>
+                    </FormContent>
+                    <FormContent>
 
 
-                </FormContent>
-            </FormWrap>
+                    </FormContent>
+                </FormWrap>
             </Container>
         </>
     );

@@ -27,8 +27,6 @@ function App() {
     async function fetchData() {
       axios.get(`${tutorUrl}`).
         then(response => {
-
-          //console.log(response.data);
           for (var key in response.data) {
             arrayData.push(response.data[key])
           }
@@ -38,7 +36,6 @@ function App() {
     }
     fetchData()
   }, [homeUrl, tutorUrl,state]);
-  //console.log(data);
   return (
 
     // ThemeProvider wraps around the whole app as it provides colours
@@ -47,7 +44,7 @@ function App() {
         <Navbar />    {/* all pages will include navbar */}
         <Routes>
           <Route path="/" element={<Home tutorData = {data} />} />
-          <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/aboutus" element={<AboutUs tutorData = {data} />} />
           <Route path="/ourservices" element={<OurServices />} />
           <Route path="/news" element={<News />} />
           <Route path="/becomeatutor" element={<BecomeATutor />} />

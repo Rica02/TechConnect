@@ -7,4 +7,10 @@ const connection = mysql.createConnection({
     database: "testdb"
 })
 
+
+const database = {
+    "databasename": "techconnect",
+    "username": "root",
+    "password": "rootpassword"
+}
 module.exports = connection 
