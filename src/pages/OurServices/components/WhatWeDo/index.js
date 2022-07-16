@@ -11,30 +11,30 @@ export default function WhatWeDo(props) {
         <StyledContainer color={props.color}>
             <h2>What do we do?</h2>
             <GridContainer>
-                <div class="grid-item">
+                <div className="grid-item">
                     <IconContainer>
-                        <RiComputerFill class="icon" />
+                        <RiComputerFill className="icon" />
                     </IconContainer>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam gravida,
                         neque vitae ultricies mollis, nulla arcu commodo lectus.</p>
                 </div>
-                <div class="grid-item">
+                <div className="grid-item">
                     <IconContainer>
-                        <RiTeamFill class="icon" />
+                        <RiTeamFill className="icon" />
                     </IconContainer>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam gravida,
                         neque vitae ultricies mollis, nulla arcu commodo lectus.</p>
                 </div>
-                <div class="grid-item">
+                <div className="grid-item">
                     <IconContainer>
-                        <FaHome class="icon" />
+                        <FaHome className="icon" />
                     </IconContainer>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam gravida,
                         neque vitae ultricies mollis, nulla arcu commodo lectus.</p>
                 </div>
-                <div class="grid-item">
+                <div className="grid-item">
                     <IconContainer>
-                        <FaSmile class="icon" />
+                        <FaSmile className="icon" />
                     </IconContainer>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam gravida,
                         neque vitae ultricies mollis, nulla arcu commodo lectus.</p>

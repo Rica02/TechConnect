@@ -8,24 +8,26 @@ import { GridContainer, GridItem } from "./OurTutorsStyle";
 export default function OurTutors(props) {
     // Function that navigates to a different route
     let navigate = useNavigate();
+    console.log(props.tutorsData);
 
-    return(
-        <StyledContainer color={ props.color }>
+    return (
+        <StyledContainer color={props.color}>
             <h2>Meet our tutors</h2>
-
             {/* Display tutors in a grid using the tutors array*/}
             <GridContainer>
-                {props.TutorList.map((tutor, index)=> (
-                    <GridItem key={index}>
-                        <img src={tutor.url} />
-                        <p>{tutor.name}<br/>
-                            {tutor.location}<br/>
-                            {tutor.qualification}<br/>
-                        </p>
-                    </GridItem>
-                ))}
+                {
+                    props.tutorsData.map((tutor, index) => (
+                        <GridItem key={index}>
+                            <div><img src={tutor.url} /></div>
+                            <p>
+                                <b>{tutor.firstname}</b> <br />
+                                {tutor.addressline1} <br />{tutor.suburb} <br />
+                                {tutor.qualification}<br />
+                            </p>
+                        </GridItem>
+                    ))}
             </GridContainer>
-            <StyledButton onClick={ () => navigate("/becomeatutor") }>WANT TO JOIN OUR TEAM?</StyledButton>
+            <StyledButton onClick={() => navigate("/becomeatutor")}>WANT TO JOIN OUR TEAM?</StyledButton>
         </StyledContainer>
     )
 }
