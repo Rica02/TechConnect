@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { Button } from "bootstrap";
+
+
 
 export const Container = styled.div`
     height: 90%;
@@ -51,7 +51,8 @@ export const FormInput = styled.input`
 
 export const FormButton = styled.button`
     background: #ff8000;
-    padding: 16px 0;
+    margin: 5px;
+    padding: 10px 0;
     border: none;
     border-radius: 10px;
     color: black;
@@ -66,6 +67,3 @@ export const Text=styled.span`
     font-size: 14px;
 `;
 
-export const ButtonLink=styled(Link)`
-    
-`;

@@ -8,18 +8,18 @@ import {
     FormInput,
     FormWrap,
     Icon,
+
     Form ,
     FormLabel
 } from './SigninStyle';
 
-function Signin() {
+function Signup() {
     // Function that navigates to a different route
     let navigate = useNavigate();
 
     return (
         <>
-            <Container>
-
+        <Container>
             <FormWrap>
                 <Icon to="/"></Icon>
                 <FormContent>
@@ -29,15 +29,17 @@ function Signin() {
                         <FormInput type='email' required/>
                         <FormLabel htmlFor='for'>Password</FormLabel>
                         <FormInput type='password' required/>
-                        <FormButton type='submitSingIn'>SIGN IN</FormButton>
-                        <FormButton onClick={ () => navigate("/forgotPassword") }>Forgot password</FormButton>
-                        <FormButton onClick={ () => navigate("/signup") }>GO SIGN UP</FormButton>
+                        <FormLabel htmlFor='for'>Password</FormLabel>
+                        <FormInput type='password' required/>
+                        <FormButton type='submitSignup'>SIGN UP</FormButton>
+                        <FormButton onClick={ () => navigate("/signin") }>GO SIGN IN</FormButton>
                     </Form>
+
                 </FormContent>
             </FormWrap>
-            </Container>
+        </Container>
         </>
     );
 }
 
-export default Signin;
+export default Signup;

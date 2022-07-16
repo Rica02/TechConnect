@@ -12,8 +12,14 @@ import ContactUs from "./pages/ContactUs";
 import BookAnAppointment from "./pages/BookAnAppointment";
 import ErrorPage from "./pages/ErrorPage";
 import { theme } from "./pages/ThemeColors";
+
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+
+
+import Signup from "./pages/Signin/Signup";
+import ForgotPassword from "./pages/Signin/ForgotPassword";
+import AddNews from "./pages/AddNews";
 
 
 function App() {
@@ -51,6 +57,9 @@ function App() {
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/bookanappointment" element={<BookAnAppointment />} />
           <Route path="/signin" element={<Signin />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/forgotPassword" element={<ForgotPassword />} />
+          <Route path="/addnews" element={<AddNews />} />
           <Route path="*" element={<ErrorPage />} />        {/* Render error page if path does not match */}
         </Routes>
         <Footer />   {/* all pages will include footer */}
