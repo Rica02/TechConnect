@@ -59,6 +59,26 @@ app.post("/register", function (req, res) {
         }
     )
 })
+
+app.post("/login", function(req, res) {
+    var email = req.body.email
+    var password = req.body.password
+
+    var searchQuery = "SELECT * FROM testdb.user WHERE email = ? AND password = ?"   
+    connection.query(searchQuery, [email,password], 
+        (sqlError, result)=> {
+            if(sqlError){
+                console.log(sqlError);
+            }
+            if(result.length > 0){
+                console.log("found " + result);
+            }else {
+                res.send({message: "nothing found"})
+            }
+            
+        })
+})
+
 app.listen(3007, function () {
     console.log("App listened function");
 
