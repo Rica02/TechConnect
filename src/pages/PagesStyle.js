@@ -24,3 +24,26 @@ export const StyledButton = styled.button`
     color: white;
     border: none;
 `
+
+export const DashboardContainer = styled.div`
+    background-color: ${ ({ theme }) => theme.colorMain.backgroundLight };
+    display: flex;
+    flex-direction: column;
+    padding: 35px 100px;
+    color: ${ ({ theme }) => theme.colorMain.text };
+    border-bottom: solid ${ ({ theme }) => theme.colorMain.backgroundDark } 15px;
+
+    h2 {
+        color: ${ ({ theme }) => theme.colorMain.highlightMain };
+        margin-bottom: 25px;
+    }
+    h3 {
+        font-size: x-large;
+        font-weight: 400;
+        color: ${ ({ theme }) => theme.colorMain.highlightMain };
+        margin-bottom: 25px;
+    }
+    p {
+        font-size: large;
+    }
+`
