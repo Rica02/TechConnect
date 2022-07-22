@@ -21,23 +21,25 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 function App() {
-  const [data, setData] = useState([]);
-  const [state, setState] = useState(false);
-  var homeUrl = "http://localhost:3007/";
-  var tutorUrl = "http://localhost:3007/tutors";
-  var arrayData = [];
-  useEffect(() => {
-    async function fetchData() {
-      axios.get(`${tutorUrl}`).then((response) => {
-        for (var key in response.data) {
-          arrayData.push(response.data[key]);
-        }
-        setData(arrayData);
-        setState(true);
-      });
-    }
-    fetchData();
-  }, [homeUrl, tutorUrl, state]);
+
+  const [data, setData] = useState([])
+  const [state, setState] = useState(false)
+  // var homeUrl = "http://localhost:3007/";
+  // var tutorUrl = "http://localhost:3007/tutors";
+  // var arrayData = []
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     axios.get(`${tutorUrl}`).
+  //       then(response => {
+  //         for (var key in response.data) {
+  //           arrayData.push(response.data[key])
+  //         }
+  //         setData(arrayData)
+  //         setState(true)
+  //       })
+  //   }
+  //   fetchData()
+  // }, [homeUrl, tutorUrl,state]);
   return (
     // ThemeProvider wraps around the whole app as it provides colours
     <ThemeProvider theme={theme}>

@@ -4,34 +4,34 @@ import SigninForm from "./SigninForm";
 import {
     Container,
     FormButton,
-    Form ,
+    Form,
 } from './SigninStyle';
 import SignupForm from "./SignupForm";
 function SigninCard() {
     // Function that navigates to a different route
 
-    const [toggleSignup,setToggleSignup] = useState(true);
-    const [togglePassword,setTogglePassword] = useState(true);
+    const [toggleSignup, setToggleSignup] = useState(true);
+    const [togglePassword, setTogglePassword] = useState(true);
     return (
         <>
-                <Container>
-                    <Form action="#">
-                    {toggleSignup ? 
+            <Container>
+                <Form action="#">
+                    {toggleSignup ?
                         <>
-                        {togglePassword ? <>
-                            <SigninForm/>
-                            <FormButton onClick={() => {setTogglePassword((value) => !value);}}>Forgot password</FormButton>
-                            <FormButton onClick={() => {setToggleSignup((value) => !value);}}>GO SIGN UP </FormButton>
+                            {togglePassword ? <>
+                                <SigninForm />
+                                <FormButton onClick={() => { setTogglePassword((value) => !value); }}>Forgot password</FormButton>
+                                <FormButton onClick={() => { setToggleSignup((value) => !value); }}>GO SIGN UP </FormButton>
                             </> : <>
-                            <PasswordForm/>
-                            <FormButton onClick={() => {setTogglePassword((value) => !value);}}>GO SIGN UP </FormButton>
-                            </>}   
-                        </> : <> 
-                        <SignupForm/>
-                        <FormButton onClick={() => {setToggleSignup((value) => !value);}}>GO SIGN IN</FormButton></>
+                                <PasswordForm />
+                                <FormButton onClick={() => { setTogglePassword((value) => !value); }}>GO SIGN UP </FormButton>
+                            </>}
+                        </> : <>
+                            <SignupForm />
+                            <FormButton onClick={() => { setToggleSignup((value) => !value); }}>GO SIGN IN</FormButton></>
                     }
-                    </Form>
-                </Container>
+                </Form>
+            </Container>
         </>
     );
 }
