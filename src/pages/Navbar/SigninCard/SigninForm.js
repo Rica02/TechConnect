@@ -15,17 +15,25 @@ function SigninForm() {
 
   var handleForm = (e) => {
     var value = e.target.value
+    //console.log(value);
     setFormInput({ ...formInput, [e.target.name]: value })
   }
   var loginFunction = async (e) => {
-    console.log(formInput.email + " " + formInput.password);
+    //console.log(formInput.email + " " + formInput.password);
     await axios.post('http://localhost:3007/login', {
       email: formInput.email,
       password: formInput.password,
     })
       .then((response) => {
-        console.log(response);
-        alert("success")
+        if(response.data){
+          var userEmail =response.data[0].email;
+          var pw =response.data[0].password; 
+          console.log("email: " + userEmail + " password: " + pw);
+          localStorage.setItem('user', response.data[0])
+          console.log(localStorage.getItem("user"));
+        }
+        
+        debugger;
       }, (error) => {
         alert('error')
         console.log(error);
