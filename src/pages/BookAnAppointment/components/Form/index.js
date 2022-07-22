@@ -14,9 +14,6 @@ export default function Form() {
 
     var Register = async (e, req, res) => {
         e.preventDefault();
-        //CORS policy
-        //req.header("Access-Control-Allow-Origin", "*");
-        //req.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         console.log(formInput.email, formInput.password);
         const dataPost = {
             email: formInput.email,
@@ -35,40 +32,12 @@ export default function Form() {
         alert("Submitted")
         console.log("------------" + req);
     }
-    // var Register = async (e, req, res) => {
-    //     e.preventDefault();
-    //     alert("Submitted")
-    //     console.log(formInput.firstname + formInput.lastname + formInput.email, formInput.password);
-    // try {
-    //     console.log("------------" + req);
-    //     //req.header("Access-Control-Allow-Origin", "*");
-    //     //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    //   let res =  await axios.post("http://localhost:3007/register", {
-    //         header: {
-    //             "Access-Control-Allow-Origin": "*" 
-    //         },
-    //       body: {
-    //       password: formInput.password,
-    //       email: formInput.email,
-    //     },
-    //   });
-    //   let resJson = await res.json();
-    //   if (res.status === 200) {
-    //     console.log(res);
-    //   } else {
-    //     console.log("unsuccesfully");
-    //   }
-    // } catch (err) {
-    //   console.log(err);
-    // }
-    // }
 
     var handleRegisterForm = (event) => {
         var value = event.target.value
         setFormInput({
             ...formInput, [event.target.name]: value
         })
-
     }
     //console.log(formInput.firstname + formInput.lastname + formInput.email, formInput.password);
     return (
