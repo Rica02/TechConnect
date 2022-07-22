@@ -89,7 +89,7 @@ app.post("/login", function (req, res) {
             }
             else if(result.length > 0) {
                 console.log(result);
-                res.send({ message: "result", result })
+                res.send( result)
 
             } else{
                 console.log("no combination found");
