@@ -6,10 +6,11 @@ import {
   FormInput,
   FormLabel,
 } from './SigninStyle';
+import {useDB} from '../../../ServerContext';
 import {useNavigate} from "react-router-dom"
 function SigninForm() {
   var navigate = useNavigate()
-  const [auth, setAuth] = useState(false)
+ const {auth,setAuth}=useDB()
 
   const [formInput, setFormInput] = useState({
     email: "",
@@ -23,6 +24,7 @@ function SigninForm() {
   }
   var loginFunction = async (e) => {
     e.preventDefault()
+    
     //console.log(formInput.email + " " + formInput.password);
     try {
       await axios.post('http://localhost:3007/login', {
@@ -32,25 +34,24 @@ function SigninForm() {
       .then((response) => {
         if(response.data.length >=1 ){
           console.log(response.data);
-          debugger
+        
           var userEmail =response.data[0].email;
           var pw =response.data[0].password; 
           console.log("email: " + userEmail + " password: " + pw);
           localStorage.setItem('user', response.data[0])
-          console.log(localStorage.getItem("user"));
-          setAuth(!auth)
+          setAuth(response.data[0])
+          console.log(auth);
           alert("succesfully login")
-          navigate("/contactus")
+          navigate("/dashborad")
         }else if(response.data.length < 1){
-          setAuth(auth)
           alert("no combination found")
         }
-        debugger;
+        
       }, (error) => {
         alert('error')
         console.log(error);
         alert("error")
-        debugger
+        
       });
     } catch (error) {
       console.log(error);

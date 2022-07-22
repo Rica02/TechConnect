@@ -16,9 +16,13 @@ import Signup from "./pages/Signin/Signup";
 import ForgotPassword from "./pages/Signin/ForgotPassword";
 import AddNews from "./pages/AddNews";
 import Dashboard from "./pages/PrivatePages/Dashboard";
-
+import TeacherPage from "./pages/TeacherPage";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { ServerProvider } from "./ServerContext";
+import PrivateRoute from "./PrivateRoute";
+import StudentPage from "./pages/StudentPage";
+import Dashborad from "./pages/Dashborad";
 
 function App() {
 
@@ -42,10 +46,14 @@ function App() {
   // }, [homeUrl, tutorUrl,state]);
   return (
     // ThemeProvider wraps around the whole app as it provides colours
+    <ServerProvider>
     <ThemeProvider theme={theme}>
       <Router>
         <Navbar /> {/* all pages will include navbar */}
         <Routes>
+          <Route path="/teacherpage" element={<PrivateRoute><TeacherPage/></PrivateRoute>} />
+          <Route path="/studentPage" element={<PrivateRoute><StudentPage/></PrivateRoute>} />
+          <Route path="/dashborad" element={<PrivateRoute><Dashborad/></PrivateRoute>} />
           <Route path="/" element={<Home tutorData={data} />} />
           <Route path="/aboutus" element={<AboutUs tutorData={data} />} />
           <Route path="/ourservices" element={<OurServices />} />
@@ -63,6 +71,7 @@ function App() {
         <Footer /> {/* all pages will include footer */}
       </Router>
     </ThemeProvider>
+    </ServerProvider>
   );
 }
 
