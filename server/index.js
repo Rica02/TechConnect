@@ -93,7 +93,7 @@ app.post("/login", function (req, res) {
 
             } else{
                 console.log("no combination found");
-                res.send({status:404,message:"unsuccesfully login"})
+                res.send( result)
             }
 
         })

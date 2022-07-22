@@ -7,6 +7,7 @@ import {
   FormLabel,
 } from './SigninStyle';
 function SigninForm() {
+  const [auth, setAuth] = useState(false)
 
   const [formInput, setFormInput] = useState({
     email: "",
@@ -25,14 +26,20 @@ function SigninForm() {
       password: formInput.password,
     })
       .then((response) => {
-        if(response.data){
+        if(response.data.length >=1 ){
+          console.log(response.data);
+          debugger
           var userEmail =response.data[0].email;
           var pw =response.data[0].password; 
           console.log("email: " + userEmail + " password: " + pw);
           localStorage.setItem('user', response.data[0])
           console.log(localStorage.getItem("user"));
+          setAuth(!auth)
+          alert("succesfully login")
+        }else if(response.data.length < 1){
+          setAuth(auth)
+          alert("no combination found")
         }
-        
         debugger;
       }, (error) => {
         alert('error')
