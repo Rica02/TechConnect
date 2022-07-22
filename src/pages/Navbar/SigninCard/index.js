@@ -15,7 +15,7 @@ function SigninCard() {
     return (
         <>
             <Container>
-                <Form action="#">
+                <Form>
                     {toggleSignup ?
                         <>
                             {togglePassword ? <>
