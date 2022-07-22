@@ -6,7 +6,9 @@ import {
   FormInput,
   FormLabel,
 } from './SigninStyle';
+import {useNavigate} from "react-router-dom"
 function SigninForm() {
+  var navigate = useNavigate()
   const [auth, setAuth] = useState(false)
 
   const [formInput, setFormInput] = useState({
@@ -20,8 +22,10 @@ function SigninForm() {
     setFormInput({ ...formInput, [e.target.name]: value })
   }
   var loginFunction = async (e) => {
+    e.preventDefault()
     //console.log(formInput.email + " " + formInput.password);
-    await axios.post('http://localhost:3007/login', {
+    try {
+      await axios.post('http://localhost:3007/login', {
       email: formInput.email,
       password: formInput.password,
     })
@@ -36,6 +40,7 @@ function SigninForm() {
           console.log(localStorage.getItem("user"));
           setAuth(!auth)
           alert("succesfully login")
+          navigate("/contactus")
         }else if(response.data.length < 1){
           setAuth(auth)
           alert("no combination found")
@@ -47,6 +52,9 @@ function SigninForm() {
         alert("error")
         debugger
       });
+    } catch (error) {
+      console.log(error);
+    }
   }
   return (
     <>
@@ -55,7 +63,7 @@ function SigninForm() {
       <FormInput name="email" onChange={handleForm} type='email' required />
       <FormLabel htmlFor='for'>Password</FormLabel>
       <FormInput type='password' name="password" onChange={handleForm} required />
-      <FormButton type='submit' onClick={() => loginFunction()}>SIGN IN</FormButton>
+      <FormButton type='submit' onClick={(e) => loginFunction(e)}>SIGN IN</FormButton>
     </>
   )
 }

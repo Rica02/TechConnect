@@ -23,7 +23,7 @@ function Signin() {
                 <FormWrap>
                     <Icon to="/"></Icon>
                     <FormContent>
-                        <Form action="#">
+                        <Form >
                             <FormH1>Sign in to your account</FormH1>
                             <FormLabel htmlFor='for'>Email</FormLabel>
                             <FormInput type='email' required />
