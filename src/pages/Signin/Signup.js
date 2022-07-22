@@ -16,7 +16,7 @@ import {
 function Signup() {
     // Function that navigates to a different route
     let navigate = useNavigate();
-
+    
     return (
         <>
         <Container>
