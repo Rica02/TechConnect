@@ -10,7 +10,7 @@ function OurServices() {
     return (
         <>
             <Header headerTitle={"Our services"} headerBanner={headerBanner} />
-            <WhatWeDo {...WhatWeDoArticle} color={ ({ theme }) => theme.colorMain.backgroundLight }/>
+            <WhatWeDo {...WhatWeDoArticle} bgColor={ ({ theme }) => theme.colorMain.backgroundLight }/>
             <Start3Step {...Start3StepArticle}/>
             <WhatCanWeTeachYou/>
         </>

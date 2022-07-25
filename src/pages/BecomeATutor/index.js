@@ -26,7 +26,7 @@ function BecomeATutor() {
                         <h3>What we will expect from you</h3>
                         <p>{SecondArticle}</p>
                     </div>
-                    <img src={BecomeTutorImg} />
+                    <img src={BecomeTutorImg} alt="tutoring example" />
                 </LowerContainer>
             </StyledContainer>
 

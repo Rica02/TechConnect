@@ -16,9 +16,9 @@ function Home(props) {
     return (
         <>
             <HomeHeader />
-            <WhatWeDo color={ ({ theme }) => theme.colorMain.backgroundLight }/>
-            <OurTutors tutorsData = {tutors} {...OurTutorsArticle} color={ ({ theme }) => theme.colorMain.backgroundDark } />
-            <Testimonials {...TestimonialsArticle} color={ ({ theme }) => theme.colorMain.backgroundLight }/>
+            <WhatWeDo bgColor={ ({ theme }) => theme.colorMain.backgroundLight }/>
+            <OurTutors tutorsData = {tutors} {...OurTutorsArticle} bgColor={ ({ theme }) => theme.colorMain.backgroundDark } />
+            <Testimonials {...TestimonialsArticle} bgColor={ ({ theme }) => theme.colorMain.backgroundLight }/>
         </>
     );
 }

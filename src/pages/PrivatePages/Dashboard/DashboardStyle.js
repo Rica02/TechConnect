@@ -8,6 +8,7 @@ export const Table = styled.table`
 
     th {
         background-color: #D9D9D9;
+        text-align: center;
     }
 
     td, th {
@@ -23,10 +24,5 @@ export const Table = styled.table`
         width: 60px;
         border: ${({theme}) => theme.colorMain.text} 1px solid;
         margin-right: 15px;
-    }
-
-    a {
-        font-weight: bold;
-        color: ${({theme}) => theme.colorMain.highlightRed};
     }
 `

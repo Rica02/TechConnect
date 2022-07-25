@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledContainer = styled.div`
-    background-color: ${ (props) => props.color };  // Either white or light beige
+    background-color: ${ (props) => props.bgColor };  // Either white or light beige
     display: flex;
     flex-direction: column;
     align-items: center;

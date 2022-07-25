@@ -11,14 +11,14 @@ export default function OurTutors(props) {
     console.log(props.tutorsData);
 
     return (
-        <StyledContainer color={props.color}>
+        <StyledContainer bgColor={props.bgColor}>
             <h2>Meet our tutors</h2>
             {/* Display tutors in a grid using the tutors array*/}
             <GridContainer>
                 {
                     props.tutorsData.map((tutor, index) => (
                         <GridItem key={index}>
-                            <div><img src={tutor.url} /></div>
+                            <div><img src={tutor.url} alt="tutor" /></div>
                             <p>
                                 <b>{tutor.firstname}</b> <br />
                                 {tutor.addressline1} <br />{tutor.suburb} <br />
