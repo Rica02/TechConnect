@@ -4,6 +4,10 @@ const cors = require('cors')
 const app = express();
 const bodyParser = require("body-parser");
 
+// for zoom
+const zoomConfig = require("./config/zoom.js");
+const jwt = require("jsonwebtoken");
+const rp = require("request-promise");
 
 app.use(express.json())
 app.use(cors())
@@ -99,9 +103,64 @@ app.post("/login", function (req, res) {
         })
 })
 
-app.post("/login", (req,res) => {
-    
-})
+
+// ZOOM API
+
+var email, userid, resp;
+
+//Use the ApiKey and APISecret from config/zoom.js
+const payload = {
+  iss: zoomConfig.APIKey,
+  exp: new Date().getTime() + 5000,
+};
+
+const token = jwt.sign(payload, zoomConfig.APISecret);
+app.post("/meeting", (req, res) => {
+  email = req.body.meetingData.email;
+  var options = {
+    method: "POST",
+    uri: "https://api.zoom.us/v2/users/" + email + "/meetings",
+    body: {
+      topic: req.body.meetingData.topic,
+      type: req.body.meetingData.type,
+      password: req.body.meetingData.password,
+      start_time: req.body.meetingData.start_time,
+      type: 2,                   // 1 = instant meeting, 2 = scheduled meeting
+      default_password: false,
+      duration: 40,              // 40 min is the max meeting time allowed with a basic free Zoom account
+      settings: {
+        host_video: "true",
+        participant_video: "true",
+      },
+    },
+    auth: {
+      bearer: token,
+    },
+    headers: {
+      "User-Agent": "Zoom-api-Jwt-Request",
+      "content-type": "application/json",
+    },
+    json: true, //Parse the JSON string in the response
+  };
+
+  rp(options)
+    .then(function (response) {
+      console.log("response is: ", response.join_url);
+      // response.status(200).json(response);
+      let dataRes = {
+        join_url: response.join_url,
+      };
+      res.status(200).json(dataRes);
+
+      res.send("create meeting result: " + JSON.stringify(response));
+    })
+    .catch(function (err) {
+      // API call failed...
+      console.log("API call failed, reason ", err);
+    });
+});
+
+
 
 
 app.listen(3007, function () {

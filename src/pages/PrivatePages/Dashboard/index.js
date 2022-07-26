@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { DashboardContainer, StyledButton } from "../../PagesStyle";
-import { Table } from "../DashboardStyle";
+import { Table } from "./DashboardStyle";
 import imgTest from "../../../assets/images/tutor-1.jpg";
+import JoinZoom from "../JoinZoom";
 
 function Dashboard() {
+  // To determine if logged in user is tutor or not
+  const [ isTutor, setIsTutor ] = useState(false);
 
   // TODO: Replace UpcomingLessons() and PastLessons() functions to get data from database
 
@@ -35,11 +38,12 @@ function Dashboard() {
           <td>{lesson.date}</td>
           <td>{lesson.where}</td>
           <td>
-            <img src={lesson.tutorImg} />
+            <img src={lesson.tutorImg} alt="user"/>
             {lesson.tutorName}
           </td>
           <td>
-            <a href={lesson.link}>CLICK HERE TO START YOUR LESSON</a>
+            {/* <a href={lesson.link}>CLICK HERE TO START YOUR LESSON</a> */}
+            <JoinZoom isTutor={isTutor} />
           </td>
         </tr>
       ))}
@@ -55,7 +59,7 @@ function Dashboard() {
           <td>{lesson.date}</td>
           <td>{lesson.where}</td>
           <td>
-            <img src={lesson.tutorImg} />
+            <img src={lesson.tutorImg} alt="user" />
             {lesson.tutorName}
           </td>
           <td>{lesson.status}</td>

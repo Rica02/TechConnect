@@ -23,11 +23,13 @@ import { ServerProvider } from "./ServerContext";
 import PrivateRoute from "./PrivateRoute";
 import StudentPage from "./pages/StudentPage";
 import Dashborad from "./pages/Dashborad";
+import Admin from "./pages/PrivatePages/Admin";
 
 function App() {
 
   const [data, setData] = useState([])
   const [state, setState] = useState(false)
+
   // var homeUrl = "http://localhost:3007/";
   // var tutorUrl = "http://localhost:3007/tutors";
   // var arrayData = []
@@ -47,30 +49,31 @@ function App() {
   return (
     // ThemeProvider wraps around the whole app as it provides colours
     <ServerProvider>
-    <ThemeProvider theme={theme}>
-      <Router>
-        <Navbar /> {/* all pages will include navbar */}
-        <Routes>
-          <Route path="/teacherpage" element={<PrivateRoute><TeacherPage/></PrivateRoute>} />
-          <Route path="/studentPage" element={<PrivateRoute><StudentPage/></PrivateRoute>} />
-          <Route path="/dashborad" element={<PrivateRoute><Dashborad/></PrivateRoute>} />
-          <Route path="/" element={<Home tutorData={data} />} />
-          <Route path="/aboutus" element={<AboutUs tutorData={data} />} />
-          <Route path="/ourservices" element={<OurServices />} />
-          <Route path="/news" element={<News />} />
-          <Route path="/becomeatutor" element={<BecomeATutor />} />
-          <Route path="/contactus" element={<ContactUs />} />
-          <Route path="/bookanappointment" element={<BookAnAppointment />} />
-          <Route path="/signin" element={<Signin />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/forgotPassword" element={<ForgotPassword />} />
-          <Route path="/addnews" element={<AddNews />} />
-          <Route path="*" element={<ErrorPage />} /> {/* Render error page if path does not match */}
-          <Route path="/login" element={<Dashboard />} />
-        </Routes>
-        <Footer /> {/* all pages will include footer */}
-      </Router>
-    </ThemeProvider>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <Navbar /> {/* all pages will include navbar */}
+          <Routes>
+            <Route path="/teacherpage" element={<PrivateRoute><TeacherPage/></PrivateRoute>} />
+            <Route path="/studentPage" element={<PrivateRoute><StudentPage/></PrivateRoute>} />
+            <Route path="/dashborad" element={<PrivateRoute><Dashborad/></PrivateRoute>} />
+            <Route path="/" element={<Home tutorData={data} />} />
+            <Route path="/aboutus" element={<AboutUs tutorData={data} />} />
+            <Route path="/ourservices" element={<OurServices />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/becomeatutor" element={<BecomeATutor />} />
+            <Route path="/contactus" element={<ContactUs />} />
+            <Route path="/bookanappointment" element={<BookAnAppointment />} />
+            <Route path="/signin" element={<Signin />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/forgotPassword" element={<ForgotPassword />} />
+            <Route path="/addnews" element={<AddNews />} />
+            <Route path="*" element={<ErrorPage />} /> {/* Render error page if path does not match */}
+            <Route path="/login" element={<Dashboard />} />   {/* TEST */}
+            <Route path="/admintest" element={<Admin />} />   {/* TEST */}
+          </Routes>
+          <Footer /> {/* all pages will include footer */}
+        </Router>
+      </ThemeProvider>
     </ServerProvider>
   );
 }
