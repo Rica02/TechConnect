@@ -15,7 +15,6 @@ import {
     NavbarSignContainerExtended,
     Signwrap,
     SignButtonWrap,
-    LoginChange,
     NavbarButton
 } from "./NavbarStyle";
 import LogoImg from "../../assets/logo.png";
@@ -40,7 +39,7 @@ export function Navbar(showlogin) {
     const [toggleSignin, setToggleSignin] = useState(false);
 
 
-    const { admin, currentUser, logout } = useDB()
+    const { admin, logout } = useDB()
     console.log("navbar", admin)
     function LogoutToHome(e) {
         e.preventDefault()
@@ -67,10 +66,17 @@ export function Navbar(showlogin) {
                         </>)}
 
                         {admin === '1' && (<>
-
+                            <NavbarLink to="/dashborad">HOME</NavbarLink>
+                            <NavbarLink to="/dashborad">BOOK A LESSON</NavbarLink>
+                            <NavbarLink to="/dashborad">ACCOUNT DETAILS</NavbarLink>
+                            <NavbarLink to="/dashborad">NEED HELLP?</NavbarLink>
                             {/* show for teacher NavbarLink*/}
                         </>)}
                         {admin === '0' && (<>
+                            <NavbarLink to="/dashborad">HOME</NavbarLink>
+                            <NavbarLink to="/dashborad">BOOK A LESSON</NavbarLink>
+                            <NavbarLink to="/dashborad">ACCOUNT DETAILS</NavbarLink>
+                            <NavbarLink to="/dashborad">NEED HELLP?</NavbarLink>
                             {/* show for student NavbarLink*/}
                         </>)}
                         <OpenLinksButton
@@ -96,40 +102,51 @@ export function Navbar(showlogin) {
                     </>)}
                     {admin === '1' && (<>
                         <Signwrap>
-                            <NavbarButton onClick={(e) => LogoutToHome(e)}>log out</NavbarButton>
+                            <SignButtonWrap>
+                                <RiAccountBoxFill fontSize="3em" />
+                                <NavbarButton onClick={(e) => LogoutToHome(e)}>SIGN OUT</NavbarButton>
+                            </SignButtonWrap>
                         </Signwrap>
                     </>)}
                     {admin === '0' && (<>
                         <Signwrap>
-                            <NavbarButton onClick={(e) => LogoutToHome(e)}>log out</NavbarButton>
+                            <SignButtonWrap>
+                                <RiAccountBoxFill fontSize="3em" />
+                                <NavbarButton onClick={(e) => LogoutToHome(e)}>SIGN OUT</NavbarButton>
+                            </SignButtonWrap>
                         </Signwrap>
                     </>)}
                 </NavbarSignContainer>
             </NavbarInnerContainer>
+            {console.log(extendNavbar)}
             {extendNavbar && (
                 // display extended menu when state is true
-                <NavbarExtendedContainer>
+                <NavbarExtendedContainer onClick={() => {
+                    setExtendNavbar((value) => !value);     // set the value opposite of current value
+                }}>
                     {admin === null && (<>
-                        <NavbarLinkExtended to="/">HOME</NavbarLinkExtended>
+                        <NavbarLinkExtended to="/" >HOME</NavbarLinkExtended>
                         <NavbarLinkExtended to="/aboutus">ABOUT US</NavbarLinkExtended>
                         <NavbarLinkExtended to="/ourservices">OUR SERVICES</NavbarLinkExtended>
                         <NavbarLinkExtended to="/news">NEWS</NavbarLinkExtended>
                         <NavbarLinkExtended to="/becomeatutor">BECOME A TUTOR</NavbarLinkExtended>
                         <NavbarLinkExtended to="/contactus">CONTACT US</NavbarLinkExtended>
                         <NavbarSignContainerExtended >
-                            <RiAccountBoxFill />
+                            <RiAccountBoxFill fontSize="3em" />
                             <NavbarLinkExtended to="/signin">Sing in</NavbarLinkExtended>
                         </NavbarSignContainerExtended>
                     </>)}
                     {admin === '1' && (<>
                         {/* show for teacher NavbarLinkExtended*/}
                         <NavbarSignContainerExtended >
+                            <RiAccountBoxFill fontSize="3em" />
                             <NavbarButton onClick={(e) => LogoutToHome(e)}>log out</NavbarButton>
                         </NavbarSignContainerExtended>
                     </>)}
                     {admin === '0' && (<>
                         {/* show for student NavbarLinkExtended*/}
                         <NavbarSignContainerExtended >
+                            <RiAccountBoxFill fontSize="3em" />
                             <NavbarButton onClick={(e) => LogoutToHome(e)}>log out</NavbarButton>
                         </NavbarSignContainerExtended>
                     </>)}

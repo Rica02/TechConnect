@@ -144,5 +144,6 @@ export const NavbarButton= styled.button`
     font-family: Helvetica, Arial, sans-serif;
     font-weight: bold;
     text-decoration: none;
-    margin: 10px;
+    margin-top: 10px;
+
 `;
