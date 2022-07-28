@@ -1,5 +1,4 @@
 import React from 'react'
-import {useDB} from '../ServerContext'
 function TeacherPage() {
   
   return (

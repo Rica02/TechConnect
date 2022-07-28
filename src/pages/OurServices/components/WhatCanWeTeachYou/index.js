@@ -1,5 +1,5 @@
 import React from 'react'
-import { CardContainer, CardFont, CardImg, CardWrap, Container, TextH2 } from './WhatCanWeTeachYouStyle';
+import { CardContainer, Container, TextH2 } from './WhatCanWeTeachYouStyle';
 import Card from './Card';
 import {cardImg1, cardImg2, cardImg3, cardImg4, cardImg5,cardImg6, cardImg7, cardImg8, cardImg9} from "./Card/imgData";
 function WhatCanWeTeachYou() {

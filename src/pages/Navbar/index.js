@@ -21,26 +21,12 @@ import LogoImg from "../../assets/logo.png";
 import SigninCard from "./SigninCard"
 import { useDB } from "../../ServerContext"
 import { useNavigate } from "react-router-dom"
-//Sign Button
-const SignButton = () => (
-    <>
-        <SignButtonWrap>
-            <RiAccountBoxFill fontSize="3em" />
-            <NavbarLink to="/">SIGN IN</NavbarLink>
-        </SignButtonWrap>
-    </>
-);
-
-
-export function Navbar(showlogin) {
+export function Navbar() {
     var navigate = useNavigate()
     // used to manage the "extend button"
     const [extendNavbar, setExtendNavbar] = useState(false);
     const [toggleSignin, setToggleSignin] = useState(false);
-
-
     const { admin, logout } = useDB()
-    console.log("navbar", admin)
     function LogoutToHome(e) {
         e.preventDefault()
         navigate("/")
@@ -96,7 +82,10 @@ export function Navbar(showlogin) {
                         <Signwrap onClick={() => {
                             setToggleSignin((value) => !value); // set the value opposite of current value
                         }}>
-                            <SignButton />
+                            <SignButtonWrap>
+                                <RiAccountBoxFill fontSize="3em" />
+                                <NavbarButton >SIGN IN</NavbarButton>
+                            </SignButtonWrap>
                         </Signwrap>
                         {toggleSignin && (<SigninCard />)}
                     </>)}
@@ -118,7 +107,7 @@ export function Navbar(showlogin) {
                     </>)}
                 </NavbarSignContainer>
             </NavbarInnerContainer>
-    
+
             {extendNavbar && (
                 // display extended menu when state is true
                 <NavbarExtendedContainer onClick={() => {
