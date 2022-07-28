@@ -19,7 +19,7 @@ import Dashboard from "./pages/PrivatePages/Dashboard";
 import TeacherPage from "./pages/TeacherPage";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { ServerProvider } from "./ServerContext";
+import { ServerProvider,useDB } from "./ServerContext";
 import PrivateRoute from "./PrivateRoute";
 import StudentPage from "./pages/StudentPage";
 import Dashborad from "./pages/Dashborad";
@@ -44,12 +44,14 @@ function App() {
   //   }
   //   fetchData()
   // }, [homeUrl, tutorUrl,state]);
+ 
   return (
     // ThemeProvider wraps around the whole app as it provides colours
     <ServerProvider>
     <ThemeProvider theme={theme}>
       <Router>
-        <Navbar /> {/* all pages will include navbar */}
+       
+        <Navbar />
         <Routes>
           <Route path="/teacherpage" element={<PrivateRoute><TeacherPage/></PrivateRoute>} />
           <Route path="/studentPage" element={<PrivateRoute><StudentPage/></PrivateRoute>} />

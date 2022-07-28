@@ -17,7 +17,7 @@ function AboutUs(props) {
             <Header headerTitle={"About us"} headerBanner={headerBanner} />
             <AboutOurTeam {...AboutOurTeamArticle} />
             <OurMission {...OurMissionArticle} />
-            <OurTutors tutorsData = {tutors} color={ ({ theme }) => theme.colorMain.backgroundLight } />
+            <OurTutors tutorsData = {tutors} bgColor={ ({ theme }) => theme.colorMain.backgroundLight } />
         </>
     );
 }

@@ -124,3 +124,25 @@ export const Signwrap=styled.div`
 export const SignButtonWrap = styled.div`
     display: flex;
 `;
+export const LoginChange = styled.div`
+     display:  ${({showlogin}) => (showlogin ?'flex':'none')};
+`;
+export const NavbarP= styled.p`
+    background-color: ${ ({ theme }) => theme.colorMain.backgroundSignIn };;
+    border: none;
+    font-size: large;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 10px;
+`;
+export const NavbarButton= styled.button`
+    background-color: ${ ({ theme }) => theme.colorMain.backgroundSignIn };;
+    display: flex;
+    border: none;
+    font-size: large;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 10px;
+`;

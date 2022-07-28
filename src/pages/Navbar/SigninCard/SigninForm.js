@@ -10,7 +10,7 @@ import {useDB} from '../../../ServerContext';
 import {useNavigate} from "react-router-dom"
 function SigninForm() {
   var navigate = useNavigate()
- const {auth,setAuth}=useDB()
+ const {setAuth,userSet}=useDB()
 
   const [formInput, setFormInput] = useState({
     email: "",
@@ -34,15 +34,14 @@ function SigninForm() {
       .then((response) => {
         if(response.data.length >=1 ){
           console.log(response.data);
-        
           var userEmail =response.data[0].email;
           var pw =response.data[0].password; 
-          console.log("email: " + userEmail + " password: " + pw);
           localStorage.setItem('user', response.data[0])
           setAuth(response.data[0])
-          console.log(auth);
+          userSet(response.data[0].email,response.data[0].admin)
           alert("succesfully login")
           navigate("/dashborad")
+          window.location.reload()
         }else if(response.data.length < 1){
           alert("no combination found")
         }
