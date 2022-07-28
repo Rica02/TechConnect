@@ -19,7 +19,7 @@ import Dashboard from "./pages/PrivatePages/Dashboard";
 import TeacherPage from "./pages/TeacherPage";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { ServerProvider } from "./ServerContext";
+import { ServerProvider,useDB } from "./ServerContext";
 import PrivateRoute from "./PrivateRoute";
 import StudentPage from "./pages/StudentPage";
 import Dashborad from "./pages/Dashborad";
@@ -46,34 +46,34 @@ function App() {
   //   }
   //   fetchData()
   // }, [homeUrl, tutorUrl,state]);
+
   return (
-    // ThemeProvider wraps around the whole app as it provides colours
     <ServerProvider>
-      <ThemeProvider theme={theme}>
-        <Router>
-          <Navbar /> {/* all pages will include navbar */}
-          <Routes>
-            <Route path="/teacherpage" element={<PrivateRoute><TeacherPage/></PrivateRoute>} />
-            <Route path="/studentPage" element={<PrivateRoute><StudentPage/></PrivateRoute>} />
-            <Route path="/dashborad" element={<PrivateRoute><Dashborad/></PrivateRoute>} />
-            <Route path="/" element={<Home tutorData={data} />} />
-            <Route path="/aboutus" element={<AboutUs tutorData={data} />} />
-            <Route path="/ourservices" element={<OurServices />} />
-            <Route path="/news" element={<News />} />
-            <Route path="/becomeatutor" element={<BecomeATutor />} />
-            <Route path="/contactus" element={<ContactUs />} />
-            <Route path="/bookanappointment" element={<BookAnAppointment />} />
-            <Route path="/signin" element={<Signin />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/forgotPassword" element={<ForgotPassword />} />
-            <Route path="/addnews" element={<AddNews />} />
-            <Route path="*" element={<ErrorPage />} /> {/* Render error page if path does not match */}
-            <Route path="/login" element={<Dashboard />} />   {/* TEST */}
-            <Route path="/admintest" element={<Admin />} />   {/* TEST */}
-          </Routes>
-          <Footer /> {/* all pages will include footer */}
-        </Router>
-      </ThemeProvider>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/teacherpage" element={<PrivateRoute><TeacherPage/></PrivateRoute>} />
+          <Route path="/studentPage" element={<PrivateRoute><StudentPage/></PrivateRoute>} />
+          <Route path="/dashborad" element={<PrivateRoute><Dashborad/></PrivateRoute>} />
+          <Route path="/" element={<Home tutorData={data} />} />
+          <Route path="/aboutus" element={<AboutUs tutorData={data} />} />
+          <Route path="/ourservices" element={<OurServices />} />
+          <Route path="/news" element={<News />} />
+          <Route path="/becomeatutor" element={<BecomeATutor />} />
+          <Route path="/contactus" element={<ContactUs />} />
+          <Route path="/bookanappointment" element={<BookAnAppointment />} />
+          <Route path="/signin" element={<Signin />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/forgotPassword" element={<ForgotPassword />} />
+          <Route path="/addnews" element={<AddNews />} />
+          <Route path="*" element={<ErrorPage />} /> {/* Render error page if path does not match */}
+          <Route path="/login" element={<Dashboard />} />
+          <Route path="/admintest" element={<Admin />} />   {/* TEST */}
+        </Routes>
+        <Footer /> {/* all pages will include footer */}
+      </Router>
+    </ThemeProvider>
     </ServerProvider>
   );
 }
