@@ -118,7 +118,7 @@ export function Navbar(showlogin) {
                     </>)}
                 </NavbarSignContainer>
             </NavbarInnerContainer>
-            {console.log(extendNavbar)}
+    
             {extendNavbar && (
                 // display extended menu when state is true
                 <NavbarExtendedContainer onClick={() => {
