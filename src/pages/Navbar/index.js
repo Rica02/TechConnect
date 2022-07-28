@@ -63,25 +63,26 @@ export function Navbar(showlogin) {
                             <NavbarLink to="/news">NEWS</NavbarLink>
                             <NavbarLink to="/becomeatutor">BECOME A TUTOR</NavbarLink>
                             <NavbarLink to="/contactus">CONTACT US</NavbarLink>
-                            <OpenLinksButton
-                                onClick={() => {
-                                    setExtendNavbar((value) => !value);     // set the value opposite of current value
-                                }}
-                            >
-                                {
-                                    // display hamburger menu when state is false, X when true
-                                    extendNavbar ? <>&#10005;</> : <>&#8801;</>
-                                }
-                            </OpenLinksButton>
+
                         </>)}
 
                         {admin === '1' && (<>
+
                             {/* show for teacher NavbarLink*/}
                         </>)}
                         {admin === '0' && (<>
                             {/* show for student NavbarLink*/}
                         </>)}
-
+                        <OpenLinksButton
+                            onClick={() => {
+                                setExtendNavbar((value) => !value);     // set the value opposite of current value
+                            }}
+                        >
+                            {
+                                // display hamburger menu when state is false, X when true
+                                extendNavbar ? <>&#10005;</> : <>&#8801;</>
+                            }
+                        </OpenLinksButton>
                     </NavbarLinkContainer>
                 </RightContainer>
                 <NavbarSignContainer >
@@ -122,15 +123,15 @@ export function Navbar(showlogin) {
                     </>)}
                     {admin === '1' && (<>
                         {/* show for teacher NavbarLinkExtended*/}
-                       
+                        <NavbarSignContainerExtended >
                             <NavbarButton onClick={(e) => LogoutToHome(e)}>log out</NavbarButton>
-                        
+                        </NavbarSignContainerExtended>
                     </>)}
                     {admin === '0' && (<>
                         {/* show for student NavbarLinkExtended*/}
-                  
+                        <NavbarSignContainerExtended >
                             <NavbarButton onClick={(e) => LogoutToHome(e)}>log out</NavbarButton>
-                     
+                        </NavbarSignContainerExtended>
                     </>)}
 
                 </NavbarExtendedContainer>
