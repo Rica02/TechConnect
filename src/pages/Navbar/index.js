@@ -53,7 +53,7 @@ export function Navbar() {
 
                         {admin === '1' && (<>
                             <NavbarLink to="/dashborad">HOME</NavbarLink>
-                            <NavbarLink to="/dashborad">BOOK A LESSON</NavbarLink>
+                            <NavbarLink to="/dashborad">CHANGE AVAILABILYTY</NavbarLink>
                             <NavbarLink to="/dashborad">ACCOUNT DETAILS</NavbarLink>
                             <NavbarLink to="/dashborad">NEED HELLP?</NavbarLink>
                             {/* show for teacher NavbarLink*/}
@@ -127,6 +127,10 @@ export function Navbar() {
                     </>)}
                     {admin === '1' && (<>
                         {/* show for teacher NavbarLinkExtended*/}
+                        <NavbarLinkExtended to="/dashborad" >HOME</NavbarLinkExtended>
+                        <NavbarLinkExtended to="/dashborad">CHANGE AVAILABILYTY</NavbarLinkExtended>
+                        <NavbarLinkExtended to="/dashborad">ACCOUNT DETAILS</NavbarLinkExtended>
+                        <NavbarLinkExtended to="/dashborad">NEED HELLP?</NavbarLinkExtended>
                         <NavbarSignContainerExtended >
                             <RiAccountBoxFill fontSize="3em" />
                             <NavbarButton onClick={(e) => LogoutToHome(e)}>log out</NavbarButton>
@@ -134,6 +138,10 @@ export function Navbar() {
                     </>)}
                     {admin === '0' && (<>
                         {/* show for student NavbarLinkExtended*/}
+                        <NavbarLinkExtended to="/dashborad" >HOME</NavbarLinkExtended>
+                        <NavbarLinkExtended to="/dashborad">BOOK A LESSON</NavbarLinkExtended>
+                        <NavbarLinkExtended to="/dashborad">ACCOUNT DETAILS</NavbarLinkExtended>
+                        <NavbarLinkExtended to="/dashborad">NEED HELLP?</NavbarLinkExtended>
                         <NavbarSignContainerExtended >
                             <RiAccountBoxFill fontSize="3em" />
                             <NavbarButton onClick={(e) => LogoutToHome(e)}>log out</NavbarButton>
