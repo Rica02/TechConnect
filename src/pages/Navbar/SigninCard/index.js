@@ -15,22 +15,22 @@ function SigninCard() {
     return (
         <>
             <Container>
-                <Form>
-                    {toggleSignup ?
-                        <>
-                            {togglePassword ? <>
-                                <SigninForm />
-                                <FormButton onClick={() => { setTogglePassword((value) => !value); }}>Forgot password</FormButton>
-                                <FormButton onClick={() => { setToggleSignup((value) => !value); }}>GO SIGN UP </FormButton>
+                    <Form>
+                        {toggleSignup ?
+                            <>
+                                {togglePassword ? <>
+                                    <SigninForm />
+                                    <FormButton onClick={() => { setTogglePassword((value) => !value); }}>Forgot password</FormButton>
+                                    <FormButton onClick={() => { setToggleSignup((value) => !value); }}>GO SIGN UP </FormButton>
+                                </> : <>
+                                    <PasswordForm />
+                                    <FormButton onClick={() => { setTogglePassword((value) => !value); }}>GO SIGN UP </FormButton>
+                                </>}
                             </> : <>
-                                <PasswordForm />
-                                <FormButton onClick={() => { setTogglePassword((value) => !value); }}>GO SIGN UP </FormButton>
-                            </>}
-                        </> : <>
-                            <SignupForm />
-                            <FormButton onClick={() => { setToggleSignup((value) => !value); }}>GO SIGN IN</FormButton></>
-                    }
-                </Form>
+                                <SignupForm />
+                                <FormButton onClick={() => { setToggleSignup((value) => !value); }}>GO SIGN IN</FormButton></>
+                        }
+                    </Form>
             </Container>
         </>
     );

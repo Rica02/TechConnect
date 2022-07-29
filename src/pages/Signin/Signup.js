@@ -20,6 +20,7 @@ function Signup() {
         email: "",
         password: "",
         passwordConfirm: "",
+        phone: ""
     })
 
     var handleForm = (e) => {
@@ -36,7 +37,8 @@ function Signup() {
         debugger
         await axios.post("http://localhost:3007/register", {
             email: formInput.email,
-            password: formInput.password
+            password: formInput.password,
+            phone: formInput.phone,
         }).then((result, reject) => {
             if (result) {
                 console.log(result);
@@ -58,6 +60,8 @@ function Signup() {
                             <FormH1>Creat your account</FormH1>
                             <FormLabel htmlFor='for'>Email</FormLabel>
                             <FormInput onChange={handleForm} name="email" type='email' required />
+                            <FormLabel htmlFor='for'>Phone number</FormLabel>
+                            <FormInput type='tel' required  name="phone" onChange={handleForm}/>
                             <FormLabel htmlFor='for'>Password</FormLabel>
                             <FormInput onChange={handleForm} name="password" type='password' required />
                             <FormLabel htmlFor='for'>Password confirm</FormLabel>

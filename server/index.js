@@ -29,8 +29,11 @@ app.get("/", function (req, res) {
 app.post("/register", function (req, res) {
     var resquestedEmail = req.body.email
     var resquestedPW = req.body.password
-    var registerQuery = "INSERT INTO techconnect.user (email, password) VALUES (?,?)"
-    connection.query(registerQuery,[resquestedEmail, resquestedPW],function(sqlErr, result){
+    var requestedPhone = req.body.phone
+    console.log(req.body.requestedPhone);
+    var registerQuery = "INSERT INTO techconnect.user (email,password,phone) VALUES (?,?,?)"
+    console.log("registerQuery " + registerQuery);
+    connection.query(registerQuery,[resquestedEmail,resquestedPW,requestedPhone],function(sqlErr, result){
         if(sqlErr){
             console.log(sqlErr);
         }else{
@@ -41,24 +44,25 @@ app.post("/register", function (req, res) {
     } )
 })
 
-app.get("/register", function (req, res) {
-    console.log("get register FROM BACKEND");
-    console.log(req.body);
-    var email = req.body.email
-    var password = req.body.password
+// app.get("/register", function (req, res) {
+//     console.log("get register FROM BACKEND");
+//     console.log(req.body);
+//     var email = req.body.email
+//     var password = req.body.password
+//     var phone = req.body.phone
 
-    var regUserQuery = "INSERT INTO techconnect.user (email, password) VALUES (?,?)"
-    connection.query(regUserQuery, [email, password],
-        (sqlErr, result) => {
-            if (sqlErr) {
-                console.log(sqlErr);
-            } else {
-                console.log(result);
-                return res.status(200).json(result)
-            }
-        }
-    )
-})
+//     var regUserQuery = "INSERT INTO techconnect.user (email, password, phone) VALUES (?,?,?)"
+//     connection.query(regUserQuery, [email, password, phone],
+//         (sqlErr, result) => {
+//             if (sqlErr) {
+//                 console.log(sqlErr);
+//             } else {
+//                 console.log(result);
+//                 return res.status(200).json(result)
+//             }
+//         }
+//     )
+// })
 
 
 // app.get("/tutors", function (req, res) {

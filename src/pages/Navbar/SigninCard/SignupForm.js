@@ -10,6 +10,7 @@ function SignupForm() {
   const [formInput, setFormInput] = useState({
     email: "",
     password: "",
+    phone: "",
     passwordConfirm:"",
   })
 
@@ -23,12 +24,15 @@ function SignupForm() {
     if(formInput.password!==formInput.passwordConfirm){
       return  alert("password Confirm Different")
     }
-    console.log(formInput.email + " " + formInput.password);
+    console.log("regFunction------------------");
+    console.log(formInput.email + " " + formInput.password + " " + formInput.phone);
     debugger
     await axios.post("http://localhost:3007/register", {
       email: formInput.email,
-      password: formInput.password
+      password: formInput.password,
+      phone: formInput.phone,
     }).then((result, reject) => {
+      console.log(formInput.phone);
       if (result) {
         console.log(result);
         alert("succeeded register")
@@ -38,12 +42,15 @@ function SignupForm() {
         alert(reject)
       }
     })
+    console.log("END regFunction------------------");
   }
   return (
     <>
       <FormH1>Creat your account</FormH1>
       <FormLabel htmlFor='for'>Email</FormLabel>
       <FormInput onChange={handleForm} name="email" type='email' required />
+      <FormLabel htmlFor='for'>Phone number</FormLabel>
+      <FormInput onChange={handleForm} name="phone" type='tel' required />
       <FormLabel htmlFor='for'>Password</FormLabel>
       <FormInput onChange={handleForm} name="password" type='password' required />
       <FormLabel htmlFor='for'>Password confirm</FormLabel>
