@@ -54,14 +54,14 @@ export function Navbar() {
                         {admin === '1' && (<>
                             <NavbarLink to="/dashborad">HOME</NavbarLink>
                             <NavbarLink to="/dashborad">CHANGE AVAILABILYTY</NavbarLink>
-                            <NavbarLink to="/dashborad">ACCOUNT DETAILS</NavbarLink>
+                            <NavbarLink to="/accountDetails">ACCOUNT DETAILS</NavbarLink>
                             <NavbarLink to="/dashborad">NEED HELLP?</NavbarLink>
                         </>)}
                             {/* tutor */}
                         {admin === '2' && (<>
                             <NavbarLink to="/dashborad">HOME</NavbarLink>
                             <NavbarLink to="/dashborad">CHANGE AVAILABILYTY</NavbarLink>
-                            <NavbarLink to="/dashborad">ACCOUNT DETAILS</NavbarLink>
+                            <NavbarLink to="/accountDetails">ACCOUNT DETAILS</NavbarLink>
                             <NavbarLink to="/dashborad">NEED HELLP?</NavbarLink>
                             {/* show for teacher NavbarLink*/}
                         </>)}
@@ -69,7 +69,7 @@ export function Navbar() {
                         {admin === '3' && (<>
                             <NavbarLink to="/dashborad">HOME</NavbarLink>
                             <NavbarLink to="/dashborad">BOOK A LESSON</NavbarLink>
-                            <NavbarLink to="/dashborad">ACCOUNT DETAILS</NavbarLink>
+                            <NavbarLink to="/accountDetails">ACCOUNT DETAILS</NavbarLink>
                             <NavbarLink to="/dashborad">NEED HELLP?</NavbarLink>
                             {/* show for student NavbarLink*/}
                         </>)}
@@ -149,7 +149,7 @@ export function Navbar() {
                         {/* show for admin NavbarLinkExtended*/}
                         <NavbarLinkExtended to="/dashborad" >HOME</NavbarLinkExtended>
                         <NavbarLinkExtended to="/dashborad">CHANGE AVAILABILYTY</NavbarLinkExtended>
-                        <NavbarLinkExtended to="/dashborad">ACCOUNT DETAILS</NavbarLinkExtended>
+                        <NavbarLinkExtended to="/accountDetails">ACCOUNT DETAILS</NavbarLinkExtended>
                         <NavbarLinkExtended to="/dashborad">NEED HELLP?</NavbarLinkExtended>
                         <NavbarSignContainerExtended >
                             <RiAccountBoxFill fontSize="3em" />
@@ -160,7 +160,7 @@ export function Navbar() {
                         {/* show for teacher NavbarLinkExtended*/}
                         <NavbarLinkExtended to="/dashborad" >HOME</NavbarLinkExtended>
                         <NavbarLinkExtended to="/dashborad">CHANGE AVAILABILYTY</NavbarLinkExtended>
-                        <NavbarLinkExtended to="/dashborad">ACCOUNT DETAILS</NavbarLinkExtended>
+                        <NavbarLinkExtended to="/accountDetails">ACCOUNT DETAILS</NavbarLinkExtended>
                         <NavbarLinkExtended to="/dashborad">NEED HELLP?</NavbarLinkExtended>
                         <NavbarSignContainerExtended >
                             <RiAccountBoxFill fontSize="3em" />
@@ -171,7 +171,7 @@ export function Navbar() {
                         {/* show for student NavbarLinkExtended*/}
                         <NavbarLinkExtended to="/dashborad" >HOME</NavbarLinkExtended>
                         <NavbarLinkExtended to="/dashborad">BOOK A LESSON</NavbarLinkExtended>
-                        <NavbarLinkExtended to="/dashborad">ACCOUNT DETAILS</NavbarLinkExtended>
+                        <NavbarLinkExtended to="/accountDetails">ACCOUNT DETAILS</NavbarLinkExtended>
                         <NavbarLinkExtended to="/dashborad">NEED HELLP?</NavbarLinkExtended>
                         <NavbarSignContainerExtended >
                             <RiAccountBoxFill fontSize="3em" />

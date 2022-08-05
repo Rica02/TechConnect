@@ -6,7 +6,9 @@ import {
   FormInput,
   FormLabel,
 } from './SigninStyle';
+import { useNavigate } from "react-router-dom"
 function SignupForm() {
+  var navigate = useNavigate()
   const [formInput, setFormInput] = useState({
     email: "",
     password: "",
@@ -32,11 +34,11 @@ function SignupForm() {
       password: formInput.password,
       phone: formInput.phone,
     }).then((result, reject) => {
-      console.log(formInput.phone);
+      console.log('result and reject');
       if (result) {
         console.log(result);
         alert("succeeded register")
-       
+        navigate("/home")
       } else {
         console.log(reject)
         alert(reject)
