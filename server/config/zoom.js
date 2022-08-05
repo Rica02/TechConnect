@@ -4,11 +4,11 @@ const env = process.env.NODE_ENV || "production";
 const config = {
   development: {
     APIKey: "mh9S4ciMuTay3vgAGq24F32lcupgCbpPeVxd",
-    APISecret: "Nw4YyRjjPCitrITmCSu7Rap0AfkUWFbAUTaW",
+    APISecret: "2AHbV8pSuC0gMvpJooEpHzTkpDFcZc4YOv9n",
   },
   production: {
     APIKey: "mh9S4ciMuTay3vgAGq24F32lcupgCbpPeVxd",
-    APISecret: "Nw4YyRjjPCitrITmCSu7Rap0AfkUWFbAUTaW",
+    APISecret: "2AHbV8pSuC0gMvpJooEpHzTkpDFcZc4YOv9n",
   },
 };
 

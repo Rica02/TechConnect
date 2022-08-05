@@ -17,35 +17,78 @@ function Admin() {
         event.preventDefault();
         console.log(inputs);
 
-        // Create meeting (must be called from back)
-
-        const meetingData = {
-            email: "techconnectweb@gmail.com",
+          // get meeting data from form
+          const meetingData = {
             topic: inputs.title,
             password: inputs.password,
             schedule_for: "ricamaeaverion22@gmail.com",     // TODO: get email of tutor (must be added to TechConnect Zoom account)
             start_time: inputs.dateTime,
-        }
+          }
 
-        try {
-          axios.post('http://localhost:3007/meeting', meetingData)
-          .then((response) => {
-            // let URL =
-            // response.data.join_url.replaceAll(
-            //   "https://us04web.zoom.us/j/",
-            //   "http://localhost:3007/?"
-            // ) + `?role=1?name=${username}`;
-            // window.location.replace(`${URL}`);
-            let URL = response.data.join_url;
-            console.log(URL);
-          }, (error) => {
-            console.log('Zoom API failed: ' + error);
+          // call auth API
+          try {
+            console.log("Calling auth API")
+            axios.get('http://localhost:3008', meetingData)
+            .then((response) => {
+                console.log("Hurray, this works");
 
-          });
-        } catch (error) {
-          console.log(error);
-        }
+                // If successfull, call create meeting API here or directly in back-end
 
+            }, (error) => {
+              console.log('Zoom API failed: ' + error.response.data);
+            });
+          } catch (error) {
+            console.log(error);
+          }
+
+
+        // OLD - calling auth API
+
+        // const authData = {
+
+        // }
+
+        // let url = "https://zoom.us/oauth/token?code=[CODE]&grant_type=authorization_code&redirect_uri=http://localhost:3000/oauthredirect";
+
+        // try {
+        //   axios.post('https://zoom.us/oauth/token', authData, {
+        //     headers: {
+        //       'Authorization': 'Basic ' + window.btoa("vw5sSJryRey9d1QUqWrzYw:Ewy8zAOMWVPGOLL7wBb6fQ1GpRdiTZsv"),
+        //       'Content-Type': 'application/x-www-form-urlencoded',
+        //     }
+        //   })
+        //   .then((response) => {
+
+        //     console.log("Oauth post successful. Code is: ")
+        //   }, (error) => {
+        //     console.log('Oauth called failed: ' + error.response.data);
+        //   });
+        // } catch (error) {
+        //   console.log(error);
+        // }
+
+
+          // OLD - calling create meeting API
+
+        // try {
+        //   console.log("calling create meeting API")
+        //   axios.post('http://localhost:3008/meeting', meetingData)
+        //   .then((response) => {
+        //     // let URL =
+        //     // response.data.join_url.replaceAll(
+        //     //   "https://us04web.zoom.us/j/",
+        //     //   "http://localhost:3007/?"
+        //     // ) + `?role=1?name=${username}`;
+        //     // window.location.replace(`${URL}`);
+        //     let URL = response.data.join_url;
+        //     console.log(URL);
+        //   }, (error) => {
+        //     //console.log('Zoom API failed: ' + error);
+        //     console.log('Zoom API failed: ' + error.response.data);
+        //   });
+        // } catch (error) {
+        //   console.log(error);
+        // }
       }
 
   return (

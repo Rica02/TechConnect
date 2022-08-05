@@ -19,7 +19,7 @@ function JoinZoom(props) {
     signatureEndpoint: 'https://techconnect-web.herokuapp.com/',
     // This Sample App has been updated to use SDK App type credentials https://marketplace.zoom.us/docs/guides/build/sdk-app
     sdkKey: 'mh9S4ciMuTay3vgAGq24F32lcupgCbpPeVxd',
-    meetingNumber: '88074795580',
+    meetingNumber: '81973198552',
     // 1 is host (tutor), 0 is participant (student). Must be 1 to start meeting.
     //var role = (props.isTutor ? 1 : 0)
     role: 0,
@@ -28,7 +28,7 @@ function JoinZoom(props) {
     leaveUrl: 'http://localhost:3000',
     userName: 'user test',    // TODO: get username of currently logged in user
     userEmail: '',
-    passWord: 'KQJ6Yy',
+    passWord: '1PpbJv',
 
     // pass in the registrant's token if your meeting or webinar requires registration. More info here:
     // Meetings: https://marketplace.zoom.us/docs/sdk/native-sdks/web/client-view/meetings#join-registered
