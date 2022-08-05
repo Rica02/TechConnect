@@ -41,6 +41,7 @@ export function Navbar() {
                 </LeftContainer>
                 <RightContainer>
                     <NavbarLinkContainer>
+                        {/* public */}
                         {admin === null && (<>
                             <NavbarLink to="/">HOME</NavbarLink>
                             <NavbarLink to="/aboutus">ABOUT US</NavbarLink>
@@ -48,17 +49,24 @@ export function Navbar() {
                             <NavbarLink to="/news">NEWS</NavbarLink>
                             <NavbarLink to="/becomeatutor">BECOME A TUTOR</NavbarLink>
                             <NavbarLink to="/contactus">CONTACT US</NavbarLink>
-
                         </>)}
-
+                        {/* admin */}
                         {admin === '1' && (<>
+                            <NavbarLink to="/dashborad">HOME</NavbarLink>
+                            <NavbarLink to="/dashborad">CHANGE AVAILABILYTY</NavbarLink>
+                            <NavbarLink to="/dashborad">ACCOUNT DETAILS</NavbarLink>
+                            <NavbarLink to="/dashborad">NEED HELLP?</NavbarLink>
+                        </>)}
+                            {/* tutor */}
+                        {admin === '2' && (<>
                             <NavbarLink to="/dashborad">HOME</NavbarLink>
                             <NavbarLink to="/dashborad">CHANGE AVAILABILYTY</NavbarLink>
                             <NavbarLink to="/dashborad">ACCOUNT DETAILS</NavbarLink>
                             <NavbarLink to="/dashborad">NEED HELLP?</NavbarLink>
                             {/* show for teacher NavbarLink*/}
                         </>)}
-                        {admin === '0' && (<>
+                        {/* student */}
+                        {admin === '3' && (<>
                             <NavbarLink to="/dashborad">HOME</NavbarLink>
                             <NavbarLink to="/dashborad">BOOK A LESSON</NavbarLink>
                             <NavbarLink to="/dashborad">ACCOUNT DETAILS</NavbarLink>
@@ -78,6 +86,7 @@ export function Navbar() {
                     </NavbarLinkContainer>
                 </RightContainer>
                 <NavbarSignContainer >
+                    {/* public */}
                     {admin === null && (<>
                         <Signwrap onClick={() => {
                             setToggleSignin((value) => !value); // set the value opposite of current value
@@ -89,6 +98,7 @@ export function Navbar() {
                         </Signwrap>
                         {toggleSignin && (<SigninCard />)}
                     </>)}
+                    {/* admin */}
                     {admin === '1' && (<>
                         <Signwrap>
                             <SignButtonWrap>
@@ -97,7 +107,17 @@ export function Navbar() {
                             </SignButtonWrap>
                         </Signwrap>
                     </>)}
-                    {admin === '0' && (<>
+                    {/* tutor */}
+                    {admin === '2' && (<>
+                        <Signwrap>
+                            <SignButtonWrap>
+                                <RiAccountBoxFill fontSize="3em" />
+                                <NavbarButton onClick={(e) => LogoutToHome(e)}>SIGN OUT</NavbarButton>
+                            </SignButtonWrap>
+                        </Signwrap>
+                    </>)}
+                    {/* student */}
+                    {admin === '3' && (<>
                         <Signwrap>
                             <SignButtonWrap>
                                 <RiAccountBoxFill fontSize="3em" />
@@ -126,6 +146,17 @@ export function Navbar() {
                         </NavbarSignContainerExtended>
                     </>)}
                     {admin === '1' && (<>
+                        {/* show for admin NavbarLinkExtended*/}
+                        <NavbarLinkExtended to="/dashborad" >HOME</NavbarLinkExtended>
+                        <NavbarLinkExtended to="/dashborad">CHANGE AVAILABILYTY</NavbarLinkExtended>
+                        <NavbarLinkExtended to="/dashborad">ACCOUNT DETAILS</NavbarLinkExtended>
+                        <NavbarLinkExtended to="/dashborad">NEED HELLP?</NavbarLinkExtended>
+                        <NavbarSignContainerExtended >
+                            <RiAccountBoxFill fontSize="3em" />
+                            <NavbarButton onClick={(e) => LogoutToHome(e)}>log out</NavbarButton>
+                        </NavbarSignContainerExtended>
+                    </>)}
+                    {admin === '2' && (<>
                         {/* show for teacher NavbarLinkExtended*/}
                         <NavbarLinkExtended to="/dashborad" >HOME</NavbarLinkExtended>
                         <NavbarLinkExtended to="/dashborad">CHANGE AVAILABILYTY</NavbarLinkExtended>
@@ -136,7 +167,7 @@ export function Navbar() {
                             <NavbarButton onClick={(e) => LogoutToHome(e)}>log out</NavbarButton>
                         </NavbarSignContainerExtended>
                     </>)}
-                    {admin === '0' && (<>
+                    {admin === '3' && (<>
                         {/* show for student NavbarLinkExtended*/}
                         <NavbarLinkExtended to="/dashborad" >HOME</NavbarLinkExtended>
                         <NavbarLinkExtended to="/dashborad">BOOK A LESSON</NavbarLinkExtended>

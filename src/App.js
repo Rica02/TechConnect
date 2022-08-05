@@ -17,12 +17,12 @@ import ForgotPassword from "./pages/Signin/ForgotPassword";
 import AddNews from "./pages/AddNews";
 import Dashboard from "./pages/PrivatePages/Dashboard";
 import TeacherPage from "./pages/TeacherPage";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { ServerProvider,useDB } from "./ServerContext";
+import { useState } from "react";
+import { ServerProvider } from "./ServerContext";
 import PrivateRoute from "./PrivateRoute";
 import StudentPage from "./pages/StudentPage";
 import Dashborad from "./pages/Dashborad";
+import AdminPage from "./pages/AdminPage";
 
 function App() {
 
@@ -55,6 +55,7 @@ function App() {
         <Routes>
           <Route path="/teacherpage" element={<PrivateRoute><TeacherPage/></PrivateRoute>} />
           <Route path="/studentPage" element={<PrivateRoute><StudentPage/></PrivateRoute>} />
+          <Route path="/adminPage" element={<PrivateRoute><AdminPage/></PrivateRoute>} />
           <Route path="/dashborad" element={<PrivateRoute><Dashborad/></PrivateRoute>} />
           <Route path="/" element={<Home tutorData={data} />} />
           <Route path="/aboutus" element={<AboutUs tutorData={data} />} />
