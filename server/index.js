@@ -33,13 +33,14 @@ app.post("/register", async function (req, res) {
     var requestedEmail = req.body.email
     var requestedPW = req.body.password
     var requestedPhone = req.body.phone
+    var userType = 3
     console.log('---------requestedPW2----------');
     var requestedPW2 = await bcrypt.hash(req.body.password, saltRounds)
     console.log(requestedPW);
     console.log(requestedPW2);
-    var registerQuery = "INSERT INTO techconnect.user (email,password,phone) VALUES (?,?,?)"
+    var registerQuery = "INSERT INTO techconnect.user (email,password,phone,admin) VALUES (?,?,?,?)"
     console.log(registerQuery);
-    connection.query(registerQuery, [requestedEmail, requestedPW2, requestedPhone], function (sqlErr, result) {
+    connection.query(registerQuery, [requestedEmail, requestedPW2, requestedPhone,userType], function (sqlErr, result) {
         if (sqlErr) {
             console.log(sqlErr);
         } else {
