@@ -12,7 +12,6 @@ function Home(props) {
     useEffect( () => {
         setTutors(props.tutorData)
     })
-    //console.log(tutors);
     return (
         <>
             <HomeHeader />
