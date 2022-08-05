@@ -41,9 +41,8 @@ function Signup() {
             phone: formInput.phone,
         }).then((result, reject) => {
             if (result) {
-                console.log(result);
                 alert("succeeded register")
-
+                console.log(result);
             } else {
                 console.log(reject)
                 alert(reject)
