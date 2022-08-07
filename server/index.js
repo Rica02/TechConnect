@@ -30,10 +30,11 @@ app.post("/register", function (req, res) {
     var resquestedEmail = req.body.email
     var resquestedPW = req.body.password
     var requestedPhone = req.body.phone
+    var userType = 3
     console.log(req.body.requestedPhone);
-    var registerQuery = "INSERT INTO techconnect.user (email,password,phone) VALUES (?,?,?)"
+    var registerQuery = "INSERT INTO techconnect.user (email,password,phone,admin) VALUES (?,?,?,?)"
     console.log("registerQuery " + registerQuery);
-    connection.query(registerQuery,[resquestedEmail,resquestedPW,requestedPhone],function(sqlErr, result){
+    connection.query(registerQuery, [resquestedEmail, resquestedPW, requestedPhone,userType], function (sqlErr, result) {
         if(sqlErr){
             console.log(sqlErr);
         }else{

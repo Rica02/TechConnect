@@ -6,9 +6,7 @@ import {
   FormInput,
   FormLabel,
 } from './SigninStyle';
-import { useNavigate } from "react-router-dom"
 function SignupForm() {
-  var navigate = useNavigate()
   const [formInput, setFormInput] = useState({
     email: "",
     password: "",
@@ -29,16 +27,12 @@ function SignupForm() {
     console.log("regFunction------------------");
     console.log(formInput.email + " " + formInput.password + " " + formInput.phone);
     debugger
-    await axios.post("http://localhost:3007/register", {
-      email: formInput.email,
-      password: formInput.password,
-      phone: formInput.phone,
-    }).then((result, reject) => {
-      console.log('result and reject');
+    await axios.post("http://localhost:3007/register",formInput).then((result, reject) => {
+      console.log(formInput.phone);
       if (result) {
         console.log(result);
         alert("succeeded register")
-        navigate("/home")
+       
       } else {
         console.log(reject)
         alert(reject)
