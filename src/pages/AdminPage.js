@@ -3,7 +3,7 @@ import { DashboardContainer, StyledButton } from "./PagesStyle";
 import { Table } from "../pages/PrivatePages/DashboardStyle";
 import imgTest from "../assets/images/tutor-1.jpg";
 
-function StudentPage() {
+function AdminPage() {
 
   // TODO: Replace UpcomingLessons() and PastLessons() functions to get data from database
 
@@ -99,4 +99,4 @@ function StudentPage() {
   );
 }
 
-export default StudentPage;
+export default AdminPage;

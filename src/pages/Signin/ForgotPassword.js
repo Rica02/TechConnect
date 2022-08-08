@@ -8,7 +8,7 @@ import {
     FormInput,
     FormWrap,
     Icon,
-    Form ,
+    Form,
     FormLabel
 } from './SigninStyle';
 
@@ -19,20 +19,20 @@ function ForgotPassword() {
     return (
         <>
             <Container>
-            <FormWrap>
-                <Icon to="/"></Icon>
-                <FormContent>
-                    <Form action="#">
-                        <FormH1>Enter your details</FormH1>
-                        <FormLabel htmlFor='for'>Email</FormLabel>
-                        <FormInput type='email' required/>
-                        <FormLabel htmlFor='for'>Phone</FormLabel>
-                        <FormInput type='phone' required/>
-                        <FormButton type='submitSignUp'>SEND EMAIL</FormButton>
-                        <FormButton onClick={ () => navigate("/signin") }>Back SIGN IN</FormButton>
-                    </Form>
-                </FormContent>
-            </FormWrap>
+                <FormWrap>
+                    <Icon to="/"></Icon>
+                    <FormContent>
+                        <Form action="#">
+                            <FormH1>Enter your details</FormH1>
+                            <FormLabel htmlFor='for'>Email</FormLabel>
+                            <FormInput type='email' required />
+                            <FormLabel htmlFor='for'>Phone</FormLabel>
+                            <FormInput type='phone' required />
+                            <FormButton type='submitSignUp'>SEND EMAIL</FormButton>
+                            <FormButton onClick={() => navigate("/signin")}>Back SIGN IN</FormButton>
+                        </Form>
+                    </FormContent>
+                </FormWrap>
             </Container>
         </>
     );

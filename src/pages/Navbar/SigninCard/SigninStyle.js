@@ -6,7 +6,6 @@ export const Container = styled.div`
     height: 90%;
     position: fixed;
     bottom: 0;
-    
     right: 0;
     top: 10%;
     
