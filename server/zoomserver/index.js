@@ -1,3 +1,7 @@
+// const zoomConfig = require("../config/zoom.js");
+// const jwt = require("jsonwebtoken");
+// const rp = require("request-promise");
+
 // Bring in environment secrets through dotenv
 require('dotenv/config')
 
@@ -11,18 +15,24 @@ const express = require('express')
 const app = express()
 
 app.use(cors())
+
 // Allow CORS access
-// app.use((req, res, next) => {
-//   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3008");
-//   res.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
-//   if (req.method == "OPTIONS") {
-//     return res.sendStatus(200);
-//   }
-//   next();
-// });
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
+  if (req.method == "OPTIONS") {
+    return res.sendStatus(200);
+  }
+  next();
+});
 
 // Call Zoom auth API
 app.get('/', (req, res) => {
+
+
+    // res.setHeader("Access-Control-Allow-Origin", "*");
+    // res.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
+
 
     // Step 1:
     // Check if the code parameter is in the url
