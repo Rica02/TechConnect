@@ -17,29 +17,45 @@ function Admin() {
         event.preventDefault();
         console.log(inputs);
 
-          // get meeting data from form
-          const meetingData = {
-            topic: inputs.title,
-            password: inputs.password,
-            schedule_for: "ricamaeaverion22@gmail.com",     // TODO: get email of tutor (must be added to TechConnect Zoom account)
-            start_time: inputs.dateTime,
-          }
+        // get meeting data from form
+        const meetingData = {
+          topic: inputs.title,
+          password: inputs.password,
+          schedule_for: "ricamaeaverion22@gmail.com",     // TODO: get email of tutor (must be added to TechConnect Zoom account)
+          start_time: inputs.dateTime,
+        }
 
-          // call auth API
-          try {
-            console.log("Calling auth API")
-            axios.get('http://localhost:3008', meetingData)
-            .then((response) => {
-                console.log("Hurray, this works");
+        // try {
+        //   window.open(
+        //   'https://zoom.us/oauth/authorize?response_type=code&client_id=' + process.env.REACT_APP_CLIENT_ID + '&redirect_uri=' + REACT_APP_REDIRECT_URL,
+        //   '_blank'
+        // );
+        // } catch (error) {
+        //   console.log(error);
+        // }
 
-                // If successfull, call create meeting API here or directly in back-end
 
-            }, (error) => {
-              console.log('Zoom API failed: ' + error.response.data);
-            });
-          } catch (error) {
+        // call auth API
+        try {
+          console.log("Calling auth API")
+          axios.get('http://localhost:3008', (req, res) => {
+
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            res.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
+
+          }, meetingData)
+          .then((response) => {
+              console.log("Hurray, this works");
+
+              // If successfull, call create meeting API here or directly in back-end
+
+          }, (error) => {
+            console.log('Zoom API failed: ' + error.response.data);
             console.log(error);
-          }
+          });
+        } catch (error) {
+          console.log(error);
+        }
 
 
         // OLD - calling auth API
