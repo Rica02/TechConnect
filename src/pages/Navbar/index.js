@@ -68,7 +68,7 @@ export function Navbar() {
                         {/* student */}
                         {admin === '3' && (<>
                             <NavbarLink to="/dashborad">HOME</NavbarLink>
-                            <NavbarLink to="/dashborad">BOOK A LESSON</NavbarLink>
+                            <NavbarLink to="/booklesson">BOOK A LESSON</NavbarLink>
                             <NavbarLink to="/accountDetails">ACCOUNT DETAILS</NavbarLink>
                             <NavbarLink to="/dashborad">NEED HELLP?</NavbarLink>
                             {/* show for student NavbarLink*/}
@@ -150,7 +150,7 @@ export function Navbar() {
                         <NavbarLinkExtended to="/dashborad" >HOME</NavbarLinkExtended>
                         <NavbarLinkExtended to="/dashborad">CHANGE AVAILABILYTY</NavbarLinkExtended>
                         <NavbarLinkExtended to="/accountDetails">ACCOUNT DETAILS</NavbarLinkExtended>
-                        <NavbarLinkExtended to="/dashborad">NEED HELLP?</NavbarLinkExtended>
+                        <NavbarLinkExtended to="/addNews">AddNews</NavbarLinkExtended>
                         <NavbarSignContainerExtended >
                             <RiAccountBoxFill fontSize="3em" />
                             <NavbarButton onClick={(e) => LogoutToHome(e)}>log out</NavbarButton>
@@ -170,7 +170,7 @@ export function Navbar() {
                     {admin === '3' && (<>
                         {/* show for student NavbarLinkExtended*/}
                         <NavbarLinkExtended to="/dashborad" >HOME</NavbarLinkExtended>
-                        <NavbarLinkExtended to="/dashborad">BOOK A LESSON</NavbarLinkExtended>
+                        <NavbarLinkExtended to="/booklesson">BOOK A LESSON</NavbarLinkExtended>
                         <NavbarLinkExtended to="/accountDetails">ACCOUNT DETAILS</NavbarLinkExtended>
                         <NavbarLinkExtended to="/dashborad">NEED HELLP?</NavbarLinkExtended>
                         <NavbarSignContainerExtended >

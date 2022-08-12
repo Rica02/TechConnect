@@ -24,6 +24,7 @@ import StudentPage from "./pages/StudentPage";
 import Dashborad from "./pages/Dashborad";
 import AdminPage from "./pages/AdminPage";
 import AccountDetails from "./pages/AccountDetails.js";
+import BookLesson from "./pages/BookLesson/intex";
 
 function App() {
 
@@ -42,6 +43,8 @@ function App() {
           <Route path="/studentPage" element={<PrivateRoute><StudentPage/></PrivateRoute>} />
           <Route path="/adminPage" element={<PrivateRoute><AdminPage/></PrivateRoute>} />
           <Route path="/accountDetails" element={<PrivateRoute><AccountDetails/></PrivateRoute>} />
+          <Route path="/booklesson" element={<PrivateRoute><BookLesson/></PrivateRoute>} />
+          <Route path="/addNews" element={<PrivateRoute><AddNews/></PrivateRoute>} />
           <Route path="/dashborad" element={<PrivateRoute><Dashborad/></PrivateRoute>} />
           <Route path="/" element={<Home tutorData={data} />} />
           <Route path="/aboutus" element={<AboutUs tutorData={data} />} />
