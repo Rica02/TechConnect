@@ -55,7 +55,7 @@ export function Navbar() {
                             <NavbarLink to="/dashborad">HOME</NavbarLink>
                             <NavbarLink to="/changeavailability">CHANGE AVAILABILITY</NavbarLink>
                             <NavbarLink to="/accountDetails">ACCOUNT DETAILS</NavbarLink>
-                            <NavbarLink to="/dashborad">NEED HELLP?</NavbarLink>
+                            <NavbarLink to="/addNews">ADD NEWS</NavbarLink>
                         </>)}
                             {/* tutor */}
                         {admin === '2' && (<>
@@ -150,7 +150,7 @@ export function Navbar() {
                         <NavbarLinkExtended to="/dashborad" >HOME</NavbarLinkExtended>
                         <NavbarLinkExtended to="/changeavailability">CHANGE AVAILABILITY</NavbarLinkExtended>
                         <NavbarLinkExtended to="/accountDetails">ACCOUNT DETAILS</NavbarLinkExtended>
-                        <NavbarLinkExtended to="/addNews">AddNews</NavbarLinkExtended>
+                        <NavbarLinkExtended to="/addNews">ADD NEWS</NavbarLinkExtended>
                         <NavbarSignContainerExtended >
                             <RiAccountBoxFill fontSize="3em" />
                             <NavbarButton onClick={(e) => LogoutToHome(e)}>log out</NavbarButton>
