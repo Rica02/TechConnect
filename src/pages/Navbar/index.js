@@ -53,14 +53,14 @@ export function Navbar() {
                         {/* admin */}
                         {admin === '1' && (<>
                             <NavbarLink to="/dashborad">HOME</NavbarLink>
-                            <NavbarLink to="/dashborad">CHANGE AVAILABILYTY</NavbarLink>
+                            <NavbarLink to="/changeavailability">CHANGE AVAILABILITY</NavbarLink>
                             <NavbarLink to="/accountDetails">ACCOUNT DETAILS</NavbarLink>
                             <NavbarLink to="/dashborad">NEED HELLP?</NavbarLink>
                         </>)}
                             {/* tutor */}
                         {admin === '2' && (<>
                             <NavbarLink to="/dashborad">HOME</NavbarLink>
-                            <NavbarLink to="/dashborad">CHANGE AVAILABILYTY</NavbarLink>
+                            <NavbarLink to="/changeavailability">CHANGE AVAILABILITY</NavbarLink>
                             <NavbarLink to="/accountDetails">ACCOUNT DETAILS</NavbarLink>
                             <NavbarLink to="/dashborad">NEED HELLP?</NavbarLink>
                             {/* show for teacher NavbarLink*/}
@@ -148,7 +148,7 @@ export function Navbar() {
                     {admin === '1' && (<>
                         {/* show for admin NavbarLinkExtended*/}
                         <NavbarLinkExtended to="/dashborad" >HOME</NavbarLinkExtended>
-                        <NavbarLinkExtended to="/dashborad">CHANGE AVAILABILYTY</NavbarLinkExtended>
+                        <NavbarLinkExtended to="/changeavailability">CHANGE AVAILABILITY</NavbarLinkExtended>
                         <NavbarLinkExtended to="/accountDetails">ACCOUNT DETAILS</NavbarLinkExtended>
                         <NavbarLinkExtended to="/addNews">AddNews</NavbarLinkExtended>
                         <NavbarSignContainerExtended >
@@ -159,7 +159,7 @@ export function Navbar() {
                     {admin === '2' && (<>
                         {/* show for teacher NavbarLinkExtended*/}
                         <NavbarLinkExtended to="/dashborad" >HOME</NavbarLinkExtended>
-                        <NavbarLinkExtended to="/dashborad">CHANGE AVAILABILYTY</NavbarLinkExtended>
+                        <NavbarLinkExtended to="/changeavailability">CHANGE AVAILABILITY</NavbarLinkExtended>
                         <NavbarLinkExtended to="/accountDetails">ACCOUNT DETAILS</NavbarLinkExtended>
                         <NavbarLinkExtended to="/dashborad">NEED HELLP?</NavbarLinkExtended>
                         <NavbarSignContainerExtended >
