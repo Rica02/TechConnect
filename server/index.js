@@ -5,11 +5,6 @@ const app = express();
 const bodyParser = require("body-parser");
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-// for zoom (old -- moved to zoomserver/index.js)
-// const zoomConfig = require("./config/zoom.js");
-// const jwt = require("jsonwebtoken");
-// const rp = require("request-promise");
-// const request = require('request')
 
 app.use(express.json())
 
@@ -50,9 +45,6 @@ app.post("/register", async function (req, res) {
             console.log("succeed");
         }
     })
-
-
-
 })
 
 app.post("/login",  function (req, res) {
@@ -79,15 +71,6 @@ app.post("/login",  function (req, res) {
                 console.log("no combination found");
             }
 
-//   rp(options)
-//     .then(function (response) {
-//       console.log("response is: ", response.join_url);
-//       // response.status(200).json(response);
-//       let dataRes = {
-//         join_url: response.join_url,
-//       };
-//       res.status(200).json(dataRes);
-
 app.post("/login", (req, res) => {
 
 })
@@ -101,4 +84,5 @@ app.listen(3007, function () {
         } console.log("DB connection is successful!")
     })
 })
+
 //connection.end()
