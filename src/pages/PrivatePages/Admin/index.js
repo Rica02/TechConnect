@@ -1,13 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DashboardContainer, StyledButton } from "../../PagesStyle";
 import { ButtonContainer, Form } from "./AdminStyle";
 import axios from "axios";
 
 function Admin() {
     const [inputs, setInputs] = useState({});
+    const [studentList, setStudentList] = useState([]);
+
+    useEffect(() => {
+      console.log("Use effect triggered");
+      try {
+         axios.post('http://localhost:3007/getusers')
+            .then((response) => {
+              //console.log("Get users successful. Response data: " + JSON.stringify(response))
+              // dynamically populate select fields
+              setStudentList(response.data.studentList)
+              console.log("Student list:" + studentList);
+            }, (error) => {
+                console.log("Error occurred: " + error);
+            });
+      } catch (error) {
+          console.log("Get users failed, reason: " + error);
+      }
+    }, []);
+
+
+    function StudentOptions() {
+      return (
+        <>
+          {/* <option selected hidden>Choose...</option> */}
+          <option value="" disabled>Choose...</option>
+          {studentList.map((student, index) => {
+            <option key={index} value={student.id}>{student.name}</option>
+          })}
+        </>
+        );
+    }
 
     const handleChange = (event) => {
-        // TODO: check that all fields are not empty
         const name = event.target.name;
         const value = event.target.value;
         setInputs(values => ({...values, [name]: value}))
@@ -25,7 +55,7 @@ function Admin() {
       }
 
       try {
-        await axios.post('http://localhost:3008/meeting', meetingData)
+        await axios.post('http://localhost:3007/meeting', meetingData)
             .then((response) => {
               console.log("API call successful. Response data: " + response)
               // redirect user to "successful meeting creation"
@@ -44,26 +74,25 @@ function Admin() {
         <h3>Create a new meeting</h3>
         <Form onSubmit={handleSubmit} >
             <label>Student</label>
-            {/* TODO: replace following code to fetch data from database*/}
             <select
                 name="student"
                 value={inputs.student || ""}
                 onChange={handleChange}
                 required
+                //defaultValue={""}
             >
-                <option selected hidden>Choose...</option>
-                <option value="student 1">Student 1</option>
-                <option value="student 2">Student 2</option>
+                {/* <option selected hidden>Choose...</option> */}
+                {/* <option value="DEFAULT" disabled>Choose...</option> */}
+                <StudentOptions />
             </select>
             <label htmlFor='for'>Tutor</label>
-            {/* TODO: replace following code to fetch data from database*/}
             <select
                 name="tutor"
                 value={inputs.tutor || ""}
                 onChange={handleChange}
                 required
             >
-                <option selected hidden>Choose...</option>
+                <option value="" disabled>Choose...</option>
                 <option value="tutor 1">Tutor 1</option>
                 <option value="tutor 2">Tutor 2</option>
             </select>
