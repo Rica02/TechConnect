@@ -24,29 +24,16 @@ import StudentPage from "./pages/StudentPage";
 import Dashborad from "./pages/Dashborad";
 import Admin from "./pages/PrivatePages/Admin";
 import MeetingCreated from "./pages/PrivatePages/MeetingCreated";
+import BookLesson from "./pages/BookLesson/intex";
+import ChangeAvailability from "./pages/ChangeAvailability/intex";
 
 function App() {
 
   const [data, setData] = useState([])
   const [state, setState] = useState(false)
-  // var homeUrl = "http://localhost:3007/";
-  // var tutorUrl = "http://localhost:3007/tutors";
-  // var arrayData = []
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     axios.get(`${tutorUrl}`).
-  //       then(response => {
-  //         for (var key in response.data) {
-  //           arrayData.push(response.data[key])
-  //         }
-  //         setData(arrayData)
-  //         setState(true)
-  //       })
-  //   }
-  //   fetchData()
-  // }, [homeUrl, tutorUrl,state]);
 
   return (
+    // ThemeProvider wraps around the whole app as it provides colours
     <ServerProvider>
     <ThemeProvider theme={theme}>
       <Router>
@@ -56,6 +43,9 @@ function App() {
           <Route path="/studentPage" element={<PrivateRoute><StudentPage/></PrivateRoute>} />
           <Route path="/adminPage" element={<PrivateRoute><AdminPage/></PrivateRoute>} />
           <Route path="/accountDetails" element={<PrivateRoute><AccountDetails/></PrivateRoute>} />
+          <Route path="/booklesson" element={<PrivateRoute><BookLesson/></PrivateRoute>} />
+          <Route path="/changeavailability" element={<PrivateRoute><ChangeAvailability/></PrivateRoute>} />
+          <Route path="/addNews" element={<PrivateRoute><AddNews/></PrivateRoute>} />
           <Route path="/dashborad" element={<PrivateRoute><Dashborad/></PrivateRoute>} />
           <Route path="/" element={<Home tutorData={data} />} />
           <Route path="/aboutus" element={<AboutUs tutorData={data} />} />
