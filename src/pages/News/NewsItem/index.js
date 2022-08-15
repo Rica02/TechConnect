@@ -18,7 +18,7 @@ export default function NewsItem() {
                     Vestibulum imperdiet ornare ipsum condimentum maximus. Maecenas sodales
                     varius scelerisque. Sed nec eros sagittis, lobortis velit nec, lobortis risus. Nam
                     gravida lectus sit amet massa pellentesque rhoncus.</p>
-                <img src={ImgPlaceholder} />
+                <img src={ImgPlaceholder} alt="news banner" />
             </NewsContentContainer>
         </StyledContainer>
     )

@@ -8,7 +8,7 @@ import { GridContainer, IconContainer } from "./WhatWeDoStyle";
 // "What do we do?" section. Present in Home and Our Services pages
 export default function WhatWeDo(props) {
     return (
-        <StyledContainer color={props.color}>
+        <StyledContainer bgColor={props.bgColor}>
             <h2>What do we do?</h2>
             <GridContainer>
                 <div className="grid-item">

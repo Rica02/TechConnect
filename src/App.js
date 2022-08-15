@@ -22,10 +22,12 @@ import { ServerProvider } from "./ServerContext";
 import PrivateRoute from "./PrivateRoute";
 import StudentPage from "./pages/StudentPage";
 import Dashborad from "./pages/Dashborad";
-import AdminPage from "./pages/AdminPage";
-import AccountDetails from "./pages/AccountDetails.js";
+import Admin from "./pages/PrivatePages/Admin";
+import MeetingCreated from "./pages/PrivatePages/MeetingCreated";
 import BookLesson from "./pages/BookLesson/intex";
 import ChangeAvailability from "./pages/ChangeAvailability/intex";
+import AdminPage from "./pages/AdminPage";
+import AccountDetails from "./pages/AccountDetails";
 
 function App() {
 
@@ -37,7 +39,6 @@ function App() {
     <ServerProvider>
     <ThemeProvider theme={theme}>
       <Router>
-       
         <Navbar />
         <Routes>
           <Route path="/teacherpage" element={<PrivateRoute><TeacherPage/></PrivateRoute>} />
@@ -61,6 +62,8 @@ function App() {
           <Route path="/addnews" element={<AddNews />} />
           <Route path="*" element={<ErrorPage />} /> {/* Render error page if path does not match */}
           <Route path="/login" element={<Dashboard />} />
+          <Route path="/admintest" element={<Admin />} />   {/* TEST */}
+          <Route path="/oauthredirect" element={<MeetingCreated />} />   {/* TEST */}
         </Routes>
         <Footer /> {/* all pages will include footer */}
       </Router>
