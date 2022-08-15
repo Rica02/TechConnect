@@ -26,6 +26,8 @@ import Admin from "./pages/PrivatePages/Admin";
 import MeetingCreated from "./pages/PrivatePages/MeetingCreated";
 import BookLesson from "./pages/BookLesson/intex";
 import ChangeAvailability from "./pages/ChangeAvailability/intex";
+import AdminPage from "./pages/AdminPage";
+import AccountDetails from "./pages/AccountDetails";
 
 function App() {
 

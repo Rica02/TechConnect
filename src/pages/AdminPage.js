@@ -1,6 +1,6 @@
 import React from "react";
 import { DashboardContainer, StyledButton } from "./PagesStyle";
-import { Table } from "../pages/PrivatePages/DashboardStyle";
+import { Table } from "./PrivatePages/Dashboard/DashboardStyle";
 import imgTest from "../assets/images/tutor-1.jpg";
 
 function AdminPage() {
