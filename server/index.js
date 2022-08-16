@@ -1,5 +1,5 @@
 // bring in environment secrets through dotenv
-require('dotenv/config')
+require('dotenv')
 
 // include required modules
 const express = require("express");
@@ -81,9 +81,9 @@ app.post("/login", function (req, res) {
             console.log(comparison);
             if (comparison) {
                 console.log("login successfully");
+                res.send(result)
             } else {
                 console.log("no combination found");
-                res.send(result)
             }
         }
         else {
