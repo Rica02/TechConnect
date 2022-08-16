@@ -6,16 +6,25 @@ import axios from "axios";
 function Admin() {
     const [inputs, setInputs] = useState({});
     const [studentList, setStudentList] = useState([]);
+    const [tutorList, setTutorList] = useState([]);
 
+    // console.log("Student list: " + JSON.stringify(studentList));
+    // console.log("Tutor list: " + JSON.stringify(tutorList));
+
+    // on page load, get student and tutor data
     useEffect(() => {
-      console.log("Use effect triggered");
       try {
          axios.post('http://localhost:3007/getusers')
             .then((response) => {
-              //console.log("Get users successful. Response data: " + JSON.stringify(response))
-              // dynamically populate select fields
-              setStudentList(response.data.studentList)
-              console.log("Student list:" + studentList);
+              console.log("Get users successful.");
+              // console.log("Get users successful. Response data: " + JSON.stringify(response))
+
+              // get response and store it in useState array
+              var newStudentList = [...response.data.studentList];
+              var newTutorList = [...response.data.tutorList];
+              setStudentList(newStudentList);
+              setTutorList(newTutorList);
+
             }, (error) => {
                 console.log("Error occurred: " + error);
             });
@@ -24,41 +33,66 @@ function Admin() {
       }
     }, []);
 
+    // iterate through student array to display select options
+    function getStudentOptions() {
+      return studentList.map((student) => {
+        return <option key={student.id} value={student.id}>{student.name}</option>;
+      });
 
-    function StudentOptions() {
-      return (
-        <>
-          {/* <option selected hidden>Choose...</option> */}
-          <option value="" disabled>Choose...</option>
-          {studentList.map((student, index) => {
-            <option key={index} value={student.id}>{student.name}</option>
-          })}
-        </>
-        );
-    }
+    };
 
+    // iterate through tutor array to display select options
+    function getTutorOptions() {
+      return tutorList.map((tutor) => {
+        return <option key={tutor.id} value={tutor.id}>{tutor.name}</option>;
+      });
+    };
+
+    // form inputs on change event handler (get values and store in useState)
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
         setInputs(values => ({...values, [name]: value}))
       }
 
-      const handleSubmit = async (event) => {
-        event.preventDefault();
-        console.log(inputs);
+    // confirm button on click event handler
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      console.log("Creating meeting.");
+
+      // get student and tutor names
+      var studentName = "";
+      var tutorName = "";
+
+      studentList.forEach(student => {
+        if (student.id == inputs.studentId) {
+          studentName = student.name;
+        }
+      });
+
+      tutorList.forEach(tutor => {
+        if (tutor.id == tutor.tutorId) {
+          tutorName = tutor.name;
+        }
+      });
+
+      //console.log("Inputs: " + JSON.stringify(inputs));
 
       // get meeting data from form
       const meetingData = {
-        //password: inputs.password,
-        topic: "Virtual lesson with student " + inputs.student + " and tutor " + inputs.tutor,
-        start_time: inputs.dateTime,
+        topic: "Virtual lesson with student " + studentName + " and tutor " + tutorName,
+        start_time: inputs.dateTime + ":00",  // match format required by Zoom API
+        student_id: inputs.studentId,
+        tutor_id: inputs.tutorId
       }
 
+      // send data to backend
       try {
         await axios.post('http://localhost:3007/meeting', meetingData)
             .then((response) => {
-              console.log("API call successful. Response data: " + response)
-              // redirect user to "successful meeting creation"
+              console.log("API call successful. Meeting created.")
+              //console.log("API call successful. Response data: " + JSON.stringify(response))
+              window.alert("Meeting successfully created!");
             }, (error) => {
                 console.log("Error occurred: " + error);
             });
@@ -75,35 +109,24 @@ function Admin() {
         <Form onSubmit={handleSubmit} >
             <label>Student</label>
             <select
-                name="student"
-                value={inputs.student || ""}
-                onChange={handleChange}
-                required
-                //defaultValue={""}
-            >
-                {/* <option selected hidden>Choose...</option> */}
-                {/* <option value="DEFAULT" disabled>Choose...</option> */}
-                <StudentOptions />
-            </select>
-            <label htmlFor='for'>Tutor</label>
-            <select
-                name="tutor"
-                value={inputs.tutor || ""}
+                name="studentId"
+                value={inputs.studentId || ""}
                 onChange={handleChange}
                 required
             >
                 <option value="" disabled>Choose...</option>
-                <option value="tutor 1">Tutor 1</option>
-                <option value="tutor 2">Tutor 2</option>
+                {getStudentOptions()}
             </select>
-            {/* <label>Meeting password</label>
-            <input
-                type='text'
-                name="password"
-                value={inputs.password || ""}
+            <label htmlFor='for'>Tutor</label>
+            <select
+                name="tutorId"
+                value={inputs.tutorId || ""}
                 onChange={handleChange}
                 required
-            /> */}
+            >
+                <option value="" disabled>Choose...</option>
+                {getTutorOptions()}
+            </select>
             <label>Date and time</label>
             <input
                 type="datetime-local"

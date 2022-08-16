@@ -151,47 +151,65 @@ const token = jwt.sign(payload, zoomConfig.APISecret);
 
 // use userinfo from the form and make a post request to /userinfo
 app.post('/meeting', (req, res) => {
-    console.log("IN BACKEND: Topic = " + req.body.topic + " Start date = " + req.body.start_time);
-    var options = {
-        method: "POST",
-        // make API call "create meeting" Zoom endpoint
-        uri: "https://api.zoom.us/v2/users/" + email + "/meetings",
-        body: {
-            topic: req.body.topic,
-            start_time: req.body.start_time,
-            type: 2,                   // 1 = instant meeting, 2 = scheduled meeting
-            default_password: false,
-            duration: 40,              // 40 min is the max meeting time allowed with a basic free Zoom account
-            settings: {
-                host_video: "true",
-                participant_video: "true",
-            },
-        },
-        auth: {
-            'bearer': token
-        },
-        headers: {
-            'User-Agent': 'Zoom-api-Jwt-Request',
-            'content-type': 'application/json'
-        },
-        json: true // parse the JSON string in the response
-    };
+  //console.log("IN BACKEND: Topic = " + req.body.topic + " Start date = " + req.body.start_time);
+  var options = {
+    method: "POST",
+    // make API call "create meeting" Zoom endpoint
+    uri: "https://api.zoom.us/v2/users/" + email + "/meetings",
+    body: {
+      topic: req.body.topic,
+      start_time: req.body.start_time,
+      timezone: "Australia/Sydney",
+      type: 2,                   // 1 = instant meeting, 2 = scheduled meeting
+      default_password: false,
+      duration: 40,              // 40 min is the max meeting time allowed with a basic free Zoom account
+      settings: {
+        host_video: "true",
+        participant_video: "true",
+      },
+    },
+    auth: {
+        'bearer': token
+    },
+    headers: {
+        'User-Agent': 'Zoom-api-Jwt-Request',
+        'content-type': 'application/json'
+    },
+    json: true // parse the JSON string in the response
+  };
 
     // use request-promise module's .then() method to make request calls.
     rp(options)
         .then(function (response) {
-            //printing the response on the console
-            console.log('Response: ', response);
-            //console.log(typeof response);
+        //printing the response on the console
+        console.log('Response: ', response);
 
-            let dataRes = {
-                join_url: response.join_url,
-            };
+        let dataRes = {
+            join_url: response.join_url,
+        };
 
-            // TODO: send details to DB
+              // upload meeting details to DB
+        var registerQuery = "INSERT INTO techconnect.meetings (studentId, tutorId, startUrl, meetingId, meetingPw, startTime, concluded) VALUES (?,?,?,?,?,?,?)"
+        connection.query(registerQuery,[
+            req.body.student_id,
+            req.body.tutor_id,
+            response.start_url,
+            response.id,
+            response.password,
+            response.start_time,
+            false
+        ],function(sqlErr, result){
+            if(sqlErr){
+                console.log(sqlErr);
+            } else {
+                //console.log(req);
+                //console.log(result);
+                console.log("Meeting details successfully uploaded to DB!");
+            }
+        })
 
-            //res.send("Create meeting result: " + JSON.stringify(response));
-            res.status(200).json(dataRes);
+        //res.send("Create meeting result: " + JSON.stringify(response));
+        res.status(200).json(dataRes);
         })
         .catch(function (err) {
             // API call failed...
