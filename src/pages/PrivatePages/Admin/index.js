@@ -8,8 +8,6 @@ function Admin() {
     const [studentList, setStudentList] = useState([]);
     const [tutorList, setTutorList] = useState([]);
 
-    const newDate = new Date(inputs.dateTime);
-
     // console.log("Student list: " + JSON.stringify(studentList));
     // console.log("Tutor list: " + JSON.stringify(tutorList));
 
@@ -18,6 +16,7 @@ function Admin() {
       try {
          axios.post('http://localhost:3007/getusers')
             .then((response) => {
+              console.log("Get users successful.");
               // console.log("Get users successful. Response data: " + JSON.stringify(response))
 
               // get response and store it in useState array
@@ -37,14 +36,15 @@ function Admin() {
     // iterate through student array to display select options
     function getStudentOptions() {
       return studentList.map((student) => {
-        return <option key={student.id} value={student.name}>{student.name}</option>;
+        return <option key={student.id} value={student.id}>{student.name}</option>;
       });
+
     };
 
     // iterate through tutor array to display select options
     function getTutorOptions() {
       return tutorList.map((tutor) => {
-        return <option key={tutor.id} value={tutor.name}>{tutor.name}</option>;
+        return <option key={tutor.id} value={tutor.id}>{tutor.name}</option>;
       });
     };
 
@@ -58,27 +58,41 @@ function Admin() {
     // confirm button on click event handler
     const handleSubmit = async (event) => {
       event.preventDefault();
-      // convert date string into Date type
-      const date = new Date(inputs.dateTime);
-      console.log("Inputs: " + JSON.stringify(inputs) + " New date: " + date);
+      console.log("Creating meeting.");
 
+      // get student and tutor names
+      var studentName = "";
+      var tutorName = "";
 
+      studentList.forEach(student => {
+        if (student.id == inputs.studentId) {
+          studentName = student.name;
+        }
+      });
+
+      tutorList.forEach(tutor => {
+        if (tutor.id == tutor.tutorId) {
+          tutorName = tutor.name;
+        }
+      });
+
+      //console.log("Inputs: " + JSON.stringify(inputs));
 
       // get meeting data from form
       const meetingData = {
-        //password: inputs.password,
-        topic: "Virtual lesson with student " + inputs.student + " and tutor " + inputs.tutor,
-        start_time: inputs.dateTime,
+        topic: "Virtual lesson with student " + studentName + " and tutor " + tutorName,
+        start_time: inputs.dateTime + ":00",  // match format required by Zoom API
+        student_id: inputs.studentId,
+        tutor_id: inputs.tutorId
       }
 
       // send data to backend
       try {
         await axios.post('http://localhost:3007/meeting', meetingData)
             .then((response) => {
-              console.log("API call successful. Response data: " + JSON.stringify(response))
-
-              // TODO: redirect user to "successful meeting creation"
-
+              console.log("API call successful. Meeting created.")
+              //console.log("API call successful. Response data: " + JSON.stringify(response))
+              window.alert("Meeting successfully created!");
             }, (error) => {
                 console.log("Error occurred: " + error);
             });
@@ -95,8 +109,8 @@ function Admin() {
         <Form onSubmit={handleSubmit} >
             <label>Student</label>
             <select
-                name="student"
-                value={inputs.student || ""}
+                name="studentId"
+                value={inputs.studentId || ""}
                 onChange={handleChange}
                 required
             >
@@ -105,22 +119,14 @@ function Admin() {
             </select>
             <label htmlFor='for'>Tutor</label>
             <select
-                name="tutor"
-                value={inputs.tutor || ""}
+                name="tutorId"
+                value={inputs.tutorId || ""}
                 onChange={handleChange}
                 required
             >
                 <option value="" disabled>Choose...</option>
                 {getTutorOptions()}
             </select>
-            {/* <label>Meeting password</label>
-            <input
-                type='text'
-                name="password"
-                value={inputs.password || ""}
-                onChange={handleChange}
-                required
-            /> */}
             <label>Date and time</label>
             <input
                 type="datetime-local"

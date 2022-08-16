@@ -23,7 +23,6 @@ import PrivateRoute from "./PrivateRoute";
 import StudentPage from "./pages/StudentPage";
 import Dashborad from "./pages/Dashborad";
 import Admin from "./pages/PrivatePages/Admin";
-import MeetingCreated from "./pages/PrivatePages/MeetingCreated";
 import BookLesson from "./pages/BookLesson/intex";
 import ChangeAvailability from "./pages/ChangeAvailability/intex";
 import AdminPage from "./pages/AdminPage";
@@ -63,7 +62,6 @@ function App() {
           <Route path="*" element={<ErrorPage />} /> {/* Render error page if path does not match */}
           <Route path="/login" element={<Dashboard />} />
           <Route path="/admintest" element={<Admin />} />   {/* TEST */}
-          <Route path="/oauthredirect" element={<MeetingCreated />} />   {/* TEST */}
         </Routes>
         <Footer /> {/* all pages will include footer */}
       </Router>

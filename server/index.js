@@ -145,7 +145,7 @@ const token = jwt.sign(payload, zoomConfig.APISecret);
 
 // use userinfo from the form and make a post request to /userinfo
 app.post('/meeting', (req, res) => {
-  console.log("IN BACKEND: Topic = " + req.body.topic + " Start date = " + req.body.start_time);
+  //console.log("IN BACKEND: Topic = " + req.body.topic + " Start date = " + req.body.start_time);
   var options = {
     method: "POST",
     // make API call "create meeting" Zoom endpoint
@@ -172,26 +172,43 @@ app.post('/meeting', (req, res) => {
     json: true // parse the JSON string in the response
   };
 
-// use request-promise module's .then() method to make request calls.
-rp(options)
-    .then(function (response) {
-      //printing the response on the console
-      console.log('Response: ', response);
-      //console.log(typeof response);
+    // use request-promise module's .then() method to make request calls.
+    rp(options)
+        .then(function (response) {
+        //printing the response on the console
+        console.log('Response: ', response);
 
-      let dataRes = {
-        join_url: response.join_url,
-      };
+        let dataRes = {
+            join_url: response.join_url,
+        };
 
-      // TODO: send details to DB
+        // upload meeting details to DB
+        var registerQuery = "INSERT INTO techconnect.meetings (studentId, tutorId, startUrl, meetingId, meetingPw, startTime, concluded) VALUES (?,?,?,?,?,?,?)"
+        connection.query(registerQuery,[
+            req.body.student_id,
+            req.body.tutor_id,
+            response.start_url,
+            response.id,
+            response.password,
+            response.start_time,
+            false
+        ],function(sqlErr, result){
+            if(sqlErr){
+                console.log(sqlErr);
+            } else {
+                //console.log(req);
+                //console.log(result);
+                console.log("Meeting details successfully uploaded to DB!");
+            }
+        })
 
-      //res.send("Create meeting result: " + JSON.stringify(response));
-      res.status(200).json(dataRes);
-    })
-    .catch(function (err) {
-        // API call failed...
-        console.log('API call failed, reason ', err);
-    });
+        //res.send("Create meeting result: " + JSON.stringify(response));
+        res.status(200).json(dataRes);
+        })
+        .catch(function (err) {
+            // API call failed...
+            console.log('API call failed, reason ', err);
+        });
 });
 
 
