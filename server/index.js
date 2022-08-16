@@ -120,7 +120,7 @@ app.post("/getusers",  function (req, res) {
             // console.log("Student list: " + JSON.stringify(studentList));
 
             // send both lists to front-end
-            let dataRes = { tutorList, studentList}
+            let dataRes = { tutorList, studentList }
             res.status(200).json(dataRes);
             //console.log("Result: " + JSON.stringify(result));
         }
@@ -153,6 +153,7 @@ app.post('/meeting', (req, res) => {
     body: {
       topic: req.body.topic,
       start_time: req.body.start_time,
+      timezone: "Australia/Sydney",
       type: 2,                   // 1 = instant meeting, 2 = scheduled meeting
       default_password: false,
       duration: 40,              // 40 min is the max meeting time allowed with a basic free Zoom account

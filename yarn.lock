@@ -2366,10 +2366,10 @@
   "resolved" "https://registry.npmjs.org/@xtuc/long/-/long-4.2.2.tgz"
   "version" "4.2.2"
 
-"@zoomus/websdk@^2.5.0":
-  "integrity" "sha512-osfPeAliX3/6WCrRtDlhwWlNExsq6AzVjVmWJDJPSrVklKH90uHcBWa7z7s3SfvNVLu5OZCRu53iwaDblu+APQ=="
-  "resolved" "https://registry.npmjs.org/@zoomus/websdk/-/websdk-2.5.0.tgz"
-  "version" "2.5.0"
+"@zoomus/websdk@^2.6.0":
+  "integrity" "sha512-TXCc8ZVsbkoXAc5YCAS6YkKK4dbiazjv568GhCbv1BTRglJ8dPkkLgmny3/yzwVYPV8jBFYOrFp5yrzmUwaXtQ=="
+  "resolved" "https://registry.npmjs.org/@zoomus/websdk/-/websdk-2.6.0.tgz"
+  "version" "2.6.0"
   dependencies:
     "lodash" "^4.17.21"
     "react" "16.8.6"
