@@ -10,6 +10,8 @@ function SignupForm() {
   const [formInput, setFormInput] = useState({
     email: "",
     password: "",
+    fname: "",
+    lname:"",
     phone: "",
     passwordConfirm:"",
   })
@@ -24,8 +26,7 @@ function SignupForm() {
     if(formInput.password!==formInput.passwordConfirm){
       return  alert("password Confirm Different")
     }
-    console.log("regFunction------------------");
-    console.log(formInput.email + " " + formInput.password + " " + formInput.phone);
+
     debugger
     await axios.post("http://localhost:3007/register",formInput).then((result, reject) => {
       console.log(formInput.phone);
@@ -42,7 +43,11 @@ function SignupForm() {
   }
   return (
     <>
-      <FormH1>Creat your account</FormH1>
+      <FormH1>Create your account</FormH1>
+      <FormLabel htmlFor='for'>First Name</FormLabel>
+      <FormInput onChange={handleForm} name="fname" type='text' required />
+      <FormLabel htmlFor='for'>Last Name</FormLabel>
+      <FormInput onChange={handleForm} name="lname" type='text' required />
       <FormLabel htmlFor='for'>Email</FormLabel>
       <FormInput onChange={handleForm} name="email" type='email' required />
       <FormLabel htmlFor='for'>Phone number</FormLabel>
@@ -51,7 +56,7 @@ function SignupForm() {
       <FormInput onChange={handleForm} name="password" type='password' required />
       <FormLabel htmlFor='for'>Password confirm</FormLabel>
       <FormInput type='password' required name="passwordConfirm" onChange={handleForm}/>
-      <FormButton type='submitSignUp' onClick={() => regFunction()}>continue</FormButton>
+      <FormButton type='submitSignUp' onClick={() => regFunction()}>Register</FormButton>
     </>
   )
 }

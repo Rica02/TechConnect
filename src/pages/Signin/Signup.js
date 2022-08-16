@@ -56,7 +56,7 @@ function Signup() {
                     <Icon to="/"></Icon>
                     <FormContent>
                         <Form action="#">
-                            <FormH1>Creat your account</FormH1>
+                            <FormH1>Create your account</FormH1>
                             <FormLabel htmlFor='for'>Email</FormLabel>
                             <FormInput onChange={handleForm} name="email" type='email' required />
                             <FormLabel htmlFor='for'>Phone number</FormLabel>
