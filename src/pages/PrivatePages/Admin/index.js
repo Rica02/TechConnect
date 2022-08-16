@@ -6,16 +6,26 @@ import axios from "axios";
 function Admin() {
     const [inputs, setInputs] = useState({});
     const [studentList, setStudentList] = useState([]);
+    const [tutorList, setTutorList] = useState([]);
 
+    const newDate = new Date(inputs.dateTime);
+
+    // console.log("Student list: " + JSON.stringify(studentList));
+    // console.log("Tutor list: " + JSON.stringify(tutorList));
+
+    // on page load, get student and tutor data
     useEffect(() => {
-      console.log("Use effect triggered");
       try {
          axios.post('http://localhost:3007/getusers')
             .then((response) => {
-              //console.log("Get users successful. Response data: " + JSON.stringify(response))
-              // dynamically populate select fields
-              setStudentList(response.data.studentList)
-              console.log("Student list:" + studentList);
+              // console.log("Get users successful. Response data: " + JSON.stringify(response))
+
+              // get response and store it in useState array
+              var newStudentList = [...response.data.studentList];
+              var newTutorList = [...response.data.tutorList];
+              setStudentList(newStudentList);
+              setTutorList(newTutorList);
+
             }, (error) => {
                 console.log("Error occurred: " + error);
             });
@@ -24,28 +34,35 @@ function Admin() {
       }
     }, []);
 
+    // iterate through student array to display select options
+    function getStudentOptions() {
+      return studentList.map((student) => {
+        return <option key={student.id} value={student.name}>{student.name}</option>;
+      });
+    };
 
-    function StudentOptions() {
-      return (
-        <>
-          {/* <option selected hidden>Choose...</option> */}
-          <option value="" disabled>Choose...</option>
-          {studentList.map((student, index) => {
-            <option key={index} value={student.id}>{student.name}</option>
-          })}
-        </>
-        );
-    }
+    // iterate through tutor array to display select options
+    function getTutorOptions() {
+      return tutorList.map((tutor) => {
+        return <option key={tutor.id} value={tutor.name}>{tutor.name}</option>;
+      });
+    };
 
+    // form inputs on change event handler (get values and store in useState)
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
         setInputs(values => ({...values, [name]: value}))
       }
 
-      const handleSubmit = async (event) => {
-        event.preventDefault();
-        console.log(inputs);
+    // confirm button on click event handler
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      // convert date string into Date type
+      const date = new Date(inputs.dateTime);
+      console.log("Inputs: " + JSON.stringify(inputs) + " New date: " + date);
+
+
 
       // get meeting data from form
       const meetingData = {
@@ -54,11 +71,14 @@ function Admin() {
         start_time: inputs.dateTime,
       }
 
+      // send data to backend
       try {
         await axios.post('http://localhost:3007/meeting', meetingData)
             .then((response) => {
-              console.log("API call successful. Response data: " + response)
-              // redirect user to "successful meeting creation"
+              console.log("API call successful. Response data: " + JSON.stringify(response))
+
+              // TODO: redirect user to "successful meeting creation"
+
             }, (error) => {
                 console.log("Error occurred: " + error);
             });
@@ -79,11 +99,9 @@ function Admin() {
                 value={inputs.student || ""}
                 onChange={handleChange}
                 required
-                //defaultValue={""}
             >
-                {/* <option selected hidden>Choose...</option> */}
-                {/* <option value="DEFAULT" disabled>Choose...</option> */}
-                <StudentOptions />
+                <option value="" disabled>Choose...</option>
+                {getStudentOptions()}
             </select>
             <label htmlFor='for'>Tutor</label>
             <select
@@ -93,8 +111,7 @@ function Admin() {
                 required
             >
                 <option value="" disabled>Choose...</option>
-                <option value="tutor 1">Tutor 1</option>
-                <option value="tutor 2">Tutor 2</option>
+                {getTutorOptions()}
             </select>
             {/* <label>Meeting password</label>
             <input
