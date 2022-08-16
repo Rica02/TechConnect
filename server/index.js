@@ -43,12 +43,18 @@ app.post("/register", async function (req, res) {
     var requestedEmail = req.body.email
     var requestedPW = req.body.password
     var requestedPhone = req.body.phone
-    console.log(req.body.requestedPhone);
+    var requestedFName = req.body.fname
+    var requestedLName = req.body.lname
+    var userType = 3
 
-    var registerQuery = "INSERT INTO techconnect.user (email,password,phone) VALUES (?,?,?)"
-    console.log("registerQuery " + registerQuery);
-    connection.query(registerQuery,[resquestedEmail,resquestedPW,requestedPhone],function(sqlErr, result){
-        if(sqlErr){
+    var requestedPW2 = await bcrypt.hash(req.body.password, saltRounds)
+    console.log(requestedPW);
+    console.log(requestedPW2);
+    var registerQuery = "INSERT INTO techconnect.user (email,password,phone,admin,firstName,lastName) VALUES (?,?,?,?,?,?)"
+    console.log(registerQuery);
+
+    connection.query(registerQuery, [requestedEmail, requestedPW2, requestedPhone, userType,requestedFName,requestedLName], function (sqlErr, result) {
+        if (sqlErr) {
             console.log(sqlErr);
         } else {
             console.log(req);
@@ -59,7 +65,7 @@ app.post("/register", async function (req, res) {
 })
 
 // login function
-app.post("/login",  function (req, res) {
+app.post("/login", function (req, res) {
 
     console.log("get LOGIN FROM BACKEND");
     var email = req.body.email
@@ -67,29 +73,29 @@ app.post("/login",  function (req, res) {
 
     var searchQuery = "SELECT * FROM techconnect.user WHERE email = ?"
     connection.query(searchQuery, [email], async (sqlError, result) => {
-            if (sqlError) {
-                console.log(sqlError);
-            }
-            else if (result.length > 0) {
-                const comparison = await bcrypt.compare(password, result[0].password)
-                console.log(comparison);
-                if (comparison) {
-                    console.log("login successfully");
-                } else {
-                    console.log("no combination found");
-                    res.send(result)
-                }
-            }
-            else{
+        if (sqlError) {
+            console.log(sqlError);
+        }
+        else if (result.length > 0) {
+            const comparison = await bcrypt.compare(password, result[0].password)
+            console.log(comparison);
+            if (comparison) {
+                console.log("login successfully");
+            } else {
                 console.log("no combination found");
+                res.send(result)
             }
+        }
+        else {
+            console.log("no combination found");
+        }
     })
 })
 
 // ADMIN FUNCTIONS
 
 // get tutor and student list (to display in admin's "create meeting" page)
-app.post("/getusers",  function (req, res) {
+app.post("/getusers", function (req, res) {
 
     var studentList = [];
     var tutorList = [];
@@ -101,9 +107,9 @@ app.post("/getusers",  function (req, res) {
         }
         else if (result.length > 0) {
             // for each user, sort them in either student or tutor list
-            result.forEach(function(user, index) {
+            result.forEach(function (user, index) {
                 myUser = {};
-                if (user.admin == 2){
+                if (user.admin == 2) {
                     myUser["id"] = user.id;
                     myUser["name"] = user.firstName + " " + user.lastName;
                     myUser["admin"] = user.admin;
@@ -120,7 +126,7 @@ app.post("/getusers",  function (req, res) {
             // console.log("Student list: " + JSON.stringify(studentList));
 
             // send both lists to front-end
-            let dataRes = { tutorList, studentList}
+            let dataRes = { tutorList, studentList }
             res.status(200).json(dataRes);
             //console.log("Result: " + JSON.stringify(result));
         }
@@ -145,52 +151,52 @@ const token = jwt.sign(payload, zoomConfig.APISecret);
 
 // use userinfo from the form and make a post request to /userinfo
 app.post('/meeting', (req, res) => {
-  console.log("IN BACKEND: Topic = " + req.body.topic + " Start date = " + req.body.start_time);
-  var options = {
-    method: "POST",
-    // make API call "create meeting" Zoom endpoint
-    uri: "https://api.zoom.us/v2/users/" + email + "/meetings",
-    body: {
-      topic: req.body.topic,
-      start_time: req.body.start_time,
-      type: 2,                   // 1 = instant meeting, 2 = scheduled meeting
-      default_password: false,
-      duration: 40,              // 40 min is the max meeting time allowed with a basic free Zoom account
-      settings: {
-        host_video: "true",
-        participant_video: "true",
-      },
-    },
-    auth: {
-        'bearer': token
-    },
-    headers: {
-        'User-Agent': 'Zoom-api-Jwt-Request',
-        'content-type': 'application/json'
-    },
-    json: true // parse the JSON string in the response
-  };
+    console.log("IN BACKEND: Topic = " + req.body.topic + " Start date = " + req.body.start_time);
+    var options = {
+        method: "POST",
+        // make API call "create meeting" Zoom endpoint
+        uri: "https://api.zoom.us/v2/users/" + email + "/meetings",
+        body: {
+            topic: req.body.topic,
+            start_time: req.body.start_time,
+            type: 2,                   // 1 = instant meeting, 2 = scheduled meeting
+            default_password: false,
+            duration: 40,              // 40 min is the max meeting time allowed with a basic free Zoom account
+            settings: {
+                host_video: "true",
+                participant_video: "true",
+            },
+        },
+        auth: {
+            'bearer': token
+        },
+        headers: {
+            'User-Agent': 'Zoom-api-Jwt-Request',
+            'content-type': 'application/json'
+        },
+        json: true // parse the JSON string in the response
+    };
 
-// use request-promise module's .then() method to make request calls.
-rp(options)
-    .then(function (response) {
-      //printing the response on the console
-      console.log('Response: ', response);
-      //console.log(typeof response);
+    // use request-promise module's .then() method to make request calls.
+    rp(options)
+        .then(function (response) {
+            //printing the response on the console
+            console.log('Response: ', response);
+            //console.log(typeof response);
 
-      let dataRes = {
-        join_url: response.join_url,
-      };
+            let dataRes = {
+                join_url: response.join_url,
+            };
 
-      // TODO: send details to DB
+            // TODO: send details to DB
 
-      //res.send("Create meeting result: " + JSON.stringify(response));
-      res.status(200).json(dataRes);
-    })
-    .catch(function (err) {
-        // API call failed...
-        console.log('API call failed, reason ', err);
-    });
+            //res.send("Create meeting result: " + JSON.stringify(response));
+            res.status(200).json(dataRes);
+        })
+        .catch(function (err) {
+            // API call failed...
+            console.log('API call failed, reason ', err);
+        });
 });
 
 
