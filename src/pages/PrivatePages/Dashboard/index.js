@@ -42,8 +42,8 @@ function Dashboard() {
             {lesson.tutorName}
           </td>
           <td>
-            {/* <a href={lesson.link}>CLICK HERE TO START YOUR LESSON</a> */}
-            <JoinZoom isTutor={isTutor} />
+            <a href={lesson.link}>CLICK HERE TO START YOUR LESSON</a>
+            {/* <JoinZoom isTutor={isTutor} /> */}
           </td>
         </tr>
       ))}
