@@ -50,23 +50,6 @@ function SigninForm() {
       console.log(error);
     }
   }
-  var test = async (req, res) => {
-    try {
-      console.log(res);
-      // res.setHeader("Access-Control-Allow-Origin", "*");
-      // res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-      await axios.post('https://zoom.us/oauth/authorize?response_type=code&client_id=vw5sSJryRey9d1QUqWrzYw&redirect_uri=https://b56f-203-222-134-3.au.ngrok.io')
-
-        .then((result) => {
-          console.log(result);
-        })
-
-
-    }
-    catch (error) {
-      console.log(error);
-    }
-  }
   return (
     <>
       <FormH1>Enter your details to sign in</FormH1>
@@ -75,7 +58,6 @@ function SigninForm() {
       <FormLabel htmlFor='for'>Password</FormLabel>
       <FormInput type='password' name="password" onChange={handleForm} required />
       <FormButton type='submit' onClick={(e) => loginFunction(e)}>SIGN IN</FormButton>
-      <Button onClick={() => test()}>Call API</Button>
     </>
   )
 }

@@ -1,5 +1,5 @@
 // bring in environment secrets through dotenv
-require('dotenv/config')
+require('dotenv')
 
 // include required modules
 const express = require("express");
@@ -43,12 +43,18 @@ app.post("/register", async function (req, res) {
     var requestedEmail = req.body.email
     var requestedPW = req.body.password
     var requestedPhone = req.body.phone
-    console.log(req.body.requestedPhone);
+    var requestedFName = req.body.fname
+    var requestedLName = req.body.lname
+    var userType = 3
 
-    var registerQuery = "INSERT INTO techconnect.user (email,password,phone) VALUES (?,?,?)"
-    console.log("registerQuery " + registerQuery);
-    connection.query(registerQuery,[resquestedEmail,resquestedPW,requestedPhone],function(sqlErr, result){
-        if(sqlErr){
+    var requestedPW2 = await bcrypt.hash(req.body.password, saltRounds)
+    console.log(requestedPW);
+    console.log(requestedPW2);
+    var registerQuery = "INSERT INTO techconnect.user (email,password,phone,admin,firstName,lastName) VALUES (?,?,?,?,?,?)"
+    console.log(registerQuery);
+
+    connection.query(registerQuery, [requestedEmail, requestedPW2, requestedPhone, userType,requestedFName,requestedLName], function (sqlErr, result) {
+        if (sqlErr) {
             console.log(sqlErr);
         } else {
             console.log(req);
@@ -59,7 +65,7 @@ app.post("/register", async function (req, res) {
 })
 
 // login function
-app.post("/login",  function (req, res) {
+app.post("/login", function (req, res) {
 
     console.log("get LOGIN FROM BACKEND");
     var email = req.body.email
@@ -67,29 +73,29 @@ app.post("/login",  function (req, res) {
 
     var searchQuery = "SELECT * FROM techconnect.user WHERE email = ?"
     connection.query(searchQuery, [email], async (sqlError, result) => {
-            if (sqlError) {
-                console.log(sqlError);
-            }
-            else if (result.length > 0) {
-                const comparison = await bcrypt.compare(password, result[0].password)
-                console.log(comparison);
-                if (comparison) {
-                    console.log("login successfully");
-                } else {
-                    console.log("no combination found");
-                    res.send(result)
-                }
-            }
-            else{
+        if (sqlError) {
+            console.log(sqlError);
+        }
+        else if (result.length > 0) {
+            const comparison = await bcrypt.compare(password, result[0].password)
+            console.log(comparison);
+            if (comparison) {
+                console.log("login successfully");
+                res.send(result)
+            } else {
                 console.log("no combination found");
             }
+        }
+        else {
+            console.log("no combination found");
+        }
     })
 })
 
 // ADMIN FUNCTIONS
 
 // get tutor and student list (to display in admin's "create meeting" page)
-app.post("/getusers",  function (req, res) {
+app.post("/getusers", function (req, res) {
 
     var studentList = [];
     var tutorList = [];
@@ -101,9 +107,9 @@ app.post("/getusers",  function (req, res) {
         }
         else if (result.length > 0) {
             // for each user, sort them in either student or tutor list
-            result.forEach(function(user, index) {
+            result.forEach(function (user, index) {
                 myUser = {};
-                if (user.admin == 2){
+                if (user.admin == 2) {
                     myUser["id"] = user.id;
                     myUser["name"] = user.firstName + " " + user.lastName;
                     myUser["admin"] = user.admin;
@@ -182,7 +188,7 @@ app.post('/meeting', (req, res) => {
             join_url: response.join_url,
         };
 
-        // upload meeting details to DB
+              // upload meeting details to DB
         var registerQuery = "INSERT INTO techconnect.meetings (studentId, tutorId, startUrl, meetingId, meetingPw, startTime, concluded) VALUES (?,?,?,?,?,?,?)"
         connection.query(registerQuery,[
             req.body.student_id,
