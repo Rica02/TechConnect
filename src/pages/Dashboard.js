@@ -2,7 +2,8 @@ import React from 'react'
 import StudentPage from './StudentPage'
 import TeacherPage from './TeacherPage'
 import AdminPage from './AdminPage'
-function Dashborad() {
+
+function Dashboard() {
     const admin=localStorage.getItem("admin")
   return (
     <>
@@ -13,4 +14,4 @@ function Dashborad() {
   )
 }
 
-export default Dashborad
+export default Dashboard

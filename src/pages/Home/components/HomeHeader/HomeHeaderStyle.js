@@ -12,9 +12,13 @@ export const HomeHeader = styled.header`
     background-color: brown;
     align-items: center;
     color: white;
+    border-bottom: solid ${ ({ theme }) => theme.colorMain.highlightMain } 2px;
 
+    h1 {
+        font-size: xxx-large;
+    }
     p {
-        font-size: large;
+        font-size: x-large;
     }
     a {
         color: white;
@@ -43,5 +47,5 @@ export const HeaderButton = styled.button`
     padding: 5px 30px;
     border-style: none;
     border-radius: 5px;
-    font-size: large;
+    font-size: x-large;
 `

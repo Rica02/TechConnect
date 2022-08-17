@@ -35,7 +35,7 @@ function SigninForm() {
             setAuth(response.data[0])
             userSet(response.data[0].email, response.data[0].admin)
             alert("succesfully login")
-            navigate("/dashborad")
+            navigate("/dashboard")
             window.location.reload()
           } else if (response.data.length < 1) {
             alert("no combination found")

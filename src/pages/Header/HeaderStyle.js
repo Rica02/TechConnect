@@ -18,4 +18,5 @@ export const StyledHeader = styled.header`
     font-weight: bold;
     justify-content: center;
     align-items: center;
+    border-bottom: solid ${ ({ theme }) => theme.colorMain.highlightMain } 2px;
 `
