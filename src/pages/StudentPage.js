@@ -1,43 +1,55 @@
-import React from "react";
-import imgTest from "../assets/images/tutor-1.jpg";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 function StudentPage() {
 
-  // TODO: Replace UpcomingLessons() and PastLessons() functions to get data from database
+  const [upcomingMeetings, setUpcomingMeetings] = useState([]);
+  const [pastMeetings, setPastMeetings] = useState([]);
 
-  const UpcomingLessonsTestData = [
-    {
-      date: "Day, dd Month yyyy at hh:mm",
-      where: "Online",
-      tutorImg: imgTest,
-      tutorName: "Tutor name",
-      link: "#"
+  console.log("Upcoming meetings: " + JSON.stringify(upcomingMeetings));
+  console.log("Past meetings: " + JSON.stringify(pastMeetings))
+
+  // on page load, get student meetings
+  useEffect(() => {
+    try {
+        axios.post('http://localhost:3007/getstudentmeetings', {
+          userId: "1"   // TODO: get current user id instead of hardcoding it
+        })
+          .then((response) => {
+            console.log("Get student's meetings successful.");
+            // console.log("Get users successful. Response data: " + JSON.stringify(response))
+
+            // get response and store it in useState array
+            var allMeetings = [...response.data];
+
+            // sort meetings to corresponding arrays
+            allMeetings.forEach(function (meeting, index) {
+              if(meeting.concluded) {
+                setPastMeetings([...pastMeetings, meeting]);
+              } else if(!meeting.concluded) {
+                setUpcomingMeetings([...upcomingMeetings, meeting]);
+              }
+            })
+
+          }, (error) => {
+              console.log("Error occurred: " + error);
+          });
+    } catch (error) {
+        console.log("Get users failed, reason: " + error);
     }
-  ];
+  }, []);
 
-  const PastLessonsTestData = [
-    {
-      date: "Day, dd Month yyyy at hh:mm",
-      where: "Online",
-      tutorImg: imgTest,
-      tutorName: "Tutor name",
-      status: "COMPLETED"
-    }
-  ];
-
- function UpcomingLessons() {
+ function UpcomingMeetings() {
   return(
     <>
-      {UpcomingLessonsTestData.map((lesson, index) => (
+      {upcomingMeetings.map((meeting, index) => (
         <tr key={index}>
-          <td>{lesson.date}</td>
-          <td>{lesson.where}</td>
+          <td>{new Date(meeting.startTime).toLocaleString()}</td>
+          <td>{(meeting.online == 1) ? "Online" : "In person"}</td>
+          <td>{meeting.tutorName}</td>
           <td>
-            <img src={lesson.tutorImg} />
-            {lesson.tutorName}
-          </td>
-          <td>
-            <a href={lesson.link}>CLICK HERE TO START YOUR LESSON</a>
+            {/* TODO: insert link or id/password if using Web SDK */}
+            <a href="#">CLICK HERE TO START YOUR LESSON</a>
           </td>
         </tr>
       ))}
@@ -45,18 +57,15 @@ function StudentPage() {
   )
  }
 
- function PastLessons() {
+ function PastMeetings() {
   return(
     <>
-      {PastLessonsTestData.map((lesson, index) => (
+      {pastMeetings.map((meeting, index) => (
         <tr key={index} >
-          <td>{lesson.date}</td>
-          <td>{lesson.where}</td>
-          <td>
-            <img src={lesson.tutorImg} />
-            {lesson.tutorName}
-          </td>
-          <td>{lesson.status}</td>
+          <td>{new Date(meeting.startTime).toLocaleString()}</td>
+          <td>{(meeting.online == 1) ? "Online" : "In person"}</td>
+          <td>{meeting.tutorName}</td>
+          <td>{(meeting.concluded == 1) ? "Completed" : "Other"}</td>
         </tr>
       ))}
     </>
@@ -66,31 +75,37 @@ function StudentPage() {
   return (
     <>
       <div className="dashboard-div-container">
-        <h2>Hello, [username]</h2>
+        {/* TODO: get current user's first name */}
+        <h2>Hello, [first name]</h2>
         <h3>Your upcoming lessons</h3>
         <table className="dashboard-table">
-          <tr>
-            <th>DATE & TIME</th>
-            <th>WHERE</th>
-            <th>TUTOR</th>
-            <th>JOIN VIDEO CALL</th>
-          </tr>
-          <UpcomingLessons />
+          <tbody>
+            <tr>
+              <th>DATE & TIME</th>
+              <th>WHERE</th>
+              <th>TUTOR</th>
+              <th>JOIN VIDEO CALL</th>
+            </tr>
+            <UpcomingMeetings />
+          </tbody>
         </table>
         <div>
+          {/* TODO: on click event */}
           <button className="styled-button">I want to cancel this appointment</button>
         </div>
       </div>
       <div className="dashboard-div-container">
         <h3>Your past lessons</h3>
         <table className="dashboard-table">
-          <tr>
-            <th>DATE & TIME</th>
-            <th>WHERE</th>
-            <th>TUTOR</th>
-            <th>STATUS</th>
-          </tr>
-          <PastLessons />
+          <tbody>
+            <tr>
+              <th>DATE & TIME</th>
+              <th>WHERE</th>
+              <th>TUTOR</th>
+              <th>STATUS</th>
+            </tr>
+            <PastMeetings />
+          </tbody>
         </table>
       </div>
     </>

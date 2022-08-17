@@ -94,44 +94,83 @@ app.post("/login", function (req, res) {
 
 // STUDENT / TUTOR FUNCTIONS
 
-// get meeting details from DB
-app.post("/getmeetings", function (req, res) {
+// get student's meeting details from DB
+app.post("/getstudentmeetings", function (req, res) {
 
-    var upcomingMeetings = [];
-    var pastMeetings = [];
+    var meetingList = [];
 
-    var searchQuery = "SELECT * FROM techconnect.user WHERE admin = 2 or admin = 3"
-    connection.query(searchQuery, async (sqlError, result) => {
-        if (sqlError) {
-            console.log(sqlError);
+    var selectQuery = "SELECT  m.tutorId, m.online, m.meetingId, m.meetingPw, "
+     + "m.startTime, m.concluded, t.firstName, t.lastName FROM techconnect.meetings m "
+     + "INNER JOIN techconnect.user t ON (m.tutorId = t.id) WHERE studentId = ?"
+    connection.query(selectQuery,[
+        req.body.userId
+    ],function(sqlErr, result){
+        if (sqlErr) {
+            console.log(sqlErr);
         }
         else if (result.length > 0) {
-            // for each user, sort them in either student or tutor list
-            result.forEach(function (user, index) {
-                myUser = {};
-                if (user.admin == 2) {
-                    myUser["id"] = user.id;
-                    myUser["name"] = user.firstName + " " + user.lastName;
-                    myUser["admin"] = user.admin;
-                    tutorList.push(myUser);
-                } else if (user.admin == 3) {
-                    myUser["id"] = user.id;
-                    myUser["name"] = user.firstName + " " + user.lastName;
-                    myUser["admin"] = user.admin;
-                    studentList.push(myUser);
-                }
+
+            // get each meeting details and add them to array
+            result.forEach(function (meeting, index) {
+                myMeeting = {};
+                myMeeting["tutorName"] = meeting.firstName + " " + meeting.lastName;
+                myMeeting["online"] = meeting.online;
+                myMeeting["meetingId"] = meeting.meetingId;
+                myMeeting["meetingPw"] = meeting.meetingPw;
+                myMeeting["startTime"] = meeting.startTime;
+                myMeeting["concluded"] = meeting.concluded;
+                meetingList.push(myMeeting);
             })
 
             // console.log("Tutor list: " + JSON.stringify(tutorList));
             // console.log("Student list: " + JSON.stringify(studentList));
 
-            // send both lists to front-end
-            let dataRes = { tutorList, studentList }
-            res.status(200).json(dataRes);
+            // send meeting lists to front-end
+            res.status(200).json(meetingList);
             //console.log("Result: " + JSON.stringify(result));
         }
         else {
-            console.log("Error in retrieving user info");
+            console.log("Error in retrieving meeting info");
+        }
+    })
+})
+
+// get tutor's meeting details from DB
+app.post("/gettutormeetings", function (req, res) {
+
+    var meetingList = [];
+
+    var selectQuery = "SELECT  m.studentId, m.online, m.startUrl, m.startTime, "
+     + "m.concluded, t.firstName, t.lastName FROM techconnect.meetings m "
+     + "INNER JOIN techconnect.user t ON (m.studentId = t.id) WHERE tutorId = ?"
+    connection.query(selectQuery,[
+        req.body.userId
+    ],function(sqlErr, result){
+        if (sqlErr) {
+            console.log(sqlErr);
+        }
+        else if (result.length > 0) {
+
+            // get each meeting details and add them to array
+            result.forEach(function (meeting, index) {
+                myMeeting = {};
+                myMeeting["studentName"] = meeting.firstName + " " + meeting.lastName;
+                myMeeting["online"] = meeting.online;
+                myMeeting["meetingStartUrl"] = meeting.startUrl;
+                myMeeting["startTime"] = meeting.startTime;
+                myMeeting["concluded"] = meeting.concluded;
+                meetingList.push(myMeeting);
+            })
+
+            // console.log("Tutor list: " + JSON.stringify(tutorList));
+            // console.log("Student list: " + JSON.stringify(studentList));
+
+            // send meeting lists to front-end
+            res.status(200).json(meetingList);
+            //console.log("Result: " + JSON.stringify(result));
+        }
+        else {
+            console.log("Error in retrieving meeting info");
         }
     })
 })
