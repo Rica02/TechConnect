@@ -36,7 +36,7 @@ function CreateMeeting() {
     // iterate through student array to display select options
     function getStudentOptions() {
       return studentList.map((student) => {
-        return <option key={student.id} value={student.id}>{student.name}</option>;
+        return <option key={student.id} value={student.id}>{student.firstName} {student.lastName}</option>;
       });
 
     };
@@ -44,7 +44,7 @@ function CreateMeeting() {
     // iterate through tutor array to display select options
     function getTutorOptions() {
       return tutorList.map((tutor) => {
-        return <option key={tutor.id} value={tutor.id}>{tutor.name}</option>;
+        return <option key={tutor.id} value={tutor.id}>{tutor.firstName} {tutor.lastName}</option>;
       });
     };
 
@@ -78,13 +78,13 @@ function CreateMeeting() {
 
       studentList.forEach(student => {
         if (student.id == inputs.studentId) {
-          studentName = student.name;
+          studentName = student.firstName + " " + student.lastName;
         }
       });
 
       tutorList.forEach(tutor => {
         if (tutor.id == inputs.tutorId) {
-          tutorName = tutor.name;
+          tutorName = tutor.firstName + " " + tutor.lastName;
           tutorEmail = tutor.email;
         }
       });

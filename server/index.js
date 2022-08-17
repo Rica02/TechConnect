@@ -176,7 +176,7 @@ app.post("/gettutormeetings", function (req, res) {
 
 // ADMIN FUNCTIONS
 
-// get tutor and student list (to display in admin's "create meeting" page)
+// get tutor and student list (used in admin pages)
 app.post("/getusers", function (req, res) {
 
     var studentList = [];
@@ -193,13 +193,18 @@ app.post("/getusers", function (req, res) {
                 myUser = {};
                 if (user.admin == 2) {
                     myUser["id"] = user.id;
-                    myUser["name"] = user.firstName + " " + user.lastName;
+                    myUser["firstName"] = user.firstName;
+                    myUser["lastName"] = user.lastName;
                     myUser["email"] = user.email;
+                    myUser["phone"] = user.phone;
                     myUser["admin"] = user.admin;
                     tutorList.push(myUser);
                 } else if (user.admin == 3) {
                     myUser["id"] = user.id;
-                    myUser["name"] = user.firstName + " " + user.lastName;
+                    myUser["firstName"] = user.firstName;
+                    myUser["lastName"] = user.lastName;
+                    myUser["email"] = user.email;
+                    myUser["phone"] = user.phone;
                     myUser["admin"] = user.admin;
                     studentList.push(myUser);
                 }
@@ -215,6 +220,44 @@ app.post("/getusers", function (req, res) {
         }
         else {
             console.log("Error in retrieving user info");
+        }
+    })
+})
+
+// get all meeting details from DB
+app.post("/getallmeetings", function (req, res) {
+
+    var meetingList = [];
+
+    var selectQuery = "SELECT m.id, m.studentId, m.tutorId, m.online, m.meetingId, m.startTime, m.concluded FROM techconnect.meetings m "
+    connection.query(selectQuery,[
+        req.body.userId
+    ],function(sqlErr, result){
+        if (sqlErr) {
+            console.log(sqlErr);
+        }
+        else if (result.length > 0) {
+
+            // get each meeting details and add them to array
+            result.forEach(function (meeting, index) {
+                myMeeting = {};
+                myMeeting["id"] = meeting.id;
+                myMeeting["studentId"] = meeting.studentId;
+                myMeeting["tutorId"] = meeting.tutorId;
+                myMeeting["online"] = meeting.online;
+                myMeeting["meetingId"] = meeting.meetingId;
+                myMeeting["startTime"] = meeting.startTime;
+                myMeeting["concluded"] = meeting.concluded;
+                meetingList.push(myMeeting);
+            })
+            //console.log("Meeting list: " + JSON.stringify(meetingList));
+
+            // send meeting lists to front-end
+            res.status(200).json(meetingList);
+            //console.log("Result: " + JSON.stringify(result));
+        }
+        else {
+            console.log("Error in retrieving meeting info");
         }
     })
 })
