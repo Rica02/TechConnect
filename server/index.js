@@ -92,6 +92,89 @@ app.post("/login", function (req, res) {
     })
 })
 
+// STUDENT / TUTOR FUNCTIONS
+
+// get student's meeting details from DB
+app.post("/getstudentmeetings", function (req, res) {
+
+    var meetingList = [];
+
+    var selectQuery = "SELECT  m.tutorId, m.online, m.meetingId, m.meetingPw, "
+     + "m.startTime, m.concluded, t.firstName, t.lastName FROM techconnect.meetings m "
+     + "INNER JOIN techconnect.user t ON (m.tutorId = t.id) WHERE studentId = ?"
+    connection.query(selectQuery,[
+        req.body.userId
+    ],function(sqlErr, result){
+        if (sqlErr) {
+            console.log(sqlErr);
+        }
+        else if (result.length > 0) {
+
+            // get each meeting details and add them to array
+            result.forEach(function (meeting, index) {
+                myMeeting = {};
+                myMeeting["tutorName"] = meeting.firstName + " " + meeting.lastName;
+                myMeeting["online"] = meeting.online;
+                myMeeting["meetingId"] = meeting.meetingId;
+                myMeeting["meetingPw"] = meeting.meetingPw;
+                myMeeting["startTime"] = meeting.startTime;
+                myMeeting["concluded"] = meeting.concluded;
+                meetingList.push(myMeeting);
+            })
+
+            // console.log("Tutor list: " + JSON.stringify(tutorList));
+            // console.log("Student list: " + JSON.stringify(studentList));
+
+            // send meeting lists to front-end
+            res.status(200).json(meetingList);
+            //console.log("Result: " + JSON.stringify(result));
+        }
+        else {
+            console.log("Error in retrieving meeting info");
+        }
+    })
+})
+
+// get tutor's meeting details from DB
+app.post("/gettutormeetings", function (req, res) {
+
+    var meetingList = [];
+
+    var selectQuery = "SELECT  m.studentId, m.online, m.startUrl, m.startTime, "
+     + "m.concluded, t.firstName, t.lastName FROM techconnect.meetings m "
+     + "INNER JOIN techconnect.user t ON (m.studentId = t.id) WHERE tutorId = ?"
+    connection.query(selectQuery,[
+        req.body.userId
+    ],function(sqlErr, result){
+        if (sqlErr) {
+            console.log(sqlErr);
+        }
+        else if (result.length > 0) {
+
+            // get each meeting details and add them to array
+            result.forEach(function (meeting, index) {
+                myMeeting = {};
+                myMeeting["studentName"] = meeting.firstName + " " + meeting.lastName;
+                myMeeting["online"] = meeting.online;
+                myMeeting["meetingStartUrl"] = meeting.startUrl;
+                myMeeting["startTime"] = meeting.startTime;
+                myMeeting["concluded"] = meeting.concluded;
+                meetingList.push(myMeeting);
+            })
+
+            // console.log("Tutor list: " + JSON.stringify(tutorList));
+            // console.log("Student list: " + JSON.stringify(studentList));
+
+            // send meeting lists to front-end
+            res.status(200).json(meetingList);
+            //console.log("Result: " + JSON.stringify(result));
+        }
+        else {
+            console.log("Error in retrieving meeting info");
+        }
+    })
+})
+
 // ADMIN FUNCTIONS
 
 // get tutor and student list (to display in admin's "create meeting" page)
@@ -137,6 +220,29 @@ app.post("/getusers", function (req, res) {
 })
 
 
+// upload in-person meeting details to DB
+app.post("/inpersonmeeting", async function (req, res) {
+
+    var registerQuery = "INSERT INTO techconnect.meetings (studentId, tutorId, online, startTime, concluded) VALUES (?,?,?,?,?)"
+    connection.query(registerQuery,[
+        req.body.student_id,
+        req.body.tutor_id,
+        false,
+        req.body.start_time,
+        false
+    ],function(sqlErr, result){
+        if(sqlErr){
+            console.log(sqlErr);
+        } else {
+            //console.log(req);
+            //console.log(result);
+            console.log("In-person meeting details successfully uploaded to DB!");
+            res.status(200).json({status: "OK"});
+        }
+    })
+})
+
+
 // ZOOM API
 
 // get email of admin from env
@@ -150,7 +256,7 @@ const payload = {
 const token = jwt.sign(payload, zoomConfig.APISecret);
 
 // use userinfo from the form and make a post request to /userinfo
-app.post('/meeting', (req, res) => {
+app.post('/zoommeeting', (req, res) => {
   //console.log("IN BACKEND: Topic = " + req.body.topic + " Start date = " + req.body.start_time);
   var options = {
     method: "POST",
@@ -181,35 +287,32 @@ app.post('/meeting', (req, res) => {
     // use request-promise module's .then() method to make request calls.
     rp(options)
         .then(function (response) {
-        //printing the response on the console
-        console.log('Response: ', response);
+            //printing the response on the console
+            console.log('Response: ', response);
 
-        let dataRes = {
-            join_url: response.join_url,
-        };
+            // upload meeting details to DB
+            var registerQuery = "INSERT INTO techconnect.meetings (studentId, tutorId, online, startUrl, meetingId, meetingPw, startTime, concluded) VALUES (?,?,?,?,?,?,?,?)"
+            connection.query(registerQuery,[
+                req.body.student_id,
+                req.body.tutor_id,
+                true,
+                response.start_url,
+                response.id,
+                response.password,
+                response.start_time,
+                false
+            ],function(sqlErr, result){
+                if(sqlErr){
+                    console.log(sqlErr);
+                } else {
+                    //console.log(req);
+                    //console.log(result);
+                    console.log("Zoom meeting details successfully uploaded to DB!");
+                }
+            })
 
-              // upload meeting details to DB
-        var registerQuery = "INSERT INTO techconnect.meetings (studentId, tutorId, startUrl, meetingId, meetingPw, startTime, concluded) VALUES (?,?,?,?,?,?,?)"
-        connection.query(registerQuery,[
-            req.body.student_id,
-            req.body.tutor_id,
-            response.start_url,
-            response.id,
-            response.password,
-            response.start_time,
-            false
-        ],function(sqlErr, result){
-            if(sqlErr){
-                console.log(sqlErr);
-            } else {
-                //console.log(req);
-                //console.log(result);
-                console.log("Meeting details successfully uploaded to DB!");
-            }
-        })
-
-        //res.send("Create meeting result: " + JSON.stringify(response));
-        res.status(200).json(dataRes);
+            //res.send("Create meeting result: " + JSON.stringify(response));
+            res.status(200).json({status: "OK"});
         })
         .catch(function (err) {
             // API call failed...
