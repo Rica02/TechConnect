@@ -75,5 +75,16 @@ const GlobalStyles = createGlobalStyle`
         margin-right: 15px;
     }
   }
+
+  .styled-link {
+    font-weight: bold;
+    color: ${({theme}) => theme.colorMain.highlightRed};
+    text-decoration: none;
+
+    &:hover {
+      color: ${({theme}) => theme.colorMain.highlightRed};
+      text-decoration: underline;
+    }
+  }
 `
 export default GlobalStyles
