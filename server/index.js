@@ -99,7 +99,7 @@ app.post("/getstudentmeetings", function (req, res) {
 
     var meetingList = [];
 
-    var selectQuery = "SELECT  m.tutorId, m.online, m.meetingId, m.meetingPw, "
+    var selectQuery = "SELECT  m.tutorId, m.online, m.meetingId, m.joinUrl, m.meetingPw, "
      + "m.startTime, m.concluded, t.firstName, t.lastName FROM techconnect.meetings m "
      + "INNER JOIN techconnect.user t ON (m.tutorId = t.id) WHERE studentId = ?"
     connection.query(selectQuery,[
@@ -116,14 +116,14 @@ app.post("/getstudentmeetings", function (req, res) {
                 myMeeting["tutorName"] = meeting.firstName + " " + meeting.lastName;
                 myMeeting["online"] = meeting.online;
                 myMeeting["meetingId"] = meeting.meetingId;
+                myMeeting["joinUrl"] = meeting.joinUrl;
                 myMeeting["meetingPw"] = meeting.meetingPw;
                 myMeeting["startTime"] = meeting.startTime;
                 myMeeting["concluded"] = meeting.concluded;
                 meetingList.push(myMeeting);
             })
 
-            // console.log("Tutor list: " + JSON.stringify(tutorList));
-            // console.log("Student list: " + JSON.stringify(studentList));
+            //console.log("Student meeting list: " + JSON.stringify(meetingList));
 
             // send meeting lists to front-end
             res.status(200).json(meetingList);
@@ -162,8 +162,7 @@ app.post("/gettutormeetings", function (req, res) {
                 meetingList.push(myMeeting);
             })
 
-            // console.log("Tutor list: " + JSON.stringify(tutorList));
-            // console.log("Student list: " + JSON.stringify(studentList));
+            // console.log("Tutor meeting list: " + JSON.stringify(meetingList));
 
             // send meeting lists to front-end
             res.status(200).json(meetingList);
@@ -195,6 +194,7 @@ app.post("/getusers", function (req, res) {
                 if (user.admin == 2) {
                     myUser["id"] = user.id;
                     myUser["name"] = user.firstName + " " + user.lastName;
+                    myUser["email"] = user.email;
                     myUser["admin"] = user.admin;
                     tutorList.push(myUser);
                 } else if (user.admin == 3) {
@@ -267,11 +267,21 @@ app.post('/zoommeeting', (req, res) => {
       start_time: req.body.start_time,
       timezone: "Australia/Sydney",
       type: 2,                   // 1 = instant meeting, 2 = scheduled meeting
-      default_password: false,
-      duration: 40,              // 40 min is the max meeting time allowed with a basic free Zoom account
+      duration: 40,              // 40 min is the max meeting time allowed with a basic, unlicensed free Zoom account
       settings: {
         host_video: "true",
         participant_video: "true",
+
+        // IMPORTANT:
+        // In order for an admin (the account creating the Zoom meeting) to designate the tutor as
+        // “alternative host” so they are able to start the meeting, both accounts need to have paid Licenses.
+        // I am currently using free, unlicensed Basic accounts, therefore at this time meetings can only be
+        // started by the admin, and the following line of code will not work.
+
+        // More on alternative host: https://support.zoom.us/hc/en-us/articles/208220166-Alternative-host
+        // More on scheduling privileges: https://support.zoom.us/hc/en-us/articles/201362803-Scheduling-privilege
+
+        //alternative_hosts: req.body.tutor_email,
       },
     },
     auth: {
@@ -291,12 +301,13 @@ app.post('/zoommeeting', (req, res) => {
             console.log('Response: ', response);
 
             // upload meeting details to DB
-            var registerQuery = "INSERT INTO techconnect.meetings (studentId, tutorId, online, startUrl, meetingId, meetingPw, startTime, concluded) VALUES (?,?,?,?,?,?,?,?)"
+            var registerQuery = "INSERT INTO techconnect.meetings (studentId, tutorId, online, startUrl, joinUrl, meetingId, meetingPw, startTime, concluded) VALUES (?,?,?,?,?,?,?,?,?)"
             connection.query(registerQuery,[
                 req.body.student_id,
                 req.body.tutor_id,
                 true,
                 response.start_url,
+                response.join_url,
                 response.id,
                 response.password,
                 response.start_time,

@@ -71,9 +71,10 @@ function CreateMeeting() {
       event.preventDefault();
       console.log("Creating meeting.");
 
-      // get student and tutor names
+      // get student name and tutor name and email
       var studentName = "";
       var tutorName = "";
+      var tutorEmail = ""
 
       studentList.forEach(student => {
         if (student.id == inputs.studentId) {
@@ -84,6 +85,7 @@ function CreateMeeting() {
       tutorList.forEach(tutor => {
         if (tutor.id == inputs.tutorId) {
           tutorName = tutor.name;
+          tutorEmail = tutor.email;
         }
       });
 
@@ -97,6 +99,7 @@ function CreateMeeting() {
           topic: "Virtual lesson with student " + studentName + " and tutor " + tutorName,
           start_time: inputs.dateTime + ":00",  // match format required by Zoom API
           student_id: inputs.studentId,
+          tutor_email: tutorEmail,  // allows tutor to start the meeting desping not being admin (WORKS ONLY WITH LICENSED ACCOUNTS)
           tutor_id: inputs.tutorId
         }
 

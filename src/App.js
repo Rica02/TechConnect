@@ -27,7 +27,6 @@ import TutorPage from "./pages/TutorPage";
 import CreateMeeting from "./pages/CreateMeeting";
 import AddNews from "./pages/AddNews";
 import ForgotPassword from "./pages/Signin/ForgotPassword";
-import DashboardTest from "./pages/ZoomTest/DashboardTest";
 
 function App() {
 
@@ -63,8 +62,6 @@ function App() {
           <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route path="/addnews" element={<AddNews />} />
           <Route path="*" element={<ErrorPage />} />  {/* Render error page if path does not match */}
-
-          <Route path="/dashboardtest" element={<DashboardTest />} />   {/* TEST */}
         </Routes>
         <Footer />
       </Router>
