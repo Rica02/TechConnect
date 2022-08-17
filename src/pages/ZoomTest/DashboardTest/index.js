@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { DashboardContainer, StyledButton } from "../../PagesStyle";
-import { Table } from "./DashboardStyle";
+import { Table } from "./DashboardTestStyle";
 import imgTest from "../../../assets/images/tutor-1.jpg";
 import JoinZoom from "../JoinZoom";
 
-function Dashboard() {
+function DashboardTest() {
   // To determine if logged in user is tutor or not
   const [ isTutor, setIsTutor ] = useState(false);
 
@@ -71,7 +70,7 @@ function Dashboard() {
 
   return (
     <>
-      <DashboardContainer>
+      <div className="dashboard-div-container">
         <h2>Hello, [username]</h2>
         <h3>Your upcoming lessons</h3>
         <Table>
@@ -84,10 +83,10 @@ function Dashboard() {
           <UpcomingLessons />
         </Table>
         <div>
-          <StyledButton>I want to cancel this appointment</StyledButton>
+          <button className="styled-button">I want to cancel this appointment</button>
         </div>
-      </DashboardContainer>
-      <DashboardContainer>
+      </div>
+      <div className="dashboard-div-container">
         <h3>Your past lessons</h3>
         <Table>
           <tr>
@@ -98,9 +97,9 @@ function Dashboard() {
           </tr>
           <PastLessons />
         </Table>
-      </DashboardContainer>
+      </div>
     </>
   );
 }
 
-export default Dashboard;
+export default DashboardTest;

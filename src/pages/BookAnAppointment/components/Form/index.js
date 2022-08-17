@@ -1,6 +1,5 @@
 import React from "react";
 import { FormContainer, FormItemContainer, FormNameContainer } from "./FormStyle";
-import { StyledButton, StyledContainer } from "../../../PagesStyle";
 import axios from "axios"
 
 export default function Form() {
@@ -41,8 +40,7 @@ export default function Form() {
     }
     //console.log(formInput.firstname + formInput.lastname + formInput.email, formInput.password);
     return (
-
-        <StyledContainer>
+        <div className="public-div-container">
             <FormContainer>
                 <FormNameContainer>
                     <FormItemContainer>
@@ -81,7 +79,7 @@ export default function Form() {
                     <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Tell us more about yourself"></textarea>
                 </FormItemContainer>
             </FormContainer>
-            <StyledButton onClick={(e) => Register(e)}> SEND</StyledButton>
-        </StyledContainer>
+            <button className="styled-button" onClick={(e) => Register(e)}> SEND</button>
+        </div>
     )
 }

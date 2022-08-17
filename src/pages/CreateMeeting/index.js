@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { DashboardContainer, StyledButton } from "../../PagesStyle";
-import { ButtonContainer, Form } from "./AdminStyle";
+import { ButtonContainer, Form } from "./CreateMeetingStyle";
 import axios from "axios";
 
-function Admin() {
+function CreateMeeting() {
     const [inputs, setInputs] = useState({});
     const [studentList, setStudentList] = useState([]);
     const [tutorList, setTutorList] = useState([]);
@@ -103,7 +102,7 @@ function Admin() {
 
   return (
     <>
-      <DashboardContainer>
+      <div className="dashboard-div-container">
         <h2>Hello admin</h2>
         <h3>Create a new meeting</h3>
         <Form onSubmit={handleSubmit} >
@@ -135,12 +134,12 @@ function Admin() {
                 onChange={handleChange}
             />
             <ButtonContainer>
-                <StyledButton type='submit'>CONFIRM</StyledButton>
+                <button className="styled-button" type='submit'>CONFIRM</button>
             </ButtonContainer>
         </Form>
-      </DashboardContainer>
+      </div>
     </>
   );
 }
 
-export default Admin;
+export default CreateMeeting;

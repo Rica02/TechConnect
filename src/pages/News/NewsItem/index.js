@@ -1,12 +1,11 @@
 import React from "react";
-import { StyledContainer } from "../../PagesStyle";
 import { NewsContentContainer, NewsTitleContainer } from "./NewsItemStyle";
 import ImgPlaceholder from "../../../assets/images/our-services-1.jpg";
 
 export default function NewsItem() {
     return (
         // TODO: make these dynamic
-        <StyledContainer>
+        <div className="public-div-container">
             <NewsTitleContainer>
                 <h2>Post title</h2>
                 <p>Date posted: dd/mm/yyyy</p>
@@ -20,6 +19,6 @@ export default function NewsItem() {
                     gravida lectus sit amet massa pellentesque rhoncus.</p>
                 <img src={ImgPlaceholder} alt="news banner" />
             </NewsContentContainer>
-        </StyledContainer>
+        </div>
     )
 }

@@ -2,7 +2,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header";
 import headerBanner from "../../assets/images/become-a-tutor-banner.jpg";
-import { StyledContainer, StyledButton } from "../PagesStyle";
 import { LowerContainer, UpperContainer } from "./BecomeATutorStyle";
 import { BecomeATutorArticle } from "../ArticleData";
 import BecomeTutorImg from "../../assets/images/become-a-tutor-1.jpg";
@@ -16,10 +15,10 @@ function BecomeATutor() {
     return (
         <>
             <Header headerTitle={"Become a tutor"} headerBanner={headerBanner} />
-            <StyledContainer bgColor={({ theme }) => theme.colorMain.backgroundLight} >
+            <div className="public-div-container" bgColor={({ theme }) => theme.colorMain.backgroundLight} >
                 <UpperContainer>
                     <p>{FirstArticle}</p>
-                    <StyledButton onClick={ () => navigate("/bookanappointment") }>JOIN OUR TEAM</StyledButton>
+                    <button className="styled-button" onClick={ () => navigate("/bookanappointment") }>JOIN OUR TEAM</button>
                 </UpperContainer>
                 <LowerContainer>
                     <div>
@@ -28,7 +27,7 @@ function BecomeATutor() {
                     </div>
                     <img src={BecomeTutorImg} alt="tutoring example" />
                 </LowerContainer>
-            </StyledContainer>
+            </div>
 
         </>
     );

@@ -8,7 +8,7 @@ export const NavbarContainer = styled.nav`
     display: flex;
     flex-direction: column;
 
-    @media (min-width: 800px) {
+    @media (min-width: 1100px) {
         height: 80px;
     }
 `;
@@ -48,7 +48,7 @@ export const NavbarLink = styled(Link)`
     margin: 10px;
 
     // only show links when screen is bigger than 800px
-    @media (max-width: 800px) {
+    @media (max-width: 1100px) {
         display: none;
     }
 `;
@@ -75,12 +75,12 @@ export const OpenLinksButton = styled.button`
     height: 50px;
     background: none;
     border: none;
-    color: white;
+    color: ${ ({ theme }) => theme.colorMain.highlightMain };
     font-size: 45px;
     cursor: pointer;
 
     // only show button when screen is smaller than 800px
-    @media (min-width: 800px) {
+    @media (min-width: 1100px) {
         display: none;
     }
 `;
@@ -91,10 +91,11 @@ export const NavbarExtendedContainer = styled.div`
     align-items: center;
 
     // only show extended menu when screen is smaller than 800px
-    @media (min-width: 800px) {
+    @media (min-width: 1100px) {
         display: none;
     }
 `;
+
 export const NavbarSignContainer = styled.div`
     background-color: ${ ({ theme }) => theme.colorMain.backgroundSignIn };;
     color: ${ ({ theme }) => theme.colorMain.highlightMain };
@@ -102,31 +103,34 @@ export const NavbarSignContainer = styled.div`
     display:grid;
     align-items: center;
     z-index: 1;
-    @media (max-width: 800px) {
+
+    @media (max-width: 1100px) {
         display: none;
     }
 `;
 
 export const NavbarSignContainerExtended = styled.div`
-
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    @media (min-width: 800px) {
+    @media (min-width: 1100px) {
         display: none;
     }
 `;
+
 export const Signwrap=styled.div`
     display: grid;
     min-width: 150px;
 `;
+
 export const SignButtonWrap = styled.div`
     display: flex;
 `;
 export const LoginChange = styled.div`
      display:  ${({showlogin}) => (showlogin ?'flex':'none')};
 `;
+
 export const NavbarP= styled.p`
     background-color: ${ ({ theme }) => theme.colorMain.backgroundSignIn };;
     border: none;
@@ -136,6 +140,7 @@ export const NavbarP= styled.p`
     text-decoration: none;
     margin: 10px;
 `;
+
 export const NavbarButton= styled.button`
     background-color: ${ ({ theme }) => theme.colorMain.backgroundSignIn };;
     display: flex;
@@ -145,5 +150,4 @@ export const NavbarButton= styled.button`
     font-weight: bold;
     text-decoration: none;
     margin-top: 10px;
-
 `;
