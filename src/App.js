@@ -15,7 +15,7 @@ import ErrorPage from "./pages/ErrorPage";
 import Signup from "./pages/Signin/Signup";
 import ForgotPassword from "./pages/Signin/ForgotPassword";
 import AddNews from "./pages/AddNews";
-import DashboardTest from "./pages/PrivatePages/DashboardTest";
+import DashboardTest from "./pages/ZoomTest/DashboardTest";
 import TeacherPage from "./pages/TeacherPage";
 import { useState } from "react";
 import { ServerProvider } from "./ServerContext";
