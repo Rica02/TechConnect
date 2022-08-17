@@ -23,11 +23,10 @@ import ChangeAvailability from "./pages/ChangeAvailability/intex";
 import AccountDetails from "./pages/AccountDetails";
 import AdminPage from "./pages/AdminPage";
 import StudentPage from "./pages/StudentPage";
-import TeacherPage from "./pages/TeacherPage";
+import TutorPage from "./pages/TutorPage";
 import CreateMeeting from "./pages/CreateMeeting";
 import AddNews from "./pages/AddNews";
 import ForgotPassword from "./pages/Signin/ForgotPassword";
-import DashboardTest from "./pages/ZoomTest/DashboardTest";
 
 function App() {
 
@@ -42,7 +41,7 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route path="/teacherpage" element={<PrivateRoute><TeacherPage/></PrivateRoute>} />
+          <Route path="/tutorpage" element={<PrivateRoute><TutorPage/></PrivateRoute>} />
           <Route path="/studentPage" element={<PrivateRoute><StudentPage/></PrivateRoute>} />
           <Route path="/adminPage" element={<PrivateRoute><AdminPage/></PrivateRoute>} />
           <Route path="/accountDetails" element={<PrivateRoute><AccountDetails/></PrivateRoute>} />
@@ -63,8 +62,6 @@ function App() {
           <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route path="/addnews" element={<AddNews />} />
           <Route path="*" element={<ErrorPage />} />  {/* Render error page if path does not match */}
-
-          <Route path="/dashboardtest" element={<DashboardTest />} />   {/* TEST */}
         </Routes>
         <Footer />
       </Router>

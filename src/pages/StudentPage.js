@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+// import JoinZoom from "../JoinZoom";
 
 function StudentPage() {
 
@@ -25,9 +26,9 @@ function StudentPage() {
             // sort meetings to corresponding arrays
             allMeetings.forEach(function (meeting, index) {
               if(meeting.concluded) {
-                setPastMeetings([...pastMeetings, meeting]);
+                setPastMeetings(values => [...values, meeting]);
               } else if(!meeting.concluded) {
-                setUpcomingMeetings([...upcomingMeetings, meeting]);
+                setUpcomingMeetings(values => [...values, meeting]);
               }
             })
 
@@ -48,8 +49,9 @@ function StudentPage() {
           <td>{(meeting.online == 1) ? "Online" : "In person"}</td>
           <td>{meeting.tutorName}</td>
           <td>
-            {/* TODO: insert link or id/password if using Web SDK */}
-            <a href="#">CLICK HERE TO START YOUR LESSON</a>
+            <a className="styled-link" href={meeting.joinUrl}>CLICK HERE TO START YOUR LESSON</a>
+            {/* TODO: fix Web SDK issue (overriding CSS) */}
+            {/* <JoinZoom isTutor={false} /> */}
           </td>
         </tr>
       ))}
