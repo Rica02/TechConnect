@@ -13,6 +13,31 @@ const zoomConfig = require('./config/zoom.js');
 const rp = require('request-promise');
 const app = express();
 
+app.use(cors());
+app.use(express.json());
+// stripe-checkout
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+app.use(express.static("public"));
+
+app.post("/pay", async (req, res) => {
+    const { items } = req.body;
+  
+    // Create a PaymentIntent with the order amount and currency
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: 0.1,
+      currency: "aud",
+      automatic_payment_methods: {
+        enabled: true,
+      },
+    });
+  
+    res.send({
+      clientSecret: paymentIntent.client_secret,
+    });
+  });
+
+//---------------stripe-checkout EDN
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(express.json())
@@ -53,7 +78,7 @@ app.post("/register", async function (req, res) {
     var registerQuery = "INSERT INTO techconnect.user (email,password,phone,admin,firstName,lastName) VALUES (?,?,?,?,?,?)"
     console.log(registerQuery);
 
-    connection.query(registerQuery, [requestedEmail, requestedPW2, requestedPhone, userType,requestedFName,requestedLName], function (sqlErr, result) {
+    connection.query(registerQuery, [requestedEmail, requestedPW2, requestedPhone, userType, requestedFName, requestedLName], function (sqlErr, result) {
         if (sqlErr) {
             console.log(sqlErr);
         } else {
@@ -210,3 +235,22 @@ app.listen(3007, function () {
 })
 
 //connection.end()
+//-------serverContext--------------
+
+app.post("/api/getUser", function (req, res) {
+
+    console.log("get LOGIN FROM BACKEND");
+    var email = req.body.email
+    var searchQuery = "SELECT * FROM techconnect.user WHERE email = ?"
+    connection.query(searchQuery, [email], async (sqlError, result) => {
+        if (sqlError) {
+            console.log(sqlError);
+        }
+        else if (result.length > 0) {
+            res.send(result)
+        }
+        else {
+            console.log("no combination found");
+        }
+    })
+})

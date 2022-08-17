@@ -1,55 +1,84 @@
-import React, { useState } from 'react'
-import { DeleteButton, EditButton, Container, Title, RWrap, LWrap, WrapContainer, LableContainer, Lable, Divider, Data, Column, LableContainer2,ViewLink,LinkWrap } from './AccountDetailsStyle'
+import React, { useState, Fragment } from 'react'
+import { DeleteButton, EditButton, Container, Title, RWrap, LWrap, WrapContainer, LableContainer, Lable, Divider, Data, Column, LableContainer2, ViewLink, LinkWrap, EditCardWrap } from './AccountDetailsStyle'
 import { ImBin } from "react-icons/im";
 import { FaRegEdit } from "react-icons/fa";
+import { useDB } from '../../ServerContext';
+import ViewAccount from './components/ViewAccount';
+import EditAccount from './components/EditAccount';
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import EditCrads from './components/EditCrads';
 function AccountDetails() {
 
-  const AccountData = [
-    {
-      id: '123',
-      FirstName: "FirstName data",
-      LastName: "LastName data",
-      Email: "Online data",
-      Gender: "x",
-      DOB: "dd/mm/yyyy",
-      Address: "#"
-    }
-  ];
+  const { userInf } = useDB();
+  const [editdContactId, setEditContactId] = useState(null);
+  const [editCard, seteditCard] = useState(false);
+  //Edit Account buttion Click
+  const stripePromise = loadStripe("pk_test_51LXPSCGr0Ica2zDT8QjrYyebIyWilHxB9kVafjZD2s09q1Gx1UO5ZzIDj53EBVskto44YBrHhGQ6p90PN0oxa2FR00Pz0gxFic");
+  const [editdAccountData, seteEitdAccountData] = useState({
+    id: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    gender: "",
+    dob: "",
+    address: "",
+  })
+  const accountEditClick = (e, contact) => {
+    e.preventDefault();
+    console.log('click')
+    console.log('userInf.id', userInf.id)
+    setEditContactId(contact.id)
+    const formValues = {
+      id: contact.id,
+      firstName: contact.firstName,
+      lastName: contact.lastName,
+      email: contact.email,
+      phone: contact.phone,
+      gender: contact.gender,
+      dob: contact.dob,
+      address: contact.address,
+    };
+    seteEitdAccountData(formValues);
+  }
+  const editAccountChange = (e) => {
+    e.preventDefault();
+    var value = e.target.value
+    seteEitdAccountData({ ...editdAccountData, [e.target.name]: value })
+  }
+  const handleCancelClick = () => {
+    setEditContactId(null);
+  };
+
+  const cardEditClick = (e) => {
+    e.preventDefault();
+    seteditCard(true);
+  }
+  const cardCancelClick = (e) => {
+    e.preventDefault();
+    seteditCard(false);
+  }
   const PaymentData = [
     {
       PaymentMethod: "Visa ending in 0000",
       Expirydate: "mm/yy",
     }
   ];
-  const [contacts, setContacts] = useState(AccountData)
+
   const [payments, setPayments] = useState(PaymentData)
-  console.log(contacts)
+
   return (
     <>
       <Container>
-        <WrapContainer>
-          <RWrap>
-            <Title>Account details</Title>
-          </RWrap>
-          <LWrap>
-            <EditButton><FaRegEdit fontSize="1.5rem"/>Edit account</EditButton>
-            <DeleteButton><ImBin fontSize="1.5rem"/>Delete account</DeleteButton>
-          </LWrap>
-        </WrapContainer>
-        <WrapContainer>
-          <LableContainer>
-            {contacts.map((contact) => (<>
-              <Column><Lable >First Name :</Lable><Data >{contact.FirstName}</Data></Column>
-              <Column><Lable >Last Name :</Lable><Data>{contact.LastName}</Data></Column>
-              <Column> <Lable>Email :</Lable><Data>{contact.Email}</Data></Column>
-              <Column> <Lable>Gender :</Lable><Data>{contact.Gender}</Data></Column>
-              <Column> <Lable>DOB :</Lable><Data>{contact.DOB}</Data></Column>
-              <Column> <Lable>Address :</Lable><Data>{contact.Address}</Data></Column>
-              <Column> <Lable>Address :</Lable><Data>{contact.Address}</Data></Column>
-              <Column> <Lable>Password :</Lable><Data>{contact.Password}</Data></Column>
-            </>))}
-          </LableContainer>
-        </WrapContainer>
+        {React.Children.toArray(
+          userInf.map((contact) => {
+            return <>
+              {editdContactId === contact.id ? <><EditAccount editdAccountData={editdAccountData} editAccountChange={editAccountChange} handleCancelClick={handleCancelClick} /></> :
+                <ViewAccount contact={contact} accountEditClick={accountEditClick} />}
+            </>
+          })
+        )}
       </Container>
       <Divider><label></label></Divider>
       <Container>
@@ -58,17 +87,28 @@ function AccountDetails() {
             <Title>Payment details</Title>
           </RWrap>
           <LWrap>
-            <EditButton><FaRegEdit fontSize="1.5rem"/>Edit card details</EditButton>
-            <DeleteButton><ImBin fontSize="1.5rem"/>Delete card details</DeleteButton>
+            <EditButton onClick={(e) => cardEditClick(e)}><FaRegEdit fontSize="1.5rem" />Edit card details</EditButton>
+            <DeleteButton><ImBin fontSize="1.5rem" />Delete card details</DeleteButton>
           </LWrap>
         </WrapContainer>
         <WrapContainer >
           <LableContainer2 >
-            {payments.map((payment) => (<>
-              <Column><Lable >Payment Method:</Lable><Data >{payment.PaymentMethod}</Data></Column>
-              <Column><Lable >Expiry date:</Lable><Data>{payment.Expirydate}</Data></Column>
-              <LinkWrap><ViewLink to="/accountDetails">View invoices of past transactions</ViewLink></LinkWrap>
-            </>))}
+            {editCard ? <>
+              <EditCardWrap>
+                <Elements stripe={stripePromise}>
+                <EditCrads />
+                </Elements>
+                <EditButton onClick={cardCancelClick}><FaRegEdit fontSize="1.5rem" />Cancel</EditButton>
+                </EditCardWrap>
+            </> : <>
+              {React.Children.toArray(
+                payments.map((payment) => (<>
+                  <Column><Lable >Payment Method:</Lable><Data >{payment.PaymentMethod}</Data></Column>
+                  <Column><Lable >Expiry date:</Lable><Data>{payment.Expirydate}</Data></Column>
+                  <LinkWrap><ViewLink to="/accountDetails">View invoices of past transactions</ViewLink></LinkWrap>
+                </>))
+              )}</>}
+
           </LableContainer2>
         </WrapContainer>
       </Container>

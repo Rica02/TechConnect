@@ -1,4 +1,5 @@
-import React, { useContext, useState, useEffect } from "react"
+import React, { useContext, useState, useEffect } from "react";
+import axios from "axios";
 const ServerContext = React.createContext()
 
 export function useDB() {
@@ -32,7 +33,16 @@ export function ServerProvider({ children }) {
     userget()
     setCurrentUser(auth)
   }, [])
+//----------DB-------------
 
+//Get Account Details
+const [userInf,setUserInf]=useState([]);
+useEffect(()=>{
+  var loaclEmail=localStorage.getItem('email');
+   axios.post("http://localhost:3007/api/getUser",{email:loaclEmail}).then((data)=>{
+    setUserInf(data.data)
+});
+},[])
 
   const value = {
     auth,
@@ -44,6 +54,7 @@ export function ServerProvider({ children }) {
     userSet,
     SetloginState,
     logout,
+    userInf,//Get Account Details
   }
   return (
     <ServerContext.Provider value={value}>
