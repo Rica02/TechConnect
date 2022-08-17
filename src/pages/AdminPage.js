@@ -1,62 +1,29 @@
 import React from "react";
-import imgTest from "../assets/images/tutor-1.jpg";
 
 function AdminPage() {
 
-  // TODO: Replace UpcomingLessons() and PastLessons() functions to get data from database
+  // TODO: get users from DB
 
-  const UpcomingLessonsTestData = [
+  const UsersTestData = [
     {
-      date: "Day, dd Month yyyy at hh:mm",
-      where: "Online",
-      tutorImg: imgTest,
-      tutorName: "Tutor name",
-      link: "#"
+      firstName: "First name",
+      lastName: "Last name",
+      email: "Online",
+      phone: "123456789",
+      accountType: "Student/Tutor",
     }
   ];
 
-  const PastLessonsTestData = [
-    {
-      date: "Day, dd Month yyyy at hh:mm",
-      where: "Online",
-      tutorImg: imgTest,
-      tutorName: "Tutor name",
-      status: "COMPLETED"
-    }
-  ];
-
- function UpcomingLessons() {
+ function Users() {
   return(
     <>
-      {UpcomingLessonsTestData.map((lesson, index) => (
+      {UsersTestData.map((user, index) => (
         <tr key={index}>
-          <td>{lesson.date}</td>
-          <td>{lesson.where}</td>
-          <td>
-            <img src={lesson.tutorImg} />
-            {lesson.tutorName}
-          </td>
-          <td>
-            <a href={lesson.link}>CLICK HERE TO START YOUR LESSON</a>
-          </td>
-        </tr>
-      ))}
-    </>
-  )
- }
-
- function PastLessons() {
-  return(
-    <>
-      {PastLessonsTestData.map((lesson, index) => (
-        <tr key={index} >
-          <td>{lesson.date}</td>
-          <td>{lesson.where}</td>
-          <td>
-            <img src={lesson.tutorImg} />
-            {lesson.tutorName}
-          </td>
-          <td>{lesson.status}</td>
+          <td>{user.firstName}</td>
+          <td>{user.lastName}</td>
+          <td>{user.email}</td>
+          <td>{user.phone}</td>
+          <td>{user.accountType}</td>
         </tr>
       ))}
     </>
@@ -66,31 +33,17 @@ function AdminPage() {
   return (
     <>
       <div className="dashboard-div-container">
-        <h2>Hello, [username]</h2>
-        <h3>Your upcoming lessons</h3>
+        <h2>Admin dashboard</h2>
+        <h3>List of users</h3>
         <table className="dashboard-table">
           <tr>
-            <th>DATE & TIME</th>
-            <th>WHERE</th>
-            <th>TUTOR</th>
-            <th>JOIN VIDEO CALL</th>
+            <th>FIRST NAME</th>
+            <th>LAST NAME</th>
+            <th>EMAIL</th>
+            <th>PHONE</th>
+            <th>ACCOUNT TYPE</th>
           </tr>
-          <UpcomingLessons />
-        </table>
-        <div>
-          <button className="styled-button">I want to cancel this appointment</button>
-        </div>
-      </div>
-      <div className="dashboard-div-container">
-        <h3>Your past lessons</h3>
-        <table className="dashboard-table">
-          <tr>
-            <th>DATE & TIME</th>
-            <th>WHERE</th>
-            <th>TUTOR</th>
-            <th>STATUS</th>
-          </tr>
-          <PastLessons />
+          <Users />
         </table>
       </div>
     </>

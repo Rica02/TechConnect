@@ -1,7 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState } from "react";
+import { ServerProvider } from "./ServerContext";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./pages/ThemeColors";
 import GlobalStyles from "./pages/GlobalStyles";
+import PrivateRoute from "./PrivateRoute";
+import Dashboard from "./pages/Dashboard";
 import Navbar from "./pages/Navbar";
 import Signin from "./pages/Signin";
 import Footer from "./pages/Footer";
@@ -12,22 +16,18 @@ import News from "./pages/News";
 import BecomeATutor from "./pages/BecomeATutor";
 import ContactUs from "./pages/ContactUs";
 import BookAnAppointment from "./pages/BookAnAppointment";
-import ErrorPage from "./pages/ErrorPage";
 import Signup from "./pages/Signin/Signup";
-import ForgotPassword from "./pages/Signin/ForgotPassword";
-import AddNews from "./pages/AddNews";
-import DashboardTest from "./pages/ZoomTest/DashboardTest";
-import TeacherPage from "./pages/TeacherPage";
-import { useState } from "react";
-import { ServerProvider } from "./ServerContext";
-import PrivateRoute from "./PrivateRoute";
-import StudentPage from "./pages/StudentPage";
-import Dashboard from "./pages/Dashboard";
-import CreateMeeting from "./pages/CreateMeeting";
+import ErrorPage from "./pages/ErrorPage";
 import BookLesson from "./pages/BookLesson/intex";
 import ChangeAvailability from "./pages/ChangeAvailability/intex";
-import AdminPage from "./pages/AdminPage";
 import AccountDetails from "./pages/AccountDetails";
+import AdminPage from "./pages/AdminPage";
+import StudentPage from "./pages/StudentPage";
+import TeacherPage from "./pages/TeacherPage";
+import CreateMeeting from "./pages/CreateMeeting";
+import AddNews from "./pages/AddNews";
+import ForgotPassword from "./pages/Signin/ForgotPassword";
+import DashboardTest from "./pages/ZoomTest/DashboardTest";
 
 function App() {
 
@@ -50,7 +50,7 @@ function App() {
           <Route path="/changeavailability" element={<PrivateRoute><ChangeAvailability/></PrivateRoute>} />
           <Route path="/addNews" element={<PrivateRoute><AddNews/></PrivateRoute>} />
           <Route path="/dashboard" element={<PrivateRoute><Dashboard/></PrivateRoute>} />
-          <Route path="/createmeeting" element={<CreateMeeting />} />
+          <Route path="/createmeeting" element={<PrivateRoute><CreateMeeting /></PrivateRoute>} />
           <Route path="/" element={<Home tutorData={data} />} />
           <Route path="/aboutus" element={<AboutUs tutorData={data} />} />
           <Route path="/ourservices" element={<OurServices />} />

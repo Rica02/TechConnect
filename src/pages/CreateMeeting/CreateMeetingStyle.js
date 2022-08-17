@@ -6,6 +6,12 @@ export const Form = styled.form`
 
     label {
         margin: 10px 0 5px 0;
+        font-size: large;
+    }
+
+    select, input {
+        padding: 5px;
+        margin-bottom: 5px;
     }
 `
 export const ButtonContainer = styled.div`

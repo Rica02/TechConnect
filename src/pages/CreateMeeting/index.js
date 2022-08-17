@@ -103,10 +103,9 @@ function CreateMeeting() {
   return (
     <>
       <div className="dashboard-div-container">
-        <h2>Hello admin</h2>
-        <h3>Create a new meeting</h3>
+        <h2>Create a new Zoom meeting</h2>
         <Form onSubmit={handleSubmit} >
-            <label>Student</label>
+            <label>STUDENT</label>
             <select
                 name="studentId"
                 value={inputs.studentId || ""}
@@ -116,7 +115,7 @@ function CreateMeeting() {
                 <option value="" disabled>Choose...</option>
                 {getStudentOptions()}
             </select>
-            <label htmlFor='for'>Tutor</label>
+            <label htmlFor='for'>TUTOR</label>
             <select
                 name="tutorId"
                 value={inputs.tutorId || ""}
@@ -126,7 +125,7 @@ function CreateMeeting() {
                 <option value="" disabled>Choose...</option>
                 {getTutorOptions()}
             </select>
-            <label>Date and time</label>
+            <label>DATE AND TIME</label>
             <input
                 type="datetime-local"
                 name="dateTime"
