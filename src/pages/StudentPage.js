@@ -1,6 +1,4 @@
 import React from "react";
-import { DashboardContainer, StyledButton } from "./PagesStyle";
-import { Table } from "./PrivatePages/Dashboard/DashboardStyle";
 import imgTest from "../assets/images/tutor-1.jpg";
 
 function StudentPage() {
@@ -67,10 +65,10 @@ function StudentPage() {
 
   return (
     <>
-      <DashboardContainer>
+      <div className="dashboard-div-container">
         <h2>Hello, [username]</h2>
         <h3>Your upcoming lessons</h3>
-        <Table>
+        <table className="dashboard-table">
           <tr>
             <th>DATE & TIME</th>
             <th>WHERE</th>
@@ -78,14 +76,14 @@ function StudentPage() {
             <th>JOIN VIDEO CALL</th>
           </tr>
           <UpcomingLessons />
-        </Table>
+        </table>
         <div>
-          <StyledButton>I want to cancel this appointment</StyledButton>
+          <button className="styled-button">I want to cancel this appointment</button>
         </div>
-      </DashboardContainer>
-      <DashboardContainer>
+      </div>
+      <div className="dashboard-div-container">
         <h3>Your past lessons</h3>
-        <Table>
+        <table className="dashboard-table">
           <tr>
             <th>DATE & TIME</th>
             <th>WHERE</th>
@@ -93,8 +91,8 @@ function StudentPage() {
             <th>STATUS</th>
           </tr>
           <PastLessons />
-        </Table>
-      </DashboardContainer>
+        </table>
+      </div>
     </>
   );
 }

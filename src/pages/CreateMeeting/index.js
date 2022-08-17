@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { DashboardContainer, StyledButton } from "../PagesStyle";
 import { ButtonContainer, Form } from "./CreateMeetingStyle";
 import axios from "axios";
 
@@ -103,7 +102,7 @@ function CreateMeeting() {
 
   return (
     <>
-      <DashboardContainer>
+      <div className="dashboard-div-container">
         <h2>Hello admin</h2>
         <h3>Create a new meeting</h3>
         <Form onSubmit={handleSubmit} >
@@ -135,10 +134,10 @@ function CreateMeeting() {
                 onChange={handleChange}
             />
             <ButtonContainer>
-                <StyledButton type='submit'>CONFIRM</StyledButton>
+                <button className="styled-button" type='submit'>CONFIRM</button>
             </ButtonContainer>
         </Form>
-      </DashboardContainer>
+      </div>
     </>
   );
 }

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { DashboardContainer, StyledButton } from "../../PagesStyle";
 import { Table } from "./DashboardTestStyle";
 import imgTest from "../../../assets/images/tutor-1.jpg";
 import JoinZoom from "../JoinZoom";
@@ -71,7 +70,7 @@ function DashboardTest() {
 
   return (
     <>
-      <DashboardContainer>
+      <div className="dashboard-div-container">
         <h2>Hello, [username]</h2>
         <h3>Your upcoming lessons</h3>
         <Table>
@@ -84,10 +83,10 @@ function DashboardTest() {
           <UpcomingLessons />
         </Table>
         <div>
-          <StyledButton>I want to cancel this appointment</StyledButton>
+          <button className="styled-button">I want to cancel this appointment</button>
         </div>
-      </DashboardContainer>
-      <DashboardContainer>
+      </div>
+      <div className="dashboard-div-container">
         <h3>Your past lessons</h3>
         <Table>
           <tr>
@@ -98,7 +97,7 @@ function DashboardTest() {
           </tr>
           <PastLessons />
         </Table>
-      </DashboardContainer>
+      </div>
     </>
   );
 }

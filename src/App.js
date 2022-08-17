@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./pages/ThemeColors";
+import GlobalStyles from "./pages/GlobalStyles";
 import Navbar from "./pages/Navbar";
 import Signin from "./pages/Signin";
 import Footer from "./pages/Footer";
@@ -37,6 +38,7 @@ function App() {
     // ThemeProvider provides colours
     <ServerProvider>
     <ThemeProvider theme={theme}>
+      <GlobalStyles />
       <Router>
         <Navbar />
         <Routes>
