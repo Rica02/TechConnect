@@ -92,6 +92,50 @@ app.post("/login", function (req, res) {
     })
 })
 
+// STUDENT / TUTOR FUNCTIONS
+
+// get meeting details from DB
+app.post("/getmeetings", function (req, res) {
+
+    var upcomingMeetings = [];
+    var pastMeetings = [];
+
+    var searchQuery = "SELECT * FROM techconnect.user WHERE admin = 2 or admin = 3"
+    connection.query(searchQuery, async (sqlError, result) => {
+        if (sqlError) {
+            console.log(sqlError);
+        }
+        else if (result.length > 0) {
+            // for each user, sort them in either student or tutor list
+            result.forEach(function (user, index) {
+                myUser = {};
+                if (user.admin == 2) {
+                    myUser["id"] = user.id;
+                    myUser["name"] = user.firstName + " " + user.lastName;
+                    myUser["admin"] = user.admin;
+                    tutorList.push(myUser);
+                } else if (user.admin == 3) {
+                    myUser["id"] = user.id;
+                    myUser["name"] = user.firstName + " " + user.lastName;
+                    myUser["admin"] = user.admin;
+                    studentList.push(myUser);
+                }
+            })
+
+            // console.log("Tutor list: " + JSON.stringify(tutorList));
+            // console.log("Student list: " + JSON.stringify(studentList));
+
+            // send both lists to front-end
+            let dataRes = { tutorList, studentList }
+            res.status(200).json(dataRes);
+            //console.log("Result: " + JSON.stringify(result));
+        }
+        else {
+            console.log("Error in retrieving user info");
+        }
+    })
+})
+
 // ADMIN FUNCTIONS
 
 // get tutor and student list (to display in admin's "create meeting" page)
@@ -137,6 +181,29 @@ app.post("/getusers", function (req, res) {
 })
 
 
+// upload in-person meeting details to DB
+app.post("/inpersonmeeting", async function (req, res) {
+
+    var registerQuery = "INSERT INTO techconnect.meetings (studentId, tutorId, online, startTime, concluded) VALUES (?,?,?,?,?)"
+    connection.query(registerQuery,[
+        req.body.student_id,
+        req.body.tutor_id,
+        false,
+        req.body.start_time,
+        false
+    ],function(sqlErr, result){
+        if(sqlErr){
+            console.log(sqlErr);
+        } else {
+            //console.log(req);
+            //console.log(result);
+            console.log("In-person meeting details successfully uploaded to DB!");
+            res.status(200).json({status: "OK"});
+        }
+    })
+})
+
+
 // ZOOM API
 
 // get email of admin from env
@@ -150,7 +217,7 @@ const payload = {
 const token = jwt.sign(payload, zoomConfig.APISecret);
 
 // use userinfo from the form and make a post request to /userinfo
-app.post('/meeting', (req, res) => {
+app.post('/zoommeeting', (req, res) => {
   //console.log("IN BACKEND: Topic = " + req.body.topic + " Start date = " + req.body.start_time);
   var options = {
     method: "POST",
@@ -181,35 +248,32 @@ app.post('/meeting', (req, res) => {
     // use request-promise module's .then() method to make request calls.
     rp(options)
         .then(function (response) {
-        //printing the response on the console
-        console.log('Response: ', response);
+            //printing the response on the console
+            console.log('Response: ', response);
 
-        let dataRes = {
-            join_url: response.join_url,
-        };
+            // upload meeting details to DB
+            var registerQuery = "INSERT INTO techconnect.meetings (studentId, tutorId, online, startUrl, meetingId, meetingPw, startTime, concluded) VALUES (?,?,?,?,?,?,?,?)"
+            connection.query(registerQuery,[
+                req.body.student_id,
+                req.body.tutor_id,
+                true,
+                response.start_url,
+                response.id,
+                response.password,
+                response.start_time,
+                false
+            ],function(sqlErr, result){
+                if(sqlErr){
+                    console.log(sqlErr);
+                } else {
+                    //console.log(req);
+                    //console.log(result);
+                    console.log("Zoom meeting details successfully uploaded to DB!");
+                }
+            })
 
-              // upload meeting details to DB
-        var registerQuery = "INSERT INTO techconnect.meetings (studentId, tutorId, startUrl, meetingId, meetingPw, startTime, concluded) VALUES (?,?,?,?,?,?,?)"
-        connection.query(registerQuery,[
-            req.body.student_id,
-            req.body.tutor_id,
-            response.start_url,
-            response.id,
-            response.password,
-            response.start_time,
-            false
-        ],function(sqlErr, result){
-            if(sqlErr){
-                console.log(sqlErr);
-            } else {
-                //console.log(req);
-                //console.log(result);
-                console.log("Meeting details successfully uploaded to DB!");
-            }
-        })
-
-        //res.send("Create meeting result: " + JSON.stringify(response));
-        res.status(200).json(dataRes);
+            //res.send("Create meeting result: " + JSON.stringify(response));
+            res.status(200).json({status: "OK"});
         })
         .catch(function (err) {
             // API call failed...

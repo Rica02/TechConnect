@@ -8,10 +8,14 @@ export const Form = styled.form`
         margin: 10px 0 5px 0;
         font-size: large;
     }
-
     select, input {
         padding: 5px;
         margin-bottom: 5px;
+    }
+    .radio-method > * {
+        input {
+            margin: 10px;
+        }
     }
 `
 export const ButtonContainer = styled.div`
