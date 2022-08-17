@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { DashboardContainer, StyledButton } from "../../PagesStyle";
-import { Table } from "./DashboardStyle";
+import { Table } from "./DashboardTestStyle";
 import imgTest from "../../../assets/images/tutor-1.jpg";
 import JoinZoom from "../JoinZoom";
 
-function Dashboard() {
+function DashboardTest() {
   // To determine if logged in user is tutor or not
   const [ isTutor, setIsTutor ] = useState(false);
 
@@ -103,4 +103,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default DashboardTest;

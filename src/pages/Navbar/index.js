@@ -54,25 +54,25 @@ export function Navbar() {
                         </>)}
                         {/* admin */}
                         {admin === '1' && (<>
-                            <NavbarLink to="/dashborad">HOME</NavbarLink>
+                            <NavbarLink to="/dashboard">HOME</NavbarLink>
                             <NavbarLink to="/createmeeting">CREATE MEETING</NavbarLink>
                             <NavbarLink to="/accountDetails">ACCOUNT DETAILS</NavbarLink>
                             <NavbarLink to="/addNews">ADD NEWS</NavbarLink>
                         </>)}
                         {/* tutor */}
                         {admin === '2' && (<>
-                            <NavbarLink to="/dashborad">HOME</NavbarLink>
+                            <NavbarLink to="/dashboard">HOME</NavbarLink>
                             <NavbarLink to="/changeavailability">CHANGE AVAILABILITY</NavbarLink>
                             <NavbarLink to="/accountDetails">ACCOUNT DETAILS</NavbarLink>
-                            <NavbarLink to="/dashborad">NEED HELLP?</NavbarLink>
+                            <NavbarLink to="/dashboard">NEED HELLP?</NavbarLink>
                             {/* show for teacher NavbarLink*/}
                         </>)}
                         {/* student */}
                         {admin === '3' && (<>
-                            <NavbarLink to="/dashborad">HOME</NavbarLink>
+                            <NavbarLink to="/dashboard">HOME</NavbarLink>
                             <NavbarLink to="/booklesson">BOOK A LESSON</NavbarLink>
                             <NavbarLink to="/accountDetails">ACCOUNT DETAILS</NavbarLink>
-                            <NavbarLink to="/dashborad">NEED HELLP?</NavbarLink>
+                            <NavbarLink to="/dashboard">NEED HELLP?</NavbarLink>
                             {/* show for student NavbarLink*/}
                         </>)}
                         <OpenLinksButton
@@ -149,7 +149,7 @@ export function Navbar() {
                     </>)}
                     {admin === '1' && (<>
                         {/* show for admin NavbarLinkExtended*/}
-                        <NavbarLinkExtended to="/dashborad" >HOME</NavbarLinkExtended>
+                        <NavbarLinkExtended to="/dashboard" >HOME</NavbarLinkExtended>
                         <NavbarLinkExtended to="/createmeeting">CREATE MEETING</NavbarLinkExtended>
                         <NavbarLinkExtended to="/accountDetails">ACCOUNT DETAILS</NavbarLinkExtended>
                         <NavbarLinkExtended to="/addNews">ADD NEWS</NavbarLinkExtended>
@@ -160,10 +160,10 @@ export function Navbar() {
                     </>)}
                     {admin === '2' && (<>
                         {/* show for teacher NavbarLinkExtended*/}
-                        <NavbarLinkExtended to="/dashborad" >HOME</NavbarLinkExtended>
+                        <NavbarLinkExtended to="/dashboard" >HOME</NavbarLinkExtended>
                         <NavbarLinkExtended to="/changeavailability">CHANGE AVAILABILITY</NavbarLinkExtended>
                         <NavbarLinkExtended to="/accountDetails">ACCOUNT DETAILS</NavbarLinkExtended>
-                        <NavbarLinkExtended to="/dashborad">NEED HELLP?</NavbarLinkExtended>
+                        <NavbarLinkExtended to="/dashboard">NEED HELLP?</NavbarLinkExtended>
                         <NavbarSignContainerExtended >
                             <RiAccountBoxFill fontSize="3em" />
                             <NavbarButton onClick={(e) => LogoutToHome(e)}>log out</NavbarButton>
@@ -171,10 +171,10 @@ export function Navbar() {
                     </>)}
                     {admin === '3' && (<>
                         {/* show for student NavbarLinkExtended*/}
-                        <NavbarLinkExtended to="/dashborad" >HOME</NavbarLinkExtended>
+                        <NavbarLinkExtended to="/dashboard" >HOME</NavbarLinkExtended>
                         <NavbarLinkExtended to="/booklesson">BOOK A LESSON</NavbarLinkExtended>
                         <NavbarLinkExtended to="/accountDetails">ACCOUNT DETAILS</NavbarLinkExtended>
-                        <NavbarLinkExtended to="/dashborad">NEED HELLP?</NavbarLinkExtended>
+                        <NavbarLinkExtended to="/dashboard">NEED HELLP?</NavbarLinkExtended>
                         <NavbarSignContainerExtended >
                             <RiAccountBoxFill fontSize="3em" />
                             <NavbarButton onClick={(e) => LogoutToHome(e)}>log out</NavbarButton>
