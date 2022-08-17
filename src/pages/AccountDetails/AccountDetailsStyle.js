@@ -113,3 +113,6 @@ max-width: 400px;
  margin: 0.2rem;
  padding: 0.5rem;
 `;
+
+export const Select=styled.select`
+`;

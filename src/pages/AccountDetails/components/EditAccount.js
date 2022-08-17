@@ -1,8 +1,8 @@
 import React from 'react'
-import { DeleteButton,Input, EditButton, Container, Title, RWrap, LWrap, WrapContainer, LableContainer, Lable, Divider, Data, Column, LableContainer2, ViewLink, LinkWrap } from '../AccountDetailsStyle'
+import { DeleteButton, Input, EditButton, Container, Title, RWrap, LWrap, WrapContainer, LableContainer, Lable, Select, Data, Column, LableContainer2, ViewLink, LinkWrap } from '../AccountDetailsStyle'
 import { BsFillCloudUploadFill } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
-function EditAccount({ editdAccountData, editAccountChange,handleCancelClick }) {
+function EditAccount({ editdAccountData, editAccountChange, handleCancelClick, handleUpdatelClick }) {
     return (
         <>
             <WrapContainer>
@@ -11,7 +11,7 @@ function EditAccount({ editdAccountData, editAccountChange,handleCancelClick }) 
                 </RWrap>
                 <LWrap>
                     <EditButton onClick={handleCancelClick}><FaRegEdit fontSize="1.5rem" />Cancel</EditButton>
-                    <DeleteButton><BsFillCloudUploadFill fontSize="1.5rem" />Update account</DeleteButton>
+                    <DeleteButton onClick={(e) => handleUpdatelClick(e)}><BsFillCloudUploadFill fontSize="1.5rem" />Update account</DeleteButton>
                 </LWrap>
             </WrapContainer>
             <WrapContainer>
@@ -30,11 +30,15 @@ function EditAccount({ editdAccountData, editAccountChange,handleCancelClick }) 
                     </Column>
                     <Column>
                         <Lable>Email :</Lable>
-                        <Input type="text" name="email" required placeholder="Enter email..." value={editdAccountData.email} onChange={editAccountChange} />
+                        <Input type="email" name="email" required placeholder="Enter email..." value={editdAccountData.email} onChange={editAccountChange} />
                     </Column>
                     <Column>
                         <Lable>Gender :</Lable>
-                        <Input type="text" name="gender" required placeholder="Enter gender..." value={editdAccountData.gender} onChange={editAccountChange} />
+                        <Select type="text" name="gender" required value={editdAccountData.gender} onChange={editAccountChange}>
+                            <option value="">select gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </Select>
                     </Column>
                     <Column>
                         <Lable>DOB :</Lable>
@@ -46,15 +50,15 @@ function EditAccount({ editdAccountData, editAccountChange,handleCancelClick }) 
                     </Column>
                     <Column>
                         <Lable>Old Password :</Lable>
-                        <Input type="text" name="name" required placeholder="Enter name..." value={editdAccountData.name} onChange={editAccountChange} />
-                        </Column>
+                        <Input type="password" name="Password" required placeholder="Enter Password..." value={editdAccountData.Password} onChange={editAccountChange} />
+                    </Column>
                     <Column>
                         <Lable>New Password :</Lable>
-                        <Input type="text" name="name" required placeholder="Enter name..." value={editdAccountData.name} onChange={editAccountChange} />
-                        </Column>
+                        <Input type="password" name="NewPassword" required placeholder="Enter New Password..." value={editdAccountData.NewPassword} onChange={editAccountChange} />
+                    </Column>
                     <Column>
                         <Lable>New Password confirm:</Lable>
-                        <Input type="text" name="name" required placeholder="Enter name..." value={editdAccountData.name} onChange={editAccountChange} />
+                        <Input type="password" name="NewPassword2" required placeholder="Enter New Password confirm..." value={editdAccountData.NewPassword2} onChange={editAccountChange} />
                     </Column>
                 </LableContainer>
             </WrapContainer>

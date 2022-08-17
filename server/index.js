@@ -360,7 +360,7 @@ app.listen(3007, function () {
 
 app.post("/api/getUser", function (req, res) {
 
-    console.log("get LOGIN FROM BACKEND");
+    console.log("api get getUser");
     var email = req.body.email
     var searchQuery = "SELECT * FROM techconnect.user WHERE email = ?"
     connection.query(searchQuery, [email], async (sqlError, result) => {
@@ -372,6 +372,82 @@ app.post("/api/getUser", function (req, res) {
         }
         else {
             console.log("no combination found");
+        }
+    })
+})
+
+app.post("/api/userUpdate", async function (req, res) {
+    console.log("api get userUpdate");
+    var email = req.body.email
+    var phone = req.body.phone
+    var firstName = req.body.firstName
+    var lastName = req.body.lastName
+    var gender = req.body.gender
+    var dob = req.body.dob
+    var address = req.body.address
+    var id = req.body.id
+    var registerQuery = "UPDATE `techconnect`.`user` SET `firstName` = ?, `lastName` = ?, `email` = ?,  `phone` = ?, `gender` = ?, `dob` = ?, `address` = ? WHERE (`id` = ?)"
+    console.log(registerQuery);
+    connection.query(registerQuery, [firstName, lastName, email, phone, gender,dob,address,id], function (sqlErr, result) {
+        if (sqlErr) {
+            console.log(sqlErr);
+        } else {
+            res.send(result)
+            console.log(req);
+            console.log(result);
+            console.log("succeed");
+        }
+    })
+})
+
+app.post("/api/userUpdateP", async function (req, res) {
+    console.log("api get userUpdate");
+    var email = req.body.email
+    var phone = req.body.phone
+    var firstName = req.body.firstName
+    var lastName = req.body.lastName
+    var gender = req.body.gender
+    var dob = req.body.dob
+    var address = req.body.address
+    var id = req.body.id
+    var password= req.body.NewPassword
+    var registerQuery = "UPDATE `techconnect`.`user` SET `firstName` = ?, `lastName` = ?, `email` = ?,  `phone` = ?, `gender` = ?, `dob` = ?, `address` = ? `password`=? WHERE (`id` = ?)"
+    console.log(registerQuery);
+    connection.query(registerQuery, [firstName, lastName, email, phone, gender,dob,address,password,id], function (sqlErr, result) {
+        if (sqlErr) {
+            console.log(sqlErr);
+        } else {
+            res.send(result)
+            console.log(req);
+            console.log(result);
+            console.log("succeed");
+        }
+    })
+})
+app.post("/api/checkPassword", function (req, res) {
+
+    console.log("api get checkPassword");
+    var id = req.body.id
+    var password = req.body.password
+
+    var searchQuery = "SELECT * FROM techconnect.user WHERE id = ?"
+    connection.query(searchQuery, [id], async (sqlError, result) => {
+        if (sqlError) {
+            console.log(sqlError);
+        }
+        else if (result.length > 0) {
+            const comparison = await bcrypt.compare(password, result[0].password)
+            console.log(comparison);
+            if (comparison) {
+                console.log("Same password");
+                res.send(result)
+            } else {
+                res.send(0)
+                console.log("server no combination found");
+            }
+        }
+        else {
+            console.log("server no combination found");
         }
     })
 })
