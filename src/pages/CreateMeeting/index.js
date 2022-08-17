@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { DashboardContainer, StyledButton } from "../../PagesStyle";
-import { ButtonContainer, Form } from "./AdminStyle";
+import { DashboardContainer, StyledButton } from "../PagesStyle";
+import { ButtonContainer, Form } from "./CreateMeetingStyle";
 import axios from "axios";
 
-function Admin() {
+function CreateMeeting() {
     const [inputs, setInputs] = useState({});
     const [studentList, setStudentList] = useState([]);
     const [tutorList, setTutorList] = useState([]);
@@ -143,4 +143,4 @@ function Admin() {
   );
 }
 
-export default Admin;
+export default CreateMeeting;

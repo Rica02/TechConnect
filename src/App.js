@@ -22,7 +22,7 @@ import { ServerProvider } from "./ServerContext";
 import PrivateRoute from "./PrivateRoute";
 import StudentPage from "./pages/StudentPage";
 import Dashborad from "./pages/Dashborad";
-import Admin from "./pages/PrivatePages/Admin";
+import CreateMeeting from "./pages/CreateMeeting";
 import BookLesson from "./pages/BookLesson/intex";
 import ChangeAvailability from "./pages/ChangeAvailability/intex";
 import AdminPage from "./pages/AdminPage";
@@ -34,7 +34,7 @@ function App() {
   const [state, setState] = useState(false)
 
   return (
-    // ThemeProvider wraps around the whole app as it provides colours
+    // ThemeProvider provides colours
     <ServerProvider>
     <ThemeProvider theme={theme}>
       <Router>
@@ -48,6 +48,7 @@ function App() {
           <Route path="/changeavailability" element={<PrivateRoute><ChangeAvailability/></PrivateRoute>} />
           <Route path="/addNews" element={<PrivateRoute><AddNews/></PrivateRoute>} />
           <Route path="/dashborad" element={<PrivateRoute><Dashborad/></PrivateRoute>} />
+          <Route path="/createmeeting" element={<CreateMeeting />} />
           <Route path="/" element={<Home tutorData={data} />} />
           <Route path="/aboutus" element={<AboutUs tutorData={data} />} />
           <Route path="/ourservices" element={<OurServices />} />
@@ -61,9 +62,8 @@ function App() {
           <Route path="/addnews" element={<AddNews />} />
           <Route path="*" element={<ErrorPage />} /> {/* Render error page if path does not match */}
           <Route path="/login" element={<Dashboard />} />
-          <Route path="/admintest" element={<Admin />} />   {/* TEST */}
         </Routes>
-        <Footer /> {/* all pages will include footer */}
+        <Footer />
       </Router>
     </ThemeProvider>
     </ServerProvider>

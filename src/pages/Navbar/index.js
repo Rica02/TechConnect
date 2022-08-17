@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { RiAccountBoxFill } from 'react-icons/ri'
+import { useDB } from "../../ServerContext";
+import { useNavigate } from "react-router-dom";
+import { RiAccountBoxFill, RiMenuFill, RiCloseFill } from 'react-icons/ri';
 import {
     NavbarContainer,
     LeftContainer,
@@ -18,15 +20,15 @@ import {
     NavbarButton
 } from "./NavbarStyle";
 import LogoImg from "../../assets/logo.png";
-import SigninCard from "./SigninCard"
-import { useDB } from "../../ServerContext"
-import { useNavigate } from "react-router-dom"
+import SigninCard from "./SigninCard";
+
 export function Navbar() {
     var navigate = useNavigate()
     // used to manage the "extend button"
     const [extendNavbar, setExtendNavbar] = useState(false);
     const [toggleSignin, setToggleSignin] = useState(false);
-    const { admin, logout } = useDB()
+    const { admin, logout } = useDB();
+
     function LogoutToHome(e) {
         e.preventDefault()
         navigate("/")
@@ -53,11 +55,11 @@ export function Navbar() {
                         {/* admin */}
                         {admin === '1' && (<>
                             <NavbarLink to="/dashborad">HOME</NavbarLink>
-                            <NavbarLink to="/changeavailability">CHANGE AVAILABILITY</NavbarLink>
+                            <NavbarLink to="/createmeeting">CREATE MEETING</NavbarLink>
                             <NavbarLink to="/accountDetails">ACCOUNT DETAILS</NavbarLink>
                             <NavbarLink to="/addNews">ADD NEWS</NavbarLink>
                         </>)}
-                            {/* tutor */}
+                        {/* tutor */}
                         {admin === '2' && (<>
                             <NavbarLink to="/dashborad">HOME</NavbarLink>
                             <NavbarLink to="/changeavailability">CHANGE AVAILABILITY</NavbarLink>
@@ -80,7 +82,7 @@ export function Navbar() {
                         >
                             {
                                 // display hamburger menu when state is false, X when true
-                                extendNavbar ? <>&#10005;</> : <>&#8801;</>
+                                extendNavbar ? <RiCloseFill /> : <RiMenuFill />
                             }
                         </OpenLinksButton>
                     </NavbarLinkContainer>
@@ -148,7 +150,7 @@ export function Navbar() {
                     {admin === '1' && (<>
                         {/* show for admin NavbarLinkExtended*/}
                         <NavbarLinkExtended to="/dashborad" >HOME</NavbarLinkExtended>
-                        <NavbarLinkExtended to="/changeavailability">CHANGE AVAILABILITY</NavbarLinkExtended>
+                        <NavbarLinkExtended to="/createmeeting">CREATE MEETING</NavbarLinkExtended>
                         <NavbarLinkExtended to="/accountDetails">ACCOUNT DETAILS</NavbarLinkExtended>
                         <NavbarLinkExtended to="/addNews">ADD NEWS</NavbarLinkExtended>
                         <NavbarSignContainerExtended >
@@ -178,7 +180,6 @@ export function Navbar() {
                             <NavbarButton onClick={(e) => LogoutToHome(e)}>log out</NavbarButton>
                         </NavbarSignContainerExtended>
                     </>)}
-
                 </NavbarExtendedContainer>
             )}
         </NavbarContainer>
