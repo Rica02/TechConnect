@@ -16,6 +16,7 @@ function AccountDetails() {
   const [editCard, seteditCard] = useState(false);
   //Edit Account buttion Click
   const stripePromise = loadStripe("pk_test_51LXPSCGr0Ica2zDT8QjrYyebIyWilHxB9kVafjZD2s09q1Gx1UO5ZzIDj53EBVskto44YBrHhGQ6p90PN0oxa2FR00Pz0gxFic");
+
   const [editdAccountData, seteEitdAccountData] = useState({
     id: "",
     firstName: "",
@@ -118,7 +119,7 @@ function AccountDetails() {
           <LableContainer2 >
             {editCard ? <>
               <EditCardWrap>
-                <Elements stripe={stripePromise}>
+                <Elements stripe={stripePromise}  >
                 <EditCrads />
                 </Elements>
                 <EditButton onClick={cardCancelClick}><FaRegEdit fontSize="1.5rem" />Cancel</EditButton>

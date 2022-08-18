@@ -25,22 +25,32 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 app.use(express.static("public"));
 
 app.post("/pay", async (req, res) => {
-    const { items } = req.body;
+    try{
+        const amount = 0.5;
+        const paymentIntent = await stripe.paymentIntents.create({
+            amount,
+            currency: "aud",
+            automatic_payment_methods:['card'],
+            metadata:{
+                name: "value",
+            },
+          });
+      const clientSecret=paymentIntent.client_secret;
+      res.json({clientSecret,message:'Update Successfully!'})
+    }catch(err){
+        console.error(err);
+        res.status(500).json({ message:'Internal server error'});
+    }
 
-    // Create a PaymentIntent with the order amount and currency
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: 0.1,
-      currency: "aud",
-      automatic_payment_methods: {
-        enabled: true,
-      },
-    });
-
-    res.send({
-      clientSecret: paymentIntent.client_secret,
-    });
   });
-
+  app.post("/stripe", (req, res) => {
+    if (req.body.type === "payment_intent.created") {
+      console.log(`${req.body.data.object.metadata.name} initated payment!`);
+    }
+    if (req.body.type === "payment_intent.succeeded") {
+      console.log(`${req.body.data.object.metadata.name} succeeded payment!`);
+    }
+  });
 //---------------stripe-checkout EDN
 
 
@@ -660,6 +670,30 @@ app.post("/api/addNews", async function (req, res) {
             console.log(req);
             res.send(result);
             console.log("Add News succeed");
+        }
+    })
+})
+
+//bookLesson
+//INSERT INTO `techconnect`.`bookLesson` (`date`, `time`, `type`, `detail`, `receive`) VALUES ('2022/12/01', '14:00', 'house', 'test', 'Email');
+app.post("/api/bookLesson", async function (req, res) {
+
+    var date = req.body.date
+    var time = req.body.time
+    var type = req.body.type
+    var detail = req.body.detail
+    var receive = req.body.receive
+    var uid = req.body.uid
+    var Query = "INSERT INTO `techconnect`.`bookLesson` (`date`, `time`, `type`, `detail`, `receive`, `uid`) VALUES (?,?,?,?,?,?);"
+    console.log(Query);
+
+    connection.query(Query, [date, time, type,detail,receive,uid], function (sqlErr, result) {
+        if (sqlErr) {
+            console.log(sqlErr);
+        } else {
+            console.log(req);
+            res.status(200).send(result);
+            console.log("Add book Lesson succeed");
         }
     })
 })
