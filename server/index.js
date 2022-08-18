@@ -576,7 +576,6 @@ app.post("/api/userUpdateP", async function (req, res) {
     })
 })
 app.post("/api/checkPassword", function (req, res) {
-
     console.log("api get checkPassword");
     var id = req.body.id
     var password = req.body.password
@@ -647,8 +646,6 @@ app.get("/api/news", function (req, res) {
             console.log(err);
             return res.send({ status: 1, message: "Error" })
         } else {
-            console.log("succeed");
-            console.log(result);
             res.send(result);
             //return res.status(200).json(result)
         }
@@ -662,20 +659,16 @@ app.post("/api/addNews", async function (req, res) {
     var text = req.body.text
     var Query = "INSERT INTO `techconnect`.`news` (`title`, `date`, `text`) VALUES (?,?,?)"
     console.log(Query);
-
     connection.query(Query, [title, date, text], function (sqlErr, result) {
         if (sqlErr) {
             console.log(sqlErr);
         } else {
-            console.log(req);
             res.send(result);
-            console.log("Add News succeed");
         }
     })
 })
 
 //bookLesson
-//INSERT INTO `techconnect`.`bookLesson` (`date`, `time`, `type`, `detail`, `receive`) VALUES ('2022/12/01', '14:00', 'house', 'test', 'Email');
 app.post("/api/bookLesson", async function (req, res) {
 
     var date = req.body.date
@@ -686,14 +679,68 @@ app.post("/api/bookLesson", async function (req, res) {
     var uid = req.body.uid
     var Query = "INSERT INTO `techconnect`.`bookLesson` (`date`, `time`, `type`, `detail`, `receive`, `uid`) VALUES (?,?,?,?,?,?);"
     console.log(Query);
-
     connection.query(Query, [date, time, type,detail,receive,uid], function (sqlErr, result) {
         if (sqlErr) {
             console.log(sqlErr);
         } else {
-            console.log(req);
             res.status(200).send(result);
-            console.log("Add book Lesson succeed");
+        }
+    })
+})
+//gey meeting
+app.get("/api/getMeetings", function (req, res) {
+    var mySQLquery = "SELECT * FROM techconnect.meetings"
+    connection.query(mySQLquery, function (err, result) {
+        if (err && (result == null)) {
+            console.log(err);
+            return res.send({ status: 1, message: "Error" })
+        } else {
+            res.send(result);
+            //return res.status(200).json(result)
+        }
+    })
+})
+//gey bookLesson
+app.get("/api/getBookLesson", function (req, res) {
+    var mySQLquery = "SELECT * FROM techconnect.bookLesson"
+    connection.query(mySQLquery, function (err, result) {
+        if (err && (result == null)) {
+            console.log(err);
+            return res.send({ status: 1, message: "Error" })
+        } else {
+            res.send(result);
+            //return res.status(200).json(result)
+        }
+    })
+})
+//gey changeAvailability
+app.get("/api/getChangeAvailability", function (req, res) {
+    var mySQLquery = "SELECT * FROM techconnect.changeAvailability"
+    connection.query(mySQLquery, function (err, result) {
+        if (err && (result == null)) {
+            console.log(err);
+            return res.send({ status: 1, message: "Error" })
+        } else {
+            res.send(result);
+            //return res.status(200).json(result)
+        }
+    })
+})
+//changeAvailability
+app.post("/api/changeAvailability", async function (req, res) {
+
+    var meetingId = req.body.meetingId
+    var aDate = req.body.aDate
+    var aTime = req.body.aTime
+    var detail = req.body.detail
+    var tid = req.body.uid
+    var Query = "INSERT INTO `techconnect`.`changeAvailability` (`meetingId`, `aDate`, `aTime`, `detail`, `tid`) VALUES (?,?,?,?,?);"
+    console.log(Query);
+    connection.query(Query, [meetingId, aDate, aTime,detail,tid], function (sqlErr, result) {
+        if (sqlErr) {
+            console.log(sqlErr);
+        } else {
+            res.status(200).send(result);
         }
     })
 })

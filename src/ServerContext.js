@@ -189,8 +189,57 @@ async function AddNewsToDB(data) {
     } catch (error) {
       console.log(error);
     }
-  
   }
+  //get meeting
+  const [getMeetings, setGetMeetings] = useState([]);
+useEffect(() => {
+  axios.get("http://localhost:3007/api/getMeetings").then((data) => {
+    setGetMeetings(data.data)
+  });
+}, [])
+  //get meeting
+  const [getBookLesson, setGetBookLesson] = useState([]);
+useEffect(() => {
+  axios.get("http://localhost:3007/api/getBookLesson").then((data) => {
+    setGetBookLesson(data.data)
+  });
+}, [])
+console.log('getBookLesson',getBookLesson)
+  //get changeAvailability
+  const [getChangeAvailability, setGetChangeAvailability] = useState([]);
+useEffect(() => {
+  axios.get("http://localhost:3007/api/getChangeAvailability").then((data) => {
+    setGetChangeAvailability(data.data)
+  });
+}, [])
+console.log( 'getChangeAvailability',getChangeAvailability)
+//ChangeAvailability
+async function ChangeAvailabilityToDB(data) {
+  try {
+    await axios.post('http://localhost:3007/api/changeAvailability', {
+    
+      meetingId: data.meetingId,
+      aDate: data.aDate,
+      aTime: data.aTime,
+      detail: data.detail,
+      uid:userInf[0].id,
+
+    })
+      .then((response) => {
+        if(response.status===200){
+          alert('Change succeed')
+        }else{
+          alert('Change error')
+        }
+      }, (error) => {
+        alert('error')
+        console.log(error);
+      });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 //-------DB END -----
   const value = {
     auth,
@@ -208,6 +257,10 @@ async function AddNewsToDB(data) {
     getNews,AddNewsToDB,
     //bookLesson
     BookLessonToDB,
+    //meeting list
+    getMeetings,
+    //ChangeAvailability
+    ChangeAvailabilityToDB,
   }
   return (
     <ServerContext.Provider value={value}>
