@@ -1,5 +1,6 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route, useResolvedPath } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import { ServerProvider } from "./ServerContext";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./pages/ThemeColors";
@@ -31,7 +32,28 @@ import ForgotPassword from "./pages/Signin/ForgotPassword";
 function App() {
 
   const [data, setData] = useState([])
-  const [state, setState] = useState(false)
+  const [state, setState] = useState(false);
+  const [ourServices, setOurServices] = useState([]);
+
+  console.log("Web content: " + JSON.stringify(ourServices))
+    // on page load, get student and tutor data
+    useEffect(() => {
+      try {
+          axios.post('http://localhost:3007/getwebcontent')
+          .then((response) => {
+            console.log("Get web content successful.");
+            // console.log("Get users successful. Response data: " + JSON.stringify(response))
+
+            // get response and store it in useState array
+            setOurServices([...response.data.ourServices]);
+
+          }, (error) => {
+              console.log("Error occurred: " + error);
+          });
+      } catch (error) {
+          console.log("Get users failed, reason: " + error);
+      }
+    }, []);
 
   return (
     // ThemeProvider provides colours
@@ -50,9 +72,9 @@ function App() {
           <Route path="/addNews" element={<PrivateRoute><AddNews/></PrivateRoute>} />
           <Route path="/dashboard" element={<PrivateRoute><Dashboard/></PrivateRoute>} />
           <Route path="/createmeeting" element={<PrivateRoute><CreateMeeting /></PrivateRoute>} />
-          <Route path="/" element={<Home tutorData={data} />} />
+          <Route path="/" element={<Home tutorData={data} serviceData={ourServices} />} />
           <Route path="/aboutus" element={<AboutUs tutorData={data} />} />
-          <Route path="/ourservices" element={<OurServices />} />
+          <Route path="/ourservices" element={<OurServices serviceData={ourServices} />} />
           <Route path="/news" element={<News />} />
           <Route path="/becomeatutor" element={<BecomeATutor />} />
           <Route path="/contactus" element={<ContactUs />} />

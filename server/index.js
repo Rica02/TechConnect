@@ -92,6 +92,44 @@ app.post("/login", function (req, res) {
     })
 })
 
+//  WEB CONTENT
+
+// get content for web
+app.post("/getwebcontent", function (req, res) {
+
+    var ourServices = [];
+
+    var selectQuery = "SELECT * FROM techconnect.webcontent"
+    connection.query(selectQuery,[
+        req.body.userId
+    ],function(sqlErr, result){
+        if (sqlErr) {
+            console.log(sqlErr);
+        }
+        else if (result.length > 0) {
+
+            // get each result and add them to array
+            result.forEach(function (content, index) {
+                if(content.section == "services") {
+                    ourServices.push(content);
+                }
+            })
+
+            //console.log("List: " + JSON.stringify(ourServices));
+
+            let dataRes = { ourServices }
+
+            // send meeting lists to front-end
+            res.status(200).json(dataRes);
+            //console.log("Result: " + JSON.stringify(result));
+        }
+        else {
+            console.log("Error in retrieving webcontent info");
+        }
+    })
+})
+
+
 // STUDENT / TUTOR FUNCTIONS
 
 // get student's meeting details from DB
