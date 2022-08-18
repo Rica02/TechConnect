@@ -497,5 +497,170 @@ app.listen(3007, function () {
         } console.log("DB and Zoom app connection successful! Listening at PORT: 3007")
     })
 })
+//-------serverContext--------------
 
+app.post("/api/getUser", function (req, res) {
+
+    console.log("api get getUser");
+    var email = req.body.email
+    var searchQuery = "SELECT * FROM techconnect.user WHERE email = ?"
+    connection.query(searchQuery, [email], async (sqlError, result) => {
+        if (sqlError) {
+            console.log(sqlError);
+        }
+        else if (result.length > 0) {
+            res.send(result)
+        }
+        else {
+            console.log("no combination found");
+        }
+    })
+})
+
+app.post("/api/userUpdate", async function (req, res) {
+    console.log("api get userUpdate");
+    var email = req.body.email
+    var phone = req.body.phone
+    var firstName = req.body.firstName
+    var lastName = req.body.lastName
+    var gender = req.body.gender
+    var dob = req.body.dob
+    var address = req.body.address
+    var id = req.body.id
+    var registerQuery = "UPDATE `techconnect`.`user` SET `firstName` = ?, `lastName` = ?, `email` = ?,  `phone` = ?, `gender` = ?, `dob` = ?, `address` = ? WHERE (`id` = ?)"
+    console.log(registerQuery);
+    connection.query(registerQuery, [firstName, lastName, email, phone, gender,dob,address,id], function (sqlErr, result) {
+        if (sqlErr) {
+            console.log(sqlErr);
+        } else {
+            res.send(result)
+            console.log(req);
+            console.log(result);
+            console.log("succeed");
+        }
+    })
+})
+
+app.post("/api/userUpdateP", async function (req, res) {
+    console.log("api get userUpdate");
+    var email = req.body.email
+    var phone = req.body.phone
+    var firstName = req.body.firstName
+    var lastName = req.body.lastName
+    var gender = req.body.gender
+    var dob = req.body.dob
+    var address = req.body.address
+    var id = req.body.id
+    var password= req.body.NewPassword
+    var registerQuery = "UPDATE `techconnect`.`user` SET `firstName` = ?, `lastName` = ?, `email` = ?,  `phone` = ?, `gender` = ?, `dob` = ?, `address` = ? `password`=? WHERE (`id` = ?)"
+    console.log(registerQuery);
+    connection.query(registerQuery, [firstName, lastName, email, phone, gender,dob,address,password,id], function (sqlErr, result) {
+        if (sqlErr) {
+            console.log(sqlErr);
+        } else {
+            res.send(result)
+            console.log(req);
+            console.log(result);
+            console.log("succeed");
+        }
+    })
+})
+app.post("/api/checkPassword", function (req, res) {
+
+    console.log("api get checkPassword");
+    var id = req.body.id
+    var password = req.body.password
+    console.log(id)
+    console.log(password)
+    var searchQuery = "SELECT * FROM techconnect.user WHERE id = ?"
+    connection.query(searchQuery, [id], async (sqlError, result) => {
+        if (sqlError) {
+            console.log(sqlError);
+        }
+        else if (result.length > 0) {
+            const comparison = await bcrypt.compare(password, result[0].password)
+            console.log(comparison);
+            if (comparison) {
+                console.log("Same password");
+                res.status(200).send(result);
+            } else {
+                res.status(220).send(result);
+                console.log("server no combination found");
+            }
+        }
+        else {
+            console.log("server no combination found");
+        }
+    })
+})
+
+//  DELETE FROM `techconnect`.`user` WHERE (`id` = '1');
+
+app.post("/api/delete", async function (req, res) {
+    console.log("api get DELETE");
+    var id = req.body.id
+    var registerQuery = "DELETE FROM `techconnect`.`user` WHERE (`id` = ?)"
+    connection.query(registerQuery, [id], function (sqlErr, result) {
+        console.log(registerQuery);
+        console.log(id);
+        if (sqlErr) {
+            console.log(sqlErr);
+        } else {
+            res.send(result)
+            console.log("succeed");
+        }
+    })
+})
+
+//reset password
+app.post("/api/reset", async function (req, res) {
+    var id = req.body.id
+    var requestedPW2 = await bcrypt.hash(req.body.password, saltRounds)
+    var registerQuery = "UPDATE `techconnect`.`user` SET `password` = ? WHERE (`id` = ?)"
+    console.log(registerQuery);
+    connection.query(registerQuery, [requestedPW2,id], function (sqlErr, result) {
+        if (sqlErr) {
+            console.log(sqlErr);
+        } else {
+            console.log(req);
+            console.log(result);
+            res.status(200).send(result);
+            console.log("succeed");
+        }
+    })
+})
+// get NEWS
+app.get("/api/news", function (req, res) {
+    var mySQLquery = "SELECT * FROM techconnect.news"
+    connection.query(mySQLquery, function (err, result) {
+        if (err && (result == null)) {
+            console.log(err);
+            return res.send({ status: 1, message: "Error" })
+        } else {
+            console.log("succeed");
+            console.log(result);
+            res.send(result);
+            //return res.status(200).json(result)
+        }
+    })
+})
+//add News
+app.post("/api/addNews", async function (req, res) {
+
+    var title = req.body.title
+    var date = req.body.date
+    var text = req.body.text
+    var Query = "INSERT INTO `techconnect`.`news` (`title`, `date`, `text`) VALUES (?,?,?)"
+    console.log(Query);
+
+    connection.query(Query, [title, date, text], function (sqlErr, result) {
+        if (sqlErr) {
+            console.log(sqlErr);
+        } else {
+            console.log(req);
+            res.send(result);
+            console.log("Add News succeed");
+        }
+    })
+})
 //connection.end()
