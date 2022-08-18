@@ -7,7 +7,7 @@ import {
     FormInput,
     FormWrap,
     Icon,
-    Form ,
+    Form,
     FormLabel,
     FormInputText
 } from './AddNewsStyle';
@@ -36,21 +36,21 @@ function AddNews() {
                 <Icon to="/"></Icon>
                 <FormContent>
                     <Form onSubmit={handleClick}>
-                    <FormH1>Post News Page</FormH1>
+                        <FormH1>Post News Page</FormH1>
                         <FormLabel htmlFor='for'>Title</FormLabel>
-                        <FormInput type='text' name="title" required onChange={editNewsChange}/>
+                        <FormInput type='text' name="title" required  onChange={editNewsChange}/>
                         <FormLabel htmlFor='for'>Date</FormLabel>
-                        <FormInput type='date' name="date" required onChange={editNewsChange}/>
+                        <FormInput type='date' name="date" required  onChange={editNewsChange}/>
                         <FormLabel htmlFor='for'>Text</FormLabel>
                         <FormInputText type='text' name="text" required onChange={editNewsChange}/>
                         <FormButton type='submitSignup'>Submit</FormButton> 
                     </Form>
 
                 </FormContent>
-             
+
             </FormWrap>
-            </Container>
-  )
+        </Container>
+    )
 }
 
 export default AddNews
