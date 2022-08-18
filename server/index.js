@@ -53,7 +53,7 @@ app.post("/register", async function (req, res) {
     var registerQuery = "INSERT INTO techconnect.user (email,password,phone,admin,firstName,lastName) VALUES (?,?,?,?,?,?)"
     console.log(registerQuery);
 
-    connection.query(registerQuery, [requestedEmail, requestedPW2, requestedPhone, userType,requestedFName,requestedLName], function (sqlErr, result) {
+    connection.query(registerQuery, [requestedEmail, requestedPW2, requestedPhone, userType, requestedFName, requestedLName], function (sqlErr, result) {
         if (sqlErr) {
             console.log(sqlErr);
         } else {
@@ -92,6 +92,59 @@ app.post("/login", function (req, res) {
     })
 })
 
+//forgot password 
+
+app.post("/forgot-password", function (req, res) {
+
+    var { email } = req.body
+    var { phone } = req.body
+
+    //var searchQuery = "SELECT email, phone FROM techconnect.user WHERE email = ?"
+    var searchQuery = "SELECT * FROM techconnect.user WHERE email = ? AND phone = ?"
+
+    connection.query(searchQuery, [email,phone], async (sqlError, result) => {
+        if (sqlError) {
+            console.log(sqlError);
+        }
+        else if (result && result.length > 0) {
+            res.status(200).send({message:"Directing to reset password", result})
+        }
+        else{
+            res.status(210).send({message: "No email or phone associated with"})
+        }
+
+    })
+
+})
+//reset password 
+
+app.post("/api/resetpassword", async function (req, res) {
+    //testing account current: 
+
+    //acc: matthew.ng.id20@gmail.com
+    //password: passwordtest
+    var { email } = req.body
+    var { password } = req.body
+    //password encryption
+    var newPassword = await bcrypt.hash(password, saltRounds)
+    var updateQuery = "UPDATE techconnect.user SET password = ? WHERE (email = ?)"
+
+
+    //Update the new password
+    connection.query(updateQuery, [newPassword,email], async (sqlError, result) => {
+        if (sqlError) {
+            console.log(sqlError);
+        }
+        else if (result && result.length > 0) {
+            res.status(200).send({message:"update successful user", result})
+        }
+        else{
+            res.status(210).send({message: "No result found"})
+        }
+
+    })
+
+})
 // STUDENT / TUTOR FUNCTIONS
 
 // get student's meeting details from DB
@@ -100,11 +153,11 @@ app.post("/getstudentmeetings", function (req, res) {
     var meetingList = [];
 
     var selectQuery = "SELECT  m.tutorId, m.online, m.meetingId, m.meetingPw, "
-     + "m.startTime, m.concluded, t.firstName, t.lastName FROM techconnect.meetings m "
-     + "INNER JOIN techconnect.user t ON (m.tutorId = t.id) WHERE studentId = ?"
-    connection.query(selectQuery,[
+        + "m.startTime, m.concluded, t.firstName, t.lastName FROM techconnect.meetings m "
+        + "INNER JOIN techconnect.user t ON (m.tutorId = t.id) WHERE studentId = ?"
+    connection.query(selectQuery, [
         req.body.userId
-    ],function(sqlErr, result){
+    ], function (sqlErr, result) {
         if (sqlErr) {
             console.log(sqlErr);
         }
@@ -141,11 +194,11 @@ app.post("/gettutormeetings", function (req, res) {
     var meetingList = [];
 
     var selectQuery = "SELECT  m.studentId, m.online, m.startUrl, m.startTime, "
-     + "m.concluded, t.firstName, t.lastName FROM techconnect.meetings m "
-     + "INNER JOIN techconnect.user t ON (m.studentId = t.id) WHERE tutorId = ?"
-    connection.query(selectQuery,[
+        + "m.concluded, t.firstName, t.lastName FROM techconnect.meetings m "
+        + "INNER JOIN techconnect.user t ON (m.studentId = t.id) WHERE tutorId = ?"
+    connection.query(selectQuery, [
         req.body.userId
-    ],function(sqlErr, result){
+    ], function (sqlErr, result) {
         if (sqlErr) {
             console.log(sqlErr);
         }
@@ -224,20 +277,20 @@ app.post("/getusers", function (req, res) {
 app.post("/inpersonmeeting", async function (req, res) {
 
     var registerQuery = "INSERT INTO techconnect.meetings (studentId, tutorId, online, startTime, concluded) VALUES (?,?,?,?,?)"
-    connection.query(registerQuery,[
+    connection.query(registerQuery, [
         req.body.student_id,
         req.body.tutor_id,
         false,
         req.body.start_time,
         false
-    ],function(sqlErr, result){
-        if(sqlErr){
+    ], function (sqlErr, result) {
+        if (sqlErr) {
             console.log(sqlErr);
         } else {
             //console.log(req);
             //console.log(result);
             console.log("In-person meeting details successfully uploaded to DB!");
-            res.status(200).json({status: "OK"});
+            res.status(200).json({ status: "OK" });
         }
     })
 })
@@ -257,32 +310,32 @@ const token = jwt.sign(payload, zoomConfig.APISecret);
 
 // use userinfo from the form and make a post request to /userinfo
 app.post('/zoommeeting', (req, res) => {
-  //console.log("IN BACKEND: Topic = " + req.body.topic + " Start date = " + req.body.start_time);
-  var options = {
-    method: "POST",
-    // make API call "create meeting" Zoom endpoint
-    uri: "https://api.zoom.us/v2/users/" + email + "/meetings",
-    body: {
-      topic: req.body.topic,
-      start_time: req.body.start_time,
-      timezone: "Australia/Sydney",
-      type: 2,                   // 1 = instant meeting, 2 = scheduled meeting
-      default_password: false,
-      duration: 40,              // 40 min is the max meeting time allowed with a basic free Zoom account
-      settings: {
-        host_video: "true",
-        participant_video: "true",
-      },
-    },
-    auth: {
-        'bearer': token
-    },
-    headers: {
-        'User-Agent': 'Zoom-api-Jwt-Request',
-        'content-type': 'application/json'
-    },
-    json: true // parse the JSON string in the response
-  };
+    //console.log("IN BACKEND: Topic = " + req.body.topic + " Start date = " + req.body.start_time);
+    var options = {
+        method: "POST",
+        // make API call "create meeting" Zoom endpoint
+        uri: "https://api.zoom.us/v2/users/" + email + "/meetings",
+        body: {
+            topic: req.body.topic,
+            start_time: req.body.start_time,
+            timezone: "Australia/Sydney",
+            type: 2,                   // 1 = instant meeting, 2 = scheduled meeting
+            default_password: false,
+            duration: 40,              // 40 min is the max meeting time allowed with a basic free Zoom account
+            settings: {
+                host_video: "true",
+                participant_video: "true",
+            },
+        },
+        auth: {
+            'bearer': token
+        },
+        headers: {
+            'User-Agent': 'Zoom-api-Jwt-Request',
+            'content-type': 'application/json'
+        },
+        json: true // parse the JSON string in the response
+    };
 
     // use request-promise module's .then() method to make request calls.
     rp(options)
@@ -292,7 +345,7 @@ app.post('/zoommeeting', (req, res) => {
 
             // upload meeting details to DB
             var registerQuery = "INSERT INTO techconnect.meetings (studentId, tutorId, online, startUrl, meetingId, meetingPw, startTime, concluded) VALUES (?,?,?,?,?,?,?,?)"
-            connection.query(registerQuery,[
+            connection.query(registerQuery, [
                 req.body.student_id,
                 req.body.tutor_id,
                 true,
@@ -301,8 +354,8 @@ app.post('/zoommeeting', (req, res) => {
                 response.password,
                 response.start_time,
                 false
-            ],function(sqlErr, result){
-                if(sqlErr){
+            ], function (sqlErr, result) {
+                if (sqlErr) {
                     console.log(sqlErr);
                 } else {
                     //console.log(req);
@@ -312,7 +365,7 @@ app.post('/zoommeeting', (req, res) => {
             })
 
             //res.send("Create meeting result: " + JSON.stringify(response));
-            res.status(200).json({status: "OK"});
+            res.status(200).json({ status: "OK" });
         })
         .catch(function (err) {
             // API call failed...

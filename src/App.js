@@ -28,6 +28,7 @@ import CreateMeeting from "./pages/CreateMeeting";
 import AddNews from "./pages/AddNews";
 import ForgotPassword from "./pages/Signin/ForgotPassword";
 import DashboardTest from "./pages/ZoomTest/DashboardTest";
+import ResetPasswordForm from "./pages/ResetPassword/resetPasswordForm";
 
 function App() {
 
@@ -62,8 +63,8 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route path="/addnews" element={<AddNews />} />
+          <Route path ="/resetpassword/:resetPasswordId" element = {<ResetPasswordForm/>}/>
           <Route path="*" element={<ErrorPage />} />  {/* Render error page if path does not match */}
-
           <Route path="/dashboardtest" element={<DashboardTest />} />   {/* TEST */}
         </Routes>
         <Footer />
