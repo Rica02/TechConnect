@@ -27,7 +27,8 @@ import TutorPage from "./pages/TutorPage";
 import CreateMeeting from "./pages/CreateMeeting";
 import AddNews from "./pages/AddNews";
 import ForgotPassword from "./pages/Signin/ForgotPassword";
-import DashboardTest from "./pages/ZoomTest/DashboardTest";
+// import DashboardTest from "./pages/ZoomTest/DashboardTest";
+import ResetPasswordForm from "./pages/ResetPassword/ResetPasswordForm";
 
 function App() {
 
@@ -58,7 +59,7 @@ function App() {
           <Route path="/becomeatutor" element={<BecomeATutor />} />
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/bookanappointment" element={<BookAnAppointment />} />
-          <Route path="/resetPassword" element={<ResetPassword/>} />
+          {/* <Route path="/resetPassword" element={<ResetPassword/>} /> */}
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
@@ -66,7 +67,7 @@ function App() {
           <Route path ="/resetpassword/:resetPasswordId" element = {<ResetPasswordForm/>}/>
           <Route path="*" element={<ErrorPage />} />  {/* Render error page if path does not match */}
 
-          <Route path="/dashboardtest" element={<DashboardTest />} />   {/* TEST */}
+          {/* <Route path="/dashboardtest" element={<DashboardTest />} />   TEST */}
         </Routes>
         <Footer />
       </Router>
