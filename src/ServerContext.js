@@ -130,7 +130,6 @@ console.log(userInf)
     } catch (error) {
       console.log(error);
     }
-
   }
 
   async function DeleteUser(ID) {
@@ -153,6 +152,24 @@ console.log(userInf)
     }
 
   }
+
+  async function ResetPassword(ID,Password) {
+    try {
+      await axios.post('http://localhost:3007/api/reset', {
+          id: ID,
+          password:Password,
+      }).then((response) => {
+        console.log("response ResetPassword",response)
+        alert('Update succeed')
+          }, (error) => {
+              alert('error')
+              console.log(error);
+          });
+  } catch (error) {
+      console.log(error);
+  }
+    
+  }
 //-------DB END -----
   const value = {
     auth,
@@ -165,7 +182,7 @@ console.log(userInf)
     SetloginState,
     logout,
     userInf,//Get Account Details
-    CheckPassword, UpdateUserP,UpdateUser,DeleteUser,
+    CheckPassword, UpdateUserP,UpdateUser,DeleteUser,ResetPassword
   }
   return (
     <ServerContext.Provider value={value}>

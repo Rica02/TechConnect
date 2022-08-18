@@ -2,7 +2,9 @@ import React from 'react'
 import { DeleteButton, Input, EditButton, Container, Title, RWrap, LWrap, WrapContainer, LableContainer, Lable, Select, Data, Column, LableContainer2, ViewLink, LinkWrap } from '../AccountDetailsStyle'
 import { BsFillCloudUploadFill } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 function EditAccount({ editdAccountData, editAccountChange, handleCancelClick, handleUpdatelClick }) {
+    var navigate = useNavigate()
     return (
         <>
             <WrapContainer>
@@ -49,17 +51,18 @@ function EditAccount({ editdAccountData, editAccountChange, handleCancelClick, h
                         <Input type="text" name="address" required placeholder="Enter address..." value={editdAccountData.address} onChange={editAccountChange} />
                     </Column>
                     <Column>
-                        <Lable>Old Password :</Lable>
-                        <Input type="password" name="Password" required placeholder="Enter Password..." value={editdAccountData.Password} onChange={editAccountChange} />
+                        <EditButton onClick={() =>navigate("/resetPassword")}><FaRegEdit fontSize="1.5rem" />Reset Password</EditButton>
+                        {/* <Lable>Password :</Lable>  navigate("/")
+                        <Input type="password" name="Password" required placeholder="Enter Password..." value={editdAccountData.Password} onChange={editAccountChange} /> */}
                     </Column>
-                    <Column>
+                    {/* <Column>
                         <Lable>New Password :</Lable>
                         <Input type="password" name="NewPassword" required placeholder="Enter New Password..." value={editdAccountData.NewPassword} onChange={editAccountChange} />
                     </Column>
                     <Column>
                         <Lable>New Password confirm:</Lable>
                         <Input type="password" name="NewPassword2" required placeholder="Enter New Password confirm..." value={editdAccountData.NewPassword2} onChange={editAccountChange} />
-                    </Column>
+                    </Column> */}
                 </LableContainer>
             </WrapContainer>
         </>

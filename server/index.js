@@ -525,3 +525,20 @@ app.post("/api/delete", async function (req, res) {
         }
     })
 })
+
+//reset password
+app.post("/api/reset", async function (req, res) {
+    var id = req.body.id
+    var requestedPW2 = await bcrypt.hash(req.body.password, saltRounds)
+    var registerQuery = "UPDATE `techconnect`.`user` SET `password` = ? WHERE (`id` = ?)"
+    console.log(registerQuery);
+    connection.query(registerQuery, [requestedPW2,id], function (sqlErr, result) {
+        if (sqlErr) {
+            console.log(sqlErr);
+        } else {
+            console.log(req);
+            console.log(result);
+            console.log("succeed");
+        }
+    })
+})

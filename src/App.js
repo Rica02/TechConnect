@@ -27,6 +27,7 @@ import TutorPage from "./pages/TutorPage";
 import CreateMeeting from "./pages/CreateMeeting";
 import AddNews from "./pages/AddNews";
 import ForgotPassword from "./pages/Signin/ForgotPassword";
+import ResetPassword from "./pages/Signin/ResetPassword";
 
 function App() {
 
@@ -57,6 +58,7 @@ function App() {
           <Route path="/becomeatutor" element={<BecomeATutor />} />
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/bookanappointment" element={<BookAnAppointment />} />
+          <Route path="/resetPassword" element={<ResetPassword/>} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
