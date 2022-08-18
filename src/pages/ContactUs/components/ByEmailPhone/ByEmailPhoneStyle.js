@@ -10,4 +10,9 @@ export const Container = styled.div`
     h2 {
         text-align: center;
     }
+
+    button {
+        background: none;
+        border: none;
+    }
 `
