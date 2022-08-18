@@ -55,6 +55,7 @@ export function Navbar() {
                         {/* admin */}
                         {admin === '1' && (<>
                             <NavbarLink to="/dashboard">HOME</NavbarLink>
+                            <NavbarLink to="/allocation">ALLOCATION</NavbarLink>
                             <NavbarLink to="/createmeeting">CREATE MEETING</NavbarLink>
                             <NavbarLink to="/accountDetails">ACCOUNT DETAILS</NavbarLink>
                             <NavbarLink to="/addNews">ADD NEWS</NavbarLink>
@@ -150,6 +151,7 @@ export function Navbar() {
                     {admin === '1' && (<>
                         {/* show for admin NavbarLinkExtended*/}
                         <NavbarLinkExtended to="/dashboard" >HOME</NavbarLinkExtended>
+                        <NavbarLinkExtended to="/allocation">ALLOCATION</NavbarLinkExtended>
                         <NavbarLinkExtended to="/createmeeting">CREATE MEETING</NavbarLinkExtended>
                         <NavbarLinkExtended to="/accountDetails">ACCOUNT DETAILS</NavbarLinkExtended>
                         <NavbarLinkExtended to="/addNews">ADD NEWS</NavbarLinkExtended>

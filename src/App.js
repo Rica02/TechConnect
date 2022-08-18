@@ -30,6 +30,7 @@ import AddNews from "./pages/AddNews";
 import ForgotPassword from "./pages/Signin/ForgotPassword";
 import AccuntResetPassword from "./pages/AccountDetails/components/AccuntResetPassword";
 import ResetPasswordForm from "./pages/ResetPassword/resetPasswordForm";
+import Allocation from "./pages/Allocation";
 
 function App() {
   const [data, setData] = useState([]);
@@ -75,6 +76,7 @@ function App() {
           <Route path="/dashboard" element={<PrivateRoute><Dashboard/></PrivateRoute>} />
           <Route path="/accuntResetPassword" element={<PrivateRoute><AccuntResetPassword/></PrivateRoute>} />
           <Route path="/createmeeting" element={<PrivateRoute><CreateMeeting /></PrivateRoute>} />
+          <Route path="/allocation" element={<PrivateRoute><Allocation /></PrivateRoute>} />
           <Route path="/" element={<Home tutorData={data} serviceData={ourServices} />} />
           <Route path="/aboutus" element={<AboutUs tutorData={data} />} />
           <Route path="/ourservices" element={<OurServices serviceData={ourServices} />} />

@@ -204,7 +204,7 @@ useEffect(() => {
     setGetBookLesson(data.data)
   });
 }, [])
-console.log('getBookLesson',getBookLesson)
+
   //get changeAvailability
   const [getChangeAvailability, setGetChangeAvailability] = useState([]);
 useEffect(() => {
@@ -212,7 +212,7 @@ useEffect(() => {
     setGetChangeAvailability(data.data)
   });
 }, [])
-console.log( 'getChangeAvailability',getChangeAvailability)
+
 //ChangeAvailability
 async function ChangeAvailabilityToDB(data) {
   try {
@@ -261,6 +261,8 @@ async function ChangeAvailabilityToDB(data) {
     getMeetings,
     //ChangeAvailability
     ChangeAvailabilityToDB,
+    getBookLesson,
+    getChangeAvailability,
   }
   return (
     <ServerContext.Provider value={value}>
