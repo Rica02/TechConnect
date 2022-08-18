@@ -15,7 +15,7 @@ function BecomeATutor() {
     return (
         <>
             <Header headerTitle={"Become a tutor"} headerBanner={headerBanner} />
-            <div className="public-div-container" bgColor={({ theme }) => theme.colorMain.backgroundLight} >
+            <div className="public-div-container" bg={({ theme }) => theme.colorMain.backgroundLight} >
                 <UpperContainer>
                     <p>{FirstArticle}</p>
                     <button className="styled-button" onClick={ () => navigate("/bookanappointment") }>JOIN OUR TEAM</button>

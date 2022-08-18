@@ -1,20 +1,19 @@
 import React from 'react'
-import { Container, ContainerWrap, TextH2, ContentText, ImgWrap, Img, ImgText } from './AboutOurTeamStyle'
+import { Quote, ImgWrap } from './AboutOurTeamStyle'
 import TeamImg from "../../../../assets/images/about-us-our-team.jpg";
+import { AboutOurTeamArticle } from '../../../ArticleData'
 
-const AboutOurTeam = ({SubTitle, Article}) => {
+const AboutOurTeam = (props) => {
   return (
     <>
-        <Container>
-            <ContainerWrap>
-              <TextH2>{SubTitle}</TextH2>
-              <ContentText >{Article}</ContentText>
-              <ImgWrap>
-                <Img src={TeamImg}/>
-                <ImgText>A photo of our team</ImgText>
-              </ImgWrap>
-            </ContainerWrap>
-        </Container>
+      <div className="public-div-container" style={{ backgroundColor: props.bg }} >
+        <Quote>{AboutOurTeamArticle.SubTitle}</Quote>
+        <p>{AboutOurTeamArticle.Article}</p>
+        <ImgWrap>
+          <img src={TeamImg}/>
+          <p>A photo of our team</p>
+        </ImgWrap>
+      </div>
     </>
   )
 }

@@ -5,6 +5,7 @@ export const StyledSlideshowContainer = styled.div`
     background-color: ${ (props) => props.color };  // Either white or light beige
     padding: 35px 100px;
     color: ${ ({ theme }) => theme.colorMain.text };
+    border-bottom: solid ${ ({ theme }) => theme.colorMain.highlightMain } 2px;
 
     h2 {
         color: ${ ({ theme }) => theme.colorMain.highlightMain };

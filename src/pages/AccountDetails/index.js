@@ -67,7 +67,7 @@ function AccountDetails() {
   //   {obj!=null?setNotNull(true):setNotNull(false)}
   //   return notNull;
   // }
-  
+
   const handleUpdatelClick= async (e)=>{
     e.preventDefault();
     UpdateUser(editdAccountData);

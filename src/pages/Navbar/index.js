@@ -94,7 +94,7 @@ export function Navbar() {
                             setToggleSignin((value) => !value); // set the value opposite of current value
                         }}>
                             <SignButtonWrap>
-                                <RiAccountBoxFill fontSize="3em" />
+                                <RiAccountBoxFill className="sign-in-icon" fontSize="3em" />
                                 <NavbarButton >SIGN IN</NavbarButton>
                             </SignButtonWrap>
                         </Signwrap>
@@ -144,7 +144,7 @@ export function Navbar() {
                         <NavbarLinkExtended to="/contactus">CONTACT US</NavbarLinkExtended>
                         <NavbarSignContainerExtended >
                             <RiAccountBoxFill fontSize="3em" />
-                            <NavbarLinkExtended to="/signin">Sing in</NavbarLinkExtended>
+                            <NavbarLinkExtended to="/signin">SIGN IN</NavbarLinkExtended>
                         </NavbarSignContainerExtended>
                     </>)}
                     {admin === '1' && (<>
@@ -155,7 +155,7 @@ export function Navbar() {
                         <NavbarLinkExtended to="/addNews">ADD NEWS</NavbarLinkExtended>
                         <NavbarSignContainerExtended >
                             <RiAccountBoxFill fontSize="3em" />
-                            <NavbarButton onClick={(e) => LogoutToHome(e)}>log out</NavbarButton>
+                            <NavbarButton onClick={(e) => LogoutToHome(e)}>SIGN OUT</NavbarButton>
                         </NavbarSignContainerExtended>
                     </>)}
                     {admin === '2' && (<>
@@ -166,7 +166,7 @@ export function Navbar() {
                         <NavbarLinkExtended to="/dashboard">NEED HELLP?</NavbarLinkExtended>
                         <NavbarSignContainerExtended >
                             <RiAccountBoxFill fontSize="3em" />
-                            <NavbarButton onClick={(e) => LogoutToHome(e)}>log out</NavbarButton>
+                            <NavbarButton onClick={(e) => LogoutToHome(e)}>SIGN OUT</NavbarButton>
                         </NavbarSignContainerExtended>
                     </>)}
                     {admin === '3' && (<>
@@ -177,7 +177,7 @@ export function Navbar() {
                         <NavbarLinkExtended to="/dashboard">NEED HELLP?</NavbarLinkExtended>
                         <NavbarSignContainerExtended >
                             <RiAccountBoxFill fontSize="3em" />
-                            <NavbarButton onClick={(e) => LogoutToHome(e)}>log out</NavbarButton>
+                            <NavbarButton onClick={(e) => LogoutToHome(e)}>SIGN OUT</NavbarButton>
                         </NavbarSignContainerExtended>
                     </>)}
                 </NavbarExtendedContainer>

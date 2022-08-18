@@ -15,13 +15,18 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true,}));
+
 // stripe-checkout
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 app.use(express.static("public"));
 
 app.post("/pay", async (req, res) => {
     const { items } = req.body;
-  
+
     // Create a PaymentIntent with the order amount and currency
     const paymentIntent = await stripe.paymentIntents.create({
       amount: 0.1,
@@ -30,7 +35,7 @@ app.post("/pay", async (req, res) => {
         enabled: true,
       },
     });
-  
+
     res.send({
       clientSecret: paymentIntent.client_secret,
     });
@@ -38,14 +43,6 @@ app.post("/pay", async (req, res) => {
 
 //---------------stripe-checkout EDN
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
-app.use(express.json())
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-    extended: true,
-}))
-app.use(cors())
 
 app.get("/", function (req, res) {
     var mySQLquery = "SELECT * FROM techconnect.user"
@@ -119,7 +116,7 @@ app.post("/login", function (req, res) {
     })
 })
 
-//forgot password 
+//forgot password
 
 app.post("/forgot-password", function (req, res) {
 
@@ -139,14 +136,13 @@ app.post("/forgot-password", function (req, res) {
         else{
             res.status(210).send({message: "No email or phone associated with"})
         }
-
     })
-
 })
-//reset password 
+
+//reset password
 
 app.post("/api/resetpassword", async function (req, res) {
-    //testing account current: 
+    //testing account current:
 
     //acc: matthew.ng.id20@gmail.com
     //password: passwordtest
@@ -168,10 +164,48 @@ app.post("/api/resetpassword", async function (req, res) {
         else{
             res.status(210).send({message: "No result found"})
         }
-
     })
-
 })
+
+
+//  WEB CONTENT
+
+// get content for web
+app.post("/getwebcontent", function (req, res) {
+
+    var ourServices = [];
+
+    var selectQuery = "SELECT * FROM techconnect.webcontent"
+    connection.query(selectQuery,[
+        req.body.userId
+    ],function(sqlErr, result){
+        if (sqlErr) {
+            console.log(sqlErr);
+        }
+        else if (result.length > 0) {
+
+            // get each result and add them to array
+            result.forEach(function (content, index) {
+                if(content.section == "services") {
+                    ourServices.push(content);
+                }
+            })
+
+            //console.log("List: " + JSON.stringify(ourServices));
+
+            let dataRes = { ourServices }
+
+            // send meeting lists to front-end
+            res.status(200).json(dataRes);
+            //console.log("Result: " + JSON.stringify(result));
+        }
+        else {
+            console.log("Error in retrieving webcontent info");
+        }
+    })
+})
+
+
 // STUDENT / TUTOR FUNCTIONS
 
 // get student's meeting details from DB
@@ -179,7 +213,7 @@ app.post("/getstudentmeetings", function (req, res) {
 
     var meetingList = [];
 
-    var selectQuery = "SELECT  m.tutorId, m.online, m.meetingId, m.meetingPw, "
+    var selectQuery = "SELECT  m.tutorId, m.online, m.meetingId, m.joinUrl, m.meetingPw, "
      + "m.startTime, m.concluded, t.firstName, t.lastName FROM techconnect.meetings m "
      + "INNER JOIN techconnect.user t ON (m.tutorId = t.id) WHERE studentId = ?"
     connection.query(selectQuery,[
@@ -390,11 +424,21 @@ app.post('/zoommeeting', (req, res) => {
       start_time: req.body.start_time,
       timezone: "Australia/Sydney",
       type: 2,                   // 1 = instant meeting, 2 = scheduled meeting
-      default_password: false,
-      duration: 40,              // 40 min is the max meeting time allowed with a basic free Zoom account
+      duration: 40,              // 40 min is the max meeting time allowed with a basic, unlicensed free Zoom account
       settings: {
         host_video: "true",
         participant_video: "true",
+
+        // IMPORTANT:
+        // In order for an admin (the account creating the Zoom meeting) to designate the tutor as
+        // “alternative host” so they are able to start the meeting, both accounts need to have paid Licenses.
+        // I am currently using free, unlicensed Basic accounts, therefore at this time meetings can only be
+        // started by the admin, and the following line of code will not work.
+
+        // More on alternative host: https://support.zoom.us/hc/en-us/articles/208220166-Alternative-host
+        // More on scheduling privileges: https://support.zoom.us/hc/en-us/articles/201362803-Scheduling-privilege
+
+        //alternative_hosts: req.body.tutor_email,
       },
     },
     auth: {
@@ -414,7 +458,7 @@ app.post('/zoommeeting', (req, res) => {
             console.log('Response: ', response);
 
             // upload meeting details to DB
-            var registerQuery = "INSERT INTO techconnect.meetings (studentId, tutorId, online, startUrl, meetingId, meetingPw, startTime, concluded) VALUES (?,?,?,?,?,?,?,?)"
+            var registerQuery = "INSERT INTO techconnect.meetings (studentId, tutorId, online, startUrl, joinUrl, meetingId, meetingPw, startTime, concluded) VALUES (?,?,?,?,?,?,?,?,?)"
             connection.query(registerQuery,[
                 req.body.student_id,
                 req.body.tutor_id,

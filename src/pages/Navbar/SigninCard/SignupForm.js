@@ -5,7 +5,10 @@ import {
   FormH1,
   FormInput,
   FormLabel,
+  TableCell,
+  Table
 } from './SigninStyle';
+
 function SignupForm() {
   const [formInput, setFormInput] = useState({
     email: "",
@@ -33,7 +36,7 @@ function SignupForm() {
       if (result) {
         console.log(result);
         alert("succeeded register")
-       
+
       } else {
         console.log(reject)
         alert(reject)
@@ -44,19 +47,37 @@ function SignupForm() {
   return (
     <>
       <FormH1>Create your account</FormH1>
-      <FormLabel htmlFor='for'>First Name</FormLabel>
-      <FormInput onChange={handleForm} name="fname" type='text' required />
-      <FormLabel htmlFor='for'>Last Name</FormLabel>
-      <FormInput onChange={handleForm} name="lname" type='text' required />
-      <FormLabel htmlFor='for'>Email</FormLabel>
-      <FormInput onChange={handleForm} name="email" type='email' required />
-      <FormLabel htmlFor='for'>Phone number</FormLabel>
-      <FormInput onChange={handleForm} name="phone" type='tel' required />
-      <FormLabel htmlFor='for'>Password</FormLabel>
-      <FormInput onChange={handleForm} name="password" type='password' required />
-      <FormLabel htmlFor='for'>Password confirm</FormLabel>
-      <FormInput type='password' required name="passwordConfirm" onChange={handleForm}/>
-      <FormButton type='submitSignUp' onClick={() => regFunction()}>Register</FormButton>
+      <Table>
+        <tr>
+          <TableCell>
+            <FormLabel htmlFor='for'>First Name</FormLabel>
+            <FormInput onChange={handleForm} name="fname" type='text' required />
+          </TableCell>
+          <TableCell>
+            <FormLabel htmlFor='for'>Last Name</FormLabel>
+            <FormInput onChange={handleForm} name="lname" type='text' required />
+          </TableCell>
+          <TableCell>
+            <FormLabel htmlFor='for'>Email</FormLabel>
+            <FormInput onChange={handleForm} name="email" type='email' required />
+          </TableCell>
+        </tr>
+        <tr>
+        <TableCell>
+            <FormLabel htmlFor='for'>Phone number</FormLabel>
+            <FormInput onChange={handleForm} name="phone" type='tel' required />
+          </TableCell>
+          <TableCell>
+            <FormLabel htmlFor='for'>Password</FormLabel>
+            <FormInput onChange={handleForm} name="password" type='password' required />
+          </TableCell>
+          <TableCell>
+            <FormLabel htmlFor='for'>Password confirm</FormLabel>
+            <FormInput type='password' required name="passwordConfirm" onChange={handleForm}/>
+          </TableCell>
+        </tr>
+      </Table>
+      <FormButton type='submitSignUp' onClick={() => regFunction()}>REGISTER</FormButton>
     </>
   )
 }

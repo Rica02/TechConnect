@@ -8,28 +8,20 @@ import testimonialImg1 from "../assets/images/home-testimonial-1.jpg";
 import testimonialImg2 from "../assets/images/home-testimonial-2.jpg";
 
 export const AboutOurTeamArticle = {
-    SubTitle:'"A quote that encapsulates our mission statement"',
-    Article:'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.'
+    SubTitle:'"We believe the most important human value is connection. We help people connect, so they are never alone."',
+    Article:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vel vehicula leo, nec consectetur sem. Proin iaculis neque lobortis turpis pretium, id euismod eros venenatis. Sed mi arcu, interdum eget semper eget, tempus sit amet elit. Donec tristique dolor non laoreet iaculis. Sed eu dolor dolor. Aenean vitae quam interdum est mattis ornare. Duis pretium diam ut eleifend elementum. Duis efficitur congue nulla. Morbi tempor libero vel purus laoreet, ac pellentesque leo mattis.'
 }
 
 export const OurMissionArticle = {
-    Article:'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.'
+    Article:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vel vehicula leo, nec consectetur sem. Proin iaculis neque lobortis turpis pretium, id euismod eros venenatis. Sed mi arcu, interdum eget semper eget, tempus sit amet elit. Donec tristique dolor non laoreet iaculis. Sed eu dolor dolor. Aenean vitae quam interdum est mattis ornare. Duis pretium diam ut eleifend elementum. Duis efficitur congue nulla. Morbi tempor libero vel purus laoreet, ac pellentesque leo mattis.'
 }
 
 export const Start3StepArticle = {
-    Step1_1:'To contatct us by emaill',
-    Step1_2:'or call us by phone at ',
-    Step1_3:'One of Our representatives will get in touch with you to have a chat with you.',
-    Step2:'Arrange to get lessons in person by having a tutor come to your house or online by video call',
-    Step3:'Start Connecting !'
-}
-
-// TODO: Add paragraphs below
-export const WhatWeDoArticle = {
-    // FirstArticle:'',
-    // SecondArticle:'',
-    // ThirdArticle:'',
-    // FourthArticle:''
+    Step1_1:'To contatct us by email ',
+    Step1_2:' or call us by phone at ',
+    Step1_3:' One of Our representatives will get in touch with you to have a chat with you.',
+    Step2:'Arrange to get lessons in person by having a tutor come to your house or online by video call.',
+    Step3:'Start Connecting!'
 }
 
 export const OurTutorsArticle = {

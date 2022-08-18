@@ -5,7 +5,7 @@ import { StyledSlideshowContainer } from "./TestimonialsStyle";
 
 export default function Testimonials(props) {
     return (
-        <StyledSlideshowContainer bgColor={ props.bgColor }>
+        <StyledSlideshowContainer style={{ backgroundColor: props.bg }} >
             <h2>Testimonials</h2>
             <Slide>
                 {props.TestimonialList.map((testimonal, index)=> (

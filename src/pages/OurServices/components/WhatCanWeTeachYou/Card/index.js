@@ -1,5 +1,6 @@
 import React from 'react'
-import {CardWrap,CardImg,CardFont,CardFontWrap} from './CardStyle'
+import { CardWrap, CardImg, CardFont, CardFontWrap } from './CardStyle'
+
 function Card({img,cardTitle}) {
   return (
     <CardWrap>
@@ -7,7 +8,6 @@ function Card({img,cardTitle}) {
         <CardFontWrap>
           <CardFont>{cardTitle}</CardFont>
         </CardFontWrap>
-        
     </CardWrap>
   )
 }
