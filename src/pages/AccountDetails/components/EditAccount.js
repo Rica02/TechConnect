@@ -51,7 +51,7 @@ function EditAccount({ editdAccountData, editAccountChange, handleCancelClick, h
                         <Input type="text" name="address" required placeholder="Enter address..." value={editdAccountData.address} onChange={editAccountChange} />
                     </Column>
                     <Column>
-                        <EditButton onClick={() =>navigate("/resetPassword")}><FaRegEdit fontSize="1.5rem" />Reset Password</EditButton>
+                        <EditButton onClick={() =>navigate("/accuntResetPassword")}><FaRegEdit fontSize="1.5rem" />Reset Password</EditButton>
                         {/* <Lable>Password :</Lable>  navigate("/")
                         <Input type="password" name="Password" required placeholder="Enter Password..." value={editdAccountData.Password} onChange={editAccountChange} /> */}
                     </Column>

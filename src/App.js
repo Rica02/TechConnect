@@ -28,7 +28,8 @@ import TutorPage from "./pages/TutorPage";
 import CreateMeeting from "./pages/CreateMeeting";
 import AddNews from "./pages/AddNews";
 import ForgotPassword from "./pages/Signin/ForgotPassword";
-import ResetPasswordForm from "./pages/ResetPassword/ResetPasswordForm";
+import AccuntResetPassword from "./pages/AccountDetails/components/AccuntResetPassword";
+import ResetPasswordForm from "./pages/ResetPassword/resetPasswordForm";
 
 function App() {
   const [data, setData] = useState([])
@@ -36,6 +37,14 @@ function App() {
   const [ourServices, setOurServices] = useState([]);
 
   //console.log("Web content: " + JSON.stringify(ourServices))
+
+  // on page load, get web content data
+  useEffect(() => {
+    try {
+        axios.post('http://localhost:3007/getwebcontent')
+        .then((response) => {
+          console.log("Get web content successful.");
+          // console.log("Get users successful. Response data: " + JSON.stringify(response))
 
   // on page load, get web content data
   useEffect(() => {
@@ -72,6 +81,7 @@ function App() {
           <Route path="/changeavailability" element={<PrivateRoute><ChangeAvailability/></PrivateRoute>} />
           <Route path="/addNews" element={<PrivateRoute><AddNews/></PrivateRoute>} />
           <Route path="/dashboard" element={<PrivateRoute><Dashboard/></PrivateRoute>} />
+          <Route path="/accuntResetPassword" element={<PrivateRoute><AccuntResetPassword/></PrivateRoute>} />
           <Route path="/createmeeting" element={<PrivateRoute><CreateMeeting /></PrivateRoute>} />
           <Route path="/" element={<Home tutorData={data} serviceData={ourServices} />} />
           <Route path="/aboutus" element={<AboutUs tutorData={data} />} />
@@ -80,7 +90,6 @@ function App() {
           <Route path="/becomeatutor" element={<BecomeATutor />} />
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/bookanappointment" element={<BookAnAppointment />} />
-          {/* <Route path="/resetPassword" element={<ResetPassword/>} /> */}
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />

@@ -44,7 +44,37 @@ export function ServerProvider({ children }) {
       setUserInf(data.data)
     });
   }, [])
-console.log(userInf)
+// console.log(userInf)
+//Get News
+const [getNews, setGetNews] = useState([]);
+useEffect(() => {
+  axios.get("http://localhost:3007/api/news").then((data) => {
+    setGetNews(data.data)
+  });
+}, [])
+//add news
+async function AddNewsToDB(data) {
+  console.log("AddNewsToDB")
+  try {
+    await axios.post('http://localhost:3007/api/addNews', {
+    
+      title: data.title,
+      date: data.date,
+      text: data.text,
+    })
+      .then((response) => {
+        console.log(response)
+        alert('Update succeed')
+      }, (error) => {
+        alert('error')
+        console.log(error);
+        alert("error")
+      });
+  } catch (error) {
+    console.log(error);
+  }
+
+}
 
   async function CheckPassword(id, Password) {
 
@@ -54,14 +84,11 @@ console.log(userInf)
         password: Password,
       })
         .then((response) => {
-          if (response.data.length >= 1) {
-            console.log("setresult true");
+          if (response.status===200) {
             setresult(true);
-            console.log("result", result)
             return result;
-          } else if (response.data < 1) {
+          } else if (response.status===220) {
             alert("no combination found")
-            console.log("result", result)
             setresult(false);
             return result;
           }
@@ -160,7 +187,12 @@ console.log(userInf)
           password:Password,
       }).then((response) => {
         console.log("response ResetPassword",response)
-        alert('Update succeed')
+        if(response.status===200){
+          alert('Update succeed')
+        }else{
+          alert('Update error')
+        }
+        
           }, (error) => {
               alert('error')
               console.log(error);
@@ -182,7 +214,9 @@ console.log(userInf)
     SetloginState,
     logout,
     userInf,//Get Account Details
-    CheckPassword, UpdateUserP,UpdateUser,DeleteUser,ResetPassword
+    CheckPassword, UpdateUserP,UpdateUser,DeleteUser,ResetPassword,
+    //News
+    getNews,AddNewsToDB,
   }
   return (
     <ServerContext.Provider value={value}>
