@@ -29,7 +29,7 @@ import CreateMeeting from "./pages/CreateMeeting";
 import AddNews from "./pages/AddNews";
 import ForgotPassword from "./pages/Signin/ForgotPassword";
 import AccuntResetPassword from "./pages/AccountDetails/components/AccuntResetPassword";
-import ResetPasswordForm from "./pages/ResetPassword/ResetPasswordForm";
+import ResetPasswordForm from "./pages/ResetPassword/resetPasswordForm";
 
 function App() {
   const [data, setData] = useState([]);
