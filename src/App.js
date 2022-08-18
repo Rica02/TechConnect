@@ -27,7 +27,7 @@ import TutorPage from "./pages/TutorPage";
 import CreateMeeting from "./pages/CreateMeeting";
 import AddNews from "./pages/AddNews";
 import ForgotPassword from "./pages/Signin/ForgotPassword";
-import ResetPassword from "./pages/Signin/ResetPasswordA";
+import AccuntResetPassword from "./pages/AccountDetails/components/AccuntResetPassword";
 
 function App() {
 
@@ -50,6 +50,7 @@ function App() {
           <Route path="/changeavailability" element={<PrivateRoute><ChangeAvailability/></PrivateRoute>} />
           <Route path="/addNews" element={<PrivateRoute><AddNews/></PrivateRoute>} />
           <Route path="/dashboard" element={<PrivateRoute><Dashboard/></PrivateRoute>} />
+          <Route path="/accuntResetPassword" element={<PrivateRoute><AccuntResetPassword/></PrivateRoute>} />
           <Route path="/createmeeting" element={<PrivateRoute><CreateMeeting /></PrivateRoute>} />
           <Route path="/" element={<Home tutorData={data} />} />
           <Route path="/aboutus" element={<AboutUs tutorData={data} />} />
@@ -58,7 +59,6 @@ function App() {
           <Route path="/becomeatutor" element={<BecomeATutor />} />
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/bookanappointment" element={<BookAnAppointment />} />
-          <Route path="/resetPassword" element={<ResetPassword/>} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />

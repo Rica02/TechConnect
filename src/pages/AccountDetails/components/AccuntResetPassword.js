@@ -10,9 +10,9 @@ import {
     Icon,
     Form,
     FormLabel
-} from './SigninStyle';
-import { useDB } from '../../ServerContext';
-function ResetPassword() {
+} from '../../Signin/SigninStyle';
+import { useDB } from '../../../ServerContext';
+function AccuntResetPassword() {
     // Function that navigates to a different route
     var navigate = useNavigate()
     const { ResetPassword, userInf, CheckPassword } = useDB()
@@ -32,9 +32,9 @@ function ResetPassword() {
             alert("New Password not same")
             return;
         } else
-            if (CheckPassword(userInf.id, formInput.oldPassword)) {
+            if (CheckPassword(userInf[0].id, formInput.oldPassword)) {
                 //update with password
-                ResetPassword(userInf, formInput.newPassword)
+                ResetPassword(userInf[0].id, formInput.newPassword)
                 return;
             } else {
                 alert("Old Password not correct")
@@ -65,4 +65,4 @@ function ResetPassword() {
     )
 }
 
-export default ResetPassword
+export default AccuntResetPassword

@@ -485,7 +485,8 @@ app.post("/api/checkPassword", function (req, res) {
     console.log("api get checkPassword");
     var id = req.body.id
     var password = req.body.password
-
+    console.log(id)
+    console.log(password)
     var searchQuery = "SELECT * FROM techconnect.user WHERE id = ?"
     connection.query(searchQuery, [id], async (sqlError, result) => {
         if (sqlError) {
@@ -496,9 +497,9 @@ app.post("/api/checkPassword", function (req, res) {
             console.log(comparison);
             if (comparison) {
                 console.log("Same password");
-                res.send(result)
+                res.status(200).send(result);
             } else {
-                res.send(0)
+                res.status(220).send(result);
                 console.log("server no combination found");
             }
         }
@@ -538,6 +539,7 @@ app.post("/api/reset", async function (req, res) {
         } else {
             console.log(req);
             console.log(result);
+            res.status(200).send(result);
             console.log("succeed");
         }
     })

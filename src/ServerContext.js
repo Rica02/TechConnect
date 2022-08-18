@@ -84,14 +84,11 @@ async function AddNewsToDB(data) {
         password: Password,
       })
         .then((response) => {
-          if (response.data.length >= 1) {
-            console.log("setresult true");
+          if (response.status===200) {
             setresult(true);
-            console.log("result", result)
             return result;
-          } else if (response.data < 1) {
+          } else if (response.status===220) {
             alert("no combination found")
-            console.log("result", result)
             setresult(false);
             return result;
           }
@@ -190,7 +187,12 @@ async function AddNewsToDB(data) {
           password:Password,
       }).then((response) => {
         console.log("response ResetPassword",response)
-        alert('Update succeed')
+        if(response.status===200){
+          alert('Update succeed')
+        }else{
+          alert('Update error')
+        }
+        
           }, (error) => {
               alert('error')
               console.log(error);
