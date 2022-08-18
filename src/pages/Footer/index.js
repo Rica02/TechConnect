@@ -60,12 +60,12 @@ const Footer = () => {
             <SocialMedia>
                 <SocialMediaWrap>
                     <SocialLogo to='/'>Tech<span>Connect</span></SocialLogo>
-                    <WebsiteRights>TechConnect ® {new Date().getFullYear()} All rithts reserved.</WebsiteRights>
+                    <WebsiteRights>TechConnect ® {new Date().getFullYear()} All rights reserved.</WebsiteRights>
                     <SocialIcons>
-                        <SocialIconLink href="//www.Facebook.com/" target="_blank" aria-label = "Facebook"><FaFacebook/></SocialIconLink>
-                        <SocialIconLink href="//www.Instagram.com/" target="_blank" aria-label = "Instagram"><FaInstagram/></SocialIconLink>
-                        <SocialIconLink href="//www.Youtube.com/" target="_blank" aria-label = "Youtube"><FaYoutube/></SocialIconLink>
-                        <SocialIconLink href="//www.teitter.com/" target="_blank" aria-label = "Twitter"><FaTwitter/></SocialIconLink>
+                        <SocialIconLink href="//www.facebook.com/" target="_blank" aria-label = "Facebook"><FaFacebook/></SocialIconLink>
+                        <SocialIconLink href="//www.instagram.com/" target="_blank" aria-label = "Instagram"><FaInstagram/></SocialIconLink>
+                        <SocialIconLink href="//www.youtube.com/" target="_blank" aria-label = "Youtube"><FaYoutube/></SocialIconLink>
+                        <SocialIconLink href="//www.twitter.com/" target="_blank" aria-label = "Twitter"><FaTwitter/></SocialIconLink>
                     </SocialIcons>
                 </SocialMediaWrap>
             </SocialMedia>
