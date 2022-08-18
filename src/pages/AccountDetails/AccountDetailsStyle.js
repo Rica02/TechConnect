@@ -103,3 +103,16 @@ color:${({ theme }) => theme.colorMain.highlightRed};
 font-weight:bold;
 align-items: end;
 `; 
+
+export const Input=styled.input`
+`;
+export const EditCardWrap=styled.div`
+display: grid;
+max-width: 400px;
+ height: 10rem;
+ margin: 0.2rem;
+ padding: 0.5rem;
+`;
+
+export const Select=styled.select`
+`;

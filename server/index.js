@@ -13,6 +13,31 @@ const zoomConfig = require('./config/zoom.js');
 const rp = require('request-promise');
 const app = express();
 
+app.use(cors());
+app.use(express.json());
+// stripe-checkout
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+app.use(express.static("public"));
+
+app.post("/pay", async (req, res) => {
+    const { items } = req.body;
+  
+    // Create a PaymentIntent with the order amount and currency
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: 0.1,
+      currency: "aud",
+      automatic_payment_methods: {
+        enabled: true,
+      },
+    });
+  
+    res.send({
+      clientSecret: paymentIntent.client_secret,
+    });
+  });
+
+//---------------stripe-checkout EDN
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(express.json())
@@ -70,9 +95,11 @@ app.post("/login", function (req, res) {
     console.log("get LOGIN FROM BACKEND");
     var email = req.body.email
     var password = req.body.password
-
+    console.log("email",email);
+    console.log("password",password);
     var searchQuery = "SELECT * FROM techconnect.user WHERE email = ?"
     connection.query(searchQuery, [email], async (sqlError, result) => {
+        console.log("result",result);
         if (sqlError) {
             console.log(sqlError);
         }
@@ -153,9 +180,9 @@ app.post("/getstudentmeetings", function (req, res) {
     var meetingList = [];
 
     var selectQuery = "SELECT  m.tutorId, m.online, m.meetingId, m.meetingPw, "
-        + "m.startTime, m.concluded, t.firstName, t.lastName FROM techconnect.meetings m "
-        + "INNER JOIN techconnect.user t ON (m.tutorId = t.id) WHERE studentId = ?"
-    connection.query(selectQuery, [
+     + "m.startTime, m.concluded, t.firstName, t.lastName FROM techconnect.meetings m "
+     + "INNER JOIN techconnect.user t ON (m.tutorId = t.id) WHERE studentId = ?"
+    connection.query(selectQuery,[
         req.body.userId
     ], function (sqlErr, result) {
         if (sqlErr) {
@@ -169,14 +196,14 @@ app.post("/getstudentmeetings", function (req, res) {
                 myMeeting["tutorName"] = meeting.firstName + " " + meeting.lastName;
                 myMeeting["online"] = meeting.online;
                 myMeeting["meetingId"] = meeting.meetingId;
+                myMeeting["joinUrl"] = meeting.joinUrl;
                 myMeeting["meetingPw"] = meeting.meetingPw;
                 myMeeting["startTime"] = meeting.startTime;
                 myMeeting["concluded"] = meeting.concluded;
                 meetingList.push(myMeeting);
             })
 
-            // console.log("Tutor list: " + JSON.stringify(tutorList));
-            // console.log("Student list: " + JSON.stringify(studentList));
+            //console.log("Student meeting list: " + JSON.stringify(meetingList));
 
             // send meeting lists to front-end
             res.status(200).json(meetingList);
@@ -215,8 +242,7 @@ app.post("/gettutormeetings", function (req, res) {
                 meetingList.push(myMeeting);
             })
 
-            // console.log("Tutor list: " + JSON.stringify(tutorList));
-            // console.log("Student list: " + JSON.stringify(studentList));
+            // console.log("Tutor meeting list: " + JSON.stringify(meetingList));
 
             // send meeting lists to front-end
             res.status(200).json(meetingList);
@@ -230,7 +256,7 @@ app.post("/gettutormeetings", function (req, res) {
 
 // ADMIN FUNCTIONS
 
-// get tutor and student list (to display in admin's "create meeting" page)
+// get tutor and student list (used in admin pages)
 app.post("/getusers", function (req, res) {
 
     var studentList = [];
@@ -247,12 +273,18 @@ app.post("/getusers", function (req, res) {
                 myUser = {};
                 if (user.admin == 2) {
                     myUser["id"] = user.id;
-                    myUser["name"] = user.firstName + " " + user.lastName;
+                    myUser["firstName"] = user.firstName;
+                    myUser["lastName"] = user.lastName;
+                    myUser["email"] = user.email;
+                    myUser["phone"] = user.phone;
                     myUser["admin"] = user.admin;
                     tutorList.push(myUser);
                 } else if (user.admin == 3) {
                     myUser["id"] = user.id;
-                    myUser["name"] = user.firstName + " " + user.lastName;
+                    myUser["firstName"] = user.firstName;
+                    myUser["lastName"] = user.lastName;
+                    myUser["email"] = user.email;
+                    myUser["phone"] = user.phone;
                     myUser["admin"] = user.admin;
                     studentList.push(myUser);
                 }
@@ -268,6 +300,44 @@ app.post("/getusers", function (req, res) {
         }
         else {
             console.log("Error in retrieving user info");
+        }
+    })
+})
+
+// get all meeting details from DB
+app.post("/getallmeetings", function (req, res) {
+
+    var meetingList = [];
+
+    var selectQuery = "SELECT m.id, m.studentId, m.tutorId, m.online, m.meetingId, m.startTime, m.concluded FROM techconnect.meetings m "
+    connection.query(selectQuery,[
+        req.body.userId
+    ],function(sqlErr, result){
+        if (sqlErr) {
+            console.log(sqlErr);
+        }
+        else if (result.length > 0) {
+
+            // get each meeting details and add them to array
+            result.forEach(function (meeting, index) {
+                myMeeting = {};
+                myMeeting["id"] = meeting.id;
+                myMeeting["studentId"] = meeting.studentId;
+                myMeeting["tutorId"] = meeting.tutorId;
+                myMeeting["online"] = meeting.online;
+                myMeeting["meetingId"] = meeting.meetingId;
+                myMeeting["startTime"] = meeting.startTime;
+                myMeeting["concluded"] = meeting.concluded;
+                meetingList.push(myMeeting);
+            })
+            //console.log("Meeting list: " + JSON.stringify(meetingList));
+
+            // send meeting lists to front-end
+            res.status(200).json(meetingList);
+            //console.log("Result: " + JSON.stringify(result));
+        }
+        else {
+            console.log("Error in retrieving meeting info");
         }
     })
 })
@@ -310,32 +380,32 @@ const token = jwt.sign(payload, zoomConfig.APISecret);
 
 // use userinfo from the form and make a post request to /userinfo
 app.post('/zoommeeting', (req, res) => {
-    //console.log("IN BACKEND: Topic = " + req.body.topic + " Start date = " + req.body.start_time);
-    var options = {
-        method: "POST",
-        // make API call "create meeting" Zoom endpoint
-        uri: "https://api.zoom.us/v2/users/" + email + "/meetings",
-        body: {
-            topic: req.body.topic,
-            start_time: req.body.start_time,
-            timezone: "Australia/Sydney",
-            type: 2,                   // 1 = instant meeting, 2 = scheduled meeting
-            default_password: false,
-            duration: 40,              // 40 min is the max meeting time allowed with a basic free Zoom account
-            settings: {
-                host_video: "true",
-                participant_video: "true",
-            },
-        },
-        auth: {
-            'bearer': token
-        },
-        headers: {
-            'User-Agent': 'Zoom-api-Jwt-Request',
-            'content-type': 'application/json'
-        },
-        json: true // parse the JSON string in the response
-    };
+  //console.log("IN BACKEND: Topic = " + req.body.topic + " Start date = " + req.body.start_time);
+  var options = {
+    method: "POST",
+    // make API call "create meeting" Zoom endpoint
+    uri: "https://api.zoom.us/v2/users/" + email + "/meetings",
+    body: {
+      topic: req.body.topic,
+      start_time: req.body.start_time,
+      timezone: "Australia/Sydney",
+      type: 2,                   // 1 = instant meeting, 2 = scheduled meeting
+      default_password: false,
+      duration: 40,              // 40 min is the max meeting time allowed with a basic free Zoom account
+      settings: {
+        host_video: "true",
+        participant_video: "true",
+      },
+    },
+    auth: {
+        'bearer': token
+    },
+    headers: {
+        'User-Agent': 'Zoom-api-Jwt-Request',
+        'content-type': 'application/json'
+    },
+    json: true // parse the JSON string in the response
+  };
 
     // use request-promise module's .then() method to make request calls.
     rp(options)
@@ -345,11 +415,12 @@ app.post('/zoommeeting', (req, res) => {
 
             // upload meeting details to DB
             var registerQuery = "INSERT INTO techconnect.meetings (studentId, tutorId, online, startUrl, meetingId, meetingPw, startTime, concluded) VALUES (?,?,?,?,?,?,?,?)"
-            connection.query(registerQuery, [
+            connection.query(registerQuery,[
                 req.body.student_id,
                 req.body.tutor_id,
                 true,
                 response.start_url,
+                response.join_url,
                 response.id,
                 response.password,
                 response.start_time,
