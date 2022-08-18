@@ -27,7 +27,7 @@ import TutorPage from "./pages/TutorPage";
 import CreateMeeting from "./pages/CreateMeeting";
 import AddNews from "./pages/AddNews";
 import ForgotPassword from "./pages/Signin/ForgotPassword";
-import ResetPassword from "./pages/Signin/ResetPassword";
+import DashboardTest from "./pages/ZoomTest/DashboardTest";
 
 function App() {
 
@@ -63,7 +63,10 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route path="/addnews" element={<AddNews />} />
+          <Route path ="/resetpassword/:resetPasswordId" element = {<ResetPasswordForm/>}/>
           <Route path="*" element={<ErrorPage />} />  {/* Render error page if path does not match */}
+
+          <Route path="/dashboardtest" element={<DashboardTest />} />   {/* TEST */}
         </Routes>
         <Footer />
       </Router>

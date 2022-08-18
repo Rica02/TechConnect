@@ -8,33 +8,33 @@ import {
     FormInput,
     FormWrap,
     Icon,
-    Form ,
+    Form,
     FormLabel,
     FormInputText
 } from './AddNewsStyle';
 
 function AddNews() {
-  return (
-    <Container>
+    return (
+        <Container>
             <FormWrap>
                 <Icon to="/"></Icon>
                 <FormContent>
                     <Form action="#">
-                    <FormH1>Post News Page</FormH1>
+                        <FormH1>Post News Page</FormH1>
                         <FormLabel htmlFor='for'>Title</FormLabel>
-                        <FormInput type='email' required/>
+                        <FormInput type='email' required />
                         <FormLabel htmlFor='for'>Date</FormLabel>
-                        <FormInput type='date' required/>
+                        <FormInput type='date' required />
                         <FormLabel htmlFor='for'>Text</FormLabel>
-                        <FormInputText type='text' required/>
-                        <FormButton type='submitSignup'>Submit</FormButton> 
+                        <FormInputText type='text' required />
+                        <FormButton type='submitSignup'>Submit</FormButton>
                     </Form>
 
                 </FormContent>
-             
+
             </FormWrap>
-            </Container>
-  )
+        </Container>
+    )
 }
 
 export default AddNews

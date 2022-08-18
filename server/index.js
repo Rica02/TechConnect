@@ -119,6 +119,59 @@ app.post("/login", function (req, res) {
     })
 })
 
+//forgot password 
+
+app.post("/forgot-password", function (req, res) {
+
+    var { email } = req.body
+    var { phone } = req.body
+
+    //var searchQuery = "SELECT email, phone FROM techconnect.user WHERE email = ?"
+    var searchQuery = "SELECT * FROM techconnect.user WHERE email = ? AND phone = ?"
+
+    connection.query(searchQuery, [email,phone], async (sqlError, result) => {
+        if (sqlError) {
+            console.log(sqlError);
+        }
+        else if (result && result.length > 0) {
+            res.status(200).send({message:"Directing to reset password", result})
+        }
+        else{
+            res.status(210).send({message: "No email or phone associated with"})
+        }
+
+    })
+
+})
+//reset password 
+
+app.post("/api/resetpassword", async function (req, res) {
+    //testing account current: 
+
+    //acc: matthew.ng.id20@gmail.com
+    //password: passwordtest
+    var { email } = req.body
+    var { password } = req.body
+    //password encryption
+    var newPassword = await bcrypt.hash(password, saltRounds)
+    var updateQuery = "UPDATE techconnect.user SET password = ? WHERE (email = ?)"
+
+
+    //Update the new password
+    connection.query(updateQuery, [newPassword,email], async (sqlError, result) => {
+        if (sqlError) {
+            console.log(sqlError);
+        }
+        else if (result && result.length > 0) {
+            res.status(200).send({message:"update successful user", result})
+        }
+        else{
+            res.status(210).send({message: "No result found"})
+        }
+
+    })
+
+})
 // STUDENT / TUTOR FUNCTIONS
 
 // get student's meeting details from DB
@@ -126,12 +179,12 @@ app.post("/getstudentmeetings", function (req, res) {
 
     var meetingList = [];
 
-    var selectQuery = "SELECT  m.tutorId, m.online, m.meetingId, m.joinUrl, m.meetingPw, "
+    var selectQuery = "SELECT  m.tutorId, m.online, m.meetingId, m.meetingPw, "
      + "m.startTime, m.concluded, t.firstName, t.lastName FROM techconnect.meetings m "
      + "INNER JOIN techconnect.user t ON (m.tutorId = t.id) WHERE studentId = ?"
     connection.query(selectQuery,[
         req.body.userId
-    ],function(sqlErr, result){
+    ], function (sqlErr, result) {
         if (sqlErr) {
             console.log(sqlErr);
         }
@@ -168,11 +221,11 @@ app.post("/gettutormeetings", function (req, res) {
     var meetingList = [];
 
     var selectQuery = "SELECT  m.studentId, m.online, m.startUrl, m.startTime, "
-     + "m.concluded, t.firstName, t.lastName FROM techconnect.meetings m "
-     + "INNER JOIN techconnect.user t ON (m.studentId = t.id) WHERE tutorId = ?"
-    connection.query(selectQuery,[
+        + "m.concluded, t.firstName, t.lastName FROM techconnect.meetings m "
+        + "INNER JOIN techconnect.user t ON (m.studentId = t.id) WHERE tutorId = ?"
+    connection.query(selectQuery, [
         req.body.userId
-    ],function(sqlErr, result){
+    ], function (sqlErr, result) {
         if (sqlErr) {
             console.log(sqlErr);
         }
@@ -294,20 +347,20 @@ app.post("/getallmeetings", function (req, res) {
 app.post("/inpersonmeeting", async function (req, res) {
 
     var registerQuery = "INSERT INTO techconnect.meetings (studentId, tutorId, online, startTime, concluded) VALUES (?,?,?,?,?)"
-    connection.query(registerQuery,[
+    connection.query(registerQuery, [
         req.body.student_id,
         req.body.tutor_id,
         false,
         req.body.start_time,
         false
-    ],function(sqlErr, result){
-        if(sqlErr){
+    ], function (sqlErr, result) {
+        if (sqlErr) {
             console.log(sqlErr);
         } else {
             //console.log(req);
             //console.log(result);
             console.log("In-person meeting details successfully uploaded to DB!");
-            res.status(200).json({status: "OK"});
+            res.status(200).json({ status: "OK" });
         }
     })
 })
@@ -337,21 +390,11 @@ app.post('/zoommeeting', (req, res) => {
       start_time: req.body.start_time,
       timezone: "Australia/Sydney",
       type: 2,                   // 1 = instant meeting, 2 = scheduled meeting
-      duration: 40,              // 40 min is the max meeting time allowed with a basic, unlicensed free Zoom account
+      default_password: false,
+      duration: 40,              // 40 min is the max meeting time allowed with a basic free Zoom account
       settings: {
         host_video: "true",
         participant_video: "true",
-
-        // IMPORTANT:
-        // In order for an admin (the account creating the Zoom meeting) to designate the tutor as
-        // “alternative host” so they are able to start the meeting, both accounts need to have paid Licenses.
-        // I am currently using free, unlicensed Basic accounts, therefore at this time meetings can only be
-        // started by the admin, and the following line of code will not work.
-
-        // More on alternative host: https://support.zoom.us/hc/en-us/articles/208220166-Alternative-host
-        // More on scheduling privileges: https://support.zoom.us/hc/en-us/articles/201362803-Scheduling-privilege
-
-        //alternative_hosts: req.body.tutor_email,
       },
     },
     auth: {
@@ -371,7 +414,7 @@ app.post('/zoommeeting', (req, res) => {
             console.log('Response: ', response);
 
             // upload meeting details to DB
-            var registerQuery = "INSERT INTO techconnect.meetings (studentId, tutorId, online, startUrl, joinUrl, meetingId, meetingPw, startTime, concluded) VALUES (?,?,?,?,?,?,?,?,?)"
+            var registerQuery = "INSERT INTO techconnect.meetings (studentId, tutorId, online, startUrl, meetingId, meetingPw, startTime, concluded) VALUES (?,?,?,?,?,?,?,?)"
             connection.query(registerQuery,[
                 req.body.student_id,
                 req.body.tutor_id,
@@ -382,8 +425,8 @@ app.post('/zoommeeting', (req, res) => {
                 response.password,
                 response.start_time,
                 false
-            ],function(sqlErr, result){
-                if(sqlErr){
+            ], function (sqlErr, result) {
+                if (sqlErr) {
                     console.log(sqlErr);
                 } else {
                     //console.log(req);
@@ -393,7 +436,7 @@ app.post('/zoommeeting', (req, res) => {
             })
 
             //res.send("Create meeting result: " + JSON.stringify(response));
-            res.status(200).json({status: "OK"});
+            res.status(200).json({ status: "OK" });
         })
         .catch(function (err) {
             // API call failed...
@@ -412,133 +455,3 @@ app.listen(3007, function () {
 })
 
 //connection.end()
-//-------serverContext--------------
-
-app.post("/api/getUser", function (req, res) {
-
-    console.log("api get getUser");
-    var email = req.body.email
-    var searchQuery = "SELECT * FROM techconnect.user WHERE email = ?"
-    connection.query(searchQuery, [email], async (sqlError, result) => {
-        if (sqlError) {
-            console.log(sqlError);
-        }
-        else if (result.length > 0) {
-            res.send(result)
-        }
-        else {
-            console.log("no combination found");
-        }
-    })
-})
-
-app.post("/api/userUpdate", async function (req, res) {
-    console.log("api get userUpdate");
-    var email = req.body.email
-    var phone = req.body.phone
-    var firstName = req.body.firstName
-    var lastName = req.body.lastName
-    var gender = req.body.gender
-    var dob = req.body.dob
-    var address = req.body.address
-    var id = req.body.id
-    var registerQuery = "UPDATE `techconnect`.`user` SET `firstName` = ?, `lastName` = ?, `email` = ?,  `phone` = ?, `gender` = ?, `dob` = ?, `address` = ? WHERE (`id` = ?)"
-    console.log(registerQuery);
-    connection.query(registerQuery, [firstName, lastName, email, phone, gender,dob,address,id], function (sqlErr, result) {
-        if (sqlErr) {
-            console.log(sqlErr);
-        } else {
-            res.send(result)
-            console.log(req);
-            console.log(result);
-            console.log("succeed");
-        }
-    })
-})
-
-app.post("/api/userUpdateP", async function (req, res) {
-    console.log("api get userUpdate");
-    var email = req.body.email
-    var phone = req.body.phone
-    var firstName = req.body.firstName
-    var lastName = req.body.lastName
-    var gender = req.body.gender
-    var dob = req.body.dob
-    var address = req.body.address
-    var id = req.body.id
-    var password= req.body.NewPassword
-    var registerQuery = "UPDATE `techconnect`.`user` SET `firstName` = ?, `lastName` = ?, `email` = ?,  `phone` = ?, `gender` = ?, `dob` = ?, `address` = ? `password`=? WHERE (`id` = ?)"
-    console.log(registerQuery);
-    connection.query(registerQuery, [firstName, lastName, email, phone, gender,dob,address,password,id], function (sqlErr, result) {
-        if (sqlErr) {
-            console.log(sqlErr);
-        } else {
-            res.send(result)
-            console.log(req);
-            console.log(result);
-            console.log("succeed");
-        }
-    })
-})
-app.post("/api/checkPassword", function (req, res) {
-
-    console.log("api get checkPassword");
-    var id = req.body.id
-    var password = req.body.password
-
-    var searchQuery = "SELECT * FROM techconnect.user WHERE id = ?"
-    connection.query(searchQuery, [id], async (sqlError, result) => {
-        if (sqlError) {
-            console.log(sqlError);
-        }
-        else if (result.length > 0) {
-            const comparison = await bcrypt.compare(password, result[0].password)
-            console.log(comparison);
-            if (comparison) {
-                console.log("Same password");
-                res.send(result)
-            } else {
-                res.send(0)
-                console.log("server no combination found");
-            }
-        }
-        else {
-            console.log("server no combination found");
-        }
-    })
-})
-
-//  DELETE FROM `techconnect`.`user` WHERE (`id` = '1');
-
-app.post("/api/delete", async function (req, res) {
-    console.log("api get DELETE");
-    var id = req.body.id
-    var registerQuery = "DELETE FROM `techconnect`.`user` WHERE (`id` = ?)"
-    connection.query(registerQuery, [id], function (sqlErr, result) {
-        console.log(registerQuery);
-        console.log(id);
-        if (sqlErr) {
-            console.log(sqlErr);
-        } else {
-            res.send(result)
-            console.log("succeed");
-        }
-    })
-})
-
-//reset password
-app.post("/api/reset", async function (req, res) {
-    var id = req.body.id
-    var requestedPW2 = await bcrypt.hash(req.body.password, saltRounds)
-    var registerQuery = "UPDATE `techconnect`.`user` SET `password` = ? WHERE (`id` = ?)"
-    console.log(registerQuery);
-    connection.query(registerQuery, [requestedPW2,id], function (sqlErr, result) {
-        if (sqlErr) {
-            console.log(sqlErr);
-        } else {
-            console.log(req);
-            console.log(result);
-            console.log("succeed");
-        }
-    })
-})
