@@ -10,7 +10,7 @@ function Home(props) {
     const [tutors, setTutors] = useState([])
     const [serviceData, setServiceData] = useState([])
 
-    useEffect( () => {
+    useEffect(() => {
         setTutors(props.tutorData)
         setServiceData(props.serviceData)
     })

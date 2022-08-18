@@ -13,14 +13,36 @@ const zoomConfig = require('./config/zoom.js');
 const rp = require('request-promise');
 const app = express();
 
+app.use(cors());
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
-app.use(express.json())
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-    extended: true,
-}))
-app.use(cors())
+app.use(bodyParser.urlencoded({extended: true,}));
+
+// stripe-checkout
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+app.use(express.static("public"));
+
+app.post("/pay", async (req, res) => {
+    const { items } = req.body;
+
+    // Create a PaymentIntent with the order amount and currency
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: 0.1,
+      currency: "aud",
+      automatic_payment_methods: {
+        enabled: true,
+      },
+    });
+
+    res.send({
+      clientSecret: paymentIntent.client_secret,
+    });
+  });
+
+//---------------stripe-checkout EDN
+
 
 app.get("/", function (req, res) {
     var mySQLquery = "SELECT * FROM techconnect.user"
@@ -53,7 +75,7 @@ app.post("/register", async function (req, res) {
     var registerQuery = "INSERT INTO techconnect.user (email,password,phone,admin,firstName,lastName) VALUES (?,?,?,?,?,?)"
     console.log(registerQuery);
 
-    connection.query(registerQuery, [requestedEmail, requestedPW2, requestedPhone, userType,requestedFName,requestedLName], function (sqlErr, result) {
+    connection.query(registerQuery, [requestedEmail, requestedPW2, requestedPhone, userType, requestedFName, requestedLName], function (sqlErr, result) {
         if (sqlErr) {
             console.log(sqlErr);
         } else {
@@ -70,9 +92,11 @@ app.post("/login", function (req, res) {
     console.log("get LOGIN FROM BACKEND");
     var email = req.body.email
     var password = req.body.password
-
+    console.log("email",email);
+    console.log("password",password);
     var searchQuery = "SELECT * FROM techconnect.user WHERE email = ?"
     connection.query(searchQuery, [email], async (sqlError, result) => {
+        console.log("result",result);
         if (sqlError) {
             console.log(sqlError);
         }
@@ -91,6 +115,58 @@ app.post("/login", function (req, res) {
         }
     })
 })
+
+//forgot password
+
+app.post("/forgot-password", function (req, res) {
+
+    var { email } = req.body
+    var { phone } = req.body
+
+    //var searchQuery = "SELECT email, phone FROM techconnect.user WHERE email = ?"
+    var searchQuery = "SELECT * FROM techconnect.user WHERE email = ? AND phone = ?"
+
+    connection.query(searchQuery, [email,phone], async (sqlError, result) => {
+        if (sqlError) {
+            console.log(sqlError);
+        }
+        else if (result && result.length > 0) {
+            res.status(200).send({message:"Directing to reset password", result})
+        }
+        else{
+            res.status(210).send({message: "No email or phone associated with"})
+        }
+    })
+})
+
+//reset password
+
+app.post("/api/resetpassword", async function (req, res) {
+    //testing account current:
+
+    //acc: matthew.ng.id20@gmail.com
+    //password: passwordtest
+    var { email } = req.body
+    var { password } = req.body
+    //password encryption
+    var newPassword = await bcrypt.hash(password, saltRounds)
+    var updateQuery = "UPDATE techconnect.user SET password = ? WHERE (email = ?)"
+
+
+    //Update the new password
+    connection.query(updateQuery, [newPassword,email], async (sqlError, result) => {
+        if (sqlError) {
+            console.log(sqlError);
+        }
+        else if (result && result.length > 0) {
+            res.status(200).send({message:"update successful user", result})
+        }
+        else{
+            res.status(210).send({message: "No result found"})
+        }
+    })
+})
+
 
 //  WEB CONTENT
 
@@ -142,7 +218,7 @@ app.post("/getstudentmeetings", function (req, res) {
      + "INNER JOIN techconnect.user t ON (m.tutorId = t.id) WHERE studentId = ?"
     connection.query(selectQuery,[
         req.body.userId
-    ],function(sqlErr, result){
+    ], function (sqlErr, result) {
         if (sqlErr) {
             console.log(sqlErr);
         }
@@ -179,11 +255,11 @@ app.post("/gettutormeetings", function (req, res) {
     var meetingList = [];
 
     var selectQuery = "SELECT  m.studentId, m.online, m.startUrl, m.startTime, "
-     + "m.concluded, t.firstName, t.lastName FROM techconnect.meetings m "
-     + "INNER JOIN techconnect.user t ON (m.studentId = t.id) WHERE tutorId = ?"
-    connection.query(selectQuery,[
+        + "m.concluded, t.firstName, t.lastName FROM techconnect.meetings m "
+        + "INNER JOIN techconnect.user t ON (m.studentId = t.id) WHERE tutorId = ?"
+    connection.query(selectQuery, [
         req.body.userId
-    ],function(sqlErr, result){
+    ], function (sqlErr, result) {
         if (sqlErr) {
             console.log(sqlErr);
         }
@@ -305,20 +381,20 @@ app.post("/getallmeetings", function (req, res) {
 app.post("/inpersonmeeting", async function (req, res) {
 
     var registerQuery = "INSERT INTO techconnect.meetings (studentId, tutorId, online, startTime, concluded) VALUES (?,?,?,?,?)"
-    connection.query(registerQuery,[
+    connection.query(registerQuery, [
         req.body.student_id,
         req.body.tutor_id,
         false,
         req.body.start_time,
         false
-    ],function(sqlErr, result){
-        if(sqlErr){
+    ], function (sqlErr, result) {
+        if (sqlErr) {
             console.log(sqlErr);
         } else {
             //console.log(req);
             //console.log(result);
             console.log("In-person meeting details successfully uploaded to DB!");
-            res.status(200).json({status: "OK"});
+            res.status(200).json({ status: "OK" });
         }
     })
 })
@@ -393,8 +469,8 @@ app.post('/zoommeeting', (req, res) => {
                 response.password,
                 response.start_time,
                 false
-            ],function(sqlErr, result){
-                if(sqlErr){
+            ], function (sqlErr, result) {
+                if (sqlErr) {
                     console.log(sqlErr);
                 } else {
                     //console.log(req);
@@ -404,7 +480,7 @@ app.post('/zoommeeting', (req, res) => {
             })
 
             //res.send("Create meeting result: " + JSON.stringify(response));
-            res.status(200).json({status: "OK"});
+            res.status(200).json({ status: "OK" });
         })
         .catch(function (err) {
             // API call failed...

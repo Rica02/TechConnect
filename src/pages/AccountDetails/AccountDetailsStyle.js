@@ -86,7 +86,7 @@ export const LableContainer2 = styled.div`
     }
 `;
 export const Lable = styled.h5`
-    
+
 `;
 export const Data = styled.p`
     font-size: 1.1rem;
@@ -102,4 +102,17 @@ export const ViewLink = styled(Link)`
 color:${({ theme }) => theme.colorMain.highlightRed};
 font-weight:bold;
 align-items: end;
-`; 
+`;
+
+export const Input=styled.input`
+`;
+export const EditCardWrap=styled.div`
+display: grid;
+max-width: 400px;
+ height: 10rem;
+ margin: 0.2rem;
+ padding: 0.5rem;
+`;
+
+export const Select=styled.select`
+`;
