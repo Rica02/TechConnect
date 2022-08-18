@@ -17,7 +17,8 @@ import {
     NavbarSignContainerExtended,
     Signwrap,
     SignButtonWrap,
-    NavbarButton
+    NavbarButton,
+    OpenLinksButtonContainer
 } from "./NavbarStyle";
 import LogoImg from "../../assets/logo.png";
 import SigninCard from "./SigninCard";
@@ -75,16 +76,18 @@ export function Navbar() {
                             <NavbarLink to="/dashboard">NEED HELLP?</NavbarLink>
                             {/* show for student NavbarLink*/}
                         </>)}
-                        <OpenLinksButton
-                            onClick={() => {
-                                setExtendNavbar((value) => !value);     // set the value opposite of current value
-                            }}
-                        >
-                            {
-                                // display hamburger menu when state is false, X when true
-                                extendNavbar ? <RiCloseFill /> : <RiMenuFill />
-                            }
-                        </OpenLinksButton>
+                        <OpenLinksButtonContainer>
+                            <OpenLinksButton
+                                onClick={() => {
+                                    setExtendNavbar((value) => !value);     // set the value opposite of current value
+                                }}
+                            >
+                                {
+                                    // display hamburger menu when state is false, X when true
+                                    extendNavbar ? <RiCloseFill /> : <RiMenuFill />
+                                }
+                            </OpenLinksButton>
+                        </OpenLinksButtonContainer>
                     </NavbarLinkContainer>
                 </RightContainer>
                 <NavbarSignContainer >
