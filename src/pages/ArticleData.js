@@ -24,14 +24,6 @@ export const Start3StepArticle = {
     Step3:'Start Connecting !'
 }
 
-// TODO: Add paragraphs below
-export const WhatWeDoArticle = {
-    // FirstArticle:'',
-    // SecondArticle:'',
-    // ThirdArticle:'',
-    // FourthArticle:''
-}
-
 export const OurTutorsArticle = {
 
   // Array that contains tutor info to display

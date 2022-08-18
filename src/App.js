@@ -30,30 +30,31 @@ import AddNews from "./pages/AddNews";
 import ForgotPassword from "./pages/Signin/ForgotPassword";
 
 function App() {
-
   const [data, setData] = useState([])
   const [state, setState] = useState(false);
   const [ourServices, setOurServices] = useState([]);
 
-  console.log("Web content: " + JSON.stringify(ourServices))
-    // on page load, get student and tutor data
-    useEffect(() => {
-      try {
-          axios.post('http://localhost:3007/getwebcontent')
-          .then((response) => {
-            console.log("Get web content successful.");
-            // console.log("Get users successful. Response data: " + JSON.stringify(response))
+  //console.log("Web content: " + JSON.stringify(ourServices))
 
-            // get response and store it in useState array
-            setOurServices([...response.data.ourServices]);
+  // on page load, get web content data
+  useEffect(() => {
+    try {
+        axios.post('http://localhost:3007/getwebcontent')
+        .then((response) => {
+          console.log("Get web content successful.");
+          // console.log("Get users successful. Response data: " + JSON.stringify(response))
 
-          }, (error) => {
-              console.log("Error occurred: " + error);
-          });
-      } catch (error) {
-          console.log("Get users failed, reason: " + error);
-      }
-    }, []);
+          // get response and store it in useState array
+          setOurServices([...response.data.ourServices]);
+          // setOurServices(values => [response.data.ourServices]);
+
+        }, (error) => {
+            console.log("Error occurred: " + error);
+        });
+    } catch (error) {
+        console.log("Get users failed, reason: " + error);
+    }
+  }, []);
 
   return (
     // ThemeProvider provides colours
