@@ -27,7 +27,7 @@ import TutorPage from "./pages/TutorPage";
 import CreateMeeting from "./pages/CreateMeeting";
 import AddNews from "./pages/AddNews";
 import ForgotPassword from "./pages/Signin/ForgotPassword";
-import ResetPassword from "./pages/Signin/ResetPassword";
+import ResetPassword from "./pages/Signin/ResetPasswordA";
 
 function App() {
 
