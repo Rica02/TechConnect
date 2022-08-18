@@ -1,15 +1,13 @@
 import React from 'react'
-import { Container, ContainerWrap, TextH2, ContentText } from './OurMissionStyle';
+import { OurMissionArticle } from '../../../ArticleData';
 
-const OurMission = ({Article}) => {
+const OurMission = (props) => {
   return (
     <>
-      <Container>
-          <ContainerWrap>
-              <TextH2>Our mission</TextH2>
-              <ContentText >{Article}</ContentText>
-          </ContainerWrap>
-      </Container>
+      <div className="public-div-container" style={{ backgroundColor: props.bg }} >
+        <h2>Our mission</h2>
+        <p >{OurMissionArticle.Article}</p>
+      </div>
     </>
   );
 }

@@ -2,16 +2,19 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
   .public-div-container {
-    background-color: ${ (props) => props.bgColor };  // Either white or light beige
+    //background-color: ${ ((props) => props.bg) };   // no longer works?
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 35px 100px;
+    padding: 30px 100px;
     color: ${ ({ theme }) => theme.colorMain.text };
     border-bottom: solid ${ ({ theme }) => theme.colorMain.highlightMain } 2px;
+    min-width: 800px;
 
     h2 {
       color: ${ ({ theme }) => theme.colorMain.highlightMain };
+      text-align: center;
+      margin: 30px 0;
     }
     p {
       font-size: large;

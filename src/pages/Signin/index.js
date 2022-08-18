@@ -60,7 +60,6 @@ function Signin() {
     return (
         <>
             <Container>
-
                 <FormWrap>
                     <Icon to="/"></Icon>
                     <FormContent>

@@ -65,7 +65,7 @@ function Signup() {
                             <FormInput onChange={handleForm} name="password" type='password' required />
                             <FormLabel htmlFor='for'>Password confirm</FormLabel>
                             <FormInput type='password' required  name="passwordConfirm" onChange={handleForm}/>
-                            <FormButton type='submitSignUp' onClick={() => regFunction()}>continue</FormButton>
+                            <FormButton type='submitSignUp' onClick={() => regFunction()}>REGISTER</FormButton>
                             <FormButton onClick={() => navigate("/signin")}>GO SIGN IN</FormButton>
                         </Form>
 

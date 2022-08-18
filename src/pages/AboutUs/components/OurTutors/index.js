@@ -10,7 +10,7 @@ export default function OurTutors(props) {
     console.log(props.tutorsData);
 
     return (
-        <div className="public-div-container" bgColor={props.bgColor}>
+        <div className="public-div-container" style={{ backgroundColor: props.bg }}>
             <h2>Meet our tutors</h2>
             {/* Display tutors in a grid using the tutors array*/}
             <GridContainer>

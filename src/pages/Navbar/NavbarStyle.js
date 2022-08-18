@@ -47,6 +47,11 @@ export const NavbarLink = styled(Link)`
     text-decoration: none;
     margin: 10px;
 
+    &:hover {
+        color: ${ ({ theme }) => theme.colorMain.highlightMain };
+        text-decoration: underline;
+    }
+
     // only show links when screen is bigger than 800px
     @media (max-width: 1100px) {
         display: none;
@@ -60,6 +65,11 @@ export const NavbarLinkExtended = styled(Link)`
     font-weight: bold;
     text-decoration: none;
     margin: 10px;
+
+    &:hover {
+        color: ${ ({ theme }) => theme.colorMain.highlightMain };
+        text-decoration: underline;
+    }
 `;
 
 export const Logo = styled.img`
@@ -99,8 +109,8 @@ export const NavbarExtendedContainer = styled.div`
 export const NavbarSignContainer = styled.div`
     background-color: ${ ({ theme }) => theme.colorMain.backgroundSignIn };;
     color: ${ ({ theme }) => theme.colorMain.highlightMain };
-    border-left: 2.5px solid ${ ({ theme }) => theme.colorMain.highlightMain};
-    display:grid;
+    border-left: solid ${ ({ theme }) => theme.colorMain.highlightMain} 2px;
+    display: grid;
     align-items: center;
     z-index: 1;
 
@@ -113,25 +123,27 @@ export const NavbarSignContainerExtended = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: ${ ({ theme }) => theme.colorMain.highlightMain};
 
     @media (min-width: 1100px) {
         display: none;
     }
 `;
 
-export const Signwrap=styled.div`
+export const Signwrap = styled.div`
     display: grid;
     min-width: 150px;
 `;
 
 export const SignButtonWrap = styled.div`
     display: flex;
+
 `;
 export const LoginChange = styled.div`
      display:  ${({showlogin}) => (showlogin ?'flex':'none')};
 `;
 
-export const NavbarP= styled.p`
+export const NavbarP = styled.p`
     background-color: ${ ({ theme }) => theme.colorMain.backgroundSignIn };;
     border: none;
     font-size: large;
@@ -141,8 +153,8 @@ export const NavbarP= styled.p`
     margin: 10px;
 `;
 
-export const NavbarButton= styled.button`
-    background-color: ${ ({ theme }) => theme.colorMain.backgroundSignIn };;
+export const NavbarButton = styled.button`
+    background-color: ${ ({ theme }) => theme.colorMain.backgroundSignIn };
     display: flex;
     border: none;
     font-size: large;
@@ -150,4 +162,10 @@ export const NavbarButton= styled.button`
     font-weight: bold;
     text-decoration: none;
     margin-top: 10px;
+    color: ${ ({ theme }) => theme.colorMain.highlightMain};
+
+    &:hover {
+        color: ${ ({ theme }) => theme.colorMain.highlightMain };
+        text-decoration: underline;
+    }
 `;

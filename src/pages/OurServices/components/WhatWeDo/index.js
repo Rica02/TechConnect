@@ -14,7 +14,7 @@ export default function WhatWeDo(props) {
     ]);
 
     return (
-        <div className="public-div-container" bgColor={props.bgColor}>
+        <div className="public-div-container" style={{ backgroundColor: props.bg }} >
             <h2>What do we do?</h2>
             <GridContainer>
                 { props.serviceData.map((content, index) => (

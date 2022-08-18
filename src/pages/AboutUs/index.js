@@ -3,7 +3,6 @@ import Header from "../Header";
 import AboutOurTeam from "./components/AboutOurTeam";
 import OurMission from "./components/OurMission";
 import OurTutors from "./components/OurTutors";
-import { AboutOurTeamArticle, OurMissionArticle } from '../ArticleData'
 import headerBanner from "../../assets/images/about-us-banner.jpg";
 
 function AboutUs(props) {
@@ -15,9 +14,9 @@ function AboutUs(props) {
     return (
         <>
             <Header headerTitle={"About us"} headerBanner={headerBanner} />
-            <AboutOurTeam {...AboutOurTeamArticle} />
-            <OurMission {...OurMissionArticle} />
-            <OurTutors tutorsData = {tutors} bgColor={ ({ theme }) => theme.colorMain.backgroundLight } />
+            <AboutOurTeam bg='#FFFFFF' />
+            <OurMission bg='#F0EBE6' />
+            <OurTutors tutorsData={tutors} bg='#FFFFFF' />
         </>
     );
 }

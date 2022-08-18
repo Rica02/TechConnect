@@ -3,7 +3,6 @@ import Header from "../Header";
 import headerBanner from "../../assets/images/our-services-banner.jpg";
 import WhatWeDo from "./components/WhatWeDo";
 import Start3Step from "./components/Start3Step";
-import { Start3StepArticle } from '../ArticleData'
 import WhatCanWeTeachYou from './components/WhatCanWeTeachYou'
 
 function OurServices(props) {
@@ -16,9 +15,9 @@ function OurServices(props) {
     return (
         <>
             <Header headerTitle={"Our services"} headerBanner={headerBanner} />
-            <WhatWeDo serviceData={serviceData} bgColor={ ({ theme }) => theme.colorMain.backgroundLight }/>
-            <Start3Step {...Start3StepArticle}/>
-            <WhatCanWeTeachYou/>
+            <WhatWeDo serviceData={serviceData} bg='#FFFFFF' />
+            <Start3Step bg='#F0EBE6' />
+            <WhatCanWeTeachYou bg='#FFFFFF' />
         </>
     );
 }
