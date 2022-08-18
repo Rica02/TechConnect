@@ -29,22 +29,14 @@ import CreateMeeting from "./pages/CreateMeeting";
 import AddNews from "./pages/AddNews";
 import ForgotPassword from "./pages/Signin/ForgotPassword";
 import AccuntResetPassword from "./pages/AccountDetails/components/AccuntResetPassword";
-import ResetPasswordForm from "./pages/ResetPassword/resetPasswordForm";
+import ResetPasswordForm from "./pages/ResetPassword/ResetPasswordForm";
 
 function App() {
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
   const [state, setState] = useState(false);
   const [ourServices, setOurServices] = useState([]);
 
   //console.log("Web content: " + JSON.stringify(ourServices))
-
-  // on page load, get web content data
-  useEffect(() => {
-    try {
-        axios.post('http://localhost:3007/getwebcontent')
-        .then((response) => {
-          console.log("Get web content successful.");
-          // console.log("Get users successful. Response data: " + JSON.stringify(response))
 
   // on page load, get web content data
   useEffect(() => {
