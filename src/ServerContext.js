@@ -44,7 +44,37 @@ export function ServerProvider({ children }) {
       setUserInf(data.data)
     });
   }, [])
-console.log(userInf)
+// console.log(userInf)
+//Get News
+const [getNews, setGetNews] = useState([]);
+useEffect(() => {
+  axios.get("http://localhost:3007/api/news").then((data) => {
+    setGetNews(data.data)
+  });
+}, [])
+//add news
+async function AddNewsToDB(data) {
+  console.log("AddNewsToDB")
+  try {
+    await axios.post('http://localhost:3007/api/addNews', {
+    
+      title: data.title,
+      date: data.date,
+      text: data.text,
+    })
+      .then((response) => {
+        console.log(response)
+        alert('Update succeed')
+      }, (error) => {
+        alert('error')
+        console.log(error);
+        alert("error")
+      });
+  } catch (error) {
+    console.log(error);
+  }
+
+}
 
   async function CheckPassword(id, Password) {
 
@@ -182,7 +212,9 @@ console.log(userInf)
     SetloginState,
     logout,
     userInf,//Get Account Details
-    CheckPassword, UpdateUserP,UpdateUser,DeleteUser,ResetPassword
+    CheckPassword, UpdateUserP,UpdateUser,DeleteUser,ResetPassword,
+    //News
+    getNews,AddNewsToDB,
   }
   return (
     <ServerContext.Provider value={value}>

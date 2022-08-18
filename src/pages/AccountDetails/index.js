@@ -11,7 +11,7 @@ import EditCrads from './components/EditCrads';
 import { useNavigate } from "react-router-dom";
 function AccountDetails() {
   var navigate = useNavigate()
-  const { userInf,UpdateUserP ,UpdateUser,CheckPassword,DeleteUser} = useDB();
+  const { userInf ,UpdateUser,DeleteUser} = useDB();
   const [editdContactId, setEditContactId] = useState(null);
   const [editCard, seteditCard] = useState(false);
   //Edit Account buttion Click
@@ -62,38 +62,15 @@ function AccountDetails() {
     setEditContactId(null);
   };
 
-  const[notNull,setNotNull]=useState();
-  function NotNull(obj){
-    {obj!=null?setNotNull(true):setNotNull(false)}
-    return notNull;
-  }
+  // const[notNull,setNotNull]=useState();
+  // function NotNull(obj){
+  //   {obj!=null?setNotNull(true):setNotNull(false)}
+  //   return notNull;
+  // }
   
   const handleUpdatelClick= async (e)=>{
     e.preventDefault();
-    if(NotNull(editdAccountData.NewPassword)){
-      if(editdAccountData.NewPassword!==editdAccountData.NewPassword2){
-        alert("New Password not same")
-        return;
-      }else if(NotNull(editdAccountData.Password)){
-        if(CheckPassword(editdAccountData.id,editdAccountData.Password)){
-           //update with password
-           UpdateUserP(editdAccountData);
-           console.log("update with password")
-           return;
-        }else{
-          alert("Old Password not correct")
-          return;
-        }
-      }else{
-        alert("Old Password can not empty")
-        return;
-      }
-    }
-    //update without password
     UpdateUser(editdAccountData);
-    console.log("update without password")
-   
-    console.log("editdAccountData",editdAccountData)
   };
   const cardEditClick = (e) => {
     e.preventDefault();
@@ -118,8 +95,10 @@ function AccountDetails() {
         {React.Children.toArray(
           userInf.map((contact) => {
             return <>
+            <Fragment>
               {editdContactId === contact.id ? <><EditAccount editdAccountData={editdAccountData} editAccountChange={editAccountChange} handleCancelClick={handleCancelClick} handleUpdatelClick={handleUpdatelClick}/></> :
                 <ViewAccount contact={contact} accountEditClick={accountEditClick} handleDeletelClick={handleDeletelClick}/>}
+            </Fragment>
             </>
           })
         )}

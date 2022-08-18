@@ -542,3 +542,37 @@ app.post("/api/reset", async function (req, res) {
         }
     })
 })
+// get NEWS
+app.get("/api/news", function (req, res) {
+    var mySQLquery = "SELECT * FROM techconnect.news"
+    connection.query(mySQLquery, function (err, result) {
+        if (err && (result == null)) {
+            console.log(err);
+            return res.send({ status: 1, message: "Error" })
+        } else {
+            console.log("succeed");
+            console.log(result);
+            res.send(result);
+            //return res.status(200).json(result)
+        }
+    })
+})
+//add News
+app.post("/api/addNews", async function (req, res) {
+
+    var title = req.body.title
+    var date = req.body.date
+    var text = req.body.text
+    var Query = "INSERT INTO `techconnect`.`news` (`title`, `date`, `text`) VALUES (?,?,?)"
+    console.log(Query);
+
+    connection.query(Query, [title, date, text], function (sqlErr, result) {
+        if (sqlErr) {
+            console.log(sqlErr);
+        } else {
+            console.log(req);
+            res.send(result);
+            console.log("Add News succeed");
+        }
+    })
+})
