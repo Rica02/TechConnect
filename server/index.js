@@ -95,9 +95,11 @@ app.post("/login", function (req, res) {
     console.log("get LOGIN FROM BACKEND");
     var email = req.body.email
     var password = req.body.password
-
+    console.log("email",email);
+    console.log("password",password);
     var searchQuery = "SELECT * FROM techconnect.user WHERE email = ?"
     connection.query(searchQuery, [email], async (sqlError, result) => {
+        console.log("result",result);
         if (sqlError) {
             console.log(sqlError);
         }
@@ -502,6 +504,24 @@ app.post("/api/checkPassword", function (req, res) {
         }
         else {
             console.log("server no combination found");
+        }
+    })
+})
+
+//  DELETE FROM `techconnect`.`user` WHERE (`id` = '1');
+
+app.post("/api/delete", async function (req, res) {
+    console.log("api get DELETE");
+    var id = req.body.id
+    var registerQuery = "DELETE FROM `techconnect`.`user` WHERE (`id` = ?)"
+    connection.query(registerQuery, [id], function (sqlErr, result) {
+        console.log(registerQuery);
+        console.log(id);
+        if (sqlErr) {
+            console.log(sqlErr);
+        } else {
+            res.send(result)
+            console.log("succeed");
         }
     })
 })

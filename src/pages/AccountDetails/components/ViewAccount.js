@@ -2,7 +2,7 @@ import React from 'react'
 import { DeleteButton, EditButton, Title, RWrap, LWrap, WrapContainer, LableContainer, Lable, Data, Column } from '../AccountDetailsStyle'
 import { ImBin } from "react-icons/im";
 import { FaRegEdit } from "react-icons/fa";
-function ViewAccount({contact,accountEditClick}) {
+function ViewAccount({contact,accountEditClick,handleDeletelClick}) {
     return (
         <>
          <WrapContainer>
@@ -11,7 +11,7 @@ function ViewAccount({contact,accountEditClick}) {
           </RWrap>
           <LWrap>
             <EditButton onClick={(e)=>accountEditClick(e,contact)}><FaRegEdit fontSize="1.5rem" />Edit account</EditButton>
-            <DeleteButton><ImBin fontSize="1.5rem" />Delete account</DeleteButton>
+            <DeleteButton onClick={(e)=>handleDeletelClick(e,contact.id)}><ImBin fontSize="1.5rem" />Delete account</DeleteButton>
           </LWrap>
         </WrapContainer>
         <WrapContainer>

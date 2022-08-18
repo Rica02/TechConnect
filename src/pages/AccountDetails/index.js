@@ -8,9 +8,10 @@ import EditAccount from './components/EditAccount';
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import EditCrads from './components/EditCrads';
+import { useNavigate } from "react-router-dom";
 function AccountDetails() {
-
-  const { userInf,UpdateUserP ,UpdateUser,CheckPassword} = useDB();
+  var navigate = useNavigate()
+  const { userInf,UpdateUserP ,UpdateUser,CheckPassword,DeleteUser} = useDB();
   const [editdContactId, setEditContactId] = useState(null);
   const [editCard, seteditCard] = useState(false);
   //Edit Account buttion Click
@@ -50,6 +51,13 @@ function AccountDetails() {
     var value = e.target.value
     seteEitdAccountData({ ...editdAccountData, [e.target.name]: value })
   }
+  const handleDeletelClick = (e,id) => {
+    e.preventDefault();
+    DeleteUser(id);
+    navigate("/")
+  };
+
+
   const handleCancelClick = () => {
     setEditContactId(null);
   };
@@ -111,7 +119,7 @@ function AccountDetails() {
           userInf.map((contact) => {
             return <>
               {editdContactId === contact.id ? <><EditAccount editdAccountData={editdAccountData} editAccountChange={editAccountChange} handleCancelClick={handleCancelClick} handleUpdatelClick={handleUpdatelClick}/></> :
-                <ViewAccount contact={contact} accountEditClick={accountEditClick} />}
+                <ViewAccount contact={contact} accountEditClick={accountEditClick} handleDeletelClick={handleDeletelClick}/>}
             </>
           })
         )}

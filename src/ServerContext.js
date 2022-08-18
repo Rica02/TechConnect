@@ -90,6 +90,7 @@ console.log(userInf)
         id: data.id,
       })
         .then((response) => {
+          console.log(response)
           alert('Update succeed')
           window.location.reload();
         }, (error) => {
@@ -118,6 +119,7 @@ console.log(userInf)
         id: data.id,
       })
         .then((response) => {
+          console.log("response UpdateUserP",response)
           alert('Update succeed')
           window.location.reload();
         }, (error) => {
@@ -131,6 +133,27 @@ console.log(userInf)
 
   }
 
+  async function DeleteUser(ID) {
+
+    try {
+      await axios.post('http://localhost:3007/api/delete', {
+        id:ID,
+      })
+        .then((response) => {
+          console.log("response delete",response)
+          alert('delete succeed')
+          logout();
+        }, (error) => {
+          alert('error')
+          console.log(error);
+          alert("error")
+        });
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+//-------DB END -----
   const value = {
     auth,
     currentUser,
@@ -142,7 +165,7 @@ console.log(userInf)
     SetloginState,
     logout,
     userInf,//Get Account Details
-    CheckPassword, UpdateUserP,UpdateUser,
+    CheckPassword, UpdateUserP,UpdateUser,DeleteUser,
   }
   return (
     <ServerContext.Provider value={value}>
