@@ -31,3 +31,4 @@ export const Column = styled.div`
     display: flex;
     margin: 0.5rem;
 `;
+export const Select=styled.select``;

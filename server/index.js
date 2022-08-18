@@ -727,8 +727,20 @@ app.get("/api/getChangeAvailability", function (req, res) {
     })
 })
 //get user List
-app.get("/api/userList", function (req, res) {
-    var mySQLquery = "SELECT * FROM techconnect.user"
+app.get("/api/userTList", function (req, res) {
+    var mySQLquery = "SELECT * FROM techconnect.user where admin=2"
+    connection.query(mySQLquery, function (err, result) {
+        if (err && (result == null)) {
+            console.log(err);
+            return res.send({ status: 1, message: "Error" })
+        } else {
+            res.send(result);
+            //return res.status(200).json(result)
+        }
+    })
+})
+app.get("/api/userSList", function (req, res) {
+    var mySQLquery = "SELECT * FROM techconnect.user where admin=3"
     connection.query(mySQLquery, function (err, result) {
         if (err && (result == null)) {
             console.log(err);

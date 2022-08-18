@@ -212,6 +212,20 @@ useEffect(() => {
     setGetChangeAvailability(data.data)
   });
 }, [])
+ //get user T
+ const [getTutor, setGetTutor] = useState([]);
+ useEffect(() => {
+   axios.get("http://localhost:3007/api/userTList").then((data) => {
+    setGetTutor(data.data)
+   });
+ }, [])
+  //get User S
+  const [getStudent, setGetStudent] = useState([]);
+useEffect(() => {
+  axios.get("http://localhost:3007/api/userSList").then((data) => {
+    setGetStudent(data.data)
+  });
+}, [])
 
 //ChangeAvailability
 async function ChangeAvailabilityToDB(data) {
@@ -263,6 +277,8 @@ async function ChangeAvailabilityToDB(data) {
     ChangeAvailabilityToDB,
     getBookLesson,
     getChangeAvailability,
+    getTutor,
+    getStudent,
   }
   return (
     <ServerContext.Provider value={value}>
