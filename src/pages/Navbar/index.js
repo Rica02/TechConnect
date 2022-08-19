@@ -66,7 +66,7 @@ export function Navbar() {
                             <NavbarLink to="/dashboard">HOME</NavbarLink>
                             <NavbarLink to="/changeavailability">CHANGE AVAILABILITY</NavbarLink>
                             <NavbarLink to="/accountDetails">ACCOUNT DETAILS</NavbarLink>
-                            <NavbarLink to="/dashboard">NEED HELLP?</NavbarLink>
+                            <NavbarLink to="/dashboard">NEED HELP?</NavbarLink>
                             {/* show for teacher NavbarLink*/}
                         </>)}
                         {/* student */}
@@ -74,7 +74,7 @@ export function Navbar() {
                             <NavbarLink to="/dashboard">HOME</NavbarLink>
                             <NavbarLink to="/booklesson">BOOK A LESSON</NavbarLink>
                             <NavbarLink to="/accountDetails">ACCOUNT DETAILS</NavbarLink>
-                            <NavbarLink to="/dashboard">NEED HELLP?</NavbarLink>
+                            <NavbarLink to="/dashboard">NEED HELP?</NavbarLink>
                             {/* show for student NavbarLink*/}
                         </>)}
                         <OpenLinksButtonContainer>
@@ -168,7 +168,7 @@ export function Navbar() {
                         <NavbarLinkExtended to="/dashboard" >HOME</NavbarLinkExtended>
                         <NavbarLinkExtended to="/changeavailability">CHANGE AVAILABILITY</NavbarLinkExtended>
                         <NavbarLinkExtended to="/accountDetails">ACCOUNT DETAILS</NavbarLinkExtended>
-                        <NavbarLinkExtended to="/dashboard">NEED HELLP?</NavbarLinkExtended>
+                        <NavbarLinkExtended to="/dashboard">NEED HELP?</NavbarLinkExtended>
                         <NavbarSignContainerExtended >
                             <RiAccountBoxFill fontSize="3em" />
                             <NavbarButton onClick={(e) => LogoutToHome(e)}>SIGN OUT</NavbarButton>
@@ -179,7 +179,7 @@ export function Navbar() {
                         <NavbarLinkExtended to="/dashboard" >HOME</NavbarLinkExtended>
                         <NavbarLinkExtended to="/booklesson">BOOK A LESSON</NavbarLinkExtended>
                         <NavbarLinkExtended to="/accountDetails">ACCOUNT DETAILS</NavbarLinkExtended>
-                        <NavbarLinkExtended to="/dashboard">NEED HELLP?</NavbarLinkExtended>
+                        <NavbarLinkExtended to="/dashboard">NEED HELP?</NavbarLinkExtended>
                         <NavbarSignContainerExtended >
                             <RiAccountBoxFill fontSize="3em" />
                             <NavbarButton onClick={(e) => LogoutToHome(e)}>SIGN OUT</NavbarButton>

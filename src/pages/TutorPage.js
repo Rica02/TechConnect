@@ -78,7 +78,7 @@ function TutorPage() {
     <>
       <div className="dashboard-div-container">
         {/* TODO: get current user's first name */}
-        <h2>Hello, [first name]</h2>
+        <h2>Welcome back!</h2>
         <h3>Your upcoming lessons</h3>
         <table className="dashboard-table">
           <tbody>

@@ -14,5 +14,11 @@ export const Container = styled.div`
     button {
         background: none;
         border: none;
+        text-decoration: underline;
+        color: #0d6efd;
+
+        &:hover {
+            color: #3366BB;
+        }
     }
 `
