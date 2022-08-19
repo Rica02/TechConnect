@@ -1,6 +1,5 @@
 import { React, useState } from 'react'
 import styled from 'styled-components';
-import { FormH1 } from '../Signin/SigninStyle';
 import { useParams } from "react-router-dom";
 import axios from 'axios';
 

@@ -10,7 +10,7 @@ function OurServices(props) {
 
     useEffect( () => {
         setServiceData(props.serviceData)
-    })
+    }, [props.serviceData])
 
     return (
         <>

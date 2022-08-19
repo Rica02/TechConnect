@@ -33,10 +33,7 @@ import ResetPasswordForm from "./pages/ResetPassword/ResetPasswordForm";
 import Allocation from "./pages/Allocation";
 
 function App() {
-  const [data, setData] = useState([]);
-  const [state, setState] = useState(false);
   const [ourServices, setOurServices] = useState([]);
-
   //console.log("Web content: " + JSON.stringify(ourServices))
 
   // on page load, get web content data
@@ -77,8 +74,8 @@ function App() {
           <Route path="/accuntResetPassword" element={<PrivateRoute><AccuntResetPassword/></PrivateRoute>} />
           <Route path="/createmeeting" element={<PrivateRoute><CreateMeeting /></PrivateRoute>} />
           <Route path="/allocation" element={<PrivateRoute><Allocation /></PrivateRoute>} />
-          <Route path="/" element={<Home tutorData={data} serviceData={ourServices} />} />
-          <Route path="/aboutus" element={<AboutUs tutorData={data} />} />
+          <Route path="/" element={<Home serviceData={ourServices} />} />
+          <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/ourservices" element={<OurServices serviceData={ourServices} />} />
           <Route path="/news" element={<News />} />
           <Route path="/becomeatutor" element={<BecomeATutor />} />
