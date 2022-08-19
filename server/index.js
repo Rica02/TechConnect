@@ -492,15 +492,6 @@ app.post('/zoommeeting', (req, res) => {
         });
 });
 
-
-app.listen(3007, function () {
-    console.log("App listened function");
-    connection.connect(function (err) {
-        if (err) {
-            throw err;
-        } console.log("DB and Zoom app connection successful! Listening at PORT: 3007")
-    })
-})
 //-------serverContext--------------
 
 app.post("/api/getUser", function (req, res) {

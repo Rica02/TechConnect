@@ -48,6 +48,7 @@ Missing features and improvements:
 * Automate response system (example: when applying to become a tutor)
 * Copyright and legal contracts (terms of service and tutor hiring) when project’s launching about to occur
 * Can be improved: web security, website accessibility/customizability, mobile support and responsiveness (mobile will not include joining/starting Zoom meetings)
+* Payment integration with Stripe
 
 
 
