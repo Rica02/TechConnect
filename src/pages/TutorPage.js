@@ -3,12 +3,10 @@ import axios from "axios";
 // import JoinZoom from "../JoinZoom";
 
 function TutorPage() {
-
   const [upcomingMeetings, setUpcomingMeetings] = useState([]);
   const [pastMeetings, setPastMeetings] = useState([]);
-
-  console.log("Upcoming meetings: " + JSON.stringify(upcomingMeetings));
-  console.log("Past meetings: " + JSON.stringify(pastMeetings))
+  // console.log("Upcoming meetings: " + JSON.stringify(upcomingMeetings));
+  // console.log("Past meetings: " + JSON.stringify(pastMeetings))
 
   // on page load, get tutor meetings
   useEffect(() => {
@@ -46,11 +44,12 @@ function TutorPage() {
       {upcomingMeetings.map((meeting, index) => (
         <tr key={index}>
           <td>{new Date(meeting.startTime).toLocaleString()}</td>
-          <td>{(meeting.online == 1) ? "Online" : "In person"}</td>
+          <td>{(meeting.online === 1) ? "Online" : "In person"}</td>
           <td>{meeting.studentName}</td>
           <td>
             <a className="styled-link" href={meeting.meetingStartUrl}>CLICK HERE TO START YOUR LESSON</a>
-            {/* TODO: fix Web SDK issue (overriding CSS) */}
+            {/* The following comonent is for integrated Zoom Web Meeting SDK.
+                Currently unavailable due to unsolved issue. */}
             {/* <JoinZoom isTutor={true} /> */}
           </td>
         </tr>
@@ -65,9 +64,9 @@ function TutorPage() {
       {pastMeetings.map((meeting, index) => (
         <tr key={index} >
           <td>{new Date(meeting.startTime).toLocaleString()}</td>
-          <td>{(meeting.online == 1) ? "Online" : "In person"}</td>
+          <td>{(meeting.online === 1) ? "Online" : "In person"}</td>
           <td>{meeting.studentName}</td>
-          <td>{(meeting.concluded == 1) ? "Completed" : "Other"}</td>
+          <td>{(meeting.concluded === 1) ? "Completed" : "Other"}</td>
         </tr>
       ))}
     </>
@@ -77,7 +76,6 @@ function TutorPage() {
   return (
     <>
       <div className="dashboard-div-container">
-        {/* TODO: get current user's first name */}
         <h2>Welcome back!</h2>
         <h3>Your upcoming lessons</h3>
         <table className="dashboard-table">
