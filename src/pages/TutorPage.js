@@ -3,13 +3,12 @@ import axios from "axios";
 // import JoinZoom from "../JoinZoom";
 
 function TutorPage() {
-
   const [upcomingMeetings, setUpcomingMeetings] = useState([]);
   const [pastMeetings, setPastMeetings] = useState([]);
-  const [currentId, setCurrentId] = useState();
 
   console.log("Upcoming meetings: " + JSON.stringify(upcomingMeetings));
   console.log("Past meetings: " + JSON.stringify(pastMeetings))
+
   // on page load, get tutor meetings
   useEffect(() => {
     setCurrentId((localStorage.getItem("id")))
@@ -43,47 +42,46 @@ function TutorPage() {
     } catch (error) {
       console.log("Get users failed, reason: " + error);
     }
-  }, [currentId]);
+  }, []);
 
-  function UpcomingMeetings() {
-    return (
-      <>
-        {upcomingMeetings.length > 0 ? upcomingMeetings.map((meeting, index) => (
-          <tr key={index}>
-            <td>{new Date(meeting.startTime).toLocaleString()}</td>
-            <td>{(meeting.online == 1) ? "Online" : "In person"}</td>
-            <td>{meeting.studentName}</td>
-            <td>
-              <a className="styled-link" href={meeting.meetingStartUrl}>CLICK HERE TO START YOUR LESSON</a>
-              {/* TODO: fix Web SDK issue (overriding CSS) */}
-              {/* <JoinZoom isTutor={true} /> */}
-            </td>
-          </tr>
-        )) : <h1> No upcoming lesson </h1>}
-      </>
-    )
-  }
+ function UpcomingMeetings() {
+  return(
+    <>
+      {upcomingMeetings.map((meeting, index) => (
+        <tr key={index}>
+          <td>{new Date(meeting.startTime).toLocaleString()}</td>
+          <td>{(meeting.online == 1) ? "Online" : "In person"}</td>
+          <td>{meeting.studentName}</td>
+          <td>
+            <a className="styled-link" href={meeting.meetingStartUrl}>CLICK HERE TO START YOUR LESSON</a>
+            {/* TODO: fix Web SDK issue (overriding CSS) */}
+            {/* <JoinZoom isTutor={true} /> */}
+          </td>
+        </tr>
+      ))}
+    </>
+  )
+ }
 
-  function PastMeetings() {
-    return (
-      <>
-        {pastMeetings.map((meeting, index) => (
-          <tr key={index} >
-            <td>{new Date(meeting.startTime).toLocaleString()}</td>
-            <td>{(meeting.online == 1) ? "Online" : "In person"}</td>
-            <td>{meeting.studentName}</td>
-            <td>{(meeting.concluded == 1) ? "Completed" : "Other"}</td>
-          </tr>
-        ))}
-      </>
-    )
-  }
+ function PastMeetings() {
+  return(
+    <>
+      {pastMeetings.map((meeting, index) => (
+        <tr key={index} >
+          <td>{new Date(meeting.startTime).toLocaleString()}</td>
+          <td>{(meeting.online == 1) ? "Online" : "In person"}</td>
+          <td>{meeting.studentName}</td>
+          <td>{(meeting.concluded == 1) ? "Completed" : "Other"}</td>
+        </tr>
+      ))}
+    </>
+  )
+ }
 
   return (
     <>
       <div className="dashboard-div-container">
-        {/* TODO: get current user's first name */}
-        <h2>Hello, [first name]</h2>
+        <h2>Welcome back!</h2>
         <h3>Your upcoming lessons</h3>
         <table className="dashboard-table">
           <tbody>

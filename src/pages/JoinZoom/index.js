@@ -1,6 +1,5 @@
 // import React from 'react';
 // import { ZoomMtg } from '@zoomus/websdk';
-// import { Button } from './JoinZoomStyle';
 
 // ZoomMtg.setZoomJSLib('https://source.zoom.us/2.5.0/lib', '/av');
 
@@ -10,33 +9,24 @@
 // ZoomMtg.i18n.load('en-US');
 // ZoomMtg.i18n.reload('en-US');
 
-// // ZOOM FUNCTION
+// // JOIN ZOOM FUNCTION
+// // NOTE: currently non-functional due to issue with Zoom SDK's CSS overriding our custom CSS
 
 // function JoinZoom(props) {
 
+//   TODO: get this info from DB
 //   const meetingConfig = {
-//     // setup your signature endpoint here: https://github.com/zoom/meetingsdk-sample-signature-node.js
 //     signatureEndpoint: 'https://techconnect-web.herokuapp.com/',
-//     // This Sample App has been updated to use SDK App type credentials https://marketplace.zoom.us/docs/guides/build/sdk-app
-//     sdkKey: 'mh9S4ciMuTay3vgAGq24F32lcupgCbpPeVxd',
-//     meetingNumber: '81973198552',
-//     // 1 is host (tutor), 0 is participant (student). Must be 1 to start meeting.
-//     //var role = (props.isTutor ? 1 : 0)
-//     role: 0,
-//     // leaveUrl is the page the user will be redirected to when meeting is over. I set it to homepage for now.
-//     // TODO: replace link after web app has been deployed
-//     leaveUrl: 'http://localhost:3000',
-//     userName: 'user test',    // TODO: get username of currently logged in user
-//     userEmail: '',
-//     passWord: '1PpbJv',
-
-//     // pass in the registrant's token if your meeting or webinar requires registration. More info here:
-//     // Meetings: https://marketplace.zoom.us/docs/sdk/native-sdks/web/client-view/meetings#join-registered
-//     // Webinars: https://marketplace.zoom.us/docs/sdk/native-sdks/web/client-view/webinars#join-registered
-//     registrantToken: '',
-
-//     // zakToken needed if user the host who's starting the meeting
-//     zakToken: '',
+//     sdkKey: '[SDK KEY]',
+//     meetingNumber: '[MEETING ID]',
+//     role = (props.isTutor ? 1 : 0),          // 1 is host (tutor), 0 is participant (student). Must be 1 to start meeting.
+//     //role: 0,
+//     leaveUrl: 'http://localhost:3000',       // page the user will be redirected to when meeting is over
+//     userName: '[USER FIRST NAME]',
+//     userEmail: '',                           // not required
+//     passWord: '[MEETING PASSWORD]',
+//     registrantToken: '',                     // not required (only required if registration is required)
+//     zakToken: '[ZAK TOKEN]',                 // zakToken needed if user the host who's starting the meeting
 //   }
 
 
@@ -110,7 +100,7 @@
 //   }
 
 //   return (
-//     <Button onClick={getSignature}>CLICK HERE TO START YOUR LESSON</Button>
+//     <button className="styled-button" onClick={getSignature}>CLICK HERE TO START YOUR LESSON</button>
 //   );
 // }
 

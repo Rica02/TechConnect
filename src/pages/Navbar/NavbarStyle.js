@@ -78,11 +78,12 @@ export const Logo = styled.img`
     height: 100%;
 `;
 
+export const OpenLinksButtonContainer = styled.div`
+    display: flex;
+`
 
 // menu that will display in small screens like mobile phones
 export const OpenLinksButton = styled.button`
-    width: 70px;
-    height: 50px;
     background: none;
     border: none;
     color: ${ ({ theme }) => theme.colorMain.highlightMain };
