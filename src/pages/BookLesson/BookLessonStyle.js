@@ -64,3 +64,4 @@ export const Button=styled.button`
  color: white;
 background-color:${({ theme }) => theme.colorMain.highlightRed};
 `;
+export const Select=styled.select``;

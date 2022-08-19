@@ -31,9 +31,9 @@ export function ServerProvider({ children }) {
   }
 
   useEffect(() => {
-    userget()
-    setCurrentUser(auth)
-  }, [])
+    userget();
+    setCurrentUser(auth);
+  }, [auth])
   //----------DB-------------
 
   //Get Account Details
@@ -54,7 +54,6 @@ useEffect(() => {
 }, [])
 //add news
 async function AddNewsToDB(data) {
-  console.log("AddNewsToDB")
   try {
     await axios.post('http://localhost:3007/api/addNews', {
     
@@ -63,12 +62,9 @@ async function AddNewsToDB(data) {
       text: data.text,
     })
       .then((response) => {
-        console.log(response)
         alert('Update succeed')
       }, (error) => {
         alert('error')
-        console.log(error);
-        alert("error")
       });
   } catch (error) {
     console.log(error);
@@ -117,46 +113,15 @@ async function AddNewsToDB(data) {
         id: data.id,
       })
         .then((response) => {
-          console.log(response)
           alert('Update succeed')
           window.location.reload();
         }, (error) => {
           alert('error')
-          console.log(error);
-          alert("error")
         });
     } catch (error) {
       console.log(error);
     }
 
-  }
-  async function UpdateUserP(data) {
-
-    try {
-      await axios.post('http://localhost:3007/api/userUpdate', {
-        email: data.email,
-        password: data.password,
-        phone: data.phone,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        gender: data.gender,
-        dob: data.dob,
-        address: data.address,
-        password:data.NewPassword,
-        id: data.id,
-      })
-        .then((response) => {
-          console.log("response UpdateUserP",response)
-          alert('Update succeed')
-          window.location.reload();
-        }, (error) => {
-          alert('error')
-          console.log(error);
-          alert("error")
-        });
-    } catch (error) {
-      console.log(error);
-    }
   }
 
   async function DeleteUser(ID) {
@@ -166,13 +131,10 @@ async function AddNewsToDB(data) {
         id:ID,
       })
         .then((response) => {
-          console.log("response delete",response)
           alert('delete succeed')
           logout();
         }, (error) => {
           alert('error')
-          console.log(error);
-          alert("error")
         });
     } catch (error) {
       console.log(error);
@@ -186,13 +148,12 @@ async function AddNewsToDB(data) {
           id: ID,
           password:Password,
       }).then((response) => {
-        console.log("response ResetPassword",response)
         if(response.status===200){
           alert('Update succeed')
+          window.location.reload();
         }else{
           alert('Update error')
         }
-        
           }, (error) => {
               alert('error')
               console.log(error);
@@ -202,6 +163,97 @@ async function AddNewsToDB(data) {
   }
     
   }
+
+  //book lesson
+  async function BookLessonToDB(data) {
+    try {
+      await axios.post('http://localhost:3007/api/bookLesson', {
+      
+        date: data.date,
+        time: data.time,
+        type: data.type,
+        detail: data.detail,
+        receive: data.receive,
+        uid:userInf[0].id,
+      })
+        .then((response) => {
+          if(response.status===200){
+            alert('booking succeed')
+          }else{
+            alert('booking error')
+          }
+        }, (error) => {
+          alert('error')
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  //get meeting
+  const [getMeetings, setGetMeetings] = useState([]);
+useEffect(() => {
+  axios.get("http://localhost:3007/api/getMeetings").then((data) => {
+    setGetMeetings(data.data)
+  });
+}, [])
+  //get meeting
+  const [getBookLesson, setGetBookLesson] = useState([]);
+useEffect(() => {
+  axios.get("http://localhost:3007/api/getBookLesson").then((data) => {
+    setGetBookLesson(data.data)
+  });
+}, [])
+
+  //get changeAvailability
+  const [getChangeAvailability, setGetChangeAvailability] = useState([]);
+useEffect(() => {
+  axios.get("http://localhost:3007/api/getChangeAvailability").then((data) => {
+    setGetChangeAvailability(data.data)
+  });
+}, [])
+ //get user T
+ const [getTutor, setGetTutor] = useState([]);
+ useEffect(() => {
+   axios.get("http://localhost:3007/api/userTList").then((data) => {
+    setGetTutor(data.data)
+   });
+ }, [])
+  //get User S
+  const [getStudent, setGetStudent] = useState([]);
+useEffect(() => {
+  axios.get("http://localhost:3007/api/userSList").then((data) => {
+    setGetStudent(data.data)
+  });
+}, [])
+
+//ChangeAvailability
+async function ChangeAvailabilityToDB(data) {
+  try {
+    await axios.post('http://localhost:3007/api/changeAvailability', {
+    
+      meetingId: data.meetingId,
+      aDate: data.aDate,
+      aTime: data.aTime,
+      detail: data.detail,
+      uid:userInf[0].id,
+
+    })
+      .then((response) => {
+        if(response.status===200){
+          alert('Change succeed')
+        }else{
+          alert('Change error')
+        }
+      }, (error) => {
+        alert('error')
+        console.log(error);
+      });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 //-------DB END -----
   const value = {
     auth,
@@ -214,9 +266,19 @@ async function AddNewsToDB(data) {
     SetloginState,
     logout,
     userInf,//Get Account Details
-    CheckPassword, UpdateUserP,UpdateUser,DeleteUser,ResetPassword,
+    CheckPassword,UpdateUser,DeleteUser,ResetPassword,
     //News
     getNews,AddNewsToDB,
+    //bookLesson
+    BookLessonToDB,
+    //meeting list
+    getMeetings,
+    //ChangeAvailability
+    ChangeAvailabilityToDB,
+    getBookLesson,
+    getChangeAvailability,
+    getTutor,
+    getStudent,
   }
   return (
     <ServerContext.Provider value={value}>

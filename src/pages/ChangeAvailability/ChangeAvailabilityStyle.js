@@ -66,3 +66,5 @@ width: 10rem;
  color: white;
 background-color:${({ theme }) => theme.colorMain.highlightRed};
 `;
+
+export const Select=styled.select``;
