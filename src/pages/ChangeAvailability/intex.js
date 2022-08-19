@@ -4,8 +4,11 @@ import { useDB } from '../../ServerContext';
 import moment from "moment";
 function ChangeAvailability() {
     const { getMeetings ,ChangeAvailabilityToDB} = useDB();
+   
+
     const [editdData, seteEitdData] = useState({
         meetingId: "",
+        studentId:"",
         aDate: "",
         aTime: "",
         detail: "",
@@ -15,6 +18,7 @@ function ChangeAvailability() {
         var value = e.target.value
         seteEitdData({ ...editdData, [e.target.name]: value })
       }
+
       const handleClick = (e) => {
         e.preventDefault();
         ChangeAvailabilityToDB(editdData)

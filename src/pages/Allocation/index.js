@@ -1,11 +1,10 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import { useDB } from '../../ServerContext';
 import moment from "moment";
 import { Container, ContainerWrap, Title, Wrap, SubTitle, Data, Column, Select } from './AllocationStyle';
 import { FaGripLines } from 'react-icons/fa';
 function Allocation() {
-    const { getBookLesson, getChangeAvailability, getStudent, getTutor } = useDB();
-    console.log(getTutor)
+    const { getBookLesson, getChangeAvailability, getStudent, getTutor,getMeetings } = useDB();
     return (
         <>
             <Container>
@@ -13,6 +12,7 @@ function Allocation() {
                     <Title>Book Lesson</Title>
                     {React.Children.toArray(
                         getBookLesson.map((GBL) => {
+                        
                             return <>
                                 <Wrap>
                                     <Column><SubTitle>Booking NO. : </SubTitle><Data>{GBL.idbookLesson}</Data></Column>
@@ -45,6 +45,7 @@ function Allocation() {
                     <Title>Change Availability</Title>
                     {React.Children.toArray(
                         getChangeAvailability.map((GCA) => {
+                           
                             return <>
                                 <Wrap>
                                     <Column><SubTitle>Meeting Id : </SubTitle><Data>{GCA.meetingId}</Data></Column>
@@ -64,16 +65,17 @@ function Allocation() {
                                     </Select>
                                     <button>Change Tutor</button>
                                     </Column>
-                                    <Column>
-                                    <Select type="text">
+                                   
                                         {React.Children.toArray(
                                             getStudent.map((trainees) => {
+                                                if(trainees.id===GCA.sid)
                                                 return <>
-                                                    <option value={trainees.id} >Name :{trainees.lastName} ,Phone :{trainees.phone} </option>
+                                                   <Column><SubTitle>Name : </SubTitle><Data> {trainees.lastName}</Data></Column>
+                                                   <Column><SubTitle>Phone : </SubTitle><Data>{trainees.phone}</Data></Column>
                                                 </>
                                             })
                                         )}
-                                    </Select>
+                                  <Column>
                                     <button>Notify trainees</button>
                                     </Column>
                                     
