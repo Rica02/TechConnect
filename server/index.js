@@ -254,6 +254,7 @@ app.post("/getstudentmeetings", function (req, res) {
             //console.log("Result: " + JSON.stringify(result));
         }
         else {
+            console.log(result);
             console.log("Error in retrieving meeting info");
         }
     })
@@ -507,7 +508,7 @@ app.listen(3007, function () {
         } console.log("DB and Zoom app connection successful! Listening at PORT: 3007")
     })
 })
-//-------serverContext--------------
+// //-------serverContext--------------
 
 app.post("/api/getUser", function (req, res) {
 

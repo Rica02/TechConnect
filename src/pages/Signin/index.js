@@ -39,7 +39,8 @@ function Signin() {
                         console.log(response.data);
                         localStorage.setItem('user', response.data[0])
                         setAuth(response.data[0])
-                        userSet(response.data[0].email, response.data[0].admin)
+                        console.log(response.data[0].id);
+                        userSet(response.data[0].id,response.data[0].email, response.data[0].admin)
                         alert("succesfully login")
                         navigate("/dashboard")
                         window.location.reload()

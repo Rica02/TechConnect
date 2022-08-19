@@ -6,15 +6,20 @@ function TutorPage() {
 
   const [upcomingMeetings, setUpcomingMeetings] = useState([]);
   const [pastMeetings, setPastMeetings] = useState([]);
+  const [currentId, setCurrentId] = useState();
+  const [getData, setGetData] = useState([]);
 
   console.log("Upcoming meetings: " + JSON.stringify(upcomingMeetings));
   console.log("Past meetings: " + JSON.stringify(pastMeetings))
-
   // on page load, get tutor meetings
   useEffect(() => {
+    // console.log(localStorage.getItem("id"));
+    setCurrentId(localStorage.getItem("id"))
+    //setCurrentId("8")
+    console.log(currentId);
     try {
         axios.post('http://localhost:3007/gettutormeetings', {
-          userId: "8"   // TODO: get current user id instead of hardcoding it
+          userId: currentId  // TODO: get current user id instead of hardcoding it
         })
           .then((response) => {
             console.log("Get tutor's meetings successful.");
