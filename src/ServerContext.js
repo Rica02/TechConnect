@@ -10,15 +10,17 @@ export function ServerProvider({ children }) {
   const [auth, setAuth] = useState({});
   const [currentUser, setCurrentUser] = useState({})
   const [email, setEmail] = useState()
+  const [id, setId] = useState()
   const [admin, setadmin] = useState()
   const [loginState, setloginState] = useState(false)
   const [result, setresult] = useState()
   function SetloginState(bool) {
     return setloginState(bool)
   }
-  function userSet(email, admin) {
+  function userSet(id,email, admin) {
     localStorage.setItem("email", email)
     localStorage.setItem("admin", admin)
+    localStorage.setItem("id", id)
   }
   function logout() {
     setCurrentUser(null)
@@ -28,6 +30,7 @@ export function ServerProvider({ children }) {
   function userget() {
     setEmail(localStorage.getItem("email"))
     setadmin(localStorage.getItem("admin"))
+    setId(localStorage.getItem("id"))
   }
 
   useEffect(() => {

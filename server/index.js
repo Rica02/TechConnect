@@ -253,6 +253,7 @@ app.post("/getstudentmeetings", function (req, res) {
             //console.log("Student meeting list: " + JSON.stringify(meetingList));
         }
         else {
+            console.log(result);
             console.log("Error in retrieving meeting info");
         }
     })
@@ -291,7 +292,7 @@ app.post("/gettutormeetings", function (req, res) {
             // console.log("Tutor meeting list: " + JSON.stringify(meetingList));
         }
         else {
-            console.log("Error in retrieving meeting info");
+            res.status(220).send({message: "No meeting found"});
         }
     })
 })
@@ -491,6 +492,15 @@ app.post('/zoommeeting', (req, res) => {
         });
 });
 
+
+app.listen(3007, function () {
+    console.log("App listened function");
+    connection.connect(function (err) {
+        if (err) {
+            throw err;
+        } console.log("DB and Zoom app connection successful! Listening at PORT: 3007")
+    })
+})
 //-------serverContext--------------
 
 app.post("/api/getUser", function (req, res) {
