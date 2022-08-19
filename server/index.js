@@ -294,7 +294,7 @@ app.post("/gettutormeetings", function (req, res) {
             //console.log("Result: " + JSON.stringify(result));
         }
         else {
-            console.log("Error in retrieving meeting info");
+            res.status(220).send({message: "No meeting found"});
         }
     })
 })

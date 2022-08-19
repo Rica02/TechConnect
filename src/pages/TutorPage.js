@@ -7,77 +7,77 @@ function TutorPage() {
   const [upcomingMeetings, setUpcomingMeetings] = useState([]);
   const [pastMeetings, setPastMeetings] = useState([]);
   const [currentId, setCurrentId] = useState();
-  const [getData, setGetData] = useState([]);
 
   console.log("Upcoming meetings: " + JSON.stringify(upcomingMeetings));
   console.log("Past meetings: " + JSON.stringify(pastMeetings))
   // on page load, get tutor meetings
   useEffect(() => {
-    // console.log(localStorage.getItem("id"));
-    setCurrentId(localStorage.getItem("id"))
-    //setCurrentId("8")
+    setCurrentId((localStorage.getItem("id")))
     console.log(currentId);
+    //setCurrentId(8)
     try {
-        axios.post('http://localhost:3007/gettutormeetings', {
-          userId: currentId  // TODO: get current user id instead of hardcoding it
-        })
-          .then((response) => {
+      axios.post('http://localhost:3007/gettutormeetings', {
+        userId: 20
+        // TODO: get current user id instead of hardcoding it
+      })
+        .then((result, reject) => {
+          if (result && result.status === 200) {
             console.log("Get tutor's meetings successful.");
             // console.log("Get users successful. Response data: " + JSON.stringify(response))
 
             // get response and store it in useState array
-            var allMeetings = [...response.data];
+            var allMeetings = [...result.data];
 
             // sort meetings to corresponding arrays
             allMeetings.forEach(function (meeting, index) {
-              if(meeting.concluded) {
+              if (meeting.concluded) {
                 setPastMeetings(values => [...values, meeting]);
-              } else if(!meeting.concluded) {
+              } else if (!meeting.concluded) {
                 setUpcomingMeetings(values => [...values, meeting]);
               }
             })
-
-          }, (error) => {
-              console.log("Error occurred: " + error);
-          });
+          }
+        }, (error) => {
+          console.log("Error occurred: " + error);
+        });
     } catch (error) {
-        console.log("Get users failed, reason: " + error);
+      console.log("Get users failed, reason: " + error);
     }
-  }, []);
+  }, [currentId]);
 
- function UpcomingMeetings() {
-  return(
-    <>
-      {upcomingMeetings.map((meeting, index) => (
-        <tr key={index}>
-          <td>{new Date(meeting.startTime).toLocaleString()}</td>
-          <td>{(meeting.online == 1) ? "Online" : "In person"}</td>
-          <td>{meeting.studentName}</td>
-          <td>
-            <a className="styled-link" href={meeting.meetingStartUrl}>CLICK HERE TO START YOUR LESSON</a>
-            {/* TODO: fix Web SDK issue (overriding CSS) */}
-            {/* <JoinZoom isTutor={true} /> */}
-          </td>
-        </tr>
-      ))}
-    </>
-  )
- }
+  function UpcomingMeetings() {
+    return (
+      <>
+        {upcomingMeetings.length > 0 ? upcomingMeetings.map((meeting, index) => (
+          <tr key={index}>
+            <td>{new Date(meeting.startTime).toLocaleString()}</td>
+            <td>{(meeting.online == 1) ? "Online" : "In person"}</td>
+            <td>{meeting.studentName}</td>
+            <td>
+              <a className="styled-link" href={meeting.meetingStartUrl}>CLICK HERE TO START YOUR LESSON</a>
+              {/* TODO: fix Web SDK issue (overriding CSS) */}
+              {/* <JoinZoom isTutor={true} /> */}
+            </td>
+          </tr>
+        )) : <h1> No upcoming lesson </h1>}
+      </>
+    )
+  }
 
- function PastMeetings() {
-  return(
-    <>
-      {pastMeetings.map((meeting, index) => (
-        <tr key={index} >
-          <td>{new Date(meeting.startTime).toLocaleString()}</td>
-          <td>{(meeting.online == 1) ? "Online" : "In person"}</td>
-          <td>{meeting.studentName}</td>
-          <td>{(meeting.concluded == 1) ? "Completed" : "Other"}</td>
-        </tr>
-      ))}
-    </>
-  )
- }
+  function PastMeetings() {
+    return (
+      <>
+        {pastMeetings.map((meeting, index) => (
+          <tr key={index} >
+            <td>{new Date(meeting.startTime).toLocaleString()}</td>
+            <td>{(meeting.online == 1) ? "Online" : "In person"}</td>
+            <td>{meeting.studentName}</td>
+            <td>{(meeting.concluded == 1) ? "Completed" : "Other"}</td>
+          </tr>
+        ))}
+      </>
+    )
+  }
 
   return (
     <>
