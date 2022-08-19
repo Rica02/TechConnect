@@ -5,6 +5,7 @@ import axios from "axios";
 function TutorPage() {
   const [upcomingMeetings, setUpcomingMeetings] = useState([]);
   const [pastMeetings, setPastMeetings] = useState([]);
+  const [currentId, setCurrentId] = useState();
 
   console.log("Upcoming meetings: " + JSON.stringify(upcomingMeetings));
   console.log("Past meetings: " + JSON.stringify(pastMeetings))
@@ -16,7 +17,7 @@ function TutorPage() {
     //setCurrentId(8)
     try {
       axios.post('http://localhost:3007/gettutormeetings', {
-        userId: 20
+        userId: currentId
         // TODO: get current user id instead of hardcoding it
       })
         .then((result, reject) => {
@@ -42,7 +43,7 @@ function TutorPage() {
     } catch (error) {
       console.log("Get users failed, reason: " + error);
     }
-  }, []);
+  }, [currentId]);
 
  function UpcomingMeetings() {
   return(
