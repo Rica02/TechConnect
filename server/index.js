@@ -22,7 +22,6 @@ app.use(bodyParser.urlencoded({extended: true,}));
 
 // stripe-checkout
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-app.use(express.static("public"));
 
 app.post("/pay", async (req, res) => {
     try{
@@ -43,6 +42,7 @@ app.post("/pay", async (req, res) => {
     }
 
   });
+
   app.post("/stripe", (req, res) => {
     if (req.body.type === "payment_intent.created") {
       console.log(`${req.body.data.object.metadata.name} initated payment!`);
@@ -247,11 +247,10 @@ app.post("/getstudentmeetings", function (req, res) {
                 meetingList.push(myMeeting);
             })
 
-            //console.log("Student meeting list: " + JSON.stringify(meetingList));
-
             // send meeting lists to front-end
             res.status(200).json(meetingList);
-            //console.log("Result: " + JSON.stringify(result));
+
+            //console.log("Student meeting list: " + JSON.stringify(meetingList));
         }
         else {
             console.log("Error in retrieving meeting info");
@@ -286,11 +285,10 @@ app.post("/gettutormeetings", function (req, res) {
                 meetingList.push(myMeeting);
             })
 
-            // console.log("Tutor meeting list: " + JSON.stringify(meetingList));
-
             // send meeting lists to front-end
             res.status(200).json(meetingList);
-            //console.log("Result: " + JSON.stringify(result));
+
+            // console.log("Tutor meeting list: " + JSON.stringify(meetingList));
         }
         else {
             console.log("Error in retrieving meeting info");
@@ -334,13 +332,12 @@ app.post("/getusers", function (req, res) {
                 }
             })
 
-            // console.log("Tutor list: " + JSON.stringify(tutorList));
-            // console.log("Student list: " + JSON.stringify(studentList));
-
             // send both lists to front-end
             let dataRes = { tutorList, studentList }
             res.status(200).json(dataRes);
-            //console.log("Result: " + JSON.stringify(result));
+
+            // console.log("Tutor list: " + JSON.stringify(tutorList));
+            // console.log("Student list: " + JSON.stringify(studentList));
         }
         else {
             console.log("Error in retrieving user info");
@@ -374,11 +371,11 @@ app.post("/getallmeetings", function (req, res) {
                 myMeeting["concluded"] = meeting.concluded;
                 meetingList.push(myMeeting);
             })
-            //console.log("Meeting list: " + JSON.stringify(meetingList));
 
             // send meeting lists to front-end
             res.status(200).json(meetingList);
-            //console.log("Result: " + JSON.stringify(result));
+
+            //console.log("Meeting list: " + JSON.stringify(meetingList));
         }
         else {
             console.log("Error in retrieving meeting info");
@@ -401,8 +398,6 @@ app.post("/inpersonmeeting", async function (req, res) {
         if (sqlErr) {
             console.log(sqlErr);
         } else {
-            //console.log(req);
-            //console.log(result);
             console.log("In-person meeting details successfully uploaded to DB!");
             res.status(200).json({ status: "OK" });
         }
@@ -483,8 +478,6 @@ app.post('/zoommeeting', (req, res) => {
                 if (sqlErr) {
                     console.log(sqlErr);
                 } else {
-                    //console.log(req);
-                    //console.log(result);
                     console.log("Zoom meeting details successfully uploaded to DB!");
                 }
             })
@@ -498,15 +491,6 @@ app.post('/zoommeeting', (req, res) => {
         });
 });
 
-
-app.listen(3007, function () {
-    console.log("App listened function");
-    connection.connect(function (err) {
-        if (err) {
-            throw err;
-        } console.log("DB and Zoom app connection successful! Listening at PORT: 3007")
-    })
-})
 //-------serverContext--------------
 
 app.post("/api/getUser", function (req, res) {
@@ -575,6 +559,7 @@ app.post("/api/userUpdateP", async function (req, res) {
         }
     })
 })
+
 app.post("/api/checkPassword", function (req, res) {
     console.log("api get checkPassword");
     var id = req.body.id
@@ -687,7 +672,7 @@ app.post("/api/bookLesson", async function (req, res) {
         }
     })
 })
-//gey meeting
+//get meeting
 app.get("/api/getMeetings", function (req, res) {
     var mySQLquery = "SELECT * FROM techconnect.meetings"
     connection.query(mySQLquery, function (err, result) {
@@ -700,7 +685,7 @@ app.get("/api/getMeetings", function (req, res) {
         }
     })
 })
-//gey bookLesson
+//get bookLesson
 app.get("/api/getBookLesson", function (req, res) {
     var mySQLquery = "SELECT * FROM techconnect.bookLesson"
     connection.query(mySQLquery, function (err, result) {
@@ -769,4 +754,15 @@ app.post("/api/changeAvailability", async function (req, res) {
         }
     })
 })
+
+
+app.listen(3007, function () {
+    console.log("App listened function");
+    connection.connect(function (err) {
+        if (err) {
+            throw err;
+        } console.log("DB and Zoom app connection successful! Listening at PORT: 3007")
+    })
+})
+
 //connection.end()
