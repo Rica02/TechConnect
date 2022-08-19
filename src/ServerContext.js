@@ -228,7 +228,18 @@ useEffect(() => {
 }, [])
 
 //ChangeAvailability
+const[searchList,setSearchList]=useState([])
+const[tempData,setTempData]=useState()
+//find meeting in list
+function findStudent(meetingId){
+    const searchResult = getMeetings.filter(list => list.meetingId ===meetingId)
+    setSearchList(searchResult)
+    searchList.map((meeting)=>{setTempData(meeting.studentId)})
+    return tempData;
+}
 async function ChangeAvailabilityToDB(data) {
+  var getSid=findStudent(data.meetingId);
+  console.log('getSid',getSid)
   try {
     await axios.post('http://localhost:3007/api/changeAvailability', {
     
@@ -236,8 +247,8 @@ async function ChangeAvailabilityToDB(data) {
       aDate: data.aDate,
       aTime: data.aTime,
       detail: data.detail,
-      uid:userInf[0].id,
-
+      tid:userInf[0].id,
+      sid:getSid,
     })
       .then((response) => {
         if(response.status===200){

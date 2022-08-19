@@ -758,10 +758,11 @@ app.post("/api/changeAvailability", async function (req, res) {
     var aDate = req.body.aDate
     var aTime = req.body.aTime
     var detail = req.body.detail
-    var tid = req.body.uid
-    var Query = "INSERT INTO `techconnect`.`changeAvailability` (`meetingId`, `aDate`, `aTime`, `detail`, `tid`) VALUES (?,?,?,?,?);"
+    var tid = req.body.tid
+    var sid = req.body.sid
+    var Query = "INSERT INTO `techconnect`.`changeAvailability` (`meetingId`, `aDate`, `aTime`, `detail`, `tid`,sid) VALUES (?,?,?,?,?,?);"
     console.log(Query);
-    connection.query(Query, [meetingId, aDate, aTime,detail,tid], function (sqlErr, result) {
+    connection.query(Query, [meetingId, aDate, aTime,detail,tid,sid], function (sqlErr, result) {
         if (sqlErr) {
             console.log(sqlErr);
         } else {
